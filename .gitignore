@@ -1,0 +1,10 @@
+# Local IDE state
+.vs/
+
+# Build outputs
+**/bin/
+**/obj/
+artifacts/
+
+# Local LLM model files
+model/*.gguf

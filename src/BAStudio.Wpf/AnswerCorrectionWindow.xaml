@@ -1,0 +1,94 @@
+<Window x:Class="BAStudio.Wpf.AnswerCorrectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="답변 평가 및 수정"
+        Width="760"
+        Height="680"
+        MinWidth="640"
+        MinHeight="520"
+        WindowStartupLocation="CenterOwner"
+        Background="#F6F7F9">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="질문" FontWeight="SemiBold" Margin="0,0,0,6" />
+        <TextBox Grid.Row="1"
+                 Text="{Binding Question, Mode=OneWay}"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Padding="10" />
+
+        <Grid Grid.Row="2" Margin="0,14,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="평가" VerticalAlignment="Center" FontWeight="SemiBold" />
+            <ComboBox Grid.Column="1"
+                      Margin="8,0,0,0"
+                      ItemsSource="{Binding Ratings}"
+                      SelectedItem="{Binding Rating}" />
+            <TextBlock Grid.Column="3" Text="기대 근거/힌트" VerticalAlignment="Center" FontWeight="SemiBold" />
+            <TextBox Grid.Column="4"
+                     Margin="8,0,0,0"
+                     Text="{Binding ExpectedSource, UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="예: WIN32/ClickAutomation.md 또는 클릭, 컨트롤 같은 검색 힌트" />
+        </Grid>
+
+        <TextBlock Grid.Row="3"
+                   Text="수정된 답변"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,6" />
+
+        <TextBox Grid.Row="4"
+                 Text="{Binding CorrectedAnswer, UpdateSourceTrigger=PropertyChanged}"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Padding="10" />
+
+        <TextBlock Grid.Row="5"
+                   Text="메모"
+                   FontWeight="SemiBold"
+                   Margin="0,12,0,6" />
+
+        <TextBox Grid.Row="6"
+                 Margin="0,12,0,0"
+                 MinHeight="56"
+                 Text="{Binding Memo, UpdateSourceTrigger=PropertyChanged}"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Padding="10"
+                 ToolTip="수정 이유나 다음 빌드 반영 메모" />
+
+        <StackPanel Grid.Row="7"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,14,0,0">
+            <Button Content="저장"
+                    MinWidth="88"
+                    Height="34"
+                    IsDefault="True"
+                    Click="Save_OnClick" />
+            <Button Content="취소"
+                    MinWidth="88"
+                    Height="34"
+                    Margin="8,0,0,0"
+                    IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

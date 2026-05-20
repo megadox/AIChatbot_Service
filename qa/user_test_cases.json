@@ -1,0 +1,182 @@
+[
+    {
+        "id": "user-case-001",
+        "domain": "BuiltIn",
+        "question": "정의된 태스크를 실행하는 액티비티는?",
+        "expectedSource": "BuiltIn/Predefined_Process.md"
+    },
+    {
+        "id": "user-case-002",
+        "domain": "BuiltIn",
+        "question": "라이브러리를 실행하는 액티비티는?",
+        "expectedSource": "BuiltIn/Predefined_Library.md"
+    },
+    {
+        "id": "user-case-003",
+        "domain": "BuiltIn",
+        "question": "반복하는 액티비티는?",
+        "expectedSource": "BuiltIn/ForEach.md"
+    },
+    {
+        "id": "user-case-004",
+        "domain": "WEB",
+        "question": "열려있는 크롬을 객체로 가져오는 액티비티는?",
+        "expectedSource": "WEB/ChromeAttach.md"
+    },
+    {
+        "id": "user-case-005",
+        "domain": "WEB",
+        "question": "새로운 웹 사이트를 여는 액티비티는?",
+        "expectedSource": "WEB/Navigate.md"
+    },
+    {
+        "id": "user-case-006",
+        "domain": "WEB",
+        "question": "웹 요소를 클릭하는 액티비티는?",
+        "expectedSource": "WEB/Click.md"
+    },
+    {
+        "id": "user-case-007",
+        "domain": "WEB",
+        "question": "웹 엘리먼트가 나타나기를 기다리는 액티비티?",
+        "expectedSource": "WEB/Wait.md"
+    },
+    {
+        "id": "user-case-008",
+        "domain": "WIN32",
+        "question": "애플리케이션 컨트롤을 클릭하는 액티비티는?",
+        "expectedSource": "WIN32/ClickAutomation.md"
+    },
+    {
+        "id": "user-case-009",
+        "domain": "WIN32",
+        "question": "애플리케이션 컨트롤을 더블클릭하는 액티비티는?",
+        "expectedSource": "WIN32/DoubleClickAutomation.md"
+    },
+    {
+        "id": "user-case-010",
+        "domain": "WIN32",
+        "question": "애플리케이션 컨트롤에 텍스트를 입력하는 액티비티는?",
+        "expectedSource": "WIN32/SetTextAutomation.md"
+    },
+    {
+        "id": "user-case-011",
+        "domain": "WIN32",
+        "question": "이미지를 기다리는 액티비티는?",
+        "expectedSource": "WIN32/WaitForImage.md"
+    },
+    {
+        "id": "user-case-012",
+        "domain": "WIN32",
+        "question": "이미지를 찾아서 클릭하는 액티비티는?",
+        "expectedSource": "WIN32/ClickOnImage.md"
+    },
+    {
+        "id": "user-case-013",
+        "domain": "WIN32",
+        "question": "CMD에서 명령어를 실행하는 액티비티는?",
+        "expectedSource": "WIN32/Execute.md"
+    },
+    {
+        "id": "user-case-014",
+        "domain": "WIN32",
+        "question": "마우스 스크롤을 수행하는 액티비티는?",
+        "expectedSource": "WIN32/ScrollMouse.md"
+    },
+    {
+        "id": "user-case-015",
+        "domain": "WIN32",
+        "question": "키보드 키를 입력하는 액티비티는?",
+        "expectedSource": "WIN32/TypeKeys.md"
+    },
+    {
+        "id": "user-case-016",
+        "domain": "WIN32",
+        "question": "컨트롤의 존재를 확인하는 액티비티는?",
+        "expectedSource": "WIN32/ControlExists.md"
+    },
+    {
+        "id": "user-case-017",
+        "domain": "EXCEL",
+        "question": "현재 엑셀 시트를 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/ActiveSheet.md"
+    },
+    {
+        "id": "user-case-018",
+        "domain": "EXCEL",
+        "question": "엑셀 시트의 이름들을 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/GetSheetsAsList.md"
+    },
+    {
+        "id": "user-case-019",
+        "domain": "EXCEL",
+        "question": "열려있는 엑셀파일을 연결할 때 사용하는 액티비티는?",
+        "expectedSource": "EXCEL/Attach.md"
+    },
+    {
+        "id": "user-case-020",
+        "domain": "EXCEL",
+        "question": "시트에서 특정 범위를 복사할 때 사용하는 액티비티는?",
+        "expectedSource": "EXCEL/CopyRange.md"
+    },
+    {
+        "id": "user-case-021",
+        "domain": "EXCEL",
+        "question": "엑셀에서 조건을 만족하는 셀 데이터를 검색하여 셀을 포함하는 행을 리스트 형태로 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/FindRowAsCollection.md"
+    },
+    {
+        "id": "user-case-022",
+        "domain": "EXCEL",
+        "question": "엑셀 특정 셀의 값을 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/GetCellValue.md"
+    },
+    {
+        "id": "user-case-023",
+        "domain": "EXCEL",
+        "question": "엑셀에서 시트의 특정 범위의 값을 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/GetRangeAsCollection.md"
+    },
+    {
+        "id": "user-case-024",
+        "domain": "COMMON",
+        "question": "특정 시간 대기하는 액티비티는?",
+        "expectedSource": "COMMON/Wait.md"
+    },
+    {
+        "id": "user-case-025",
+        "domain": "COMMON",
+        "question": "클립보드의 데이터를 가져오는 액티비티는?",
+        "expectedSource": "COMMON/GetClipboard.md"
+    },
+    {
+        "id": "user-case-026",
+        "domain": "COMMON",
+        "question": "특정 프로세스를 강제 종료시키는 액티비티는?",
+        "expectedSource": "COMMON/KillProcess.md"
+    },
+    {
+        "id": "user-case-027",
+        "domain": "COMMON",
+        "question": "특정 프로세스가 동작할 때까지 대기하는 액티비티는?",
+        "expectedSource": "COMMON/WaitForProcess.md"
+    },
+    {
+        "id": "user-case-028",
+        "domain": "COMMON",
+        "question": "에러가 발생했을 경우 대체 업무를 수행하기 위한 액티비티는?",
+        "expectedSource": "COMMON/OnError.md"
+    },
+    {
+        "id": "user-case-029",
+        "domain": "COMMON",
+        "question": "특정 윈도우 애플리케이션의 창이 닫힐 때까지 대기하는 액티비티는?",
+        "expectedSource": "COMMON/WaitForProcessWindow.md"
+    },
+    {
+        "id": "user-case-030",
+        "domain": "COMMON",
+        "question": "로그 메시지를 특정 파일에 저장하는 액티비티는?",
+        "expectedSource": "COMMON/LogWrite.md"
+    }
+]

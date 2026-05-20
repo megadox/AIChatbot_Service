@@ -1,0 +1,2887 @@
+{
+  "StartedAt": "2026-05-20T20:33:38.992058+09:00",
+  "FinishedAt": "2026-05-20T20:33:47.2024527+09:00",
+  "CaseFile": "qa\\user_test_cases.json",
+  "Total": 30,
+  "Passed": 30,
+  "Failed": 0,
+  "HitWithinTopK": 30,
+  "RetrievalTop1Passed": 30,
+  "Results": [
+    {
+      "Id": "user-case-001",
+      "Domain": "BuiltIn",
+      "Question": "\uC815\uC758\uB41C \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "BuiltIn/Predefined_Process.md",
+      "TopSource": "BuiltIn/Predefined_Process.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "Answer": "BuiltIn/Predefined_Process.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uBBF8\uB9AC \uC815\uC758\uB41C \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### path\n\uC2E4\uD589\uD560 \uD0DC\uC2A4\uD06C\uC758 \uC0C1\uB300\uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022.\\sample.fp\u0022\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060path\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC2E4\uD589\uD560 \uD0DC\uC2A4\uD06C\uC758 \uC0C1\uB300\uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022.\\sample.fp\u0022 |\r\n\r\n[\uADFC\uAC70]\r\n- BuiltIn/Predefined_Process.md / Summary\r\n- BuiltIn/Predefined_Process.md / Property Notes/path\r\n- BuiltIn/Predefined_Process.md / Properties\r\n- BuiltIn/Predefined_Process.md / Metadata",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "BuiltIn/Predefined_Process.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.188125,
+          "VectorScore": 0.508799,
+          "KeywordScore": 0.857143,
+          "Preview": "\uBBF8\uB9AC \uC815\uC758\uB41C \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "BuiltIn/Predefined_Process.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.712061,
+          "VectorScore": 0.121151,
+          "KeywordScore": 0.285714,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "BuiltIn/Predefined_Process.md",
+          "SectionPath": "Property Notes/path",
+          "ChunkType": "property_note",
+          "FinalScore": 1.715121,
+          "VectorScore": 0.126713,
+          "KeywordScore": 0.285714,
+          "Preview": "### path"
+        },
+        {
+          "Rank": 4,
+          "Source": "BuiltIn/Predefined_Process.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.154,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060BuiltIn\u0060"
+        },
+        {
+          "Rank": 5,
+          "Source": "BuiltIn/Predefined_Library.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.888458,
+          "VectorScore": 0.37382,
+          "KeywordScore": 0.571429,
+          "Preview": "\uB77C\uC774\uBE0C\uB7EC\uB9AC \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/ExecuteAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.74427,
+          "VectorScore": 0.24153,
+          "KeywordScore": 0.285714,
+          "Preview": "\uB2E4\uC774\uC5BC\uB85C\uADF8\uB97C \uD1B5\uD558\uC5EC \uC2E4\uD589\uD30C\uC77C\uC744 \uCC3E\uC544\uC11C \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC744 \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "ANDROID/ExecuteApp.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.725851,
+          "VectorScore": 0.20804,
+          "KeywordScore": 0.285714,
+          "Preview": "\uC548\uB4DC\uB85C\uC774\uB4DC \uB514\uBC14\uC774\uC2A4\uC758 \uC571\uC744 \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/GetThreadName.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.668772,
+          "VectorScore": 0.169197,
+          "KeywordScore": 0.142857,
+          "Preview": "\uBA40\uD2F0 \uC2A4\uB808\uB529 \uC2E4\uD589 \uC911 \uD604\uC7AC \uC2A4\uB808\uB4DC\uC758 \uC774\uB984\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-002",
+      "Domain": "BuiltIn",
+      "Question": "\uB77C\uC774\uBE0C\uB7EC\uB9AC\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "BuiltIn/Predefined_Library.md",
+      "TopSource": "BuiltIn/Predefined_Library.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "Answer": "BuiltIn/Predefined_Library.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uB77C\uC774\uBE0C\uB7EC\uB9AC \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060path\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | - |\r\n\r\n[\uADFC\uAC70]\r\n- BuiltIn/Predefined_Library.md / Summary\r\n- BuiltIn/Predefined_Library.md / Properties\r\n- BuiltIn/Predefined_Library.md / Metadata",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "BuiltIn/Predefined_Library.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.267229,
+          "VectorScore": 0.296565,
+          "KeywordScore": 0.6,
+          "Preview": "\uB77C\uC774\uBE0C\uB7EC\uB9AC \uD0DC\uC2A4\uD06C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "BuiltIn/Predefined_Library.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.414118,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "BuiltIn/Predefined_Library.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.414118,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060BuiltIn\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/ExecuteExcelMacro.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.795508,
+          "VectorScore": 0.282741,
+          "KeywordScore": 0.4,
+          "Preview": "\uC5D1\uC140 \uD30C\uC77C\uC5D0 \uC800\uC7A5\uB41C \uD2B9\uC815 \uB9E4\uD06C\uB85C\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "ANDROID/ExecuteApp.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.766576,
+          "VectorScore": 0.230138,
+          "KeywordScore": 0.4,
+          "Preview": "\uC548\uB4DC\uB85C\uC774\uB4DC \uB514\uBC14\uC774\uC2A4\uC758 \uC571\uC744 \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/GetThreadName.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.692942,
+          "VectorScore": 0.187168,
+          "KeywordScore": 0.2,
+          "Preview": "\uBA40\uD2F0 \uC2A4\uB808\uB529 \uC2E4\uD589 \uC911 \uD604\uC7AC \uC2A4\uB808\uB4DC\uC758 \uC774\uB984\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "WEB/ExecuteScript.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.75521,
+          "VectorScore": 0.209472,
+          "KeywordScore": 0.4,
+          "Preview": "\uC6F9 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C JavaScript\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/ExecuteAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.74673,
+          "VectorScore": 0.194055,
+          "KeywordScore": 0.4,
+          "Preview": "\uB2E4\uC774\uC5BC\uB85C\uADF8\uB97C \uD1B5\uD558\uC5EC \uC2E4\uD589\uD30C\uC77C\uC744 \uCC3E\uC544\uC11C \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC744 \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-003",
+      "Domain": "BuiltIn",
+      "Question": "\uBC18\uBCF5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "BuiltIn/ForEach.md",
+      "TopSource": "BuiltIn/ForEach.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "BuiltIn",
+      "Answer": "BuiltIn/ForEach.md\r\n\r\n\uCEEC\uB809\uC158\uC758 \uC694\uC18C\uC758 \uC218 \uB9CC\uD07C \uBC18\uBCF5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n[\uADFC\uAC70]\r\n- BuiltIn/ForEach.md",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "BuiltIn/ForEach.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.176762,
+          "VectorScore": 0.261992,
+          "KeywordScore": 0.666667,
+          "Preview": "\uCEEC\uB809\uC158\uC758 \uC694\uC18C\uC758 \uC218 \uB9CC\uD07C \uBC18\uBCF5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "BuiltIn/ForEach.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.746,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 3,
+          "Source": "BuiltIn/ForEach.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.746,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060BuiltIn\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "BuiltIn/DoWhile.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.906438,
+          "VectorScore": 0.490492,
+          "KeywordScore": 0.666667,
+          "Preview": "\uBC18\uBCF5 \uC601\uC5ED\uC744 \uCD5C\uC18C\uD55C \uD55C \uBC88\uC740 \uC2E4\uD589\uD55C \uD6C4 \uC870\uAC74\uC744 \uB9CC\uC871\uD558\uB294 \uB3D9\uC548 \uBC18\uBCF5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "qa/answer_corrections/70c5144d4cf6436da97b76c454ba30b4",
+          "SectionPath": "Answer Corrections/70c5144d4cf6436da97b76c454ba30b4",
+          "ChunkType": "answer_correction",
+          "FinalScore": 0.882505,
+          "VectorScore": 0.513646,
+          "KeywordScore": 1,
+          "Preview": "Question:"
+        },
+        {
+          "Rank": 6,
+          "Source": "BuiltIn/While.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.823086,
+          "VectorScore": 0.338944,
+          "KeywordScore": 0.666667,
+          "Preview": "\uBC18\uBCF5 \uC870\uAC74\uC744 \uB9CC\uC871\uD558\uB294 \uB3D9\uC548 \uBC18\uBCF5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "BuiltIn/MultiThread.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 0.455988,
+          "VectorScore": 0.041189,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 8,
+          "Source": "BuiltIn/DecisionJump.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.529581,
+          "VectorScore": 0.108329,
+          "KeywordScore": 0,
+          "Preview": "\uC870\uAC74\uC758 \uACB0\uACFC(True/False)\uC5D0 \uB530\uB77C \uB2E4\uB978 \uC561\uD2F0\uBE44\uD2F0\uB85C Jump\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-004",
+      "Domain": "WEB",
+      "Question": "\uC5F4\uB824\uC788\uB294 \uD06C\uB86C\uC744 \uAC1D\uCCB4\uB85C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WEB/ChromeAttach.md",
+      "TopSource": "WEB/ChromeAttach.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "Answer": "WEB/ChromeAttach.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC5F4\uB824\uC788\uB294 \uD06C\uB86C \uBE0C\uB77C\uC6B0\uC800\uB97C \uAC1D\uCCB4\uB85C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n(\uD06C\uB86C \uBE0C\uB77C\uC6B0\uC800\uC5D0 --remote-debugging-port=9222 \uC778\uC790 \uC0AC\uC6A9 \uD544\uC694)\r\n\r\n### driverPath\n\uC6F9 \uB4DC\uB77C\uC774\uBC84\uC758 \uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\WebDriver\\chromedriver.exe\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uB0B4\uC7A5\uB41C \uC6F9 \uB4DC\uB77C\uC774\uBC84\uB97C \uC0AC\uC6A9\uD55C\uB2E4.)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060driverPath\u0060 | \u0060string\u0060 | \u0060\u0060 | - | \uC6F9 \uB4DC\uB77C\uC774\uBC84\uC758 \uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\WebDriver\\chromedriver.exe\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uB0B4\uC7A5\uB41C \uC6F9 \uB4DC\uB77C\uC774\uBC84\uB97C \uC0AC\uC6A9\uD55C\uB2E4.) |\r\n\r\n[\uADFC\uAC70]\r\n- WEB/ChromeAttach.md / Summary\r\n- WEB/ChromeAttach.md / Property Notes/driverPath\r\n- WEB/ChromeAttach.md / Properties\r\n- WEB/ChromeAttach.md / Metadata",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WEB/ChromeAttach.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.582124,
+          "VectorScore": 0.36669,
+          "KeywordScore": 0.777778,
+          "Preview": "\uC5F4\uB824\uC788\uB294 \uD06C\uB86C \uBE0C\uB77C\uC6B0\uC800\uB97C \uAC1D\uCCB4\uB85C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WEB/ChromeAttach.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.07418,
+          "VectorScore": 0.014872,
+          "KeywordScore": 0,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WEB/ChromeAttach.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.066,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WEB\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "WEB/ChromeAttach.md",
+          "SectionPath": "Property Notes/driverPath",
+          "ChunkType": "property_note",
+          "FinalScore": 1.074421,
+          "VectorScore": 0.01531,
+          "KeywordScore": 0,
+          "Preview": "### driverPath"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/GetThreadName.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.424405,
+          "VectorScore": 0.452453,
+          "KeywordScore": 0.222222,
+          "Preview": "\uBA40\uD2F0 \uC2A4\uB808\uB529 \uC2E4\uD589 \uC911 \uD604\uC7AC \uC2A4\uB808\uB4DC\uC758 \uC774\uB984\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "ANDROID/GetSMS.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.287437,
+          "VectorScore": 0.20342,
+          "KeywordScore": 0.222222,
+          "Preview": "\uC548\uB4DC\uB85C\uC774\uB4DC \uB514\uBC14\uC774\uC2A4\uC758 SMS\uB97C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "WEB/EdgeAttach.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.474048,
+          "VectorScore": 0.340693,
+          "KeywordScore": 0.666667,
+          "Preview": "\uC5F4\uB824\uC788\uB294 \uC5E3\uC9C0 \uBE0C\uB77C\uC6B0\uC800\uB97C \uAC1D\uCCB4\uB85C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/GetTextAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.264309,
+          "VectorScore": 0.161371,
+          "KeywordScore": 0.222222,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uC774\uB984\uC774\uB098 \uAC12\uC758 \uD14D\uC2A4\uD2B8 \uB370\uC774\uD130\uB97C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-005",
+      "Domain": "WEB",
+      "Question": "\uC0C8\uB85C\uC6B4 \uC6F9 \uC0AC\uC774\uD2B8\uB97C \uC5EC\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WEB/Navigate.md",
+      "TopSource": "WEB/Navigate.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WEB",
+      "Answer": "WEB/Navigate.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC6F9 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uC0C8\uB85C\uC6B4 \uC6F9 \uC0AC\uC774\uD2B8\uB85C \uC774\uB3D9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n[\uADFC\uAC70]\r\n- WEB/Navigate.md / Summary",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WEB/Navigate.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.79224,
+          "VectorScore": 0.358619,
+          "KeywordScore": 0.5,
+          "Preview": "\uC6F9 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uC0C8\uB85C\uC6B4 \uC6F9 \uC0AC\uC774\uD2B8\uB85C \uC774\uB3D9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WEB/WaitDisappear.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.700796,
+          "VectorScore": 0.343872,
+          "KeywordScore": 0.166667,
+          "Preview": "\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAC00 \uC0AC\uB77C\uC9C0\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 3,
+          "Source": "WEB/SendKeys.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 0.494366,
+          "VectorScore": 0.110968,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 4,
+          "Source": "WEB/SelectDropboxItem.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.573395,
+          "VectorScore": 0.112234,
+          "KeywordScore": 0.166667,
+          "Preview": "\uC6F9 \uD398\uC774\uC9C0\uC5D0\uC11C \uB4DC\uB86D\uBC15\uC2A4\uC758 \uC544\uC774\uD15C(select \uD0DC\uADF8)\uC744 valuueType\uD544\uB4DC \uAC12\uC758 \uBC29\uC2DD\uC73C\uB85C \uC120\uD0DD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "WEB/SelectAll.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.577223,
+          "VectorScore": 0.119192,
+          "KeywordScore": 0.166667,
+          "Preview": "\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uB4E4\uC744 \uAC00\uB974\uD0A4\uB294 \uCC38\uC870\uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC124\uC815\uB41C \uBCC0\uC218\uC5D0 \uCEEC\uB809\uC158 \uD615\uD0DC\uB85C \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "WEB/ClickAlert.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.604037,
+          "VectorScore": 0.167946,
+          "KeywordScore": 0.166667,
+          "Preview": "\uC6F9 \uBE0C\uB77C\uC6B0\uC800\uC5D0 \uC54C\uB9BC\uCC3D\uC758 \uD655\uC778/\uCDE8\uC18C \uBC84\uD2BC\uC744 \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "WEB/SaveElementImage.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.57424,
+          "VectorScore": 0.11377,
+          "KeywordScore": 0.166667,
+          "Preview": "\uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uC774\uBBF8\uC9C0\uB97C \uB2E4\uC6B4\uBC1B\uC544 savePath\uD544\uB4DC\uC5D0 \uC9C0\uC815\uD55C \uACBD\uB85C\uC5D0 \uC774\uBBF8\uC9C0 \uD30C\uC77C\uB85C \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "WEB/ScrollIntoElement.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.580823,
+          "VectorScore": 0.125739,
+          "KeywordScore": 0.166667,
+          "Preview": "\uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAE4C\uC9C0 \uD654\uBA74\uC744 \uC2A4\uD06C\uB864\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0(IE\uBE0C\uB77C\uC6B0\uC800 \uC9C0\uC6D0 \uBD88\uAC00)"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-006",
+      "Domain": "WEB",
+      "Question": "\uC6F9 \uC694\uC18C\uB97C \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WEB/Click.md",
+      "TopSource": "WEB/Click.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WEB",
+      "Answer": "WEB/Click.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uB97C \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060anchor\u0060 | \u0060string\u0060 | \u0060\u0022center\u0022\u0060 | \u0060\u0022center\u0022\u0060, \u0060\u0022topLeft\u0022\u0060, \u0060\u0022topRight\u0022\u0060, \u0060\u0022bottomLeft\u0022\u0060, \u0060\u0022bottomRight\u0022\u0060 | \uD074\uB9AD\uD560 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAE30\uC900 \uC704\uCE58\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022center\u0022 |\r\n| \u0060combinationkey\u0060 | \u0060string\u0060 | \u0060None\u0060 | \u0060None\u0060, \u0060\u0022ctrl\u0022\u0060, \u0060\u0022shift\u0022\u0060, \u0060\u0022alt\u0022\u0060, \u0060\u0022win\u0022\u0060 | \uD074\uB9AD \uC2DC \uD568\uAED8 \uB204\uB97C \uC870\uD569 \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nNone: \uC870\uD569 \uD0A4\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.\n\u0022ctrl\u0022: Ctrl \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022shift\u0022: Shift \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022alt\u0022: Alt \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022win\u0022: Windows \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4. |\r\n| \u0060encoding\u0060 | \u0060string\u0060 | \u0060\u0022utf-8\u0022\u0060 | \u0060\u0022utf-8\u0022\u0060, \u0060\u0022cp949\u0022\u0060, \u0060\u0022utf-16\u0022\u0060 | \uC6F9 \uBE0C\uB77C\uC6B0\uC800 \uAE30\uBCF8 \uC778\uCF54\uB529 \uAC12 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022utf-8\u0022 |\r\n| \u0060offsetX\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uD074\uB9AD\uD560 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 X\uCD95 \uC624\uD504\uC14B \uAC12\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 10 |\r\n| \u0060offsetY\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uD074\uB9AD\uD560 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 Y\uCD95 \uC624\uD504\uC14B \uAC12\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 20 |\r\n| \u0060retry\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060 | \uC7AC\uC2DC\uB3C4 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 2\n(\uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uBA74 \uC7AC\uC2DC\uB3C4 \uC2DC 0.5\uCD08 \uAC04\uACA9\uC73C\uB85C \uC561\uD2F0\uBE44\uD2F0\uB97C \uC218\uD589 \uB0B4\uC6A9\uC744 \uC7AC\uC2DC\uB3C4\uD55C\uB2E4.) |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC6F9 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_1 |\r\n| \u0060waitClickable\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | params\uC5D0 \uC9C0\uC815\uB41C \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC\uB97C \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC\uB97C \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060waitParams\u0060 | \u0060string\u0060 | \u0060True\u0060 | \u0060True\u0060, \u0060False\u0060 | params\uC5D0 \uC9C0\uC815\uB41C \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uB85C\uB529 \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uB85C\uB529\uC744 \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uB85C\uB529\uC744 \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n\r\n### waitClickable\nparams\uC5D0 \uC9C0\uC815\uB41C \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC\uB97C \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAC00\uB2A5 \uC0C1\uD0DC\uB97C \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4.\r\n\r\n### anchor\n\uD074\uB9AD\uD560 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uC758 \uD074\uB9AD \uAE30\uC900 \uC704\uCE58\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022center\u0022\r\n\r\n[\uADFC\uAC70]\r\n- WEB/Click.md / Summary\r\n- WEB/Click.md / Properties\r\n- WEB/Click.md / Property Notes/waitClickable\r\n- WEB/Click.md / Property Notes/anchor",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.590752,
+          "VectorScore": 0.309322,
+          "KeywordScore": 0.5,
+          "Preview": "\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uB97C \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 2.379901,
+          "VectorScore": 0.219896,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/offsetX",
+          "ChunkType": "property_note",
+          "FinalScore": 2.30567,
+          "VectorScore": 0.08493,
+          "KeywordScore": 0.333333,
+          "Preview": "### offsetX"
+        },
+        {
+          "Rank": 4,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/combinationkey",
+          "ChunkType": "property_note",
+          "FinalScore": 2.269566,
+          "VectorScore": 0.095045,
+          "KeywordScore": 0.166667,
+          "Preview": "### combinationkey"
+        },
+        {
+          "Rank": 5,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/waitClickable",
+          "ChunkType": "property_note",
+          "FinalScore": 2.36032,
+          "VectorScore": 0.184293,
+          "KeywordScore": 0.333333,
+          "Preview": "### waitClickable"
+        },
+        {
+          "Rank": 6,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/selector",
+          "ChunkType": "property_note",
+          "FinalScore": 2.291284,
+          "VectorScore": 0.134531,
+          "KeywordScore": 0.166667,
+          "Preview": "### selector"
+        },
+        {
+          "Rank": 7,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/anchor",
+          "ChunkType": "property_note",
+          "FinalScore": 2.32237,
+          "VectorScore": 0.115294,
+          "KeywordScore": 0.333333,
+          "Preview": "### anchor"
+        },
+        {
+          "Rank": 8,
+          "Source": "WEB/Click.md",
+          "SectionPath": "Property Notes/encoding",
+          "ChunkType": "property_note",
+          "FinalScore": 2.267198,
+          "VectorScore": 0.09074,
+          "KeywordScore": 0.166667,
+          "Preview": "### encoding"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-007",
+      "Domain": "WEB",
+      "Question": "\uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAC00 \uB098\uD0C0\uB098\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0?",
+      "ExpectedSource": "WEB/Wait.md",
+      "TopSource": "WEB/Wait.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WEB",
+      "Answer": "WEB/Wait.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAC00 \uB098\uD0C0\uB098\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### selector\n\uB300\uC0C1 \uC6F9 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_1\r\n\r\n### encoding\n\uC6F9 \uBE0C\uB77C\uC6B0\uC800 \uAE30\uBCF8 \uC778\uCF54\uB529 \uAC12 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022utf-8\u0022\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060encoding\u0060 | \u0060string\u0060 | \u0060\u0022utf-8\u0022\u0060 | \u0060\u0022utf-8\u0022\u0060, \u0060\u0022cp949\u0022\u0060, \u0060\u0022utf-16\u0022\u0060 | \uC6F9 \uBE0C\uB77C\uC6B0\uC800 \uAE30\uBCF8 \uC778\uCF54\uB529 \uAC12 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022utf-8\u0022 |\r\n| \u0060retry\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060 | \uC7AC\uC2DC\uB3C4 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3\n(\uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uBA74 \uC7AC\uC2DC\uB3C4 \uC2DC 0.5\uCD08 \uAC04\uACA9\uC73C\uB85C \uC561\uD2F0\uBE44\uD2F0\uB97C \uC218\uD589 \uB0B4\uC6A9\uC744 \uC7AC\uC2DC\uB3C4\uD55C\uB2E4.) |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC6F9 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_1 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030\u0060 | \u006030\u0060, \u006040\u0060, \u006050\u0060, \u006060\u0060, \u0060100\u0060 | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n\r\n[\uADFC\uAC70]\r\n- WEB/Wait.md / Summary\r\n- WEB/Wait.md / Property Notes/selector\r\n- WEB/Wait.md / Property Notes/encoding\r\n- WEB/Wait.md / Properties",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.233525,
+          "VectorScore": 0.653681,
+          "KeywordScore": 1,
+          "Preview": "\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAC00 \uB098\uD0C0\uB098\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.563077,
+          "VectorScore": 0.042478,
+          "KeywordScore": 0.142857,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Property Notes/selector",
+          "ChunkType": "property_note",
+          "FinalScore": 1.570769,
+          "VectorScore": 0.056464,
+          "KeywordScore": 0.142857,
+          "Preview": "### selector"
+        },
+        {
+          "Rank": 4,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Property Notes/encoding",
+          "ChunkType": "property_note",
+          "FinalScore": 1.567992,
+          "VectorScore": 0.051414,
+          "KeywordScore": 0.142857,
+          "Preview": "### encoding"
+        },
+        {
+          "Rank": 5,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.504,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WEB\u0060"
+        },
+        {
+          "Rank": 6,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.504,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 7,
+          "Source": "WEB/Wait.md",
+          "SectionPath": "Property Notes/retry",
+          "ChunkType": "property_note",
+          "FinalScore": 1.462448,
+          "VectorScore": -0.075549,
+          "KeywordScore": 0,
+          "Preview": "### retry"
+        },
+        {
+          "Rank": 8,
+          "Source": "WEB/WaitDisappear.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.934879,
+          "VectorScore": 0.52056,
+          "KeywordScore": 0.714286,
+          "Preview": "\uD2B9\uC815 \uC6F9 \uC5D8\uB9AC\uBA3C\uD2B8\uAC00 \uC0AC\uB77C\uC9C0\uAE30\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-008",
+      "Domain": "WIN32",
+      "Question": "\uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uCEE8\uD2B8\uB864\uC744 \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/ClickAutomation.md",
+      "TopSource": "WIN32/ClickAutomation.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/ClickAutomation.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uB9C8\uC6B0\uC2A4 \uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### anchor\n\uD074\uB9AD\uD560 \uC704\uCE58\uB97C \uC9C0\uC815\uD560 \uB54C \uAE30\uC900\uC810\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022center\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC911\uC559\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060anchor\u0060 | \u0060string\u0060 | \u0060\u0022center\u0022\u0060 | \u0060\u0022center\u0022\u0060, \u0060\u0022topLeft\u0022\u0060, \u0060\u0022topRight\u0022\u0060, \u0060\u0022bottomLeft\u0022\u0060, \u0060\u0022bottomRight\u0022\u0060 | \uD074\uB9AD\uD560 \uC704\uCE58\uB97C \uC9C0\uC815\uD560 \uB54C \uAE30\uC900\uC810\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022center\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC911\uC559\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4. |\r\n| \u0060button\u0060 | \u0060string\u0060 | \u0060\u0022left\u0022\u0060 | \u0060\u0022left\u0022\u0060, \u0060\u0022middle\u0022\u0060, \u0060\u0022right\u0022\u0060 | \uD074\uB9AD\uC5D0 \uC0AC\uC6A9\uD560 \uB9C8\uC6B0\uC2A4\uC758 \uBC84\uD2BC\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022left\u0022: \uC88C\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4.\n\u0022middle\u0022: \uD720\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4.\n\u0022right\u0022: \uC6B0\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4. |\r\n| \u0060combinationkey\u0060 | \u0060string\u0060 | \u0060None\u0060 | \u0060None\u0060, \u0060\u0022ctrl\u0022\u0060, \u0060\u0022shift\u0022\u0060, \u0060\u0022alt\u0022\u0060, \u0060\u0022win\u0022\u0060 | \uD074\uB9AD \uC2DC \uD568\uAED8 \uB204\uB97C \uC870\uD569 \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nNone: \uC870\uD569 \uD0A4\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.\n\u0022ctrl\u0022: Ctrl \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022shift\u0022: Shift \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022alt\u0022: Alt \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022win\u0022: Windows \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4. |\r\n| \u0060move\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uB9C8\uC6B0\uC2A4 \uD3EC\uC778\uD2B8 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158 \uC0AC\uC6A9 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uB9C8\uC6B0\uC2A4 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158\uC744 \uD45C\uC2DC\uD55C\uB2E4.\nFalse: \uB9C8\uC6B0\uC2A4 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158\uC744 \uD45C\uC2DC\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060offsetX\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uD074\uB9AD\uD560 \uC704\uCE58\uC758 X\uCD95 \uC624\uD504\uC14B\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 10 |\r\n| \u0060offsetY\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uD074\uB9AD\uD560 \uC704\uCE58\uC758 Y\uCD95 \uC624\uD504\uC14B\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 10 |\r\n| \u0060searchMode\u0060 | \u0060string\u0060 | \u0060\u0022All\u0022\u0060 | \u0060\u0022All\u0022\u0060, \u0060\u0022UIA\u0022\u0060, \u0060\u0022MSAA\u0022\u0060 | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4 \uAC80\uC0C9 \uBC29\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022All\u0022: UIA\uC640 MSAA\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\u0022UIA\u0022: UIA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\n\u0022MSAA\u0022: MSAA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4. |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_0 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030\u0060 | \u00605\u0060, \u006010\u0060, \u006020\u0060, \u006030\u0060, \u006040\u0060, \u006050\u0060, \u006060\u0060 | \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uCC3E\uB294 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n\r\n### combinationkey\n\uD074\uB9AD \uC2DC \uD568\uAED8 \uB204\uB97C \uC870\uD569 \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nNone: \uC870\uD569 \uD0A4\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.\n\u0022ctrl\u0022: Ctrl \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022shift\u0022: Shift \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022alt\u0022: Alt \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022win\u0022: Windows \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/ClickAutomation.md / Summary\r\n- WIN32/ClickAutomation.md / Property Notes/anchor\r\n- WIN32/ClickAutomation.md / Properties\r\n- WIN32/ClickAutomation.md / Property Notes/combinationkey",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.615324,
+          "VectorScore": 0.191498,
+          "KeywordScore": 0.7,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uB9C8\uC6B0\uC2A4 \uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 2.276645,
+          "VectorScore": 0.066627,
+          "KeywordScore": 0.1,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Property Notes/offsetX",
+          "ChunkType": "property_note",
+          "FinalScore": 2.245809,
+          "VectorScore": 0.010561,
+          "KeywordScore": 0.1,
+          "Preview": "### offsetX"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 2.215,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Property Notes/combinationkey",
+          "ChunkType": "property_note",
+          "FinalScore": 2.254558,
+          "VectorScore": 0.026469,
+          "KeywordScore": 0.1,
+          "Preview": "### combinationkey"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Property Notes/anchor",
+          "ChunkType": "property_note",
+          "FinalScore": 2.295951,
+          "VectorScore": 0.10173,
+          "KeywordScore": 0.1,
+          "Preview": "### anchor"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Property Notes/button",
+          "ChunkType": "property_note",
+          "FinalScore": 2.173844,
+          "VectorScore": -0.120284,
+          "KeywordScore": 0.1,
+          "Preview": "### button"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/ClickAutomation.md",
+          "SectionPath": "Property Notes/offsetY",
+          "ChunkType": "property_note",
+          "FinalScore": 2.246078,
+          "VectorScore": 0.011052,
+          "KeywordScore": 0.1,
+          "Preview": "### offsetY"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-009",
+      "Domain": "WIN32",
+      "Question": "\uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uCEE8\uD2B8\uB864\uC744 \uB354\uBE14\uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/DoubleClickAutomation.md",
+      "TopSource": "WIN32/DoubleClickAutomation.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/DoubleClickAutomation.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uB9C8\uC6B0\uC2A4 \uB354\uBE14\uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060anchor\u0060 | \u0060string\u0060 | \u0060\u0022center\u0022\u0060 | \u0060\u0022center\u0022\u0060, \u0060\u0022topLeft\u0022\u0060, \u0060\u0022topRight\u0022\u0060, \u0060\u0022bottomLeft\u0022\u0060, \u0060\u0022bottomRight\u0022\u0060 | \uB354\uBE14 \uD074\uB9AD\uD560 \uC704\uCE58\uB97C \uC9C0\uC815\uD560 \uB54C \uAE30\uC900\uC810\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022center\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC911\uC559\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022topRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uC0C1\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomLeft\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC88C\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4.\n\u0022bottomRight\u0022: \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uC758 \uC6B0\uD558\uB2E8\uC744 \uAE30\uC900\uC73C\uB85C \uD074\uB9AD\uD55C\uB2E4. |\r\n| \u0060combinationkey\u0060 | \u0060string\u0060 | \u0060None\u0060 | \u0060None\u0060, \u0060\u0022ctrl\u0022\u0060, \u0060\u0022shift\u0022\u0060, \u0060\u0022alt\u0022\u0060, \u0060\u0022win\u0022\u0060 | \uD074\uB9AD \uC2DC \uD568\uAED8 \uB204\uB97C \uC870\uD569 \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nNone: \uC870\uD569 \uD0A4\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.\n\u0022ctrl\u0022: Ctrl \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022shift\u0022: Shift \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022alt\u0022: Alt \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022win\u0022: Windows \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4. |\r\n| \u0060move\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uB9C8\uC6B0\uC2A4 \uD3EC\uC778\uD2B8 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158 \uC0AC\uC6A9 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uB9C8\uC6B0\uC2A4 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158\uC744 \uD45C\uC2DC\uD55C\uB2E4.\nFalse: \uB9C8\uC6B0\uC2A4 \uC774\uB3D9 \uC560\uB2C8\uBA54\uC774\uC158\uC744 \uD45C\uC2DC\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060offsetX\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uB354\uBE14 \uD074\uB9AD\uD560 \uC704\uCE58\uC758 X\uCD95 \uC624\uD504\uC14B\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 10 |\r\n| \u0060offsetY\u0060 | \u0060string\u0060 | \u00600\u0060 | - | \uB354\uBE14 \uD074\uB9AD\uD560 \uC704\uCE58\uC758 Y\uCD95 \uC624\uD504\uC14B\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 10 |\r\n| \u0060searchMode\u0060 | \u0060string\u0060 | \u0060\u0022All\u0022\u0060 | \u0060\u0022All\u0022\u0060, \u0060\u0022UIA\u0022\u0060, \u0060\u0022MSAA\u0022\u0060 | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4 \uAC80\uC0C9 \uBC29\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022All\u0022: UIA\uC640 MSAA\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\u0022UIA\u0022: UIA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\n\u0022MSAA\u0022: MSAA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4. |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_0 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030\u0060 | \u00605\u0060, \u006010\u0060, \u006020\u0060, \u006030\u0060, \u006040\u0060, \u006050\u0060, \u006060\u0060 | \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uCC3E\uB294 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n\r\n### searchMode\n\uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4 \uAC80\uC0C9 \uBC29\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022All\u0022: UIA\uC640 MSAA\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\u0022UIA\u0022: UIA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\n\u0022MSAA\u0022: MSAA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/DoubleClickAutomation.md / Summary\r\n- WIN32/DoubleClickAutomation.md / Metadata\r\n- WIN32/DoubleClickAutomation.md / Properties\r\n- WIN32/DoubleClickAutomation.md / Property Notes/searchMode",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.633189,
+          "VectorScore": 0.208072,
+          "KeywordScore": 0.7,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uB9C8\uC6B0\uC2A4 \uB354\uBE14\uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 2.22375,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.849373,
+          "VectorScore": 0.082951,
+          "KeywordScore": 0,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Property Notes/offsetX",
+          "ChunkType": "property_note",
+          "FinalScore": 1.825238,
+          "VectorScore": 0.039068,
+          "KeywordScore": 0,
+          "Preview": "### offsetX"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Property Notes/move",
+          "ChunkType": "property_note",
+          "FinalScore": 1.789738,
+          "VectorScore": -0.025476,
+          "KeywordScore": 0,
+          "Preview": "### move"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Property Notes/searchMode",
+          "ChunkType": "property_note",
+          "FinalScore": 1.832855,
+          "VectorScore": 0.052918,
+          "KeywordScore": 0,
+          "Preview": "### searchMode"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.819608,
+          "VectorScore": 0.028833,
+          "KeywordScore": 0,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Property Notes/combinationkey",
+          "ChunkType": "property_note",
+          "FinalScore": 1.818012,
+          "VectorScore": 0.02593,
+          "KeywordScore": 0,
+          "Preview": "### combinationkey"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-010",
+      "Domain": "WIN32",
+      "Question": "\uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uCEE8\uD2B8\uB864\uC5D0 \uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/SetTextAutomation.md",
+      "TopSource": "WIN32/SetTextAutomation.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/SetTextAutomation.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uD14D\uC2A4\uD2B8 \uC785\uB825\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### clear\n\uD14D\uC2A4\uD2B8 \uC785\uB825 \uC804\uC5D0 \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B0\uB294 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B4\uB2E4.\nFalse: \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B0\uC9C0 \uC54A\uB294\uB2E4.\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060byClipboard\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uD074\uB9BD\uBCF4\uB4DC\uB97C \uC774\uC6A9\uD55C \uD14D\uC2A4\uD2B8 \uC785\uB825 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uD074\uB9BD\uBCF4\uB4DC\uB97C \uC774\uC6A9\uD558\uC5EC \uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD55C\uB2E4.\nFalse: \uD074\uB9BD\uBCF4\uB4DC\uB97C \uC774\uC6A9\uD558\uC9C0 \uC54A\uACE0 \uD14D\uC2A4\uD2B8\uB97C \uC785\uB825\uD55C\uB2E4. |\r\n| \u0060clear\u0060 | \u0060string\u0060 | \u0060True\u0060 | \u0060True\u0060, \u0060False\u0060 | \uD14D\uC2A4\uD2B8 \uC785\uB825 \uC804\uC5D0 \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B0\uB294 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B4\uB2E4.\nFalse: \uAE30\uC874 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC6B0\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060searchMode\u0060 | \u0060string\u0060 | \u0060\u0022All\u0022\u0060 | \u0060\u0022All\u0022\u0060, \u0060\u0022UIA\u0022\u0060, \u0060\u0022MSAA\u0022\u0060 | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4 \uAC80\uC0C9 \uBC29\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022All\u0022: UIA\uC640 MSAA\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\u0022UIA\u0022: UIA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\n\u0022MSAA\u0022: MSAA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4. |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\nex) selector_0 |\r\n| \u0060text\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC785\uB825\uD560 \uD14D\uC2A4\uD2B8\uB97C \uBB38\uC790\uC5F4\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022hello world\u0022 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030\u0060 | \u00605\u0060, \u006010\u0060, \u006020\u0060, \u006030\u0060, \u006040\u0060, \u006050\u0060, \u006060\u0060 | \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uCC3E\uB294 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n\r\n### text\n\uC785\uB825\uD560 \uD14D\uC2A4\uD2B8\uB97C \uBB38\uC790\uC5F4\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022hello world\u0022\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/SetTextAutomation.md / Summary\r\n- WIN32/SetTextAutomation.md / Property Notes/clear\r\n- WIN32/SetTextAutomation.md / Properties\r\n- WIN32/SetTextAutomation.md / Property Notes/text",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.222522,
+          "VectorScore": 0.220747,
+          "KeywordScore": 0.666667,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uD14D\uC2A4\uD2B8 \uC785\uB825\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.996845,
+          "VectorScore": 0.218,
+          "KeywordScore": 0.25,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/TypeText.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.169626,
+          "VectorScore": 0.268174,
+          "KeywordScore": 0.75,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 text\uD544\uB4DC\uC5D0 \uC785\uB825\uD55C \uD14D\uC2A4\uD2B8 \uB370\uC774\uD130\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Property Notes/text",
+          "ChunkType": "property_note",
+          "FinalScore": 1.941785,
+          "VectorScore": 0.117893,
+          "KeywordScore": 0.25,
+          "Preview": "### text"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Property Notes/clear",
+          "ChunkType": "property_note",
+          "FinalScore": 1.999327,
+          "VectorScore": 0.222514,
+          "KeywordScore": 0.25,
+          "Preview": "### clear"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Property Notes/byClipboard",
+          "ChunkType": "property_note",
+          "FinalScore": 1.936836,
+          "VectorScore": 0.108894,
+          "KeywordScore": 0.25,
+          "Preview": "### byClipboard"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Property Notes/selector",
+          "ChunkType": "property_note",
+          "FinalScore": 1.873446,
+          "VectorScore": 0.107276,
+          "KeywordScore": 0,
+          "Preview": "### selector"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/SetTextAutomation.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.814444,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-011",
+      "Domain": "WIN32",
+      "Question": "\uC774\uBBF8\uC9C0\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/WaitForImage.md",
+      "TopSource": "WIN32/WaitForImage.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "Answer": "WIN32/WaitForImage.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uD654\uBA74 \uC704\uC758 \uC774\uBBF8\uC9C0\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060confidence\u0060 | \u0060string\u0060 | \u0060\u002290%\u0022\u0060 | \u0060\u002290%\u0022\u0060, \u0060\u002280%\u0022\u0060, \u0060\u002270%\u0022\u0060, \u0060\u002260%\u0022\u0060, \u0060\u002250%\u0022\u0060 | \uB300\uC0C1 \uC774\uBBF8\uC9C0\uC758 \uC2E0\uB8B0\uB3C4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u002290%\u0022 (90\uD37C\uC13C\uD2B8\uB9CC \uC77C\uCE58\uD574\uB3C4 \uAC19\uC740 \uC774\uBBF8\uC9C0\uB85C \uC778\uC815) |\r\n| \u0060image\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uAE30\uB2E4\uB9B4 \uC774\uBBF8\uC9C0\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nimage_0 |\r\n| \u0060imageCollection\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uAE30\uB2E4\uB9B4 \uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4. \uADF8 \uC911 \uB2E8 \uD558\uB098\uC758 \uC774\uBBF8\uC9C0\uB77C\uB3C4 \uCC3E\uB294\uB2E4\uBA74 \uAE30\uB2E4\uB9BC\uC774 \uC885\uB8CC\uB429\uB2C8\uB2E4. \nex) [\u0027image_0\u0027, \u0027image_1\u0027]\n(\uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC0AC\uC6A9\uD560 \uACBD\uC6B0 image \uD504\uB85C\uD37C\uD2F0\uB294 \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.) |\r\n| \u0060module\u0060 | \u0060string\u0060 | \u0060\u0022gdi32\u0022\u0060 | \u0060\u0022graphic\u0022\u0060, \u0060\u0022gdi32\u0022\u0060, \u0060\u0022WDD\u0022\u0060 | \uC774\uBBF8\uC9C0 \uCEA1\uCCD0\uC5D0 \uC0AC\uC6A9\uD560 \uBAA8\uB4C8\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022gdi32\u0022 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006060000\u0060 | \u006030000\u0060, \u006060000\u0060, \u0060120000\u0060, \u0060300000\u0060 | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n\r\n### imageCollection\n\uAE30\uB2E4\uB9B4 \uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4. \uADF8 \uC911 \uB2E8 \uD558\uB098\uC758 \uC774\uBBF8\uC9C0\uB77C\uB3C4 \uCC3E\uB294\uB2E4\uBA74 \uAE30\uB2E4\uB9BC\uC774 \uC885\uB8CC\uB429\uB2C8\uB2E4. \nex) [\u0027image_0\u0027, \u0027image_1\u0027]\n(\uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC0AC\uC6A9\uD560 \uACBD\uC6B0 image \uD504\uB85C\uD37C\uD2F0\uB294 \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.)\r\n\r\n### confidence\n\uB300\uC0C1 \uC774\uBBF8\uC9C0\uC758 \uC2E0\uB8B0\uB3C4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u002290%\u0022 (90\uD37C\uC13C\uD2B8\uB9CC \uC77C\uCE58\uD574\uB3C4 \uAC19\uC740 \uC774\uBBF8\uC9C0\uB85C \uC778\uC815)\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/WaitForImage.md / Summary\r\n- WIN32/WaitForImage.md / Properties\r\n- WIN32/WaitForImage.md / Property Notes/imageCollection\r\n- WIN32/WaitForImage.md / Property Notes/confidence",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.927906,
+          "VectorScore": 0.385283,
+          "KeywordScore": 0.8,
+          "Preview": "\uC708\uB3C4\uC6B0 \uD654\uBA74 \uC704\uC758 \uC774\uBBF8\uC9C0\uB97C \uAE30\uB2E4\uB9AC\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.490857,
+          "VectorScore": 0.081558,
+          "KeywordScore": 0.2,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Property Notes/image",
+          "ChunkType": "property_note",
+          "FinalScore": 1.468772,
+          "VectorScore": 0.041403,
+          "KeywordScore": 0.2,
+          "Preview": "### image"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Property Notes/confidence",
+          "ChunkType": "property_note",
+          "FinalScore": 1.486423,
+          "VectorScore": 0.073496,
+          "KeywordScore": 0.2,
+          "Preview": "### confidence"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Property Notes/module",
+          "ChunkType": "property_note",
+          "FinalScore": 1.459923,
+          "VectorScore": 0.025315,
+          "KeywordScore": 0.2,
+          "Preview": "### module"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Property Notes/imageCollection",
+          "ChunkType": "property_note",
+          "FinalScore": 1.487964,
+          "VectorScore": 0.076298,
+          "KeywordScore": 0.2,
+          "Preview": "### imageCollection"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.396,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/WaitForImage.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.396,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-012",
+      "Domain": "WIN32",
+      "Question": "\uC774\uBBF8\uC9C0\uB97C \uCC3E\uC544\uC11C \uD074\uB9AD\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/ClickOnImage.md",
+      "TopSource": "WIN32/ClickOnImage.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/ClickOnImage.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uD654\uBA74 \uC704\uC758 \uC774\uBBF8\uC9C0\uB97C \uCC3E\uC544\uC11C \uB9C8\uC6B0\uC2A4 \uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### waiting\n\uD074\uB9AD\uD560 \uC774\uBBF8\uC9C0 \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC774\uBBF8\uC9C0\uAC00 \uB098\uD0C0\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC774\uBBF8\uC9C0\uAC00 \uB098\uD0C0\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4.\r\n\r\n### imageCollection\n\uD074\uB9AD\uD560 \uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4. \uADF8 \uC911 \uB2E8 \uD558\uB098\uC758 \uC774\uBBF8\uC9C0\uB77C\uB3C4 \uCC3E\uB294\uB2E4\uBA74 \uD074\uB9AD\uC774 \uBC1C\uC0DD\uD569\uB2C8\uB2E4. \nex) [\u0027image_0\u0027, \u0027image_1\u0027]\n(\uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC0AC\uC6A9\uD560 \uACBD\uC6B0 image \uD504\uB85C\uD37C\uD2F0\uB294 \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060button\u0060 | \u0060string\u0060 | \u0060\u0022left\u0022\u0060 | \u0060\u0022left\u0022\u0060, \u0060\u0022middle\u0022\u0060, \u0060\u0022right\u0022\u0060 | \uD074\uB9AD\uC5D0 \uC0AC\uC6A9\uD560 \uB9C8\uC6B0\uC2A4\uC758 \uBC84\uD2BC\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022left\u0022: \uC88C\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4.\n\u0022middle\u0022: \uD720\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4.\n\u0022right\u0022: \uC6B0\uD074\uB9AD\uC744 \uC0AC\uC6A9\uD55C\uB2E4. |\r\n| \u0060clicks\u0060 | \u0060string\u0060 | \u00601\u0060 | \u00601\u0060, \u00602\u0060, \u00603\u0060 | \uD074\uB9AD\uC758 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 2 |\r\n| \u0060combinationkey\u0060 | \u0060string\u0060 | \u0060None\u0060 | \u0060None\u0060, \u0060\u0022ctrl\u0022\u0060, \u0060\u0022shift\u0022\u0060, \u0060\u0022alt\u0022\u0060, \u0060\u0022win\u0022\u0060 | \uD074\uB9AD \uC2DC \uD568\uAED8 \uB204\uB97C \uC870\uD569 \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nNone: \uC870\uD569 \uD0A4\uB97C \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.\n\u0022ctrl\u0022: Ctrl \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022shift\u0022: Shift \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022alt\u0022: Alt \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4.\n\u0022win\u0022: Windows \uD0A4\uB97C \uD568\uAED8 \uB204\uB985\uB2C8\uB2E4. |\r\n| \u0060confidence\u0060 | \u0060string\u0060 | \u0060\u002290%\u0022\u0060 | \u0060\u002290%\u0022\u0060, \u0060\u002280%\u0022\u0060, \u0060\u002270%\u0022\u0060, \u0060\u002260%\u0022\u0060, \u0060\u002250%\u0022\u0060 | \uB300\uC0C1 \uC774\uBBF8\uC9C0\uC758 \uC2E0\uB8B0\uB3C4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u002290%\u0022 (90\uD37C\uC13C\uD2B8\uB9CC \uC77C\uCE58\uD574\uB3C4 \uAC19\uC740 \uC774\uBBF8\uC9C0\uB85C \uC778\uC815) |\r\n| \u0060image\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uD074\uB9AD\uD560 \uC774\uBBF8\uC9C0\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nimage_0 |\r\n| \u0060imageCollection\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uD074\uB9AD\uD560 \uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4. \uADF8 \uC911 \uB2E8 \uD558\uB098\uC758 \uC774\uBBF8\uC9C0\uB77C\uB3C4 \uCC3E\uB294\uB2E4\uBA74 \uD074\uB9AD\uC774 \uBC1C\uC0DD\uD569\uB2C8\uB2E4. \nex) [\u0027image_0\u0027, \u0027image_1\u0027]\n(\uC774\uBBF8\uC9C0 \uCEEC\uB809\uC158\uC744 \uC0AC\uC6A9\uD560 \uACBD\uC6B0 image \uD504\uB85C\uD37C\uD2F0\uB294 \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.) |\r\n| \u0060module\u0060 | \u0060string\u0060 | \u0060\u0022gdi32\u0022\u0060 | \u0060\u0022graphic\u0022\u0060, \u0060\u0022gdi32\u0022\u0060, \u0060\u0022WDD\u0022\u0060 | \uC774\uBBF8\uC9C0 \uCEA1\uCCD0\uC5D0 \uC0AC\uC6A9\uD560 \uBAA8\uB4C8\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022gdi32\u0022 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006060000\u0060 | \u006030000\u0060, \u006060000\u0060, \u0060120000\u0060, \u0060300000\u0060 | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n| \u0060waiting\u0060 | \u0060string\u0060 | \u0060True\u0060 | \u0060True\u0060, \u0060False\u0060 | \uD074\uB9AD\uD560 \uC774\uBBF8\uC9C0 \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC774\uBBF8\uC9C0\uAC00 \uB098\uD0C0\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC774\uBBF8\uC9C0\uAC00 \uB098\uD0C0\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060x\u0060 | \u0060string\u0060 | \u0060\u002250%\u0022\u0060 | - | \uCEE4\uC11C \uD074\uB9AD\uD560 x\uC88C\uD45C\uC758 \uC704\uCE58\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\n ex) \u002250%\u0022 |\r\n| \u0060y\u0060 | \u0060string\u0060 | \u0060\u002250%\u0022\u0060 | - | \uCEE4\uC11C \uD074\uB9AD\uD560 y\uC88C\uD45C\uC758 \uC704\uCE58\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\n ex) \u002250%\u0022 |\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/ClickOnImage.md / Summary\r\n- WIN32/ClickOnImage.md / Property Notes/waiting\r\n- WIN32/ClickOnImage.md / Property Notes/imageCollection\r\n- WIN32/ClickOnImage.md / Properties",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.661975,
+          "VectorScore": 0.321613,
+          "KeywordScore": 0.666667,
+          "Preview": "\uC708\uB3C4\uC6B0 \uD654\uBA74 \uC704\uC758 \uC774\uBBF8\uC9C0\uB97C \uCC3E\uC544\uC11C \uB9C8\uC6B0\uC2A4 \uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 2.307647,
+          "VectorScore": 0.047078,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/waiting",
+          "ChunkType": "property_note",
+          "FinalScore": 2.323963,
+          "VectorScore": 0.076743,
+          "KeywordScore": 0.333333,
+          "Preview": "### waiting"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/imageCollection",
+          "ChunkType": "property_note",
+          "FinalScore": 2.318511,
+          "VectorScore": 0.066831,
+          "KeywordScore": 0.333333,
+          "Preview": "### imageCollection"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/button",
+          "ChunkType": "property_note",
+          "FinalScore": 2.244589,
+          "VectorScore": 0.008184,
+          "KeywordScore": 0.166667,
+          "Preview": "### button"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/image",
+          "ChunkType": "property_note",
+          "FinalScore": 2.301768,
+          "VectorScore": 0.036388,
+          "KeywordScore": 0.333333,
+          "Preview": "### image"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/y",
+          "ChunkType": "property_note",
+          "FinalScore": 2.246385,
+          "VectorScore": 0.01145,
+          "KeywordScore": 0.166667,
+          "Preview": "### y"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/ClickOnImage.md",
+          "SectionPath": "Property Notes/combinationkey",
+          "ChunkType": "property_note",
+          "FinalScore": 2.226123,
+          "VectorScore": -0.025391,
+          "KeywordScore": 0.166667,
+          "Preview": "### combinationkey"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-013",
+      "Domain": "WIN32",
+      "Question": "CMD\uC5D0\uC11C \uBA85\uB839\uC5B4\uB97C \uC2E4\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/Execute.md",
+      "TopSource": "WIN32/Execute.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "ActivityNameHint": "CMD",
+      "Answer": "WIN32/Execute.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC708\uB3C4\uC6B0 \uCEE4\uB9E8\uB4DC\uCC3D(CMD)\uC5D0\uC11C \uBA85\uB839\uC5B4\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060command\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC218\uD589\uD560 \uBA85\uB839\uC5B4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022notepad\u0022 |\r\n| \u0060encoding\u0060 | \u0060string\u0060 | \u0060\u0022cp949\u0022\u0060 | \u0060\u0022utf-8\u0022\u0060, \u0060\u0022cp949\u0022\u0060, \u0060\u0022utf-16\u0022\u0060 | Encoding Type\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022cp949\u0022 |\r\n| \u0060params\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | command \uD544\uB4DC\uC5D0 \uAC12\uC5D0 \uB4A4 \uB530\uB974\uB294 \uC785\uB825 \uD30C\uB77C\uBBF8\uD130\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022-f -u -p\u0022\n(\uAC01 \uD30C\uB77C\uBBF8\uD130\uB294 \uACF5\uBC31\uC744 \uAE30\uC900\uC73C\uB85C \uAD6C\uBD84\uD55C\uB2E4.) |\r\n| \u0060returnHandle\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uAC1D\uCCB4 \uD578\uB4E4\uC758 \uBC18\uD658 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uAC1D\uCCB4\uC758 \uD578\uB4E4\uC744 Name\uD544\uB4DC\uC758 \uAC12\uC5D0 \uBC18\uD658\uD55C\uB2E4.\nFalse: \uAC1D\uCCB4\uC758 \uD578\uB4E4\uC744 \uBC18\uD658\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n| \u0060startdir\u0060 | \u0060string\u0060 | \u0060\u0022C:\\\u0022\u0060 | - | \uBA85\uB839\uC744 \uC218\uD589\uD560 \uC2DC\uC791 \uB514\uB809\uD1A0\uB9AC\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\logs\u0022 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n| \u0060waiting\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uC2DC\uAE4C\uC9C0 \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uC2DC\uAE4C\uC9C0 \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4. |\r\n\r\n### command\n\uC218\uD589\uD560 \uBA85\uB839\uC5B4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022notepad\u0022\r\n\r\n### waiting\n\uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uB300\uAE30 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uC2DC\uAE4C\uC9C0 \uB300\uAE30\uD55C\uB2E4.\nFalse: \uC2E4\uD589 \uBA85\uB839\uC758 \uC218\uD589 \uC644\uB8CC \uC2DC\uAE4C\uC9C0 \uB300\uAE30\uD558\uC9C0 \uC54A\uB294\uB2E4.\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/Execute.md / Summary\r\n- WIN32/Execute.md / Properties\r\n- WIN32/Execute.md / Property Notes/command\r\n- WIN32/Execute.md / Property Notes/waiting",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.83968,
+          "VectorScore": 0.280132,
+          "KeywordScore": 0.571429,
+          "Preview": "\uC708\uB3C4\uC6B0 \uCEE4\uB9E8\uB4DC\uCC3D(CMD)\uC5D0\uC11C \uBA85\uB839\uC5B4\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.579153,
+          "VectorScore": 0.089564,
+          "KeywordScore": 0.428571,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Property Notes/command",
+          "ChunkType": "property_note",
+          "FinalScore": 1.563151,
+          "VectorScore": 0.125404,
+          "KeywordScore": 0.285714,
+          "Preview": "### command"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Property Notes/returnHandle",
+          "ChunkType": "property_note",
+          "FinalScore": 1.468023,
+          "VectorScore": 0.082314,
+          "KeywordScore": 0,
+          "Preview": "### returnHandle"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Property Notes/waiting",
+          "ChunkType": "property_note",
+          "FinalScore": 1.497663,
+          "VectorScore": 0.071271,
+          "KeywordScore": 0.142857,
+          "Preview": "### waiting"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.42275,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Property Notes/params",
+          "ChunkType": "property_note",
+          "FinalScore": 1.427212,
+          "VectorScore": 0.008113,
+          "KeywordScore": 0,
+          "Preview": "### params"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/Execute.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.42275,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "### timeout"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-014",
+      "Domain": "WIN32",
+      "Question": "\uB9C8\uC6B0\uC2A4 \uC2A4\uD06C\uB864\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/ScrollMouse.md",
+      "TopSource": "WIN32/ScrollMouse.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/ScrollMouse.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uD3EC\uC778\uD2B8 \uC704\uCE58\uC5D0\uC11C \uB9C8\uC6B0\uC2A4 \uC2A4\uD06C\uB864\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### current\n\uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uCEE4\uC11C\uC758 \uC704\uCE58 \uC0AC\uC6A9 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uC704\uCE58\uC5D0\uC11C \uC2A4\uD06C\uB864\uD55C\uB2E4.\nFalse: x, y\uC88C\uD45C\uC5D0\uC11C \uC2A4\uD06C\uB864\uD55C\uB2E4.\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060current\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uCEE4\uC11C\uC758 \uC704\uCE58 \uC0AC\uC6A9 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nTrue: \uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uC704\uCE58\uC5D0\uC11C \uC2A4\uD06C\uB864\uD55C\uB2E4.\nFalse: x, y\uC88C\uD45C\uC5D0\uC11C \uC2A4\uD06C\uB864\uD55C\uB2E4. |\r\n| \u0060wheelCount\u0060 | \u0060string\u0060 | \u00601\u0060 | - | \uC2A4\uD06C\uB864\uD560 \uD720\uC758 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) -10\n(\uAC12\uC774 \uC591\uC218\uBA74 \uC704\uB85C \uC2A4\uD06C\uB864/\uAC12\uC774 \uC74C\uC218\uBA74 \uC544\uB798\uB85C \uC2A4\uD06C\uB864) |\r\n| \u0060x\u0060 | \u0060string\u0060 | \u00600\u0060 | - | current \uD544\uB4DC\uC758 \uAC12\uC774 False\uC77C \uACBD\uC6B0 \uC2A4\uD06C\uB864\uD560 x\uC88C\uD45C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 300 |\r\n| \u0060y\u0060 | \u0060string\u0060 | \u00600\u0060 | - | current \uD544\uB4DC\uC758 \uAC12\uC774 False\uC77C \uACBD\uC6B0 \uC2A4\uD06C\uB864\uD560 y\uC88C\uD45C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 400 |\r\n\r\n### y\ncurrent \uD544\uB4DC\uC758 \uAC12\uC774 False\uC77C \uACBD\uC6B0 \uC2A4\uD06C\uB864\uD560 y\uC88C\uD45C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 400\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/ScrollMouse.md / Summary\r\n- WIN32/ScrollMouse.md / Property Notes/current\r\n- WIN32/ScrollMouse.md / Properties\r\n- WIN32/ScrollMouse.md / Property Notes/y",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.377683,
+          "VectorScore": 0.492598,
+          "KeywordScore": 0.833333,
+          "Preview": "\uD604\uC7AC \uB9C8\uC6B0\uC2A4 \uD3EC\uC778\uD2B8 \uC704\uCE58\uC5D0\uC11C \uB9C8\uC6B0\uC2A4 \uC2A4\uD06C\uB864\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.931141,
+          "VectorScore": 0.126158,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Property Notes/current",
+          "ChunkType": "property_note",
+          "FinalScore": 1.963342,
+          "VectorScore": 0.184705,
+          "KeywordScore": 0.333333,
+          "Preview": "### current"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.765407,
+          "VectorScore": -0.023662,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Property Notes/y",
+          "ChunkType": "property_note",
+          "FinalScore": 1.861753,
+          "VectorScore": 0.075756,
+          "KeywordScore": 0.166667,
+          "Preview": "### y"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Property Notes/wheelCount",
+          "ChunkType": "property_note",
+          "FinalScore": 1.808622,
+          "VectorScore": -0.020846,
+          "KeywordScore": 0.166667,
+          "Preview": "### wheelCount"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/ScrollMouse.md",
+          "SectionPath": "Property Notes/x",
+          "ChunkType": "property_note",
+          "FinalScore": 1.815881,
+          "VectorScore": -0.007649,
+          "KeywordScore": 0.166667,
+          "Preview": "### x"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/DoubleClickAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.747058,
+          "VectorScore": 0.276468,
+          "KeywordScore": 0.5,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uB9C8\uC6B0\uC2A4 \uB354\uBE14\uD074\uB9AD\uC744 \uC218\uD589\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-015",
+      "Domain": "WIN32",
+      "Question": "\uD0A4\uBCF4\uB4DC \uD0A4\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/TypeKeys.md",
+      "TopSource": "WIN32/TypeKeys.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/TypeKeys.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uD2B9\uC815 \uD0A4\uBCF4\uB4DC Key\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### keys\n\uC785\uB825\uD560 \uD0A4\uBCF4\uB4DC \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022esc\u0022\n(\uBCF5\uD569\uD0A4 \uC0AC\uC6A9\uC740 \u0027\u002B\u0027\uB97C \uC774\uC6A9\uD55C\uB2E4.)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060delay\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u0060500\u0060, \u00601000\u0060, \u00601500\u0060, \u00602000\u0060, \u00605000\u0060, \u006010000\u0060 | \uC5EC\uB7EC \uD0A4\uB97C \uC785\uB825\uD560 \uACBD\uC6B0 \uAC01 \uD0A4 \uC785\uB825\uAC04 \uB300\uAE30\uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 500 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n| \u0060keys\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC785\uB825\uD560 \uD0A4\uBCF4\uB4DC \uD0A4\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022esc\u0022\n(\uBCF5\uD569\uD0A4 \uC0AC\uC6A9\uC740 \u0027\u002B\u0027\uB97C \uC774\uC6A9\uD55C\uB2E4.) |\r\n| \u0060repeat\u0060 | \u0060string\u0060 | \u00601\u0060 | \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060 | \uC785\uB825 \uBC18\uBCF5 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 2 |\r\n| \u0060searchMode\u0060 | \u0060string\u0060 | \u0060\u0022All\u0022\u0060 | \u0060\u0022All\u0022\u0060, \u0060\u0022UIA\u0022\u0060, \u0060\u0022MSAA\u0022\u0060 | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4 \uAC80\uC0C9 \uBC29\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\n\u0022All\u0022: UIA\uC640 MSAA\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\u0022UIA\u0022: UIA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4.\n\u0022MSAA\u0022: MSAA \uBC29\uC2DD\uC73C\uB85C\uB9CC \uAC80\uC0C9\uD569\uB2C8\uB2E4. |\r\n| \u0060selector\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uC0C1 \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uC120\uD0DD\uD569\uB2C8\uB2E4.\n(\uAC12\uC774 \uBE44\uC5B4 \uC788\uC73C\uBA74 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uCEE8\uD2B8\uB864\uC5D0 keys \uC785\uB825\uD55C\uB2E4.)\nex) selector_0 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030\u0060 | \u00605\u0060, \u006010\u0060, \u006020\u0060, \u006030\u0060, \u006040\u0060, \u006050\u0060, \u006060\u0060 | \uC708\uB3C4\uC6B0 \uAC1D\uCCB4\uB97C \uCC3E\uB294 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30 (\uB2E8\uC704: \uCD08) |\r\n\r\n### delay\n\uC5EC\uB7EC \uD0A4\uB97C \uC785\uB825\uD560 \uACBD\uC6B0 \uAC01 \uD0A4 \uC785\uB825\uAC04 \uB300\uAE30\uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 500 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8)\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/TypeKeys.md / Summary\r\n- WIN32/TypeKeys.md / Property Notes/keys\r\n- WIN32/TypeKeys.md / Properties\r\n- WIN32/TypeKeys.md / Property Notes/delay",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.168353,
+          "VectorScore": 0.244064,
+          "KeywordScore": 0.6,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC5D0 \uD2B9\uC815 \uD0A4\uBCF4\uB4DC Key\uB97C \uC785\uB825\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 2.01998,
+          "VectorScore": 0.192477,
+          "KeywordScore": 0.6,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Property Notes/keys",
+          "ChunkType": "property_note",
+          "FinalScore": 2.034446,
+          "VectorScore": 0.218779,
+          "KeywordScore": 0.6,
+          "Preview": "### keys"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Property Notes/delay",
+          "ChunkType": "property_note",
+          "FinalScore": 1.92695,
+          "VectorScore": 0.11424,
+          "KeywordScore": 0.4,
+          "Preview": "### delay"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Property Notes/selector",
+          "ChunkType": "property_note",
+          "FinalScore": 1.87747,
+          "VectorScore": 0.115187,
+          "KeywordScore": 0.2,
+          "Preview": "### selector"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Property Notes/repeat",
+          "ChunkType": "property_note",
+          "FinalScore": 1.83211,
+          "VectorScore": 0.032712,
+          "KeywordScore": 0.2,
+          "Preview": "### repeat"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Property Notes/searchMode",
+          "ChunkType": "property_note",
+          "FinalScore": 1.827672,
+          "VectorScore": 0.115553,
+          "KeywordScore": 0,
+          "Preview": "### searchMode"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/TypeKeys.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.764118,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-016",
+      "Domain": "WIN32",
+      "Question": "\uCEE8\uD2B8\uB864\uC758 \uC874\uC7AC\uB97C \uD655\uC778\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "WIN32/ControlExists.md",
+      "TopSource": "WIN32/ControlExists.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "WIN32/ControlExists.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uCEE8\uD2B8\uB864\uC758 \uC874\uC7AC\uB97C \uD655\uC778\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n[\uADFC\uAC70]\r\n- WIN32/ControlExists.md / Summary",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.064899,
+          "VectorScore": 0.172817,
+          "KeywordScore": 0.285714,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uC758 \uC874\uC7AC \uACB0\uACFC\uB97C \uBC18\uD658\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Property Notes/searchMode",
+          "ChunkType": "property_note",
+          "FinalScore": 1.809112,
+          "VectorScore": 0.055802,
+          "KeywordScore": 0,
+          "Preview": "### searchMode"
+        },
+        {
+          "Rank": 3,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.807987,
+          "VectorScore": 0.053756,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060WIN32\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.811866,
+          "VectorScore": 0.06081,
+          "KeywordScore": 0,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 5,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Property Notes/selector",
+          "ChunkType": "property_note",
+          "FinalScore": 1.713213,
+          "VectorScore": -0.118559,
+          "KeywordScore": 0,
+          "Preview": "### selector"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/ControlExists.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.742534,
+          "VectorScore": -0.06525,
+          "KeywordScore": 0,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 7,
+          "Source": "qa/answer_corrections/e60bd7900d044ae9979adbd04a766f88",
+          "SectionPath": "Answer Corrections/e60bd7900d044ae9979adbd04a766f88",
+          "ChunkType": "answer_correction",
+          "FinalScore": 0.97654,
+          "VectorScore": 0.684618,
+          "KeywordScore": 1,
+          "Preview": "Question:"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/ImageExists.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.713665,
+          "VectorScore": 0.248223,
+          "KeywordScore": 0.428571,
+          "Preview": "\uC708\uB3C4\uC6B0 \uD654\uBA74 \uC704\uC758 \uC774\uBBF8\uC9C0\uC758 \uC874\uC7AC \uC5EC\uBD80\uB97C \uD655\uC778\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-017",
+      "Domain": "EXCEL",
+      "Question": "\uD604\uC7AC \uC5D1\uC140 \uC2DC\uD2B8\uB97C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/ActiveSheet.md",
+      "TopSource": "EXCEL/ActiveSheet.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/ActiveSheet.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\n\uD604\uC7AC \uC5D1\uC140 \uC2DC\uD2B8\uB97C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\n\r\n[\uADFC\uAC70]\r\n- EXCEL/ActiveSheet.md / Property Notes/sheet",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.144795,
+          "VectorScore": 0.242094,
+          "KeywordScore": 0.428571,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.7845,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.7845,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.630596,
+          "VectorScore": 0.107058,
+          "KeywordScore": 0.142857,
+          "Preview": "\uC2DC\uD2B8 \uC774\uB984\uC758 \uBAA9\uB85D\uC744 \uB9AC\uC2A4\uD2B8\uB85C \uBC18\uD658\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.416,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.416,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 7,
+          "Source": "qa/answer_corrections/3031cf73c6574bd38ab5311a131803cc",
+          "SectionPath": "Answer Corrections/3031cf73c6574bd38ab5311a131803cc",
+          "ChunkType": "answer_correction",
+          "FinalScore": 1.002961,
+          "VectorScore": 0.732656,
+          "KeywordScore": 1,
+          "Preview": "Question:"
+        },
+        {
+          "Rank": 8,
+          "Source": "qa/answer_corrections/902fc0e4ee6c4ff99aad69468ffe23e7",
+          "SectionPath": "Answer Corrections/902fc0e4ee6c4ff99aad69468ffe23e7",
+          "ChunkType": "answer_correction",
+          "FinalScore": 0.758739,
+          "VectorScore": 0.418486,
+          "KeywordScore": 0.714286,
+          "Preview": "Question:"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-018",
+      "Domain": "EXCEL",
+      "Question": "\uC5D1\uC140 \uC2DC\uD2B8\uC758 \uC774\uB984\uB4E4\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/GetSheetsAsList.md",
+      "TopSource": "EXCEL/GetSheetsAsList.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/GetSheetsAsList.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC5D1\uC140 \uC2DC\uD2B8\uC758 \uC774\uB984\uB4E4\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/GetSheetsAsList.md",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.028747,
+          "VectorScore": 0.149994,
+          "KeywordScore": 0.125,
+          "Preview": "\uC2DC\uD2B8 \uC774\uB984\uC758 \uBAA9\uB85D\uC744 \uB9AC\uC2A4\uD2B8\uB85C \uBC18\uD658\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.820958,
+          "VectorScore": 0.047196,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.837619,
+          "VectorScore": 0.07749,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.522191,
+          "VectorScore": 0.033074,
+          "KeywordScore": 0.125,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.35275,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/ActiveSheet.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.35275,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 7,
+          "Source": "qa/answer_corrections/3b9b68483385492a93510f89b1a93fba",
+          "SectionPath": "Answer Corrections/3b9b68483385492a93510f89b1a93fba",
+          "ChunkType": "answer_correction",
+          "FinalScore": 1.004385,
+          "VectorScore": 0.735246,
+          "KeywordScore": 1,
+          "Preview": "Question:"
+        },
+        {
+          "Rank": 8,
+          "Source": "qa/answer_corrections/902fc0e4ee6c4ff99aad69468ffe23e7",
+          "SectionPath": "Answer Corrections/902fc0e4ee6c4ff99aad69468ffe23e7",
+          "ChunkType": "answer_correction",
+          "FinalScore": 0.813666,
+          "VectorScore": 0.50212,
+          "KeywordScore": 0.75,
+          "Preview": "Question:"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-019",
+      "Domain": "EXCEL",
+      "Question": "\uC5F4\uB824\uC788\uB294 \uC5D1\uC140\uD30C\uC77C\uC744 \uC5F0\uACB0\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/Attach.md",
+      "TopSource": "EXCEL/Attach.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/Attach.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC5F4\uB824\uC788\uB294 \uC5D1\uC140\uD30C\uC77C\uC744 \uC5F0\uACB0\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060retry\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060 | \uC7AC\uC2DC\uB3C4 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3\n(\uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uBA74 \uC7AC\uC2DC\uB3C4 \uC2DC 0.5\uCD08 \uAC04\uACA9\uC73C\uB85C \uC561\uD2F0\uBE44\uD2F0\uB97C \uC218\uD589 \uB0B4\uC6A9\uC744 \uC7AC\uC2DC\uB3C4\uD55C\uB2E4.) |\r\n\r\n### retry\n\uC7AC\uC2DC\uB3C4 \uD69F\uC218\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3\n(\uC624\uB958\uAC00 \uBC1C\uC0DD\uD558\uBA74 \uC7AC\uC2DC\uB3C4 \uC2DC 0.5\uCD08 \uAC04\uACA9\uC73C\uB85C \uC561\uD2F0\uBE44\uD2F0\uB97C \uC218\uD589 \uB0B4\uC6A9\uC744 \uC7AC\uC2DC\uB3C4\uD55C\uB2E4.)\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/Attach.md / Summary\r\n- EXCEL/Attach.md / Metadata\r\n- EXCEL/Attach.md / Properties\r\n- EXCEL/Attach.md / Property Notes/retry",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/Attach.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.501214,
+          "VectorScore": 0.62645,
+          "KeywordScore": 0.888889,
+          "Preview": "\uC5F4\uB824\uC788\uB294 \uC5D1\uC140\uD30C\uC77C\uC744 \uC5F0\uACB0\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/Attach.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.824026,
+          "VectorScore": 0.017422,
+          "KeywordScore": 0,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/Attach.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.849302,
+          "VectorScore": 0.063378,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/Attach.md",
+          "SectionPath": "Property Notes/retry",
+          "ChunkType": "property_note",
+          "FinalScore": 1.794495,
+          "VectorScore": -0.036272,
+          "KeywordScore": 0,
+          "Preview": "### retry"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/FillBlankUsingUpper.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.650638,
+          "VectorScore": 0.227422,
+          "KeywordScore": 0.222222,
+          "Preview": "\uD2B9\uC815 \uC5F4\uC5D0\uC11C \uC140 \uAC12\uC774 \uBE44\uC5B4 \uC788\uC73C\uBA74 \uC704\uC5D0 \uCC44\uC6CC\uC9C4 \uC140 \uAC12\uC73C\uB85C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/BulkCopyRows.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.646126,
+          "VectorScore": 0.219219,
+          "KeywordScore": 0.222222,
+          "Preview": "\uD2B9\uC815 \uD30C\uC77C\uC758 \uC2DC\uD2B8\uC640 \uC601\uC5ED\uC2DC\uC810\uC744 \uC9C0\uC815\uD558\uC5EC \uB2E4\uB978 \uD30C\uC77C\uC758 \uC2DC\uD2B8\uC640 \uC601\uC5ED\uC2DC\uC810\uC73C\uB85C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "EXCEL/CellAddress.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.666288,
+          "VectorScore": 0.255877,
+          "KeywordScore": 0.222222,
+          "Preview": "\uD2B9\uC815 \uC140\uC758 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC758 \uC8FC\uC18C\uB97C \uC5D1\uC140 \uD45C\uC2DC \uD615\uC2DD\uC758 \uC8FC\uC18C\uB97C \uBCC0\uD658\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "EXCEL/CopySheetToWorkBook.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.645817,
+          "VectorScore": 0.218657,
+          "KeywordScore": 0.222222,
+          "Preview": "\uAC19\uC740 \uC778\uC2A4\uD134\uC2A4 \uB0B4\uC5D0\uC11C \uD2B9\uC815 \uC6CC\uD06C\uBD81\uC758 \uC2DC\uD2B8\uB97C \uBCF5\uC0AC\uD558\uC5EC \uB2E4\uB978 \uC6CC\uD06C\uBD81\uC5D0 \uBD99\uC5EC\uB123\uC744 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-020",
+      "Domain": "EXCEL",
+      "Question": "\uC2DC\uD2B8\uC5D0\uC11C \uD2B9\uC815 \uBC94\uC704\uB97C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/CopyRange.md",
+      "TopSource": "EXCEL/CopyRange.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/CopyRange.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC2DC\uD2B8\uC5D0\uC11C \uD2B9\uC815 \uBC94\uC704\uB97C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060range\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uBCF5\uC0AC\uD560 \uC601\uC5ED\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022E2:E3\u0022 |\r\n| \u0060sheet\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC791\uC5C5\uC744 \uC218\uD589\uD560 \uC2DC\uD2B8\uC758 \uC778\uB371\uC2A4 \uB610\uB294 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022Sheet 1\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C \uC9C0\uC815\uD55C\uB2E4.) |\r\n\r\n### range\n\uBCF5\uC0AC\uD560 \uC601\uC5ED\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022E2:E3\u0022\r\n\r\n### sheet\n\uC791\uC5C5\uC744 \uC218\uD589\uD560 \uC2DC\uD2B8\uC758 \uC778\uB371\uC2A4 \uB610\uB294 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022Sheet 1\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C \uC9C0\uC815\uD55C\uB2E4.)\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/CopyRange.md / Summary\r\n- EXCEL/CopyRange.md / Properties\r\n- EXCEL/CopyRange.md / Property Notes/range\r\n- EXCEL/CopyRange.md / Property Notes/sheet",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.518342,
+          "VectorScore": 0.646986,
+          "KeywordScore": 0.9,
+          "Preview": "\uC2DC\uD2B8\uC5D0\uC11C \uD2B9\uC815 \uBC94\uC704\uB97C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.937305,
+          "VectorScore": 0.081464,
+          "KeywordScore": 0.3,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Property Notes/range",
+          "ChunkType": "property_note",
+          "FinalScore": 1.932845,
+          "VectorScore": 0.11881,
+          "KeywordScore": 0.2,
+          "Preview": "### range"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.828078,
+          "VectorScore": 0.019233,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Property Notes/sheet",
+          "ChunkType": "property_note",
+          "FinalScore": 1.857296,
+          "VectorScore": 0.026902,
+          "KeywordScore": 0.1,
+          "Preview": "### sheet"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/ActivateSheet.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.768431,
+          "VectorScore": 0.355784,
+          "KeywordScore": 0.4,
+          "Preview": "\uD2B9\uC815 \uC2DC\uD2B8\uB97C \uD65C\uC131\uD654\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "EXCEL/DeleteSheet.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.702432,
+          "VectorScore": 0.281239,
+          "KeywordScore": 0.3,
+          "Preview": "\uC2DC\uD2B8\uB97C \uC0AD\uC81C\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "EXCEL/AddSheet.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.696524,
+          "VectorScore": 0.270498,
+          "KeywordScore": 0.3,
+          "Preview": "\uC2DC\uD2B8\uB97C \uCD94\uAC00\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-021",
+      "Domain": "EXCEL",
+      "Question": "\uC5D1\uC140\uC5D0\uC11C \uC870\uAC74\uC744 \uB9CC\uC871\uD558\uB294 \uC140 \uB370\uC774\uD130\uB97C \uAC80\uC0C9\uD558\uC5EC \uC140\uC744 \uD3EC\uD568\uD558\uB294 \uD589\uC744 \uB9AC\uC2A4\uD2B8 \uD615\uD0DC\uB85C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/FindRowAsCollection.md",
+      "TopSource": "EXCEL/FindRowAsCollection.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/FindRowAsCollection.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uC870\uAC74\uC744 \uB9CC\uC871\uD558\uB294 \uC140 \uB370\uC774\uD130\uB97C \uAC80\uC0C9\uD558\uC5EC \uC140\uC744 \uD3EC\uD568\uD558\uB294 \uD589\uC744 \uB9AC\uC2A4\uD2B8\uD615\uD0DC\uB85C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### condition\n\uCC3E\uC744 \uB370\uC774\uD130\uC758 \uC870\uAC74\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u00221|\uC0AC\uACE0\uAC74\uC218\u0022\n(\uC5F4\uC778\uB371\uC2A4|\uC140\uAC12 \uC21C\uC73C\uB85C \uAC80\uC0C9 \uC870\uAC74\uC744 \uC785\uB825\uD55C\uB2E4.)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060beginRow\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060, \u00606\u0060, \u00607\u0060, \u00608\u0060, \u00609\u0060 | \uAC80\uC0C9\uC744 \uC2DC\uC791\uD560 \uD589\uC744 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 0 |\r\n| \u0060condition\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uCC3E\uC744 \uB370\uC774\uD130\uC758 \uC870\uAC74\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u00221\\|\uC0AC\uACE0\uAC74\uC218\u0022\n(\uC5F4\uC778\uB371\uC2A4\\|\uC140\uAC12 \uC21C\uC73C\uB85C \uAC80\uC0C9 \uC870\uAC74\uC744 \uC785\uB825\uD55C\uB2E4.) |\r\n| \u0060sheet\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC791\uC5C5\uC744 \uC218\uD589\uD560 \uC2DC\uD2B8\uC758 \uC778\uB371\uC2A4 \uB610\uB294 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) Sheet 1\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C \uC9C0\uC815\uD55C\uB2E4.) \uB610\uB294 \u0022Sheet 1\u0022 |\r\n\r\n### beginRow\n\uAC80\uC0C9\uC744 \uC2DC\uC791\uD560 \uD589\uC744 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 0\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/FindRowAsCollection.md / Summary\r\n- EXCEL/FindRowAsCollection.md / Property Notes/condition\r\n- EXCEL/FindRowAsCollection.md / Properties\r\n- EXCEL/FindRowAsCollection.md / Property Notes/beginRow",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.270147,
+          "VectorScore": 0.497434,
+          "KeywordScore": 0.6,
+          "Preview": "\uC870\uAC74\uC744 \uB9CC\uC871\uD558\uB294 \uC140 \uB370\uC774\uD130\uB97C \uAC80\uC0C9\uD558\uC5EC \uC140\uC744 \uD3EC\uD568\uD558\uB294 \uD589\uC744 \uB9AC\uC2A4\uD2B8\uD615\uD0DC\uB85C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.793994,
+          "VectorScore": 0.031701,
+          "KeywordScore": 0.2,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Property Notes/beginRow",
+          "ChunkType": "property_note",
+          "FinalScore": 1.782149,
+          "VectorScore": 0.078348,
+          "KeywordScore": 0.05,
+          "Preview": "### beginRow"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Property Notes/condition",
+          "ChunkType": "property_note",
+          "FinalScore": 1.815176,
+          "VectorScore": 0.092942,
+          "KeywordScore": 0.15,
+          "Preview": "### condition"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.726558,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/FindRowAsCollection.md",
+          "SectionPath": "Property Notes/sheet",
+          "ChunkType": "property_note",
+          "FinalScore": 1.70377,
+          "VectorScore": -0.041434,
+          "KeywordScore": 0,
+          "Preview": "### sheet"
+        },
+        {
+          "Rank": 7,
+          "Source": "EXCEL/GetActiveCell.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.484958,
+          "VectorScore": 0.022197,
+          "KeywordScore": 0,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC140\uC758 \uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "EXCEL/GetActiveCell.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.361797,
+          "VectorScore": 0.01645,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-022",
+      "Domain": "EXCEL",
+      "Question": "\uC5D1\uC140 \uD2B9\uC815 \uC140\uC758 \uAC12\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/GetCellValue.md",
+      "TopSource": "EXCEL/GetCellValue.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/GetCellValue.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uC140\uC758 \uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060cell\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uAC12\uC744 \uAC00\uC838\uC62C \uC140\uC744 \uC5D1\uC140 \uD45C\uC2DC \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022B2\u0022\n(\uBE48 \uAC12\uC774\uBA74 row\uC640 column \uD544\uB4DC\uC758 \uAC12\uC73C\uB85C \uC140\uC744 \uC9C0\uC815\uD55C\uB2E4.) |\r\n| \u0060column\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060, \u00606\u0060, \u00607\u0060, \u00608\u0060, \u00609\u0060 | \uAC12\uC744 \uAC00\uC838\uC62C \uC5F4\uC758 \uAC12\uC744 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3 |\r\n| \u0060returnAsText\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uAC12\uC744 \uD14D\uC2A4\uD2B8\uC758 \uD615\uD0DC\uB85C \uAC00\uC838\uC62C\uC9C0 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) False |\r\n| \u0060row\u0060 | \u0060string\u0060 | \u00600\u0060 | \u00600\u0060, \u00601\u0060, \u00602\u0060, \u00603\u0060, \u00604\u0060, \u00605\u0060, \u00606\u0060, \u00607\u0060, \u00608\u0060, \u00609\u0060 | \uAC12\uC744 \uAC00\uC838\uC62C \uD589\uC758 \uAC12\uC744 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 2 |\r\n\r\n### cell\n\uAC12\uC744 \uAC00\uC838\uC62C \uC140\uC744 \uC5D1\uC140 \uD45C\uC2DC \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022B2\u0022\n(\uBE48 \uAC12\uC774\uBA74 row\uC640 column \uD544\uB4DC\uC758 \uAC12\uC73C\uB85C \uC140\uC744 \uC9C0\uC815\uD55C\uB2E4.)\r\n\r\n### column\n\uAC12\uC744 \uAC00\uC838\uC62C \uC5F4\uC758 \uAC12\uC744 \uC778\uB371\uC2A4 \uBC29\uC2DD\uC73C\uB85C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/GetCellValue.md / Summary\r\n- EXCEL/GetCellValue.md / Properties\r\n- EXCEL/GetCellValue.md / Property Notes/cell\r\n- EXCEL/GetCellValue.md / Property Notes/column",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.186714,
+          "VectorScore": 0.29922,
+          "KeywordScore": 0.428571,
+          "Preview": "\uD2B9\uC815 \uC140\uC758 \uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.971467,
+          "VectorScore": 0.190978,
+          "KeywordScore": 0.285714,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Property Notes/cell",
+          "ChunkType": "property_note",
+          "FinalScore": 1.952228,
+          "VectorScore": 0.155999,
+          "KeywordScore": 0.285714,
+          "Preview": "### cell"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Property Notes/returnAsText",
+          "ChunkType": "property_note",
+          "FinalScore": 1.875134,
+          "VectorScore": 0.080763,
+          "KeywordScore": 0.142857,
+          "Preview": "### returnAsText"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/GetActiveCell.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.99307,
+          "VectorScore": 0.202985,
+          "KeywordScore": 0.285714,
+          "Preview": "\uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC140\uC758 \uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Property Notes/column",
+          "ChunkType": "property_note",
+          "FinalScore": 1.925654,
+          "VectorScore": 0.172618,
+          "KeywordScore": 0.142857,
+          "Preview": "### column"
+        },
+        {
+          "Rank": 7,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.795,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060EXCEL\u0060"
+        },
+        {
+          "Rank": 8,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Property Notes/row",
+          "ChunkType": "property_note",
+          "FinalScore": 1.918061,
+          "VectorScore": 0.158811,
+          "KeywordScore": 0.142857,
+          "Preview": "### row"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-023",
+      "Domain": "EXCEL",
+      "Question": "\uC5D1\uC140\uC5D0\uC11C \uC2DC\uD2B8\uC758 \uD2B9\uC815 \uBC94\uC704\uC758 \uAC12\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "EXCEL/GetRangeAsCollection.md",
+      "TopSource": "EXCEL/GetRangeAsCollection.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "EXCEL",
+      "Answer": "EXCEL/GetRangeAsCollection.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uBC94\uC704\uC758 \uAC12\uC744 \uB9AC\uC2A4\uD2B8 \uD615\uD0DC\uB85C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060close\u0060 | \u0060string\u0060 | \u0060True\u0060 | \u0060True\u0060, \u0060False\u0060 | \uC791\uC5C5 \uC644\uB8CC \uD6C4 \uC5D1\uC140 \uBB38\uC11C\uB97C \uB2EB\uC744\uC9C0 \uC5EC\uBD80\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\n(path\uB97C \uC0AC\uC6A9\uD55C \uACBD\uC6B0\uC5D0\uB9CC \uB3D9\uC791\uD55C\uB2E4.)\nTrue: \uC791\uC5C5 \uD6C4 \uC5F4\uB9B0 \uC5D1\uC140 \uBB38\uC11C\uB97C \uB2EB\uC2B5\uB2C8\uB2E4.\nFalse: \uC791\uC5C5 \uD6C4 \uC5D1\uC140 \uBB38\uC11C\uB97C \uC5F4\uB9B0 \uC0C1\uD0DC\uB85C \uC720\uC9C0\uD569\uB2C8\uB2E4. |\r\n| \u0060password\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uCEEC\uB809\uC158 \uAC12\uC73C\uB85C \uAC00\uC838\uC62C \uC5D1\uC140 \uD30C\uC77C\uC5D0 \uC124\uC815\uB41C \uBE44\uBC00\uBC88\uD638\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022batem12345\u0022 |\r\n| \u0060path\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uCEEC\uB809\uC158 \uAC12\uC73C\uB85C \uAC00\uC838\uC62C \uC5D1\uC140 \uD30C\uC77C\uC758 \uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\excel\\sample.xlsx\u0022\n(\uBE48 \uAC12\uC774\uBA74 Target\uD544\uB4DC\uC758 \uC5D1\uC140\uC758 \uB370\uC774\uD130\uB97C \uAC00\uC838\uC628\uB2E4.) |\r\n| \u0060range\u0060 | \u0060string\u0060 | \u0060\u0022A1:B2\u0022\u0060 | - | \uCEEC\uB809\uC158 \uAC12\uC744 \uAC00\uC838\uC62C \uC601\uC5ED\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022E2:E3\u0022\n(\uCEEC\uB809\uC158\uC740 2D\uB9AC\uC2A4\uD2B8\uB85C \uBC18\uD658\uD55C\uB2E4.) |\r\n| \u0060returnAsText\u0060 | \u0060string\u0060 | \u0060False\u0060 | \u0060True\u0060, \u0060False\u0060 | \uAC12\uC744 \uD14D\uC2A4\uD2B8\uC758 \uD615\uD0DC\uB85C \uAC00\uC838\uC62C\uC9C0 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) False |\r\n| \u0060sheet\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC791\uC5C5\uC744 \uC218\uD589\uD560 \uC2DC\uD2B8\uC758 \uC778\uB371\uC2A4 \uB610\uB294 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022Sheet 1\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C \uC9C0\uC815\uD55C\uB2E4.) |\r\n| \u0060writeResPassword\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uCEEC\uB809\uC158 \uAC12\uC73C\uB85C \uAC00\uC838\uC62C \uC5D1\uC140 \uD30C\uC77C\uC5D0 \uC124\uC815\uB41C \uC4F0\uAE30 \uAD8C\uD55C \uBE44\uBC00\uBC88\uD638\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022ba123\u0022 |\r\n\r\n### sheet\n\uC791\uC5C5\uC744 \uC218\uD589\uD560 \uC2DC\uD2B8\uC758 \uC778\uB371\uC2A4 \uB610\uB294 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022Sheet 1\u0022\n(\uBE44\uC5B4\uC788\uB294 \uACBD\uC6B0 \uD604\uC7AC \uD65C\uC131\uD654\uB41C \uC2DC\uD2B8\uB97C \uC9C0\uC815\uD55C\uB2E4.)\r\n\r\n### returnAsText\n\uAC12\uC744 \uD14D\uC2A4\uD2B8\uC758 \uD615\uD0DC\uB85C \uAC00\uC838\uC62C\uC9C0 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) False\r\n\r\n[\uADFC\uAC70]\r\n- EXCEL/GetRangeAsCollection.md / Summary\r\n- EXCEL/GetRangeAsCollection.md / Properties\r\n- EXCEL/GetRangeAsCollection.md / Property Notes/sheet\r\n- EXCEL/GetRangeAsCollection.md / Property Notes/returnAsText",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "EXCEL/GetRangeAsCollection.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.899022,
+          "VectorScore": 0.27475,
+          "KeywordScore": 0.363636,
+          "Preview": "\uD2B9\uC815 \uBC94\uC704\uC758 \uAC12\uC744 \uB9AC\uC2A4\uD2B8 \uD615\uD0DC\uB85C Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "EXCEL/GetRangeAsCollection.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.67856,
+          "VectorScore": 0.092093,
+          "KeywordScore": 0.363636,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "EXCEL/SortRange.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.742107,
+          "VectorScore": 0.32445,
+          "KeywordScore": 0.363636,
+          "Preview": "\uD2B9\uC815 \uBC94\uC704\uC758 \uAC12\uC744 \uC815\uB82C\uC2DC\uCF1C\uC8FC\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 4,
+          "Source": "EXCEL/GetRangeAsCollection.md",
+          "SectionPath": "Property Notes/sheet",
+          "ChunkType": "property_note",
+          "FinalScore": 1.629113,
+          "VectorScore": 0.084833,
+          "KeywordScore": 0.181818,
+          "Preview": "### sheet"
+        },
+        {
+          "Rank": 5,
+          "Source": "EXCEL/CopyRange.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.639833,
+          "VectorScore": 0.17982,
+          "KeywordScore": 0.272727,
+          "Preview": "\uC2DC\uD2B8\uC5D0\uC11C \uD2B9\uC815 \uBC94\uC704\uB97C \uBCF5\uC0AC\uD560 \uB54C \uC0AC\uC6A9\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "EXCEL/GetSheetsAsList.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.591845,
+          "VectorScore": 0.060214,
+          "KeywordScore": 0.090909,
+          "Preview": "\uC2DC\uD2B8 \uC774\uB984\uC758 \uBAA9\uB85D\uC744 \uB9AC\uC2A4\uD2B8\uB85C \uBC18\uD658\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "EXCEL/GetRangeAsCollection.md",
+          "SectionPath": "Property Notes/returnAsText",
+          "ChunkType": "property_note",
+          "FinalScore": 1.60773,
+          "VectorScore": 0.087277,
+          "KeywordScore": 0.090909,
+          "Preview": "### returnAsText"
+        },
+        {
+          "Rank": 8,
+          "Source": "EXCEL/GetCellValue.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.684087,
+          "VectorScore": 0.186605,
+          "KeywordScore": 0.181818,
+          "Preview": "\uD2B9\uC815 \uC140\uC758 \uAC12\uC744 Name\uD544\uB4DC\uC5D0 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-024",
+      "Domain": "COMMON",
+      "Question": "\uD2B9\uC815 \uC2DC\uAC04 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/Wait.md",
+      "TopSource": "COMMON/Wait.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "COMMON",
+      "Answer": "COMMON/Wait.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uC808\uB300\uC2DC\uAC04 \uB3D9\uC548 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### term\n\uB300\uAE30\uD560 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060term\u0060 | \u0060string\u0060 | \u00601000\u0060 | \u00601000\u0060, \u00602000\u0060, \u00603000\u0060, \u00604000\u0060, \u00605000\u0060 | \uB300\uAE30\uD560 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 3000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/Wait.md / Summary\r\n- COMMON/Wait.md / Property Notes/term\r\n- COMMON/Wait.md / Properties\r\n- COMMON/Wait.md / Metadata",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/Wait.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.166851,
+          "VectorScore": 0.372735,
+          "KeywordScore": 0.6,
+          "Preview": "\uD2B9\uC815 \uC808\uB300\uC2DC\uAC04 \uB3D9\uC548 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/Wait.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.811878,
+          "VectorScore": 0.036422,
+          "KeywordScore": 0.4,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/Wait.md",
+          "SectionPath": "Property Notes/term",
+          "ChunkType": "property_note",
+          "FinalScore": 1.817366,
+          "VectorScore": 0.0464,
+          "KeywordScore": 0.4,
+          "Preview": "### term"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/Wait.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.691846,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.78105,
+          "VectorScore": 0.292818,
+          "KeywordScore": 0.6,
+          "Preview": "\uD2B9\uC815 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uCC3D\uC774 \uB2EB\uD790 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/RunProcessUntilEnded.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.793528,
+          "VectorScore": 0.315505,
+          "KeywordScore": 0.6,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB05D\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.79217,
+          "VectorScore": 0.313036,
+          "KeywordScore": 0.6,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB3D9\uC791\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/WaitForProcessToDisappear.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.79217,
+          "VectorScore": 0.313036,
+          "KeywordScore": 0.6,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uC885\uB8CC\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-025",
+      "Domain": "COMMON",
+      "Question": "\uD074\uB9BD\uBCF4\uB4DC\uC758 \uB370\uC774\uD130\uB97C \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/GetClipboard.md",
+      "TopSource": "COMMON/GetClipboard.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "COMMON",
+      "Answer": "COMMON/GetClipboard.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\nClipboard\uC758 \uB370\uC774\uD130\uB97C Name\uD544\uB4DC\uC758 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/GetClipboard.md / Summary\r\n- COMMON/GetClipboard.md / Metadata\r\n- COMMON/GetClipboard.md / Properties",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/GetClipboard.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.089861,
+          "VectorScore": 0.197149,
+          "KeywordScore": 0.285714,
+          "Preview": "Clipboard\uC758 \uB370\uC774\uD130\uB97C Name\uD544\uB4DC\uC758 \uC9C0\uC815\uB41C \uBCC0\uC218\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/SetClipboard.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.920681,
+          "VectorScore": 0.209549,
+          "KeywordScore": 0.285714,
+          "Preview": "Clipboard\uC5D0 \uD2B9\uC815 \uB370\uC774\uD130\uB97C \uC4F0\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/GetClipboard.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.815926,
+          "VectorScore": 0.047138,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/GetClipboard.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.812203,
+          "VectorScore": 0.040369,
+          "KeywordScore": 0,
+          "Preview": "(\uC18D\uC131\uC774 \uC5C6\uC2B5\uB2C8\uB2E4)"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/SetClipboard.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.667532,
+          "VectorScore": 0.032395,
+          "KeywordScore": 0.142857,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/SetClipboard.md",
+          "SectionPath": "Property Notes/text",
+          "ChunkType": "property_note",
+          "FinalScore": 1.668419,
+          "VectorScore": 0.034009,
+          "KeywordScore": 0.142857,
+          "Preview": "### text"
+        },
+        {
+          "Rank": 7,
+          "Source": "COMMON/SetClipboard.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.627726,
+          "VectorScore": 0.024957,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/GetThreadName.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.748019,
+          "VectorScore": 0.37562,
+          "KeywordScore": 0.285714,
+          "Preview": "\uBA40\uD2F0 \uC2A4\uB808\uB529 \uC2E4\uD589 \uC911 \uD604\uC7AC \uC2A4\uB808\uB4DC\uC758 \uC774\uB984\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-026",
+      "Domain": "COMMON",
+      "Question": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uB97C \uAC15\uC81C \uC885\uB8CC\uC2DC\uD0A4\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/KillProcess.md",
+      "TopSource": "COMMON/KillProcess.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "BuiltIn",
+      "Answer": "COMMON/KillProcess.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uB97C \uAC15\uC81C \uC885\uB8CC\uC2DC\uD0A4\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060processName\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC2E4\uD589\uC911\uC778 \uD504\uB85C\uC138\uC2A4\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022mspaint.exe\u0022\n(\uC774\uB984\uC740 \uC791\uC5C5\uAD00\uB9AC\uC790\uC5D0\uC11C \uCC38\uC870\uD55C\uB2E4.) |\r\n\r\n### processName\n\uC2E4\uD589\uC911\uC778 \uD504\uB85C\uC138\uC2A4\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022mspaint.exe\u0022\n(\uC774\uB984\uC740 \uC791\uC5C5\uAD00\uB9AC\uC790\uC5D0\uC11C \uCC38\uC870\uD55C\uB2E4.)\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/KillProcess.md / Summary\r\n- COMMON/KillProcess.md / Properties\r\n- COMMON/KillProcess.md / Metadata\r\n- COMMON/KillProcess.md / Property Notes/processName",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/KillProcess.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.089113,
+          "VectorScore": 0.555022,
+          "KeywordScore": 0.857143,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uB97C \uAC15\uC81C \uC885\uB8CC\uC2DC\uD0A4\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/KillProcess.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.456104,
+          "VectorScore": -0.053046,
+          "KeywordScore": 0.142857,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/KillProcess.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.449565,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/KillProcess.md",
+          "SectionPath": "Property Notes/processName",
+          "ChunkType": "property_note",
+          "FinalScore": 1.414121,
+          "VectorScore": -0.129379,
+          "KeywordScore": 0.142857,
+          "Preview": "### processName"
+        },
+        {
+          "Rank": 5,
+          "Source": "BuiltIn/Decision.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.494851,
+          "VectorScore": 0.045183,
+          "KeywordScore": 0,
+          "Preview": "\uC870\uAC74\uC5D0 \uB530\uB77C \uBD84\uAE30\uB97C \uACB0\uC815\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 6,
+          "Source": "BuiltIn/TryExcept.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.489548,
+          "VectorScore": 0.035541,
+          "KeywordScore": 0,
+          "Preview": "\uC2E4\uD589 \uC911 \uBC1C\uC0DD\uD560 \uC218 \uC788\uB294 \uC608\uC678\uB97C \uCC98\uB9AC\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "BuiltIn/Group.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.48826,
+          "VectorScore": 0.0332,
+          "KeywordScore": 0,
+          "Preview": "\uAC1C\uBCC4 \uC561\uD2F0\uBE44\uD2F0\uB4E4\uC744 \uAE30\uB2A5\uC801 \uB610\uB294 \uC758\uBBF8\uC801 \uAE30\uC900\uC5D0 \uB530\uB77C \uBD84\uB958\uD558\uAE30 \uC704\uD55C \uCEE8\uD14C\uC774\uB108 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "BuiltIn/DecisionJump.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.493434,
+          "VectorScore": 0.042608,
+          "KeywordScore": 0,
+          "Preview": "\uC870\uAC74\uC758 \uACB0\uACFC(True/False)\uC5D0 \uB530\uB77C \uB2E4\uB978 \uC561\uD2F0\uBE44\uD2F0\uB85C Jump\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-027",
+      "Domain": "COMMON",
+      "Question": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB3D9\uC791\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/WaitForProcess.md",
+      "TopSource": "COMMON/WaitForProcess.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "COMMON",
+      "Answer": "COMMON/WaitForProcess.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB3D9\uC791\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### timeout\n\uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8)\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060processName\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uB300\uAE30\uD560 \uD504\uB85C\uC138\uC2A4\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022mspaint.exe\u0022\n(\uC774\uB984\uC740 \uC791\uC5C5\uAD00\uB9AC\uC790\uC5D0\uC11C \uCC38\uC870\uD55C\uB2E4.) |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030000\u0060 | - | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/WaitForProcess.md / Summary\r\n- COMMON/WaitForProcess.md / Property Notes/timeout\r\n- COMMON/WaitForProcess.md / Properties\r\n- COMMON/WaitForProcess.md / Metadata",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.489451,
+          "VectorScore": 0.605062,
+          "KeywordScore": 0.888889,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB3D9\uC791\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.861804,
+          "VectorScore": -0.014901,
+          "KeywordScore": 0.222222,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/WaitForProcessToDisappear.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.973751,
+          "VectorScore": 0.49288,
+          "KeywordScore": 0.666667,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uC885\uB8CC\uD560 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/RunProcessUntilEnded.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 1.975889,
+          "VectorScore": 0.496768,
+          "KeywordScore": 0.666667,
+          "Preview": "\uD2B9\uC815 \uD504\uB85C\uC138\uC2A4\uAC00 \uB05D\uB0A0 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.814444,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.879417,
+          "VectorScore": 0.067627,
+          "KeywordScore": 0.111111,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 7,
+          "Source": "COMMON/WaitForProcess.md",
+          "SectionPath": "Property Notes/processName",
+          "ChunkType": "property_note",
+          "FinalScore": 1.787583,
+          "VectorScore": -0.149849,
+          "KeywordScore": 0.222222,
+          "Preview": "### processName"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/WaitForProcessToDisappear.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.480167,
+          "VectorScore": 0.066163,
+          "KeywordScore": 0.111111,
+          "Preview": "### timeout"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-028",
+      "Domain": "COMMON",
+      "Question": "\uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD588\uC744 \uACBD\uC6B0 \uB300\uCCB4 \uC5C5\uBB34\uB97C \uC218\uD589\uD558\uAE30 \uC704\uD55C \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/OnError.md",
+      "TopSource": "COMMON/OnError.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "Answer": "COMMON/OnError.md\n\n\uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD588\uC744 \uACBD\uC6B0 \uB300\uCCB4 \uC5C5\uBB34\uB97C \uC218\uD589\uD558\uAE30 \uC704\uD55C \uC561\uD2F0\uBE44\uD2F0\n\n[\uADFC\uAC70]\n- COMMON/OnError.md / Summary",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.190734,
+          "VectorScore": 0.661372,
+          "KeywordScore": 0.916667,
+          "Preview": "\uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD588\uC744 \uACBD\uC6B0 \uB300\uCCB4 \uC5C5\uBB34\uB97C \uC218\uD589\uD558\uAE30 \uC704\uD55C \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.545541,
+          "VectorScore": 0.085264,
+          "KeywordScore": 0.083333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.499153,
+          "VectorScore": 0.038801,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Property Notes/comment",
+          "ChunkType": "property_note",
+          "FinalScore": 1.556018,
+          "VectorScore": 0.104313,
+          "KeywordScore": 0.083333,
+          "Preview": "### comment"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Property Notes/MaxCount",
+          "ChunkType": "property_note",
+          "FinalScore": 1.502318,
+          "VectorScore": 0.044555,
+          "KeywordScore": 0,
+          "Preview": "### MaxCount"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/OnError.md",
+          "SectionPath": "Property Notes/importance",
+          "ChunkType": "property_note",
+          "FinalScore": 1.507321,
+          "VectorScore": 0.053652,
+          "KeywordScore": 0,
+          "Preview": "### importance"
+        },
+        {
+          "Rank": 7,
+          "Source": "qa/answer_corrections/d78f5224f32d4a1aab5da7ad0512215b",
+          "SectionPath": "Answer Corrections/d78f5224f32d4a1aab5da7ad0512215b",
+          "ChunkType": "answer_correction",
+          "FinalScore": 0.67823,
+          "VectorScore": 0.778601,
+          "KeywordScore": 1,
+          "Preview": "Question:"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/GetThreadName.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.24388,
+          "VectorScore": 0.225236,
+          "KeywordScore": 0,
+          "Preview": "\uBA40\uD2F0 \uC2A4\uB808\uB529 \uC2E4\uD589 \uC911 \uD604\uC7AC \uC2A4\uB808\uB4DC\uC758 \uC774\uB984\uC744 \uAC00\uC838\uC624\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-029",
+      "Domain": "COMMON",
+      "Question": "\uD2B9\uC815 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uCC3D\uC774 \uB2EB\uD790 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/WaitForProcessWindow.md",
+      "TopSource": "COMMON/WaitForProcessWindow.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "WIN32",
+      "Answer": "COMMON/WaitForProcessWindow.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uD2B9\uC815 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uCC3D\uC774 \uB2EB\uD790 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n### processTitle\n\uC885\uB8CC \uB300\uAE30\uD560 \uC708\uB3C4\uC6B0 \uCC3D\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022\uBA54\uBAA8\uC7A5\u0022\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060processTitle\u0060 | \u0060string\u0060 | \u0060-\u0060 | - | \uC885\uB8CC \uB300\uAE30\uD560 \uC708\uB3C4\uC6B0 \uCC3D\uC758 \uC774\uB984\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022\uBA54\uBAA8\uC7A5\u0022 |\r\n| \u0060timeout\u0060 | \u0060string\u0060 | \u006030000\u0060 | - | \uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8) |\r\n\r\n### timeout\n\uB300\uAE30\uD560 \uCD5C\uB300 \uC2DC\uAC04\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) 30000 (\uB2E8\uC704: \uBC00\uB9AC\uC138\uCEE8)\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/WaitForProcessWindow.md / Summary\r\n- COMMON/WaitForProcessWindow.md / Property Notes/processTitle\r\n- COMMON/WaitForProcessWindow.md / Properties\r\n- COMMON/WaitForProcessWindow.md / Property Notes/timeout",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.202356,
+          "VectorScore": 0.665841,
+          "KeywordScore": 0.928571,
+          "Preview": "\uD2B9\uC815 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uCC3D\uC774 \uB2EB\uD790 \uB54C\uAE4C\uC9C0 \uB300\uAE30\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.54529,
+          "VectorScore": 0.046501,
+          "KeywordScore": 0.142857,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.484,
+          "VectorScore": 0,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Property Notes/processTitle",
+          "ChunkType": "property_note",
+          "FinalScore": 1.55294,
+          "VectorScore": 0.06041,
+          "KeywordScore": 0.142857,
+          "Preview": "### processTitle"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/WaitForProcessWindow.md",
+          "SectionPath": "Property Notes/timeout",
+          "ChunkType": "property_note",
+          "FinalScore": 1.506346,
+          "VectorScore": 0.008161,
+          "KeywordScore": 0.071429,
+          "Preview": "### timeout"
+        },
+        {
+          "Rank": 6,
+          "Source": "WIN32/GetControls.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.737425,
+          "VectorScore": 0.258955,
+          "KeywordScore": 0.5,
+          "Preview": "\uC870\uAC74\uC5D0 \uD574\uB2F9\uD558\uB294 \uBAA8\uB4E0 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uC624\uBE0C\uC81D\uD2B8(\uCEE8\uD2B8\uB864)\uB4E4\uC744 \uBC18\uD658\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 7,
+          "Source": "WIN32/ShowAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.721532,
+          "VectorScore": 0.230057,
+          "KeywordScore": 0.5,
+          "Preview": "\uD2B9\uC815 \uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158 \uCC3D\uC744 \uD654\uBA74\uC5D0 \uD45C\uC2DC\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 8,
+          "Source": "WIN32/MinimizeAutomation.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 0.732791,
+          "VectorScore": 0.250528,
+          "KeywordScore": 0.5,
+          "Preview": "\uC708\uB3C4\uC6B0 \uC560\uD50C\uB9AC\uCF00\uC774\uC158\uC758 \uCC3D\uC758 \uD06C\uAE30\uB97C \uCD5C\uC18C\uD654\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        }
+      ]
+    },
+    {
+      "Id": "user-case-030",
+      "Domain": "COMMON",
+      "Question": "\uB85C\uADF8 \uBA54\uC2DC\uC9C0\uB97C \uD2B9\uC815 \uD30C\uC77C\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\uB294?",
+      "ExpectedSource": "COMMON/LogWrite.md",
+      "TopSource": "COMMON/LogWrite.md",
+      "ExpectedRank": 1,
+      "Passed": true,
+      "RetrievalTop1Passed": true,
+      "ExpectedSourceFound": true,
+      "AnswerContainsExpectedSource": true,
+      "PreferredGroup": "FILE",
+      "Answer": "COMMON/LogWrite.md \uAE30\uC900\uC73C\uB85C \uD655\uC778\uD55C \uB0B4\uC6A9\uC785\uB2C8\uB2E4.\r\n\r\n\uB85C\uADF8 \uBA54\uC2DC\uC9C0\uB97C \uD2B9\uC815 \uD30C\uC77C\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0\r\n\r\n| Name | Type | Default | Options | Description |\r\n|---|---|---|---|---|\r\n| \u0060ext\u0060 | \u0060string\u0060 | \u0060\u0022log\u0022\u0060 | - | \uB85C\uADF8 \uD30C\uC77C\uC758 \uD655\uC7A5\uC790\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022log\u0022 |\r\n| \u0060filePath\u0060 | \u0060string\u0060 | \u0060\u0060 | - | \uB85C\uADF8 \uD30C\uC77C\uC758 \uC800\uC7A5 \uD3F4\uB354 \uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\log\u0022 |\r\n| \u0060format\u0060 | \u0060string\u0060 | \u0060\u0022%Y-%m-%d %H:%M:%S\u0022\u0060 | - | \uB85C\uADF8\uC5D0 \uD3EC\uD568\uB420 \uC2DC\uAC04\uC758 \uD45C\uC2DC \uD615\uC2DD\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022%Y-%m-%d %H:%M\u0022\n(\uD30C\uC774\uC36C datetime \uD3EC\uB9F7\uC744 \uC9C0\uC6D0\uD55C\uB2E4.) |\r\n| \u0060level\u0060 | \u0060string\u0060 | \u0060\u0022[Info]\u0022\u0060 | - | \uD45C\uC2DC\uD560 \uB85C\uADF8\uC758 \uB808\uBCA8\uC744 \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022[Info]\u0022 |\r\n| \u0060message\u0060 | \u0060string\u0060 | \u0060\u0060 | - | \uB85C\uADF8\uC758 \uB0B4\uC6A9\uC5D0 \uD574\uB2F9\uD558\uB294 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022\uB85C\uADF8 \uAE30\uB85D\u0022 |\r\n\r\n### filePath\n\uB85C\uADF8 \uD30C\uC77C\uC758 \uC800\uC7A5 \uD3F4\uB354 \uACBD\uB85C\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022C:\\log\u0022\r\n\r\n### message\n\uB85C\uADF8\uC758 \uB0B4\uC6A9\uC5D0 \uD574\uB2F9\uD558\uB294 \uD14D\uC2A4\uD2B8\uB97C \uC9C0\uC815\uD569\uB2C8\uB2E4.\nex) \u0022\uB85C\uADF8 \uAE30\uB85D\u0022\r\n\r\n[\uADFC\uAC70]\r\n- COMMON/LogWrite.md / Summary\r\n- COMMON/LogWrite.md / Properties\r\n- COMMON/LogWrite.md / Property Notes/filePath\r\n- COMMON/LogWrite.md / Property Notes/message",
+      "RankedSources": [
+        {
+          "Rank": 1,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Summary",
+          "ChunkType": "summary",
+          "FinalScore": 2.125874,
+          "VectorScore": 0.592821,
+          "KeywordScore": 0.888889,
+          "Preview": "\uB85C\uADF8 \uBA54\uC2DC\uC9C0\uB97C \uD2B9\uC815 \uD30C\uC77C\uC5D0 \uC800\uC7A5\uD558\uB294 \uC561\uD2F0\uBE44\uD2F0"
+        },
+        {
+          "Rank": 2,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Properties",
+          "ChunkType": "properties",
+          "FinalScore": 1.613701,
+          "VectorScore": 0.132305,
+          "KeywordScore": 0.333333,
+          "Preview": "| Name | Type | Default | Options | Description |"
+        },
+        {
+          "Rank": 3,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Property Notes/filePath",
+          "ChunkType": "property_note",
+          "FinalScore": 1.59676,
+          "VectorScore": 0.101504,
+          "KeywordScore": 0.333333,
+          "Preview": "### filePath"
+        },
+        {
+          "Rank": 4,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Property Notes/message",
+          "ChunkType": "property_note",
+          "FinalScore": 1.545719,
+          "VectorScore": 0.109711,
+          "KeywordScore": 0.111111,
+          "Preview": "### message"
+        },
+        {
+          "Rank": 5,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Property Notes/ext",
+          "ChunkType": "property_note",
+          "FinalScore": 1.541834,
+          "VectorScore": 0.052143,
+          "KeywordScore": 0.222222,
+          "Preview": "### ext"
+        },
+        {
+          "Rank": 6,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Metadata",
+          "ChunkType": "metadata",
+          "FinalScore": 1.469861,
+          "VectorScore": 0.022292,
+          "KeywordScore": 0,
+          "Preview": "- group: \u0060COMMON\u0060"
+        },
+        {
+          "Rank": 7,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Property Notes/level",
+          "ChunkType": "property_note",
+          "FinalScore": 1.500167,
+          "VectorScore": 0.02689,
+          "KeywordScore": 0.111111,
+          "Preview": "### level"
+        },
+        {
+          "Rank": 8,
+          "Source": "COMMON/LogWrite.md",
+          "SectionPath": "Property Notes/format",
+          "ChunkType": "property_note",
+          "FinalScore": 1.49348,
+          "VectorScore": 0.014731,
+          "KeywordScore": 0.111111,
+          "Preview": "### format"
+        }
+      ]
+    }
+  ]
+}
