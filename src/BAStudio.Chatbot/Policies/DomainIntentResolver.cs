@@ -15,9 +15,9 @@ public sealed class DomainIntentResolver
         ["FILE"] = ["파일", "폴더", "경로", "file", "folder", "path"],
         ["PDF"] = ["pdf"],
         ["WORD"] = ["word", "워드"],
-        ["EMAIL"] = ["메일", "email", "smtp", "outlook"],
+        ["EMAIL"] = ["메일", "이메일", "email", "smtp", "outlook"],
         ["COMMON"] = ["로그", "대기", "클립보드", "공통"],
-        ["BuiltIn"] = ["프로세스", "반복", "조건", "예외", "process", "while", "foreach"]
+        ["BuiltIn"] = ["프로세스", "반복", "조건", "예외", "병렬", "동시", "스레드", "멀티스레드", "thread", "parallel", "process", "while", "foreach"]
     };
 
     private static readonly HashSet<string> KnownGroups = new(GroupSignals.Keys, StringComparer.OrdinalIgnoreCase);
@@ -30,7 +30,7 @@ public sealed class DomainIntentResolver
 
         foreach (var (group, words) in GroupSignals)
         {
-            if (words.Any(w => normalized.Contains(w, StringComparison.OrdinalIgnoreCase)))
+            if (words.Any(w => MatchesSignal(normalized, w)))
             {
                 preferredGroup ??= group;
                 signals.Add(group);
@@ -47,6 +47,83 @@ public sealed class DomainIntentResolver
         var activityHint = ExtractActivityHint(normalized, preferredGroup);
         var intent = ResolveIntent(normalized);
         return new DomainIntent(preferredGroup, activityHint, intent, signals.Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+    }
+
+    private static bool MatchesSignal(string question, string signal)
+    {
+        if (string.IsNullOrWhiteSpace(signal))
+        {
+            return false;
+        }
+
+        if (Regex.IsMatch(signal, @"^[A-Za-z0-9_ ]+$"))
+        {
+            return signal.Contains(' ')
+                ? question.Contains(signal, StringComparison.OrdinalIgnoreCase)
+                : Regex.IsMatch(question, $@"\b{Regex.Escape(signal)}\b", RegexOptions.IgnoreCase);
+        }
+
+        foreach (var token in Tokenize(question))
+        {
+            var normalized = NormalizeKoreanToken(token);
+            if (string.Equals(token, signal, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(normalized, signal, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            if (signal.Length <= 2)
+            {
+                if (token.StartsWith(signal, StringComparison.OrdinalIgnoreCase) ||
+                    normalized.StartsWith(signal, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            else if (token.Contains(signal, StringComparison.OrdinalIgnoreCase) ||
+                     normalized.Contains(signal, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static IEnumerable<string> Tokenize(string text)
+    {
+        foreach (Match match in Regex.Matches(text.ToLowerInvariant(), @"[A-Za-z0-9_]+|[가-힣]+"))
+        {
+            yield return match.Value;
+        }
+    }
+
+    private static string NormalizeKoreanToken(string token)
+    {
+        if (!Regex.IsMatch(token, @"^[가-힣]+$") || token.Length <= 1)
+        {
+            return token;
+        }
+
+        var endings = new[] { "시켜주는", "시키는", "하려고", "되는", "하는", "한다", "하기", "하려", "된", "할" };
+        foreach (var ending in endings)
+        {
+            if (token.EndsWith(ending, StringComparison.Ordinal) && token.Length > ending.Length + 1)
+            {
+                return token[..^ending.Length];
+            }
+        }
+
+        var particles = new[] { "으로부터", "로부터", "에서는", "에서", "에게", "으로", "로", "의", "을", "를", "은", "는", "이", "가", "에" };
+        foreach (var particle in particles)
+        {
+            if (token.EndsWith(particle, StringComparison.Ordinal) && token.Length > particle.Length + 1)
+            {
+                return token[..^particle.Length];
+            }
+        }
+
+        return token;
     }
 
     private static UserIntent ResolveIntent(string question)

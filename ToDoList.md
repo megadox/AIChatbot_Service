@@ -36,3 +36,41 @@
   - First question: "이메일을 보내는"
   - Follow-up: "다른것은?"
   - Expected source: `EMAIL/SendMail(SMTP).md`
+
+- Add a new user intent for comparison requests.
+  - Examples: "ForEach와 While을 비교해줘", "ForEach랑 While 차이는?", "A vs B", "A와 B의 차이점"
+  - Expected meaning: resolve two or more explicit activity targets, retrieve grounding for each target separately, and generate a side-by-side comparison.
+
+- Extract comparison targets from the question.
+  - Normalize Korean particles and connectors.
+  - Example: "ForEach와 While을 비교해줘" -> `ForEach`, `While`
+  - Resolve each target to exact activity sources when possible.
+  - Example sources:
+    - `BuiltIn/ForEach.md`
+    - `BuiltIn/While.md`
+
+- Add a comparison retrieval path in `ChatOrchestrator`.
+  - Do not search the whole phrase as one query when comparison targets are explicit.
+  - Search or resolve each activity independently.
+  - Retrieve `summary`, `properties`, and important `property_note` chunks for each source.
+  - Keep both sources in the final grounding set.
+
+- Add a comparison answer builder.
+  - Answer structure should explain the main difference first.
+  - For `ForEach` vs `While`, emphasize:
+    - `ForEach`: repeats over collection elements.
+    - `While`: repeats while a condition is satisfied.
+  - Include usage guidance and a `[근거]` section with both sources.
+
+- Add comparison process logs.
+  - Example logs:
+    - `의도 분석: Compare`
+    - `비교 대상: BuiltIn/ForEach.md, BuiltIn/While.md`
+    - `ForEach 근거 검색: Summary, Properties`
+    - `While 근거 검색: Summary, Properties`
+
+- Add comparison regression cases.
+  - Question: "ForEach와 While을 비교해줘"
+  - Expected sources:
+    - `BuiltIn/ForEach.md`
+    - `BuiltIn/While.md`

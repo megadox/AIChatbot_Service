@@ -282,6 +282,7 @@ public sealed class SqliteVectorStore : IVectorStore
             "최소화" or "minimize" => ["최소화", "minimize"],
             "최대화" or "maximize" => ["최대화", "maximize"],
             "삭제" or "delete" or "remove" or "clear" => ["삭제", "delete", "remove", "clear"],
+            "동시" or "병렬" or "스레드" or "멀티스레드" or "thread" or "multithread" or "parallel" => ["동시", "병렬", "스레드", "멀티스레드", "thread", "multithread", "parallel"],
             _ => []
         };
     }
@@ -341,6 +342,7 @@ public sealed class SqliteVectorStore : IVectorStore
         new(["숨김", "숨기", "hide"]),
         new(["실행", "execute", "run"]),
         new(["삭제", "delete", "remove", "clear"]),
+        new(["동시", "병렬", "스레드", "멀티스레드", "thread", "multithread", "parallel"]),
         new(["클릭", "click"]),
         new(["더블클릭", "doubleclick"])
     ];
@@ -387,7 +389,7 @@ public sealed class SqliteVectorStore : IVectorStore
             return token;
         }
 
-        var endings = new[] { "시켜주는", "시키는", "되는", "하는", "한다", "하기", "된", "할" };
+        var endings = new[] { "시켜주는", "시키는", "하려고", "되는", "하는", "한다", "하기", "하려", "된", "할" };
         foreach (var ending in endings)
         {
             if (token.EndsWith(ending, StringComparison.Ordinal) && token.Length > ending.Length + 1)
