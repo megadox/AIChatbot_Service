@@ -9,6 +9,7 @@ namespace BAStudio.Chatbot.Orchestration;
 
 public sealed class ChatOrchestrator : IChatOrchestrator
 {
+    private const string DetailsMarker = "\n<<<DETAILS>>>\n";
     private static readonly ConcurrentDictionary<string, ConversationGrounding> ConversationGroundings = new(StringComparer.OrdinalIgnoreCase);
 
     private readonly IEmbeddingService _embeddings;
@@ -47,10 +48,15 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             $"의도 분석: intent={intent.Intent}, group={intent.PreferredGroup ?? "-"}, activity={intent.ActivityNameHint ?? "-"}");
         var conversationId = string.IsNullOrWhiteSpace(request.ConversationId) ? "default" : request.ConversationId;
         ConversationGroundings.TryGetValue(conversationId, out var previousGrounding);
-        var contextualQuestion = BuildContextualQuestion(request.Question, intent, previousGrounding);
-        var preferredSource = ShouldUsePreviousSource(request.Question, intent, previousGrounding) ? previousGrounding?.Source : null;
-        var preferredGroup = intent.PreferredGroup ?? (preferredSource is not null ? previousGrounding?.GroupName : null);
-        var activityHint = intent.ActivityNameHint ?? (preferredSource is not null ? previousGrounding?.ActivityName : null);
+        var followUpKind = ResolveFollowUpKind(request.Question);
+        var canUsePreviousContext = CanUsePreviousContext(intent, followUpKind, previousGrounding);
+        var effectivePreviousGrounding = canUsePreviousContext ? previousGrounding : null;
+        var contextualQuestion = BuildContextualQuestion(request.Question, intent, effectivePreviousGrounding, followUpKind);
+        var preferredSource = ShouldUsePreviousSource(request.Question, intent, effectivePreviousGrounding, followUpKind) ? effectivePreviousGrounding?.Source : null;
+        var preferredGroup = intent.PreferredGroup ?? (preferredSource is not null || canUsePreviousContext && IsContextualFollowUp(followUpKind) ? effectivePreviousGrounding?.GroupName : null);
+        var activityHint = followUpKind == FollowUpKind.Comparison
+            ? null
+            : intent.ActivityNameHint ?? (preferredSource is not null ? effectivePreviousGrounding?.ActivityName : null);
         if (!string.Equals(contextualQuestion, request.Question, StringComparison.Ordinal))
         {
             yield return ChatStreamEvent.Status($"대화 문맥 적용: {contextualQuestion}");
@@ -62,8 +68,9 @@ public sealed class ChatOrchestrator : IChatOrchestrator
 
         yield return ChatStreamEvent.Status("매뉴얼을 검색하는 중...");
         var embedding = _embeddings.Embed(contextualQuestion);
+        var topK = followUpKind == FollowUpKind.Comparison ? Math.Max(request.TopK, 24) : request.TopK;
         var chunks = await _vectorStore.SearchAsync(
-            new SearchRequest(contextualQuestion, embedding, request.TopK, request.MinScore, preferredGroup, activityHint, preferredSource),
+            new SearchRequest(contextualQuestion, embedding, topK, request.MinScore, preferredGroup, activityHint, preferredSource),
             cancellationToken);
         yield return ChatStreamEvent.Status(BuildSearchStatus(chunks));
 
@@ -75,12 +82,15 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             yield break;
         }
 
-        var correctionOverride = TryBuildCorrectionOverride(request.Question, chunks);
-        if (correctionOverride is not null)
+        chunks = await AddCompanionSourcesAsync(request.Question, followUpKind, chunks, cancellationToken);
+        chunks = await EnrichSourceChunksAsync(chunks, cancellationToken);
+
+        var followUpAnswer = TryBuildFollowUpAnswer(request.Question, followUpKind, effectivePreviousGrounding, chunks);
+        if (followUpAnswer is not null)
         {
-            RememberGrounding(conversationId, chunks);
-            yield return ChatStreamEvent.Status("저장된 답변 수정 내용을 우선 적용");
-            yield return ChatStreamEvent.Token(correctionOverride);
+            RememberGrounding(conversationId, chunks.Where(c => !string.Equals(c.Source, previousGrounding?.Source, StringComparison.OrdinalIgnoreCase)).ToArray());
+            yield return ChatStreamEvent.Status("후속 질문 답변 생성");
+            yield return ChatStreamEvent.Token(followUpAnswer);
             yield return ChatStreamEvent.Completed();
             yield break;
         }
@@ -104,6 +114,16 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             yield break;
         }
 
+        var correctionOverride = TryBuildCorrectionOverride(request.Question, chunks);
+        if (correctionOverride is not null)
+        {
+            RememberGrounding(conversationId, chunks);
+            yield return ChatStreamEvent.Status("저장된 답변 수정 내용을 우선 적용");
+            yield return ChatStreamEvent.Token(correctionOverride);
+            yield return ChatStreamEvent.Completed();
+            yield break;
+        }
+
         yield return ChatStreamEvent.Status("근거 기반 답변을 생성하는 중...");
         var prompt = _promptBuilder.Build(request.Question, chunks);
         await foreach (var token in _llm.StreamAsync(prompt, cancellationToken))
@@ -115,6 +135,76 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         yield return ChatStreamEvent.Completed();
     }
 
+    private async Task<IReadOnlyList<RetrievedChunk>> EnrichSourceChunksAsync(
+        IReadOnlyList<RetrievedChunk> chunks,
+        CancellationToken cancellationToken)
+    {
+        var results = new List<RetrievedChunk>(chunks);
+        var resultIds = results.Select(c => c.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var source in chunks.Select(c => c.Source).Distinct(StringComparer.OrdinalIgnoreCase))
+        {
+            var sourceChunks = await _vectorStore.GetChunksBySourceAsync(source, cancellationToken);
+            foreach (var chunk in sourceChunks)
+            {
+                if (resultIds.Add(chunk.Id))
+                {
+                    results.Add(chunk);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    private async Task<IReadOnlyList<RetrievedChunk>> AddCompanionSourcesAsync(
+        string question,
+        FollowUpKind followUpKind,
+        IReadOnlyList<RetrievedChunk> chunks,
+        CancellationToken cancellationToken)
+    {
+        if (followUpKind != FollowUpKind.Companion)
+        {
+            return chunks;
+        }
+
+        var companionSources = ResolveCompanionSources(question, chunks).ToArray();
+        if (companionSources.Length == 0)
+        {
+            return chunks;
+        }
+
+        var results = new List<RetrievedChunk>(chunks);
+        var resultIds = results.Select(c => c.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var source in companionSources)
+        {
+            var sourceChunks = await _vectorStore.GetChunksBySourceAsync(source, cancellationToken);
+            foreach (var chunk in sourceChunks)
+            {
+                if (resultIds.Add(chunk.Id))
+                {
+                    results.Add(chunk);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    private static IEnumerable<string> ResolveCompanionSources(string question, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var mentionsMultiThread = question.Contains("MultiThread", StringComparison.OrdinalIgnoreCase) ||
+                                  question.Contains("Multi Thread", StringComparison.OrdinalIgnoreCase) ||
+                                  chunks.Any(c => string.Equals(c.Source, "BuiltIn/MultiThread.md", StringComparison.OrdinalIgnoreCase));
+        if (!mentionsMultiThread)
+        {
+            yield break;
+        }
+
+        yield return "COMMON/BreakThread.md";
+        yield return "COMMON/GetThreadName.md";
+    }
+
     private static string BuildSearchStatus(IReadOnlyList<RetrievedChunk> chunks)
     {
         if (chunks.Count == 0)
@@ -123,49 +213,110 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         }
 
         var top = chunks
+            .GroupBy(c => c.Source, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.First())
             .Take(5)
             .Select((c, index) => $"{index + 1}. {c.Source} / {c.SectionPath} ({c.FinalScore:0.000})");
         return "검색 결과: " + string.Join(" | ", top);
     }
 
-    private static bool ShouldUsePreviousSource(string question, DomainIntent intent, ConversationGrounding? previousGrounding)
+    private static bool CanUsePreviousContext(DomainIntent intent, FollowUpKind followUpKind, ConversationGrounding? previousGrounding)
+    {
+        if (previousGrounding is null || followUpKind == FollowUpKind.None)
+        {
+            return false;
+        }
+
+        return intent.PreferredGroup is null && intent.ActivityNameHint is null;
+    }
+
+    private static bool ShouldUsePreviousSource(string question, DomainIntent intent, ConversationGrounding? previousGrounding, FollowUpKind followUpKind)
     {
         if (previousGrounding is null || intent.PreferredGroup is not null || intent.ActivityNameHint is not null)
         {
             return false;
         }
 
-        return IsFollowUpQuestion(question);
+        return followUpKind == FollowUpKind.Detail;
     }
 
-    private static bool IsFollowUpQuestion(string question)
+    private static FollowUpKind ResolveFollowUpKind(string question)
     {
         var q = question.Trim();
+        if (q.Contains("비교", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("차이", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("다른점", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("다른 점", StringComparison.OrdinalIgnoreCase))
+        {
+            return FollowUpKind.Comparison;
+        }
+
+        if (q.Contains("다른것", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("다른 것", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("비슷", StringComparison.OrdinalIgnoreCase))
+        {
+            return FollowUpKind.Alternative;
+        }
+
+        if (q.Contains("함께", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("같이", StringComparison.OrdinalIgnoreCase))
+        {
+            return FollowUpKind.Companion;
+        }
+
+        if (q.Contains("같은 기능", StringComparison.OrdinalIgnoreCase) ||
+            q.Contains("대체", StringComparison.OrdinalIgnoreCase))
+        {
+            return FollowUpKind.Equivalent;
+        }
+
         if (q.Length <= 20)
         {
-            return q.Contains("속성", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("기본값", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("옵션", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("예시", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("사용법", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("그건", StringComparison.OrdinalIgnoreCase) ||
-                   q.Contains("그 액티비티", StringComparison.OrdinalIgnoreCase);
+            if (q.Contains("속성", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("기본값", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("옵션", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("예시", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("사용법", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("그건", StringComparison.OrdinalIgnoreCase) ||
+                q.Contains("그 액티비티", StringComparison.OrdinalIgnoreCase))
+            {
+                return FollowUpKind.Detail;
+            }
         }
 
         return q.StartsWith("그 ", StringComparison.OrdinalIgnoreCase) ||
                q.StartsWith("이 ", StringComparison.OrdinalIgnoreCase) ||
-               q.StartsWith("해당 ", StringComparison.OrdinalIgnoreCase);
+               q.StartsWith("해당 ", StringComparison.OrdinalIgnoreCase)
+            ? FollowUpKind.Detail
+            : FollowUpKind.None;
     }
 
-    private static string BuildContextualQuestion(string question, DomainIntent intent, ConversationGrounding? previousGrounding)
+    private static bool IsContextualFollowUp(FollowUpKind followUpKind)
     {
-        if (!ShouldUsePreviousSource(question, intent, previousGrounding) || previousGrounding is null)
+        return followUpKind is FollowUpKind.Alternative or FollowUpKind.Comparison or FollowUpKind.Companion or FollowUpKind.Equivalent;
+    }
+
+    private static string BuildContextualQuestion(string question, DomainIntent intent, ConversationGrounding? previousGrounding, FollowUpKind followUpKind)
+    {
+        if (previousGrounding is null)
         {
             return question;
         }
 
         var activity = string.IsNullOrWhiteSpace(previousGrounding.ActivityName) ? previousGrounding.Source : previousGrounding.ActivityName;
-        return $"{previousGrounding.GroupName} {activity} {previousGrounding.Source} {question}";
+        if (ShouldUsePreviousSource(question, intent, previousGrounding, followUpKind))
+        {
+            return $"{previousGrounding.GroupName} {activity} {previousGrounding.Source} {question}";
+        }
+
+        return followUpKind switch
+        {
+            FollowUpKind.Alternative => $"{previousGrounding.GroupName} {BaseActivityName(activity)} {activity} {question} 비슷한 기능 대체 액티비티",
+            FollowUpKind.Comparison => $"{previousGrounding.GroupName} {activity} {previousGrounding.Source} {question} 정의 속성 비교",
+            FollowUpKind.Companion => $"{previousGrounding.GroupName} {activity} {question} 함께 사용 관련 액티비티",
+            FollowUpKind.Equivalent => $"{previousGrounding.GroupName} {activity} {question} 같은 기능 대체 액티비티",
+            _ => question
+        };
     }
 
     private static void RememberGrounding(string conversationId, IReadOnlyList<RetrievedChunk> chunks)
@@ -215,6 +366,287 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         return sb.ToString().TrimEnd();
     }
 
+    private static string? TryBuildFollowUpAnswer(
+        string question,
+        FollowUpKind followUpKind,
+        ConversationGrounding? previousGrounding,
+        IReadOnlyList<RetrievedChunk> chunks)
+    {
+        if (followUpKind == FollowUpKind.None || followUpKind == FollowUpKind.Detail)
+        {
+            return null;
+        }
+
+        if (followUpKind == FollowUpKind.Comparison)
+        {
+            if (previousGrounding is null)
+            {
+                return TryBuildComparisonAnswer(question, chunks);
+            }
+
+            return TryBuildComparisonAnswer(previousGrounding, chunks);
+        }
+
+        if (followUpKind == FollowUpKind.Companion)
+        {
+            var companionAnswer = TryBuildCompanionAnswer(question, chunks);
+            if (companionAnswer is not null)
+            {
+                return companionAnswer;
+            }
+        }
+
+        if (previousGrounding is null)
+        {
+            return null;
+        }
+
+        var sameGroupOnly = followUpKind is FollowUpKind.Alternative or FollowUpKind.Companion;
+        var previousBase = BaseActivityName(previousGrounding.ActivityName ?? previousGrounding.Source);
+        var candidate = chunks
+            .Where(c => c.ChunkType != "answer_correction")
+            .Where(c => !string.Equals(c.Source, previousGrounding.Source, StringComparison.OrdinalIgnoreCase))
+            .Where(c => !sameGroupOnly || string.Equals(c.GroupName, previousGrounding.GroupName, StringComparison.OrdinalIgnoreCase))
+            .GroupBy(c => c.Source, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.OrderByDescending(c => c.ChunkType == "summary" ? 1 : 0).ThenByDescending(c => c.FinalScore).First())
+            .OrderByDescending(c => string.Equals(BaseActivityName(c.ActivityName ?? c.Source), previousBase, StringComparison.OrdinalIgnoreCase) ? 2 : 0)
+            .ThenByDescending(c => c.FinalScore)
+            .FirstOrDefault();
+
+        if (candidate is null)
+        {
+            return $"현재 검색 결과 안에서는 {FormatDisplaySource(previousGrounding.Source)}와 비슷한 다른 액티비티를 찾지 못했습니다.";
+        }
+
+        var ordered = chunks
+            .Where(c => string.Equals(c.Source, candidate.Source, StringComparison.OrdinalIgnoreCase))
+            .Concat(chunks.Where(c => !string.Equals(c.Source, candidate.Source, StringComparison.OrdinalIgnoreCase)))
+            .ToArray();
+        return TryBuildDirectAnswer("액티비티", new DomainIntent(candidate.GroupName, candidate.ActivityName, UserIntent.ActivityLookup, []), ordered);
+    }
+
+    private static string? TryBuildCompanionAnswer(string question, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var companionSources = ResolveCompanionSources(question, chunks).ToArray();
+        if (companionSources.Length == 0)
+        {
+            return null;
+        }
+
+        var companions = companionSources
+            .Select(source => chunks.FirstOrDefault(c => string.Equals(c.Source, source, StringComparison.OrdinalIgnoreCase) && c.ChunkType == "summary")
+                              ?? chunks.FirstOrDefault(c => string.Equals(c.Source, source, StringComparison.OrdinalIgnoreCase)))
+            .Where(c => c is not null)
+            .Select(c => c!)
+            .ToArray();
+        if (companions.Length == 0)
+        {
+            return null;
+        }
+
+        var anchor = chunks.FirstOrDefault(c => string.Equals(c.Source, "BuiltIn/MultiThread.md", StringComparison.OrdinalIgnoreCase) && c.ChunkType == "summary")
+                     ?? chunks.FirstOrDefault(c => string.Equals(c.Source, "BuiltIn/MultiThread.md", StringComparison.OrdinalIgnoreCase));
+        var title = anchor is null
+            ? "함께 사용할 수 있는 액티비티"
+            : $"{FormatDisplaySource(anchor.Source)}와 함께 사용할 수 있는 액티비티";
+
+        var sb = new StringBuilder();
+        sb.AppendLine(title);
+        foreach (var companion in companions)
+        {
+            sb.AppendLine($"- {FormatDisplaySource(companion.Source)} : {GetSummary(chunks.Where(c => string.Equals(c.Source, companion.Source, StringComparison.OrdinalIgnoreCase)).ToArray())}");
+        }
+
+        if (anchor is not null)
+        {
+            sb.AppendLine();
+            sb.AppendLine("- 사용 맥락 :");
+            sb.AppendLine($"  - {FormatDisplaySource(anchor.Source)} : {GetSummary(chunks.Where(c => string.Equals(c.Source, anchor.Source, StringComparison.OrdinalIgnoreCase)).ToArray())}");
+            sb.AppendLine("  - `BreakThread`는 멀티 스레딩 실행을 중단할 때 사용합니다.");
+            sb.AppendLine("  - `GetThreadName`은 멀티 스레딩 실행 중 현재 스레드 이름이 필요할 때 사용합니다.");
+        }
+
+        var related = chunks
+            .Where(c => companionSources.Contains(c.Source, StringComparer.OrdinalIgnoreCase) ||
+                        string.Equals(c.Source, anchor?.Source, StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+        var details = new StringBuilder();
+        details.AppendLine("[근거]");
+        foreach (var c in related.Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
+        {
+            details.AppendLine($"- {c}");
+        }
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static string? TryBuildComparisonAnswer(string question, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var pair = chunks
+            .Where(c => c.ChunkType != "answer_correction")
+            .GroupBy(c => c.Source, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.OrderByDescending(c => c.ChunkType == "summary" ? 1 : 0).ThenByDescending(c => c.FinalScore).First())
+            .OrderByDescending(c => ScoreActivityMention(question, c))
+            .ThenByDescending(c => c.FinalScore)
+            .Take(2)
+            .ToArray();
+
+        return pair.Length < 2 ? null : BuildComparisonAnswer(pair[0], pair[1], chunks);
+    }
+
+    private static string? TryBuildComparisonAnswer(ConversationGrounding previousGrounding, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var left = chunks.FirstOrDefault(c => string.Equals(c.Source, previousGrounding.Source, StringComparison.OrdinalIgnoreCase));
+        var right = chunks
+            .Where(c => c.ChunkType != "answer_correction")
+            .Where(c => !string.Equals(c.Source, previousGrounding.Source, StringComparison.OrdinalIgnoreCase))
+            .GroupBy(c => c.Source, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.OrderByDescending(c => c.ChunkType == "summary" ? 1 : 0).ThenByDescending(c => c.FinalScore).First())
+            .OrderByDescending(c => c.FinalScore)
+            .FirstOrDefault();
+
+        if (left is null || right is null)
+        {
+            return null;
+        }
+
+        return BuildComparisonAnswer(left, right, chunks);
+    }
+
+    private static string BuildComparisonAnswer(RetrievedChunk left, RetrievedChunk right, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var leftChunks = chunks.Where(c => string.Equals(c.Source, left.Source, StringComparison.OrdinalIgnoreCase)).ToArray();
+        var rightChunks = chunks.Where(c => string.Equals(c.Source, right.Source, StringComparison.OrdinalIgnoreCase)).ToArray();
+        var leftSummary = GetSummary(leftChunks);
+        var rightSummary = GetSummary(rightChunks);
+        var leftProperties = BuildPropertySummaries(leftChunks).ToArray();
+        var rightProperties = BuildPropertySummaries(rightChunks).ToArray();
+        var leftPropertyNames = leftProperties.Select(p => p.Name).ToArray();
+        var rightPropertyNames = rightProperties.Select(p => p.Name).ToArray();
+        var commonProperties = leftPropertyNames
+            .Intersect(rightPropertyNames, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(p => p, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        var leftOnlyProperties = leftPropertyNames
+            .Except(rightPropertyNames, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(p => p, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        var rightOnlyProperties = rightPropertyNames
+            .Except(leftPropertyNames, StringComparer.OrdinalIgnoreCase)
+            .OrderBy(p => p, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+
+        var sb = new StringBuilder();
+        sb.AppendLine($"{FormatDisplaySource(left.Source)} 와 {FormatDisplaySource(right.Source)} 비교");
+        sb.AppendLine();
+        sb.AppendLine("| 구분 | " + FormatDisplaySource(left.Source) + " | " + FormatDisplaySource(right.Source) + " |");
+        sb.AppendLine("|---|---|---|");
+        sb.AppendLine($"| 핵심 용도 | {EscapeTableCell(leftSummary)} | {EscapeTableCell(rightSummary)} |");
+        sb.AppendLine($"| 선택 기준 | {EscapeTableCell(BuildUsageHint(left.Source, leftSummary, leftOnlyProperties))} | {EscapeTableCell(BuildUsageHint(right.Source, rightSummary, rightOnlyProperties))} |");
+        sb.AppendLine($"| 공통 속성 | {EscapeTableCell(FormatPropertyNames(commonProperties))} | {EscapeTableCell(FormatPropertyNames(commonProperties))} |");
+        sb.AppendLine($"| 전용 속성 | {EscapeTableCell(FormatPropertyNames(leftOnlyProperties))} | {EscapeTableCell(FormatPropertyNames(rightOnlyProperties))} |");
+        sb.AppendLine($"| 전체 속성 | {EscapeTableCell(FormatPropertyNames(leftPropertyNames))} | {EscapeTableCell(FormatPropertyNames(rightPropertyNames))} |");
+        sb.AppendLine();
+        sb.AppendLine("- 쉽게 고르면 :");
+        sb.AppendLine($"  - {FormatDisplaySource(left.Source)} : {BuildUsageHint(left.Source, leftSummary, leftOnlyProperties)}");
+        sb.AppendLine($"  - {FormatDisplaySource(right.Source)} : {BuildUsageHint(right.Source, rightSummary, rightOnlyProperties)}");
+
+        var notes = BuildComparisonNotes(left.Source, right.Source, leftOnlyProperties, rightOnlyProperties).ToArray();
+        if (notes.Length > 0)
+        {
+            sb.AppendLine("- 주의할 점 :");
+            foreach (var note in notes)
+            {
+                sb.AppendLine($"  - {note}");
+            }
+        }
+
+        var details = new StringBuilder();
+        details.AppendLine("[근거]");
+        foreach (var c in leftChunks.Concat(rightChunks).Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
+        {
+            details.AppendLine($"- {c}");
+        }
+
+        details.AppendLine();
+        details.AppendLine("[원문]");
+        foreach (var c in leftChunks.Concat(rightChunks))
+        {
+            details.AppendLine($"## {c.Source} / {c.SectionPath}");
+            details.AppendLine(c.Content.Trim());
+            details.AppendLine();
+        }
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static string BuildUsageHint(string source, string summary, IReadOnlyList<string> exclusiveProperties)
+    {
+        var text = $"{source} {summary} {string.Join(' ', exclusiveProperties)}";
+        if (text.Contains("SMTP", StringComparison.OrdinalIgnoreCase) ||
+            exclusiveProperties.Any(p => p.StartsWith("smtp", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "Outlook 클라이언트에 의존하지 않고 SMTP 서버 정보와 계정으로 메일을 보낼 때 사용합니다.";
+        }
+
+        if (text.Contains("Outlook", StringComparison.OrdinalIgnoreCase))
+        {
+            return "PC에 설정된 Outlook 계정을 통해 메일을 보낼 때 사용합니다.";
+        }
+
+        return summary;
+    }
+
+    private static IEnumerable<string> BuildComparisonNotes(
+        string leftSource,
+        string rightSource,
+        IReadOnlyList<string> leftOnlyProperties,
+        IReadOnlyList<string> rightOnlyProperties)
+    {
+        foreach (var note in BuildSourceNotes(leftSource, leftOnlyProperties))
+        {
+            yield return note;
+        }
+
+        foreach (var note in BuildSourceNotes(rightSource, rightOnlyProperties))
+        {
+            yield return note;
+        }
+    }
+
+    private static IEnumerable<string> BuildSourceNotes(string source, IReadOnlyList<string> exclusiveProperties)
+    {
+        var displaySource = FormatDisplaySource(source);
+        if (exclusiveProperties.Any(p => p.StartsWith("smtp", StringComparison.OrdinalIgnoreCase)))
+        {
+            yield return $"{displaySource}는 `smtphost`, `smtpport`, `smtpuser`, `smtppassword`, `smtptype` 같은 SMTP 접속 정보가 필요합니다.";
+        }
+
+        if (exclusiveProperties.Any(p => p.StartsWith("imap", StringComparison.OrdinalIgnoreCase)))
+        {
+            yield return $"{displaySource}는 보낸 메일함 저장이 필요하면 IMAP 관련 속성도 설정해야 합니다.";
+        }
+
+        if (exclusiveProperties.Contains("cc", StringComparer.OrdinalIgnoreCase) ||
+            exclusiveProperties.Contains("bcc", StringComparer.OrdinalIgnoreCase))
+        {
+            yield return $"{displaySource}는 `cc`, `bcc`를 별도 속성으로 제공합니다.";
+        }
+
+        if (exclusiveProperties.Contains("waiting", StringComparer.OrdinalIgnoreCase))
+        {
+            yield return $"{displaySource}는 Outlook 전송 완료 대기 시간(`waiting`)을 조정할 수 있습니다.";
+        }
+    }
+
+    private static string EscapeTableCell(string value)
+    {
+        return value
+            .Replace("\r", " ", StringComparison.Ordinal)
+            .Replace("\n", " ", StringComparison.Ordinal)
+            .Replace("|", "\\|", StringComparison.Ordinal);
+    }
+
     private static string? TryBuildCorrectionOverride(string question, IReadOnlyList<RetrievedChunk> chunks)
     {
         var correction = chunks
@@ -262,43 +694,163 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             .Where(c => c.Source == best.Source)
             .OrderByDescending(c => c.ChunkType is "summary" ? 1 : 0)
             .ThenByDescending(c => c.FinalScore)
-            .Take(4)
             .ToArray();
 
         var sb = new StringBuilder();
-        sb.AppendLine($"{best.Source} 기준으로 확인한 내용입니다.");
-        sb.AppendLine();
-
-        foreach (var c in related)
+        sb.AppendLine(FormatDisplaySource(best.Source));
+        var summary = related.FirstOrDefault(c => c.ChunkType == "summary")?.Content.Trim();
+        if (!string.IsNullOrWhiteSpace(summary))
         {
-            if (c.ChunkType == "summary")
-            {
-                sb.AppendLine(c.Content.Trim());
-                sb.AppendLine();
-            }
-            else if (c.ChunkType == "answer_correction")
-            {
-                var correction = ParseCorrectionContent(c.Content);
-                if (correction.HasChangedAnswer)
-                {
-                    sb.AppendLine(correction.CorrectedAnswer);
-                    sb.AppendLine();
-                }
-            }
-            else if (c.ChunkType is "properties" or "property_note")
-            {
-                sb.AppendLine(c.Content.Trim());
-                sb.AppendLine();
-            }
+            sb.AppendLine($"- 정의 : {summary}");
         }
 
-        sb.AppendLine("[근거]");
+        var properties = BuildPropertySummaries(related).ToArray();
+        sb.AppendLine("- 속성 :");
+        if (properties.Length > 0)
+        {
+            foreach (var property in properties)
+            {
+                sb.AppendLine($"  - `{property.Name}` : {property.Description}");
+            }
+        }
+        else
+        {
+            sb.AppendLine("  - (속성이 없습니다)");
+        }
+
+        var details = new StringBuilder();
+        details.AppendLine($"source: {best.Source}");
+        details.AppendLine();
+        details.AppendLine("[근거]");
         foreach (var c in related.Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
         {
-            sb.AppendLine($"- {c}");
+            details.AppendLine($"- {c}");
         }
 
-        return sb.ToString().TrimEnd();
+        details.AppendLine();
+        details.AppendLine("[원문]");
+        foreach (var c in related)
+        {
+            details.AppendLine($"## {c.SectionPath}");
+            details.AppendLine(c.Content.Trim());
+            details.AppendLine();
+        }
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static string FormatDisplaySource(string source)
+    {
+        return source.EndsWith(".md", StringComparison.OrdinalIgnoreCase)
+            ? source[..^3]
+            : source;
+    }
+
+    private static string BaseActivityName(string activityNameOrSource)
+    {
+        var fileName = activityNameOrSource.Split('/', '\\').Last();
+        if (fileName.EndsWith(".md", StringComparison.OrdinalIgnoreCase))
+        {
+            fileName = fileName[..^3];
+        }
+
+        var paren = fileName.IndexOf('(', StringComparison.Ordinal);
+        return paren > 0 ? fileName[..paren] : fileName;
+    }
+
+    private static string GetSummary(IReadOnlyList<RetrievedChunk> chunks)
+    {
+        return chunks.FirstOrDefault(c => c.ChunkType == "summary")?.Content.Trim()
+            ?? chunks.FirstOrDefault()?.Content.Split('\n', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault()?.Trim()
+            ?? "-";
+    }
+
+    private static int ScoreActivityMention(string question, RetrievedChunk chunk)
+    {
+        var activity = chunk.ActivityName ?? BaseActivityName(chunk.Source);
+        var candidates = new[]
+        {
+            activity,
+            BaseActivityName(activity),
+            activity.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? activity[..^1] : activity
+        };
+
+        return candidates
+            .Where(c => !string.IsNullOrWhiteSpace(c))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Any(c => question.Contains(c, StringComparison.OrdinalIgnoreCase))
+            ? 1
+            : 0;
+    }
+
+    private static string FormatPropertyNames(IReadOnlyList<string> names)
+    {
+        return names.Count == 0 ? "(속성이 없습니다)" : string.Join(", ", names.Select(n => $"`{n}`"));
+    }
+
+    private static IEnumerable<PropertySummary> BuildPropertySummaries(IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var noteProperties = chunks
+            .Where(c => c.ChunkType == "property_note")
+            .Select(ParsePropertyNote)
+            .Where(p => p is not null)
+            .Select(p => p!)
+            .ToArray();
+        if (noteProperties.Length > 0)
+        {
+            return noteProperties;
+        }
+
+        var propertiesChunk = chunks.FirstOrDefault(c => c.ChunkType == "properties");
+        return propertiesChunk is null
+            ? []
+            : ParsePropertiesTable(propertiesChunk.Content);
+    }
+
+    private static PropertySummary? ParsePropertyNote(RetrievedChunk chunk)
+    {
+        var lines = chunk.Content
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .ToArray();
+        if (lines.Length == 0)
+        {
+            return null;
+        }
+
+        var name = lines[0].TrimStart('#').Trim().Trim('`');
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            name = chunk.SectionPath.Split('/').LastOrDefault() ?? "property";
+        }
+
+        var description = string.Join(" ", lines.Skip(1)).Trim();
+        return string.IsNullOrWhiteSpace(description)
+            ? null
+            : new PropertySummary(name, description);
+    }
+
+    private static IEnumerable<PropertySummary> ParsePropertiesTable(string content)
+    {
+        foreach (var line in content.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            if (!line.StartsWith('|') || line.Contains("---", StringComparison.Ordinal) || line.Contains("Name", StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            var cells = line.Trim('|').Split('|').Select(c => c.Trim()).ToArray();
+            if (cells.Length < 5)
+            {
+                continue;
+            }
+
+            var name = cells[0].Trim('`');
+            var description = cells[4];
+            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(description) && description != "-")
+            {
+                yield return new PropertySummary(name, description);
+            }
+        }
     }
 
     private static RetrievedChunk SelectBestAnswerChunk(IReadOnlyList<RetrievedChunk> chunks)
@@ -380,4 +932,16 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         bool HasChangedAnswer);
 
     private sealed record ConversationGrounding(string Source, string GroupName, string? ActivityName);
+
+    private sealed record PropertySummary(string Name, string Description);
+
+    private enum FollowUpKind
+    {
+        None,
+        Detail,
+        Alternative,
+        Comparison,
+        Companion,
+        Equivalent
+    }
 }

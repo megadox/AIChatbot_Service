@@ -74,3 +74,47 @@
   - Expected sources:
     - `BuiltIn/ForEach.md`
     - `BuiltIn/While.md`
+
+## Improve Scenario-based Activity Recommendation
+
+- Add stronger intent classification for scenario questions.
+  - Examples: "이때 사용하는 것은?", "어떤 액티비티를 써야 하나?", "하고 싶다", "하려면?"
+  - Expected meaning: infer the user's desired task and recommend the best matching activity, not only search literal words.
+
+- Extract domain-specific entities from user questions.
+  - URL/domain examples: `naver.com`, `daum.net`, `https://...` -> `WEB`
+  - Excel range examples: `A1:B10`, `셀`, `시트`, `범위` -> `EXCEL`
+  - File path examples: `C:\...`, `파일`, `폴더`, `경로` -> `FILE`
+  - UI automation examples: `마우스`, `좌표`, `창`, `컨트롤` -> `WIN32`
+
+- Add a query rewrite step before retrieval.
+  - Convert natural scenario descriptions into search-friendly manual terms.
+  - Example:
+    - Original: "naver.com에서 daum.net으로 이동하고 싶다. 이때 사용하는 것은?"
+    - Rewritten: "WEB 브라우저 URL 사이트 이동 Navigate url 새로운 웹 사이트로 이동"
+
+- Add an action concept map for common task expressions.
+  - "사이트 이동", "URL 변경", "페이지 열기", "접속" -> `WEB/Navigate.md`
+  - "현재 페이지 새로고침" -> `WEB/Refresh.md`
+  - "웹 요소 클릭" -> `WEB/Click.md`
+  - "셀 범위 최대값" -> `EXCEL/MaxInRange.md`
+
+- Improve candidate validation and reranking.
+  - Penalize or exclude candidates whose domain conflicts with strong entity signals.
+  - Example: if the question contains URL domains, reject `EXCEL/MaxInRange.md` unless there is explicit Excel context.
+  - Avoid direct answers when the top candidate has no keyword, alias, domain, or action-concept support.
+
+- Extend `SearchRequest` or add a query analysis model.
+  - Include original question, rewritten query, required/preferred group, extracted entities, and action concept hints.
+  - Keep the original question for answer wording and logs.
+
+- Keep source-level chunk enrichment after the activity is selected.
+  - Search decides the activity source.
+  - Then retrieve all chunks for that source: `Summary`, `Metadata`, `Properties`, and `Property Notes`.
+  - Do not depend on the top retrieval pool for property output.
+
+- Add regression cases for scenario recommendations.
+  - Question: "naver.com에서 daum.net으로 이동하고 싶다. 이때 사용하는 것은?"
+  - Expected source: `WEB/Navigate.md`
+  - Question: "현재 웹 페이지를 다시 불러오고 싶다"
+  - Expected source: `WEB/Refresh.md`

@@ -86,13 +86,61 @@ public sealed class SqliteVectorStore : IVectorStore
             .ToArray();
     }
 
+    public async Task<IReadOnlyList<RetrievedChunk>> GetChunksBySourceAsync(string source, CancellationToken cancellationToken)
+    {
+        if (!File.Exists(_dbPath) || string.IsNullOrWhiteSpace(source))
+        {
+            return Array.Empty<RetrievedChunk>();
+        }
+
+        var chunks = new List<RetrievedChunk>();
+        await using var connection = new SqliteConnection($"Data Source={_dbPath};Mode=ReadOnly");
+        await connection.OpenAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = """
+            SELECT id, source, group_name, activity_name, title, section_path, chunk_type, content
+            FROM kb_chunks
+            WHERE source = $source
+            """;
+        command.Parameters.AddWithValue("$source", source);
+
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            chunks.Add(new RetrievedChunk(
+                reader.GetString(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.IsDBNull(3) ? null : reader.GetString(3),
+                reader.GetString(4),
+                reader.GetString(5),
+                reader.GetString(6),
+                reader.GetString(7),
+                VectorScore: 0,
+                KeywordScore: 0,
+                FinalScore: 0));
+        }
+
+        return chunks
+            .OrderBy(c => ChunkTypeOrder(c.ChunkType))
+            .ThenBy(c => c.SectionPath, StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+    }
+
     private static IEnumerable<Candidate> SelectMmr(IEnumerable<Candidate> candidates, int topK)
     {
-        var pool = candidates
+        var rankedPool = candidates
             .OrderByDescending(c => c.Chunk.FinalScore)
             .ThenByDescending(c => c.Chunk.ChunkType == "summary" ? 1 : 0)
             .ThenBy(c => c.Chunk.Source, StringComparer.OrdinalIgnoreCase)
             .Take(80)
+            .ToList();
+        var pool = rankedPool
+            .GroupBy(c => c.Chunk.Source, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g
+                .OrderByDescending(c => c.Chunk.FinalScore)
+                .ThenByDescending(c => c.Chunk.ChunkType == "summary" ? 1 : 0)
+                .First())
             .ToList();
         var selected = new List<Candidate>();
 
@@ -122,6 +170,16 @@ public sealed class SqliteVectorStore : IVectorStore
 
         return selected;
     }
+
+    private static int ChunkTypeOrder(string chunkType) => chunkType switch
+    {
+        "summary" => 0,
+        "metadata" => 1,
+        "properties" => 2,
+        "property_note" => 3,
+        "answer_correction" => 4,
+        _ => 5
+    };
 
     private static async Task<Dictionary<string, double>> FindAliasMatchesAsync(SqliteConnection connection, string query, CancellationToken cancellationToken)
     {
@@ -189,7 +247,7 @@ public sealed class SqliteVectorStore : IVectorStore
         }
 
         var aliasTokens = TokenizeForMatching(rawAlias)
-            .Select(NormalizeTokenForMatching)
+            .SelectMany(ExpandToken)
             .Where(t => !string.IsNullOrWhiteSpace(t))
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .ToArray();
@@ -379,6 +437,30 @@ public sealed class SqliteVectorStore : IVectorStore
         if (!string.Equals(token, normalized, StringComparison.OrdinalIgnoreCase))
         {
             yield return normalized;
+        }
+
+        foreach (var part in SplitKoreanCompoundToken(normalized))
+        {
+            yield return part;
+        }
+    }
+
+    private static IEnumerable<string> SplitKoreanCompoundToken(string token)
+    {
+        if (!Regex.IsMatch(token, @"^[가-힣]+$"))
+        {
+            yield break;
+        }
+
+        var suffixes = new[] { "정보", "이름", "목록", "파일", "폴더", "경로", "값" };
+        foreach (var suffix in suffixes)
+        {
+            if (token.EndsWith(suffix, StringComparison.Ordinal) && token.Length > suffix.Length + 1)
+            {
+                yield return token[..^suffix.Length];
+                yield return suffix;
+                yield break;
+            }
         }
     }
 

@@ -14,6 +14,7 @@ public interface IEmbeddingService
 public interface IVectorStore
 {
     Task<IReadOnlyList<RetrievedChunk>> SearchAsync(SearchRequest request, CancellationToken cancellationToken);
+    Task<IReadOnlyList<RetrievedChunk>> GetChunksBySourceAsync(string source, CancellationToken cancellationToken);
 }
 
 public interface ILlmService

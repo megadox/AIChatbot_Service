@@ -6,5 +6,8 @@
 **/obj/
 artifacts/
 
+# Runtime chat session data
+ChatBot/conversations/
+
 # Local LLM model files
 model/*.gguf
