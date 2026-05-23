@@ -158,12 +158,20 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Grid.Row="0"
-                          Grid.Column="0"
-                          Grid.ColumnSpan="4"
-                          Content="문맥 유지"
-                          IsChecked="{Binding SelectedSession.IsContextRetained}"
-                          Margin="0,0,0,8" />
+                <StackPanel Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="4"
+                            Orientation="Horizontal"
+                            Margin="0,0,0,8">
+                    <CheckBox Content="문맥 유지"
+                              IsChecked="{Binding SelectedSession.IsContextRetained}"
+                              Margin="0,0,18,0" />
+                    <CheckBox Content="일반 질문"
+                              IsChecked="{Binding SelectedSession.IsGeneralQuestionEnabled}"
+                              Margin="0,0,18,0" />
+                    <CheckBox Content="웹 검색"
+                              IsChecked="{Binding SelectedSession.IsWebSearchEnabled}" />
+                </StackPanel>
 
                 <TextBox Grid.Row="1"
                          Grid.Column="0"

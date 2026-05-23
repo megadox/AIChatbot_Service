@@ -4,7 +4,9 @@ public sealed record ChatRequest(
     string Question,
     string? ConversationId = null,
     int TopK = 6,
-    double MinScore = 0.0);
+    double MinScore = 0.0,
+    bool AllowGeneralQuestion = false,
+    bool AllowWebSearch = false);
 
 public enum ChatStreamEventKind
 {
@@ -49,6 +51,18 @@ public sealed record DomainIntent(
     string? ActivityNameHint,
     UserIntent Intent,
     IReadOnlyList<string> Signals);
+
+public sealed record WebSearchResult(
+    string Query,
+    string Summary,
+    IReadOnlyList<WebSearchItem> Items,
+    bool IsConnected,
+    string? ErrorMessage = null);
+
+public sealed record WebSearchItem(
+    string Title,
+    string Snippet,
+    string Url);
 
 public enum UserIntent
 {

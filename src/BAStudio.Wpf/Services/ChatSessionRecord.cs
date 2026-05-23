@@ -12,7 +12,9 @@ public sealed record ChatSessionRecord(
     DateTimeOffset CreatedAt,
     DateTimeOffset UpdatedAt,
     bool IsContextRetained,
-    IReadOnlyList<ChatMessageRecord> Messages);
+    IReadOnlyList<ChatMessageRecord> Messages,
+    bool IsGeneralQuestionEnabled = false,
+    bool IsWebSearchEnabled = false);
 
 public sealed record ChatMessageRecord(
     string Role,

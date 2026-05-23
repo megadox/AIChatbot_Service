@@ -1,7 +1,6 @@
 # To Do List
 
-## Improve Follow-up Question Handling
-
+## Improve Follow-up Question Handling - 진행중
 - Add a new user intent for alternative requests.
   - Examples: "다른것은?", "다른 액티비티는?", "또 있어?", "다른 방법은?", "Outlook 말고"
   - Expected meaning: reuse the previous question context, exclude the already answered source, and return the next relevant activity.
@@ -118,3 +117,66 @@
   - Expected source: `WEB/Navigate.md`
   - Question: "현재 웹 페이지를 다시 불러오고 싶다"
   - Expected source: `WEB/Refresh.md`
+
+## Add Solution Usage and Guide Chat Support
+
+- Add a separate intent for solution/product guide questions.
+  - Examples: "이 프로그램은 어떻게 실행해?", "KB는 어떻게 빌드해?", "대화 세션은 어디에 저장돼?", "답변 수정은 어떻게 반영돼?"
+  - Expected meaning: answer about the AI Chatbot solution itself, not BA-Studio activity manuals.
+
+- Separate guide knowledge from activity manual knowledge.
+  - Activity manual KB: `docs/generated/commands/**/*.md`
+  - Solution guide KB candidates:
+    - `README.md`
+    - `guide_doc/**/*.md`
+    - `ToDoList.md`
+    - generated operation guide files
+  - Keep source type metadata: `activity_manual`, `solution_guide`, `qa_correction`.
+
+- Add a solution guide document set.
+  - App overview and purpose
+  - How to run the WPF chatbot
+  - How to build or rebuild the manual vector DB
+  - How to configure model path and KB path
+  - How chat sessions are saved and loaded
+  - How answer corrections are stored and reflected
+  - How to run retrieval smoke tests
+
+- Extend KB builder or add a second guide KB builder path.
+  - Option A: store guide docs in the same SQLite DB with a new source type.
+  - Option B: maintain a separate `solution_guide_vector.db`.
+  - Prefer Option A first if source type filtering is added.
+
+- Extend retrieval routing.
+  - If intent is `SolutionGuide`, search only solution guide sources.
+  - If intent is `ActivityLookup` or `ActivityRecommendation`, search activity manual sources.
+  - If intent is ambiguous, search both and rerank by intent confidence.
+
+- Add a guide answer builder.
+  - Use procedural step format for "how to" questions.
+  - Use short explanation plus paths for "where is stored" questions.
+  - Include exact local file paths or commands when available.
+  - Avoid mixing activity properties into solution guide answers.
+
+- Add process logs for guide questions.
+  - Example logs:
+    - `의도 분석: SolutionGuide`
+    - `가이드 문서 검색: README.md, guide_doc/...`
+    - `솔루션 사용법 답변 생성`
+
+- Add guide regression cases.
+  - Question: "KB는 어떻게 다시 빌드해?"
+  - Expected source: `README.md` or guide doc with KB build command.
+  - Question: "대화 세션은 어디에 저장돼?"
+  - Expected source: guide doc describing `ChatBot/conversations/`.
+  - Question: "답변 수정은 어디에 저장돼?"
+  - Expected source: guide doc or `qa/answer_corrections.jsonl` explanation.
+
+- Add user-facing help entry later.
+  - Provide a small "도움말" button or command.
+  - Show examples grouped by:
+    - Activity lookup
+    - Scenario recommendation
+    - Comparison
+    - Follow-up questions
+    - Solution usage

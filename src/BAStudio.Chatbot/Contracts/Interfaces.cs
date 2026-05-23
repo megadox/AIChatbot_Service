@@ -22,6 +22,11 @@ public interface ILlmService
     IAsyncEnumerable<string> StreamAsync(string prompt, CancellationToken cancellationToken);
 }
 
+public interface IWebSearchService
+{
+    Task<WebSearchResult> SearchAsync(string query, CancellationToken cancellationToken);
+}
+
 public interface IPromptBuilder
 {
     string Build(string question, IReadOnlyList<RetrievedChunk> chunks);

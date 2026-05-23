@@ -16,6 +16,7 @@ public sealed class ChatOrchestrator : IChatOrchestrator
     private readonly IVectorStore _vectorStore;
     private readonly IPromptBuilder _promptBuilder;
     private readonly ILlmService _llm;
+    private readonly IWebSearchService? _webSearch;
     private readonly DomainIntentResolver _intentResolver;
 
     public ChatOrchestrator(
@@ -23,12 +24,14 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         IVectorStore vectorStore,
         IPromptBuilder promptBuilder,
         ILlmService llm,
+        IWebSearchService? webSearch = null,
         DomainIntentResolver? intentResolver = null)
     {
         _embeddings = embeddings;
         _vectorStore = vectorStore;
         _promptBuilder = promptBuilder;
         _llm = llm;
+        _webSearch = webSearch;
         _intentResolver = intentResolver ?? new DomainIntentResolver();
     }
 
@@ -49,6 +52,55 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         var conversationId = string.IsNullOrWhiteSpace(request.ConversationId) ? "default" : request.ConversationId;
         ConversationGroundings.TryGetValue(conversationId, out var previousGrounding);
         var followUpKind = ResolveFollowUpKind(request.Question);
+        if (IsOutOfScopeQuestion(request.Question, intent, followUpKind, previousGrounding))
+        {
+            if (request.AllowWebSearch)
+            {
+                yield return ChatStreamEvent.Status("웹 검색 중...");
+                var webResult = _webSearch is null
+                    ? new WebSearchResult(request.Question, "", [], IsConnected: false, "웹 검색 서비스가 설정되어 있지 않습니다.")
+                    : await _webSearch.SearchAsync(request.Question, cancellationToken);
+
+                if (!webResult.IsConnected)
+                {
+                    yield return ChatStreamEvent.Status("웹 검색 실패");
+                    yield return ChatStreamEvent.Token($"웹에 연결할 수 없습니다. {webResult.ErrorMessage ?? "네트워크 연결을 확인해주세요."}");
+                    yield return ChatStreamEvent.Completed();
+                    yield break;
+                }
+
+                if (string.IsNullOrWhiteSpace(webResult.Summary) && webResult.Items.Count == 0)
+                {
+                    yield return ChatStreamEvent.Status("웹 검색 결과 없음");
+                    yield return ChatStreamEvent.Token("웹 검색은 수행했지만 답변에 사용할 만한 검색 결과를 찾지 못했습니다.");
+                    yield return ChatStreamEvent.Completed();
+                    yield break;
+                }
+
+                yield return ChatStreamEvent.Status("웹 검색 기반 답변 생성");
+                yield return ChatStreamEvent.Token(BuildWebSearchAnswer(webResult));
+                yield return ChatStreamEvent.Completed();
+                yield break;
+            }
+
+            if (!request.AllowGeneralQuestion)
+            {
+                yield return ChatStreamEvent.Status("범위 밖 질문으로 판단");
+                yield return ChatStreamEvent.Token("이 챗봇은 기본적으로 BA-Studio 액티비티 매뉴얼과 솔루션 사용법 질문에 답하도록 설정되어 있습니다. 일반 지식 질문에 답하려면 아래의 `일반 질문` 체크박스를 켜고, 최신 정보가 필요하면 `웹 검색` 체크박스도 켠 뒤 다시 질문해주세요.");
+                yield return ChatStreamEvent.Completed();
+                yield break;
+            }
+
+            yield return ChatStreamEvent.Status("일반 질문 답변 생성");
+            await foreach (var token in _llm.StreamAsync(BuildGeneralQuestionPrompt(request.Question), cancellationToken))
+            {
+                yield return ChatStreamEvent.Token(token);
+            }
+
+            yield return ChatStreamEvent.Completed();
+            yield break;
+        }
+
         var canUsePreviousContext = CanUsePreviousContext(intent, followUpKind, previousGrounding);
         var effectivePreviousGrounding = canUsePreviousContext ? previousGrounding : null;
         var contextualQuestion = BuildContextualQuestion(request.Question, intent, effectivePreviousGrounding, followUpKind);
@@ -133,6 +185,95 @@ public sealed class ChatOrchestrator : IChatOrchestrator
 
         RememberGrounding(conversationId, chunks);
         yield return ChatStreamEvent.Completed();
+    }
+
+    private static bool IsOutOfScopeQuestion(
+        string question,
+        DomainIntent intent,
+        FollowUpKind followUpKind,
+        ConversationGrounding? previousGrounding)
+    {
+        if (intent.PreferredGroup is not null || intent.ActivityNameHint is not null || intent.Signals.Count > 0)
+        {
+            return false;
+        }
+
+        if (followUpKind != FollowUpKind.None && previousGrounding is not null)
+        {
+            return false;
+        }
+
+        return !LooksLikeManualQuestion(question) && !LooksLikeSolutionGuideQuestion(question);
+    }
+
+    private static bool LooksLikeManualQuestion(string question)
+    {
+        var q = question.Trim();
+        var manualTerms = new[]
+        {
+            "액티비티", "속성", "기본값", "옵션", "사용법", "비교", "차이", "함께", "대체",
+            "스크립트", "selector", "셀렉터", "브라우저", "엑셀", "파일", "폴더", "클립보드",
+            "메일", "이메일", "스레드", "멀티스레드", "프로세스", "윈도우", "마우스", "키보드"
+        };
+
+        if (manualTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase)))
+        {
+            return true;
+        }
+
+        return Regex.IsMatch(q, @"\b[A-Za-z][A-Za-z0-9_]*(?:\([^)]+\))?\b", RegexOptions.CultureInvariant);
+    }
+
+    private static bool LooksLikeSolutionGuideQuestion(string question)
+    {
+        var q = question.Trim();
+        var guideTerms = new[]
+        {
+            "챗봇", "프로그램", "솔루션", "실행", "빌드", "KB", "DB", "세션", "탭",
+            "저장", "불러", "답변 수정", "가이드", "사용법", "설정", "모델"
+        };
+
+        return guideTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static string BuildGeneralQuestionPrompt(string question)
+    {
+        return $"""
+        <|system|>
+        You are a helpful assistant. Answer the user's general knowledge question directly and concisely in Korean.
+        If you are not sure, say so briefly.
+        <|end|>
+        <|user|>
+        {question}
+        <|end|>
+        <|assistant|>
+        """;
+    }
+
+    private static string BuildWebSearchAnswer(WebSearchResult result)
+    {
+        var sb = new StringBuilder();
+        if (!string.IsNullOrWhiteSpace(result.Summary))
+        {
+            sb.AppendLine(result.Summary.Trim());
+        }
+        else
+        {
+            sb.AppendLine(result.Items[0].Snippet.Trim());
+        }
+
+        if (result.Items.Count > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("[웹 검색 결과]");
+            foreach (var item in result.Items.Take(3))
+            {
+                var url = string.IsNullOrWhiteSpace(item.Url) ? "" : $" - {item.Url}";
+                sb.AppendLine($"- {item.Snippet}{url}");
+            }
+        }
+
+        return sb.ToString().TrimEnd();
     }
 
     private async Task<IReadOnlyList<RetrievedChunk>> EnrichSourceChunksAsync(

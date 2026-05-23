@@ -76,7 +76,7 @@ static async Task RunCasesAsync(
 {
     var startedAt = DateTimeOffset.Now;
     var results = new List<UserTestCaseResult>();
-    var orchestrator = new ChatOrchestrator(embeddings, store, new PromptBuilder(), new NoopLlmService(), intentResolver);
+    var orchestrator = new ChatOrchestrator(embeddings, store, new PromptBuilder(), new NoopLlmService(), intentResolver: intentResolver);
 
     foreach (var testCase in cases)
     {

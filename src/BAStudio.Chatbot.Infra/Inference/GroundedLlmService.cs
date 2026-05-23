@@ -21,6 +21,12 @@ public sealed class GroundedLlmService : ILlmService
 
     private static string BuildFallbackAnswer(string prompt)
     {
+        if (!prompt.Contains("[Manual]", StringComparison.OrdinalIgnoreCase) &&
+            prompt.Contains("<|user|>", StringComparison.OrdinalIgnoreCase))
+        {
+            return "일반 질문 모드는 켜져 있지만, 현재 로컬 일반 답변 모델을 사용할 수 없습니다. 모델 파일을 설정하면 일반 지식 질문에도 답변할 수 있습니다.";
+        }
+
         var sources = Regex.Matches(prompt, @"source:\s*(.+)")
             .Select(m => m.Groups[1].Value.Trim())
             .Where(s => !string.IsNullOrWhiteSpace(s))

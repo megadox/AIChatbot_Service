@@ -145,7 +145,7 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         ILlmService llm = File.Exists(options.ModelPath)
             ? new LlamaSharpPhi4LlmService(options)
             : new GroundedLlmService();
-        var orchestrator = new ChatOrchestrator(embeddings, store, promptBuilder, llm, new DomainIntentResolver());
+        var orchestrator = new ChatOrchestrator(embeddings, store, promptBuilder, llm, new NaverWebSearchService(), new DomainIntentResolver());
         var sessionStore = new ChatSessionStore(repoRoot);
         var savedSessions = sessionStore.LoadAll();
         return new ChatViewModel(orchestrator, options, new AnswerCorrectionStore(repoRoot), sessionStore, savedSessions);
@@ -206,6 +206,8 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         session.ClearProcessLogs();
         AddProcessLog(session, $"질문 입력: {question}");
         AddProcessLog(session, session.IsContextRetained ? "문맥 유지: 켜짐" : "문맥 유지: 꺼짐");
+        AddProcessLog(session, session.IsGeneralQuestionEnabled ? "일반 질문: 켜짐" : "일반 질문: 꺼짐");
+        AddProcessLog(session, session.IsWebSearchEnabled ? "웹 검색: 켜짐" : "웹 검색: 꺼짐");
         var assistant = new ChatMessageViewModel("Assistant", "", isUser: false);
         session.AddMessage(assistant);
         await SaveSessionAsync(session);
@@ -217,7 +219,7 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         {
             var buffer = new StringBuilder();
             var lastFlush = Environment.TickCount64;
-            await foreach (var evt in _orchestrator.AskAsync(new ChatRequest(question, ConversationId: conversationId, TopK: _options.TopK, MinScore: _options.MinScore), _cts.Token))
+            await foreach (var evt in _orchestrator.AskAsync(new ChatRequest(question, ConversationId: conversationId, TopK: _options.TopK, MinScore: _options.MinScore, AllowGeneralQuestion: session.IsGeneralQuestionEnabled, AllowWebSearch: session.IsWebSearchEnabled), _cts.Token))
             {
                 if (evt.Kind == ChatStreamEventKind.Status)
                 {
@@ -430,7 +432,7 @@ public sealed class ChatViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(CanSend));
             SendCommand.RaiseCanExecuteChanged();
         }
-        else if (e.PropertyName is nameof(ChatSessionViewModel.IsContextRetained))
+        else if (e.PropertyName is nameof(ChatSessionViewModel.IsContextRetained) or nameof(ChatSessionViewModel.IsGeneralQuestionEnabled) or nameof(ChatSessionViewModel.IsWebSearchEnabled))
         {
             if (sender is ChatSessionViewModel session)
             {

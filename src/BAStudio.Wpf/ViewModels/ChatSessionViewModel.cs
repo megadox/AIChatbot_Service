@@ -11,6 +11,8 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
     private string _inputText = "";
     private string _processLogText = "";
     private bool _isContextRetained = true;
+    private bool _isGeneralQuestionEnabled;
+    private bool _isWebSearchEnabled;
 
     public ChatSessionViewModel(string id, string title, DateTimeOffset createdAt, DateTimeOffset updatedAt)
     {
@@ -88,6 +90,38 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
         }
     }
 
+    public bool IsGeneralQuestionEnabled
+    {
+        get => _isGeneralQuestionEnabled;
+        set
+        {
+            if (_isGeneralQuestionEnabled == value)
+            {
+                return;
+            }
+
+            _isGeneralQuestionEnabled = value;
+            Touch();
+            OnPropertyChanged();
+        }
+    }
+
+    public bool IsWebSearchEnabled
+    {
+        get => _isWebSearchEnabled;
+        set
+        {
+            if (_isWebSearchEnabled == value)
+            {
+                return;
+            }
+
+            _isWebSearchEnabled = value;
+            Touch();
+            OnPropertyChanged();
+        }
+    }
+
     public string DisplayUpdatedAt => UpdatedAt.ToString("MM-dd HH:mm");
 
     public void AddMessage(ChatMessageViewModel message)
@@ -133,14 +167,18 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
             CreatedAt,
             UpdatedAt,
             IsContextRetained,
-            Messages.Select(m => new ChatMessageRecord(m.Role, m.Text, m.DetailsText, m.IsUser, m.CreatedAt)).ToArray());
+            Messages.Select(m => new ChatMessageRecord(m.Role, m.Text, m.DetailsText, m.IsUser, m.CreatedAt)).ToArray(),
+            IsGeneralQuestionEnabled,
+            IsWebSearchEnabled);
     }
 
     public static ChatSessionViewModel FromRecord(ChatSessionRecord record)
     {
         var session = new ChatSessionViewModel(record.Id, record.Title, record.CreatedAt, record.UpdatedAt)
         {
-            _isContextRetained = record.IsContextRetained
+            _isContextRetained = record.IsContextRetained,
+            _isGeneralQuestionEnabled = record.IsGeneralQuestionEnabled,
+            _isWebSearchEnabled = record.IsWebSearchEnabled
         };
 
         foreach (var message in record.Messages)
