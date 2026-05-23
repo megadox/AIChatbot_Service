@@ -16,6 +16,9 @@ using BAStudio.Wpf.Services;
 
 namespace BAStudio.Wpf.ViewModels;
 
+/// <summary>
+/// Main WPF view model that manages chat sessions, commands, streaming answers, and answer corrections.
+/// </summary>
 public sealed class ChatViewModel : INotifyPropertyChanged
 {
     private const string DetailsMarker = "\n<<<DETAILS>>>\n";
@@ -137,6 +140,9 @@ public sealed class ChatViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Creates the default application view model and wires the production services.
+    /// </summary>
     public static ChatViewModel Create(ChatbotOptions options, string repoRoot)
     {
         var embeddings = new HashEmbeddingService();

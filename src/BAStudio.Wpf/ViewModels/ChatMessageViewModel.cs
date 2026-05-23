@@ -4,16 +4,25 @@ using System.Windows.Media;
 
 namespace BAStudio.Wpf.ViewModels;
 
+/// <summary>
+/// Represents one chat bubble and its visual state in the WPF UI.
+/// </summary>
 public sealed class ChatMessageViewModel : INotifyPropertyChanged
 {
     private string _text;
     private string _detailsText = "";
 
+    /// <summary>
+    /// Creates a chat message with the current timestamp.
+    /// </summary>
     public ChatMessageViewModel(string role, string text, bool isUser)
         : this(role, text, isUser, DateTimeOffset.Now)
     {
     }
 
+    /// <summary>
+    /// Creates a chat message with an explicit timestamp.
+    /// </summary>
     public ChatMessageViewModel(string role, string text, bool isUser, DateTimeOffset createdAt)
     {
         Role = role;

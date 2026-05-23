@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace BAStudio.Wpf.Services;
 
+/// <summary>
+/// Loads, saves, and deletes chat session files under the repository conversation folder.
+/// </summary>
 public sealed class ChatSessionStore
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -14,17 +17,26 @@ public sealed class ChatSessionStore
     private readonly string _directory;
     private readonly string _indexPath;
 
+    /// <summary>
+    /// Creates a session store rooted at the repository directory.
+    /// </summary>
     public ChatSessionStore(string repoRoot)
     {
         _directory = Path.Combine(repoRoot, "ChatBot", "conversations");
         _indexPath = Path.Combine(_directory, "sessions.json");
     }
 
+    /// <summary>
+    /// Loads all sessions asynchronously.
+    /// </summary>
     public async Task<IReadOnlyList<ChatSessionRecord>> LoadAllAsync(CancellationToken cancellationToken = default)
     {
         return await Task.Run(LoadAll, cancellationToken);
     }
 
+    /// <summary>
+    /// Loads all sessions from disk and skips corrupt session files.
+    /// </summary>
     public IReadOnlyList<ChatSessionRecord> LoadAll()
     {
         Directory.CreateDirectory(_directory);
@@ -63,6 +75,9 @@ public sealed class ChatSessionStore
         return sessions;
     }
 
+    /// <summary>
+    /// Saves one session file and updates the session index.
+    /// </summary>
     public async Task SaveAsync(ChatSessionRecord session, CancellationToken cancellationToken = default)
     {
         Directory.CreateDirectory(_directory);
@@ -81,6 +96,9 @@ public sealed class ChatSessionStore
         await SaveIndexAsync(updated, cancellationToken);
     }
 
+    /// <summary>
+    /// Deletes a session file and removes it from the session index.
+    /// </summary>
     public async Task DeleteAsync(string sessionId, CancellationToken cancellationToken = default)
     {
         Directory.CreateDirectory(_directory);

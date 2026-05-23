@@ -395,6 +395,9 @@ static async Task InsertChunkAsync(SqliteConnection connection, KbChunk chunk, b
     await command.ExecuteNonQueryAsync();
 }
 
+/// <summary>
+/// Represents one chunk prepared for insertion into the knowledge-base tables.
+/// </summary>
 internal sealed record KbChunk(
     string Id,
     string Source,
@@ -406,6 +409,9 @@ internal sealed record KbChunk(
     string Content,
     string ContentHash);
 
+/// <summary>
+/// Represents one persisted answer correction consumed by the KB builder.
+/// </summary>
 internal sealed record AnswerCorrectionRecord(
     string? Id,
     DateTimeOffset CreatedAt,
@@ -417,10 +423,16 @@ internal sealed record AnswerCorrectionRecord(
     string? ExpectedSource,
     string? Memo);
 
+/// <summary>
+/// Represents the alias configuration for one activity source.
+/// </summary>
 internal sealed record ActivityAliasRecord(
     string Source,
     string[]? Aliases);
 
+/// <summary>
+/// Represents one normalized alias entry inserted into the alias table.
+/// </summary>
 internal sealed record ActivityAlias(
     string Source,
     string Alias);

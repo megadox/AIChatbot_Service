@@ -5,7 +5,7 @@ using System.Windows;
 namespace BAStudio.Wpf;
 
 /// <summary>
-/// Interaction logic for App.xaml
+/// Application entry type for the WPF chatbot.
 /// </summary>
 public partial class App : Application
 {

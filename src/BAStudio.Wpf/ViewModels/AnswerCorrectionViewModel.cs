@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace BAStudio.Wpf.ViewModels;
 
+/// <summary>
+/// Holds editable answer feedback fields for the correction dialog.
+/// </summary>
 public sealed class AnswerCorrectionViewModel : INotifyPropertyChanged
 {
     private string _rating = "수정";
@@ -10,6 +13,9 @@ public sealed class AnswerCorrectionViewModel : INotifyPropertyChanged
     private string _expectedSource = "";
     private string _memo = "";
 
+    /// <summary>
+    /// Creates a correction form initialized with the original question and answer.
+    /// </summary>
     public AnswerCorrectionViewModel(string question, string originalAnswer)
     {
         Question = question;

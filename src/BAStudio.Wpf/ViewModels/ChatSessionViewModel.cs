@@ -5,6 +5,9 @@ using BAStudio.Wpf.Services;
 
 namespace BAStudio.Wpf.ViewModels;
 
+/// <summary>
+/// Represents one chat session tab, including messages, options, and process logs.
+/// </summary>
 public sealed class ChatSessionViewModel : INotifyPropertyChanged
 {
     private string _title;
@@ -14,6 +17,9 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
     private bool _isGeneralQuestionEnabled;
     private bool _isWebSearchEnabled;
 
+    /// <summary>
+    /// Creates a session view model with persisted identity and timestamps.
+    /// </summary>
     public ChatSessionViewModel(string id, string title, DateTimeOffset createdAt, DateTimeOffset updatedAt)
     {
         Id = id;
@@ -124,12 +130,18 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
 
     public string DisplayUpdatedAt => UpdatedAt.ToString("MM-dd HH:mm");
 
+    /// <summary>
+    /// Adds a message to the session and updates its modified timestamp.
+    /// </summary>
     public void AddMessage(ChatMessageViewModel message)
     {
         Messages.Add(message);
         Touch();
     }
 
+    /// <summary>
+    /// Adds one timestamped process-log entry and keeps only recent entries.
+    /// </summary>
     public void AddProcessLog(string text)
     {
         if (string.IsNullOrWhiteSpace(text))
@@ -146,12 +158,18 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
         ProcessLogText = string.Join(Environment.NewLine, ProcessLogs);
     }
 
+    /// <summary>
+    /// Clears the visible process logs for this session.
+    /// </summary>
     public void ClearProcessLogs()
     {
         ProcessLogs.Clear();
         ProcessLogText = "";
     }
 
+    /// <summary>
+    /// Updates the session modified timestamp and related display bindings.
+    /// </summary>
     public void Touch()
     {
         UpdatedAt = DateTimeOffset.Now;
@@ -159,6 +177,9 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(DisplayUpdatedAt));
     }
 
+    /// <summary>
+    /// Converts this view model into a persistable session record.
+    /// </summary>
     public ChatSessionRecord ToRecord()
     {
         return new ChatSessionRecord(
@@ -172,6 +193,9 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
             IsWebSearchEnabled);
     }
 
+    /// <summary>
+    /// Rehydrates a session view model from a persisted session record.
+    /// </summary>
     public static ChatSessionViewModel FromRecord(ChatSessionRecord record)
     {
         var session = new ChatSessionViewModel(record.Id, record.Title, record.CreatedAt, record.UpdatedAt)

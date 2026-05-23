@@ -247,12 +247,18 @@ static JsonSerializerOptions JsonOptions()
     };
 }
 
+/// <summary>
+/// Defines one retrieval smoke-test case.
+/// </summary>
 public sealed record UserTestCase(
     string Id,
     string Domain,
     string Question,
     string ExpectedSource);
 
+/// <summary>
+/// Stores aggregate smoke-test results and per-case outcomes.
+/// </summary>
 public sealed record UserTestReport(
     DateTimeOffset StartedAt,
     DateTimeOffset FinishedAt,
@@ -264,6 +270,9 @@ public sealed record UserTestReport(
     int RetrievalTop1Passed,
     IReadOnlyList<UserTestCaseResult> Results);
 
+/// <summary>
+/// Stores the retrieval and answer outcome for one smoke-test case.
+/// </summary>
 public sealed record UserTestCaseResult(
     string Id,
     string Domain,
@@ -280,6 +289,9 @@ public sealed record UserTestCaseResult(
     string Answer,
     IReadOnlyList<RankedSource> RankedSources);
 
+/// <summary>
+/// Represents one ranked source returned during a smoke test.
+/// </summary>
 public sealed record RankedSource(
     int Rank,
     string Source,
@@ -290,8 +302,14 @@ public sealed record RankedSource(
     double KeywordScore,
     string Preview);
 
+/// <summary>
+/// Test-only LLM service that prevents nondeterministic model generation.
+/// </summary>
 public sealed class NoopLlmService : ILlmService
 {
+    /// <summary>
+    /// Streams a fixed marker response if the orchestrator reaches the LLM fallback path.
+    /// </summary>
     public async IAsyncEnumerable<string> StreamAsync(string prompt, [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

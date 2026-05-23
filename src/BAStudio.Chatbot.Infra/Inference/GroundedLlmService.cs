@@ -4,8 +4,14 @@ using BAStudio.Chatbot.Contracts;
 
 namespace BAStudio.Chatbot.Infra.Inference;
 
+/// <summary>
+/// Provides a deterministic fallback answer generator when no local LLM model is available.
+/// </summary>
 public sealed class GroundedLlmService : ILlmService
 {
+    /// <summary>
+    /// Streams a simple answer derived from the grounded prompt content.
+    /// </summary>
     public async IAsyncEnumerable<string> StreamAsync(
         string prompt,
         [EnumeratorCancellation] CancellationToken cancellationToken)

@@ -3,6 +3,9 @@ using BAStudio.Chatbot.Contracts;
 
 namespace BAStudio.Chatbot.Policies;
 
+/// <summary>
+/// Resolves rule-based domain, activity, and intent hints from a user question.
+/// </summary>
 public sealed class DomainIntentResolver
 {
     private static readonly Dictionary<string, string[]> GroupSignals = new(StringComparer.OrdinalIgnoreCase)
@@ -22,6 +25,9 @@ public sealed class DomainIntentResolver
 
     private static readonly HashSet<string> KnownGroups = new(GroupSignals.Keys, StringComparer.OrdinalIgnoreCase);
 
+    /// <summary>
+    /// Analyzes a question and returns retrieval preferences for the orchestrator.
+    /// </summary>
     public DomainIntent Resolve(string question)
     {
         var normalized = question.Trim();

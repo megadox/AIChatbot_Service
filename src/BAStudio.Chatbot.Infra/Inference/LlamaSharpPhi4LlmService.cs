@@ -7,17 +7,26 @@ using LLama.Sampling;
 
 namespace BAStudio.Chatbot.Infra.Inference;
 
+/// <summary>
+/// Streams answers from a local Phi-4 GGUF model through LLamaSharp.
+/// </summary>
 public sealed class LlamaSharpPhi4LlmService : ILlmService, IDisposable
 {
     private readonly ChatbotOptions _options;
     private readonly Lazy<ModelHandle> _model;
 
+    /// <summary>
+    /// Creates a lazy-loading local LLM service using the supplied chatbot options.
+    /// </summary>
     public LlamaSharpPhi4LlmService(ChatbotOptions options)
     {
         _options = options;
         _model = new Lazy<ModelHandle>(LoadModel);
     }
 
+    /// <summary>
+    /// Runs local model inference and yields generated tokens.
+    /// </summary>
     public async IAsyncEnumerable<string> StreamAsync(
         string prompt,
         [EnumeratorCancellation] CancellationToken cancellationToken)
@@ -41,6 +50,9 @@ public sealed class LlamaSharpPhi4LlmService : ILlmService, IDisposable
         }
     }
 
+    /// <summary>
+    /// Releases the loaded model, context, and native resources.
+    /// </summary>
     public void Dispose()
     {
         if (_model.IsValueCreated)

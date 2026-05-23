@@ -6,10 +6,16 @@ using BAStudio.Wpf.ViewModels;
 
 namespace BAStudio.Wpf;
 
+/// <summary>
+/// Main WPF window that hosts the chatbot UI.
+/// </summary>
 public partial class MainWindow : Window
 {
     private static readonly string RepoRoot = FindRepoRoot();
 
+    /// <summary>
+    /// Initializes the window and creates the main chat view model.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();

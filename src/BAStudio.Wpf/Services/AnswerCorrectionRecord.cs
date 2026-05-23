@@ -1,5 +1,8 @@
 namespace BAStudio.Wpf.Services;
 
+/// <summary>
+/// Stores one user evaluation or correction for a chatbot answer.
+/// </summary>
 public sealed record AnswerCorrectionRecord(
     string Id,
     DateTimeOffset CreatedAt,

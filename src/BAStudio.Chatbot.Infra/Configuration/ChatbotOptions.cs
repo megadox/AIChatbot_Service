@@ -1,5 +1,8 @@
 namespace BAStudio.Chatbot.Infra.Configuration;
 
+/// <summary>
+/// Holds runtime configuration for the local model, knowledge base, and retrieval limits.
+/// </summary>
 public sealed class ChatbotOptions
 {
     public string ModelPath { get; init; } = "model/microsoft_Phi-4-mini-instruct-Q4_K_M.gguf";

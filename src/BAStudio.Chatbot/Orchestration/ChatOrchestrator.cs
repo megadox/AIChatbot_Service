@@ -7,6 +7,9 @@ using BAStudio.Chatbot.Policies;
 
 namespace BAStudio.Chatbot.Orchestration;
 
+/// <summary>
+/// Orchestrates question handling across intent resolution, retrieval, answer generation, and web fallback.
+/// </summary>
 public sealed class ChatOrchestrator : IChatOrchestrator
 {
     private const string DetailsMarker = "\n<<<DETAILS>>>\n";
@@ -19,6 +22,9 @@ public sealed class ChatOrchestrator : IChatOrchestrator
     private readonly IWebSearchService? _webSearch;
     private readonly DomainIntentResolver _intentResolver;
 
+    /// <summary>
+    /// Creates a chat orchestrator with retrieval, prompt, LLM, and optional web search services.
+    /// </summary>
     public ChatOrchestrator(
         IEmbeddingService embeddings,
         IVectorStore vectorStore,
@@ -35,6 +41,9 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         _intentResolver = intentResolver ?? new DomainIntentResolver();
     }
 
+    /// <summary>
+    /// Handles a user request and streams process updates plus answer text.
+    /// </summary>
     public async IAsyncEnumerable<ChatStreamEvent> AskAsync(
         ChatRequest request,
         [EnumeratorCancellation] CancellationToken cancellationToken)

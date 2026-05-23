@@ -5,17 +5,29 @@ using BAStudio.Chatbot.Contracts;
 
 namespace BAStudio.Chatbot.Infra.Embedding;
 
+/// <summary>
+/// Produces deterministic lightweight hash embeddings for local retrieval.
+/// </summary>
 public sealed class HashEmbeddingService : IEmbeddingService
 {
     private static readonly Regex TokenRegex = new(@"[A-Za-z0-9_()]+|[가-힣]+", RegexOptions.Compiled);
 
+    /// <summary>
+    /// Creates a hash embedding service with the requested vector dimension.
+    /// </summary>
     public HashEmbeddingService(int dimension = 384)
     {
         Dimension = dimension;
     }
 
+    /// <summary>
+    /// Gets the vector dimension used by the embedding service.
+    /// </summary>
     public int Dimension { get; }
 
+    /// <summary>
+    /// Embeds text by hashing normalized tokens into a fixed-size vector.
+    /// </summary>
     public float[] Embed(string text)
     {
         var vector = new float[Dimension];

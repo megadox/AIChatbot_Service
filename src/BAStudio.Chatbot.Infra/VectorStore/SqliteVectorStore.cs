@@ -4,15 +4,24 @@ using Microsoft.Data.Sqlite;
 
 namespace BAStudio.Chatbot.Infra.VectorStore;
 
+/// <summary>
+/// Reads and ranks manual chunks from the SQLite vector knowledge base.
+/// </summary>
 public sealed class SqliteVectorStore : IVectorStore
 {
     private readonly string _dbPath;
 
+    /// <summary>
+    /// Creates a vector store backed by the supplied SQLite database path.
+    /// </summary>
     public SqliteVectorStore(string dbPath)
     {
         _dbPath = dbPath;
     }
 
+    /// <summary>
+    /// Searches chunks using vector similarity, keyword overlap, aliases, and intent boosts.
+    /// </summary>
     public async Task<IReadOnlyList<RetrievedChunk>> SearchAsync(SearchRequest request, CancellationToken cancellationToken)
     {
         if (!File.Exists(_dbPath))
@@ -86,6 +95,9 @@ public sealed class SqliteVectorStore : IVectorStore
             .ToArray();
     }
 
+    /// <summary>
+    /// Loads all chunks for a selected source document in display order.
+    /// </summary>
     public async Task<IReadOnlyList<RetrievedChunk>> GetChunksBySourceAsync(string source, CancellationToken cancellationToken)
     {
         if (!File.Exists(_dbPath) || string.IsNullOrWhiteSpace(source))
@@ -504,6 +516,9 @@ public sealed class SqliteVectorStore : IVectorStore
         return sum;
     }
 
+    /// <summary>
+    /// Serializes a float vector to the binary format stored in SQLite.
+    /// </summary>
     public static byte[] ToBlob(float[] vector)
     {
         var bytes = new byte[vector.Length * sizeof(float)];
@@ -511,6 +526,9 @@ public sealed class SqliteVectorStore : IVectorStore
         return bytes;
     }
 
+    /// <summary>
+    /// Deserializes a SQLite vector blob back into a float array.
+    /// </summary>
     public static float[] ReadVector(byte[] blob)
     {
         var vector = new float[blob.Length / sizeof(float)];

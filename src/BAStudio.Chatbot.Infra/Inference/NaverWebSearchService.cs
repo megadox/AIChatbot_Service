@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace BAStudio.Chatbot.Infra.Inference;
 
+/// <summary>
+/// Searches Naver through the company proxy first, then falls back to the Naver Open API.
+/// </summary>
 public sealed class NaverWebSearchService : IWebSearchService
 {
     private const string ProxyEndpoint = "http://api.batem.com/naverSearch";
@@ -21,6 +24,9 @@ public sealed class NaverWebSearchService : IWebSearchService
         Timeout = TimeSpan.FromSeconds(8)
     };
 
+    /// <summary>
+    /// Executes a Naver web search and returns normalized result items.
+    /// </summary>
     public async Task<WebSearchResult> SearchAsync(string query, CancellationToken cancellationToken)
     {
         var proxyResult = await TrySearchProxyAsync(query, cancellationToken);

@@ -2,8 +2,14 @@ using System.Windows;
 
 namespace BAStudio.Wpf;
 
+/// <summary>
+/// Dialog window used to record answer ratings and corrections.
+/// </summary>
 public partial class AnswerCorrectionWindow : Window
 {
+    /// <summary>
+    /// Initializes the correction dialog.
+    /// </summary>
     public AnswerCorrectionWindow()
     {
         InitializeComponent();

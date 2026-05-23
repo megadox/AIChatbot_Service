@@ -4,6 +4,9 @@ using BAStudio.Chatbot.Contracts;
 
 namespace BAStudio.Chatbot.Infra.Inference;
 
+/// <summary>
+/// Searches the DuckDuckGo instant answer API and normalizes results for the chatbot.
+/// </summary>
 public sealed class DuckDuckGoWebSearchService : IWebSearchService
 {
     private static readonly HttpClient HttpClient = new()
@@ -11,6 +14,9 @@ public sealed class DuckDuckGoWebSearchService : IWebSearchService
         Timeout = TimeSpan.FromSeconds(8)
     };
 
+    /// <summary>
+    /// Executes a DuckDuckGo search for the supplied query.
+    /// </summary>
     public async Task<WebSearchResult> SearchAsync(string query, CancellationToken cancellationToken)
     {
         try

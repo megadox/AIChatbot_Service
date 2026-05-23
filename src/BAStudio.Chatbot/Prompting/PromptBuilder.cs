@@ -3,8 +3,14 @@ using BAStudio.Chatbot.Contracts;
 
 namespace BAStudio.Chatbot.Prompting;
 
+/// <summary>
+/// Builds the instruction prompt used for grounded BA-Studio manual answers.
+/// </summary>
 public sealed class PromptBuilder : IPromptBuilder
 {
+    /// <summary>
+    /// Combines the user question and retrieved chunks into a single chat prompt.
+    /// </summary>
     public string Build(string question, IReadOnlyList<RetrievedChunk> chunks)
     {
         var sb = new StringBuilder();
