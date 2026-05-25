@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using BAStudio.Chatbot.Contracts;
 using BAStudio.Wpf.Services;
 
 namespace BAStudio.Wpf.ViewModels;
@@ -16,6 +17,7 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
     private bool _isContextRetained = true;
     private bool _isGeneralQuestionEnabled;
     private bool _isWebSearchEnabled;
+    private ChatQuestionType _questionType = ChatQuestionType.ActivityTask;
 
     /// <summary>
     /// Creates a session view model with persisted identity and timestamps.
@@ -128,6 +130,28 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
         }
     }
 
+    public ChatQuestionType QuestionType
+    {
+        get => _questionType;
+        set
+        {
+            if (_questionType == value)
+            {
+                return;
+            }
+
+            _questionType = value;
+            if (value == ChatQuestionType.General)
+            {
+                _isGeneralQuestionEnabled = true;
+                OnPropertyChanged(nameof(IsGeneralQuestionEnabled));
+            }
+
+            Touch();
+            OnPropertyChanged();
+        }
+    }
+
     public string DisplayUpdatedAt => UpdatedAt.ToString("MM-dd HH:mm");
 
     /// <summary>
@@ -190,7 +214,8 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
             IsContextRetained,
             Messages.Select(m => new ChatMessageRecord(m.Role, m.Text, m.DetailsText, m.IsUser, m.CreatedAt)).ToArray(),
             IsGeneralQuestionEnabled,
-            IsWebSearchEnabled);
+            IsWebSearchEnabled,
+            QuestionType.ToString());
     }
 
     /// <summary>
@@ -202,7 +227,10 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
         {
             _isContextRetained = record.IsContextRetained,
             _isGeneralQuestionEnabled = record.IsGeneralQuestionEnabled,
-            _isWebSearchEnabled = record.IsWebSearchEnabled
+            _isWebSearchEnabled = record.IsWebSearchEnabled,
+            _questionType = Enum.TryParse<ChatQuestionType>(record.QuestionType, out var parsed)
+                ? parsed
+                : ChatQuestionType.ActivityTask
         };
 
         foreach (var message in record.Messages)

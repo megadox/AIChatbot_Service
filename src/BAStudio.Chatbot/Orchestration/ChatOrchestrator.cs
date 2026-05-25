@@ -14,6 +14,29 @@ public sealed class ChatOrchestrator : IChatOrchestrator
 {
     private const string DetailsMarker = "\n<<<DETAILS>>>\n";
     private static readonly ConcurrentDictionary<string, ConversationGrounding> ConversationGroundings = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly string[] BAStudioGuideSources =
+    [
+        "docs/product-manuals/guides/ba-studio/2.6.0/activity-add-edit.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/breakpoint-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/code-editor-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/debug-task-project.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/image-automation.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/library-create.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/logs-debug-window.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/package-export.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/predefined-process-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/project-create.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/project-library-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/project-run.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/properties-edit.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/resource-manage.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/start-task-set.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/task-create.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/task-run.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/variables-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/web-selector-use.md",
+        "docs/product-manuals/guides/ba-studio/2.6.0/window-selector-use.md"
+    ];
 
     private readonly IEmbeddingService _embeddings;
     private readonly IVectorStore _vectorStore;
@@ -56,11 +79,42 @@ public sealed class ChatOrchestrator : IChatOrchestrator
 
         yield return ChatStreamEvent.Status("질문 의도를 분석하는 중...");
         var intent = _intentResolver.Resolve(request.Question);
+        intent = ApplyQuestionTypeOverride(request.Question, request.QuestionType, intent);
         yield return ChatStreamEvent.Status(
-            $"의도 분석: intent={intent.Intent}, group={intent.PreferredGroup ?? "-"}, activity={intent.ActivityNameHint ?? "-"}");
+            $"의도 분석: type={request.QuestionType}, intent={intent.Intent}, group={intent.PreferredGroup ?? "-"}, activity={intent.ActivityNameHint ?? "-"}");
         var conversationId = string.IsNullOrWhiteSpace(request.ConversationId) ? "default" : request.ConversationId;
         ConversationGroundings.TryGetValue(conversationId, out var previousGrounding);
         var followUpKind = ResolveFollowUpKind(request.Question);
+        if (request.QuestionType == ChatQuestionType.General)
+        {
+            if (request.AllowWebSearch)
+            {
+                yield return ChatStreamEvent.Status("일반 질문 웹 검색 중...");
+                var webResult = _webSearch is null
+                    ? new WebSearchResult(request.Question, "", [], IsConnected: false, "웹 검색 서비스가 설정되어 있지 않습니다.")
+                    : await _webSearch.SearchAsync(request.Question, cancellationToken);
+
+                if (webResult.IsConnected && (!string.IsNullOrWhiteSpace(webResult.Summary) || webResult.Items.Count > 0))
+                {
+                    yield return ChatStreamEvent.Status("웹 검색 기반 답변 생성");
+                    yield return ChatStreamEvent.Token(BuildWebSearchAnswer(webResult));
+                    yield return ChatStreamEvent.Completed();
+                    yield break;
+                }
+
+                yield return ChatStreamEvent.Status("웹 검색 실패 또는 결과 없음");
+            }
+
+            yield return ChatStreamEvent.Status("일반 질문 답변 생성");
+            await foreach (var token in _llm.StreamAsync(BuildGeneralQuestionPrompt(request.Question), cancellationToken))
+            {
+                yield return ChatStreamEvent.Token(token);
+            }
+
+            yield return ChatStreamEvent.Completed();
+            yield break;
+        }
+
         if (IsOutOfScopeQuestion(request.Question, intent, followUpKind, previousGrounding))
         {
             if (request.AllowWebSearch)
@@ -118,20 +172,47 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         var activityHint = followUpKind == FollowUpKind.Comparison
             ? null
             : intent.ActivityNameHint ?? (preferredSource is not null ? effectivePreviousGrounding?.ActivityName : null);
+        var searchQuery = string.IsNullOrWhiteSpace(intent.RewrittenQuery)
+            ? contextualQuestion
+            : BuildSearchQuery(contextualQuestion, intent.RewrittenQuery);
         if (!string.Equals(contextualQuestion, request.Question, StringComparison.Ordinal))
         {
             yield return ChatStreamEvent.Status($"대화 문맥 적용: {contextualQuestion}");
+        }
+        if (!string.Equals(searchQuery, contextualQuestion, StringComparison.Ordinal))
+        {
+            yield return ChatStreamEvent.Status($"검색어 재작성: {searchQuery}");
         }
         if (preferredSource is not null)
         {
             yield return ChatStreamEvent.Status($"이전 근거 우선: {preferredSource}");
         }
+        if (intent.PreferredSourceHint is not null)
+        {
+            yield return ChatStreamEvent.Status($"추천 후보 힌트: {intent.PreferredSourceHint}");
+        }
 
         yield return ChatStreamEvent.Status("매뉴얼을 검색하는 중...");
-        var embedding = _embeddings.Embed(contextualQuestion);
-        var topK = followUpKind == FollowUpKind.Comparison ? Math.Max(request.TopK, 24) : request.TopK;
+        var embedding = _embeddings.Embed(searchQuery);
+        var topK = intent.Intent == UserIntent.ProductGuide
+            ? Math.Max(request.TopK, 30)
+            : followUpKind == FollowUpKind.Comparison ? Math.Max(request.TopK, 24) : request.TopK;
+        var sourceTypes = ResolveSourceTypes(intent);
+        yield return ChatStreamEvent.Status($"검색 범위: {FormatSourceTypes(sourceTypes)}");
         var chunks = await _vectorStore.SearchAsync(
-            new SearchRequest(contextualQuestion, embedding, topK, request.MinScore, preferredGroup, activityHint, preferredSource),
+            new SearchRequest(
+                searchQuery,
+                embedding,
+                topK,
+                request.MinScore,
+                preferredGroup,
+                activityHint,
+                preferredSource,
+                request.Question,
+                intent.RequiredGroup,
+                intent.PreferredSourceHint,
+                intent.ActionConceptHints,
+                sourceTypes),
             cancellationToken);
         yield return ChatStreamEvent.Status(BuildSearchStatus(chunks));
 
@@ -143,8 +224,19 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             yield break;
         }
 
+        chunks = await AddProductGuideSourcesAsync(intent, chunks, cancellationToken);
         chunks = await AddCompanionSourcesAsync(request.Question, followUpKind, chunks, cancellationToken);
         chunks = await EnrichSourceChunksAsync(chunks, cancellationToken);
+
+        var productGuideAnswer = TryBuildProductGuideAnswer(request.Question, intent, chunks);
+        if (productGuideAnswer is not null)
+        {
+            RememberGrounding(conversationId, chunks);
+            yield return ChatStreamEvent.Status("제품 매뉴얼 답변 생성");
+            yield return ChatStreamEvent.Token(productGuideAnswer);
+            yield return ChatStreamEvent.Completed();
+            yield break;
+        }
 
         var followUpAnswer = TryBuildFollowUpAnswer(request.Question, followUpKind, effectivePreviousGrounding, chunks);
         if (followUpAnswer is not null)
@@ -242,7 +334,68 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             "저장", "불러", "답변 수정", "가이드", "사용법", "설정", "모델"
         };
 
-        return guideTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase));
+        var productTerms = new[] { "BA-Studio", "BA Studio", "스튜디오", "BA-Assist", "BA Assist", "어시스트", "BA-Server", "BA-Worker" };
+        return guideTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase)) ||
+               productTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static IReadOnlyList<string> ResolveSourceTypes(DomainIntent intent)
+    {
+        return intent.Intent == UserIntent.ProductGuide
+            ? ["product_guide", "product_manual"]
+            : ["activity_manual", "qa_correction"];
+    }
+
+    private static DomainIntent ApplyQuestionTypeOverride(string question, ChatQuestionType questionType, DomainIntent intent)
+    {
+        return questionType switch
+        {
+            ChatQuestionType.ActivityTask when intent.Intent == UserIntent.ProductGuide => new DomainIntent(
+                PreferredGroup: null,
+                ActivityNameHint: null,
+                Intent: UserIntent.ActivityLookup,
+                Signals: [],
+                RewrittenQuery: question,
+                RequiredGroup: null,
+                PreferredSourceHint: null,
+                ActionConceptHints: []),
+            ChatQuestionType.BAStudioGuide => BuildProductGuideIntent(question, "BA-Studio", null),
+            ChatQuestionType.BAAssistGuide => BuildProductGuideIntent(question, "BA-Assist", ResolveBAAssistGuideSource(question)),
+            ChatQuestionType.General => new DomainIntent(null, null, UserIntent.OutOfScope, [], question),
+            ChatQuestionType.Auto => intent,
+            _ => intent
+        };
+    }
+
+    private static DomainIntent BuildProductGuideIntent(string question, string product, string? source)
+    {
+        return new DomainIntent(
+            PreferredGroup: null,
+            ActivityNameHint: null,
+            Intent: UserIntent.ProductGuide,
+            Signals: ["ProductManual", product],
+            RewrittenQuery: $"{question} {product} 제품 매뉴얼 사용자 매뉴얼",
+            RequiredGroup: null,
+            PreferredSourceHint: source,
+            ActionConceptHints: []);
+    }
+
+    private static string ResolveBAAssistGuideSource(string question)
+    {
+        return question.Contains("BA-Server", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Server", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA-Worker", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Worker", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("Queue", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("Sequential", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("logs.db", StringComparison.OrdinalIgnoreCase)
+            ? "docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md"
+            : "docs/product-manuals/normalized/ba-assist/2.5.0.md";
+    }
+
+    private static string FormatSourceTypes(IReadOnlyList<string> sourceTypes)
+    {
+        return string.Join(", ", sourceTypes);
     }
 
     private static string BuildGeneralQuestionPrompt(string question)
@@ -285,6 +438,17 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         return sb.ToString().TrimEnd();
     }
 
+    private static string BuildSearchQuery(string contextualQuestion, string rewrittenQuery)
+    {
+        if (string.IsNullOrWhiteSpace(rewrittenQuery) ||
+            string.Equals(contextualQuestion, rewrittenQuery, StringComparison.Ordinal))
+        {
+            return contextualQuestion;
+        }
+
+        return $"{contextualQuestion} {rewrittenQuery}";
+    }
+
     private async Task<IReadOnlyList<RetrievedChunk>> EnrichSourceChunksAsync(
         IReadOnlyList<RetrievedChunk> chunks,
         CancellationToken cancellationToken)
@@ -305,6 +469,107 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         }
 
         return results;
+    }
+
+    private async Task<IReadOnlyList<RetrievedChunk>> AddProductGuideSourcesAsync(
+        DomainIntent intent,
+        IReadOnlyList<RetrievedChunk> chunks,
+        CancellationToken cancellationToken)
+    {
+        if (intent.Intent != UserIntent.ProductGuide ||
+            !intent.Signals.Any(signal => string.Equals(signal, "BA-Studio", StringComparison.OrdinalIgnoreCase)))
+        {
+            return chunks;
+        }
+
+        var results = new List<RetrievedChunk>(chunks);
+        var resultIds = results.Select(c => c.Id).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        foreach (var source in BAStudioGuideSources)
+        {
+            var sourceChunks = await _vectorStore.GetChunksBySourceAsync(source, cancellationToken);
+            if (sourceChunks.Count == 0)
+            {
+                sourceChunks = LoadGuideChunkFromFile(source);
+            }
+
+            foreach (var chunk in sourceChunks)
+            {
+                if (resultIds.Add(chunk.Id))
+                {
+                    results.Add(chunk);
+                }
+            }
+        }
+
+        return results;
+    }
+
+    private static IReadOnlyList<RetrievedChunk> LoadGuideChunkFromFile(string source)
+    {
+        var root = FindRepoRoot();
+        var path = Path.Combine(root, source.Replace('/', Path.DirectorySeparatorChar));
+        if (!File.Exists(path))
+        {
+            return [];
+        }
+
+        var text = File.ReadAllText(path);
+        var title = Regex.Match(text, @"^#\s+(.+)$", RegexOptions.Multiline).Groups[1].Value.Trim();
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            title = Path.GetFileNameWithoutExtension(path);
+        }
+
+        var product = ExtractGuideMetadataValue(text, "Product") ?? "BA-Studio";
+        var version = ExtractGuideMetadataValue(text, "Version") ?? "2.6.0";
+        var topic = ExtractGuideMetadataValue(text, "Topic") ?? Path.GetFileNameWithoutExtension(path);
+        var content = $"""
+        Product: {product}
+        Version: {version}
+        Topic: {topic}
+        Source: {source}
+
+        {text.Trim()}
+        """;
+
+        return
+        [
+            new RetrievedChunk(
+                Id: $"guide-file:{source}",
+                Source: source,
+                GroupName: product,
+                ActivityName: null,
+                Title: title,
+                SectionPath: title,
+                ChunkType: "product_guide",
+                Content: content,
+                VectorScore: 0,
+                KeywordScore: 0,
+                FinalScore: 0,
+                SourceType: "product_guide")
+        ];
+    }
+
+    private static string FindRepoRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null)
+        {
+            if (File.Exists(Path.Combine(dir.FullName, "commands.json")))
+            {
+                return dir.FullName;
+            }
+
+            dir = dir.Parent;
+        }
+
+        return Directory.GetCurrentDirectory();
+    }
+
+    private static string? ExtractGuideMetadataValue(string text, string name)
+    {
+        var match = Regex.Match(text, $@"^(?:-\s*)?{Regex.Escape(name)}:\s*(?<value>.+?)\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        return match.Success ? match.Groups["value"].Value.Trim() : null;
     }
 
     private async Task<IReadOnlyList<RetrievedChunk>> AddCompanionSourcesAsync(
@@ -826,10 +1091,475 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         return correction.Correction.CorrectedAnswer;
     }
 
+    private static string? TryBuildProductGuideAnswer(string question, DomainIntent intent, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        if (intent.Intent != UserIntent.ProductGuide)
+        {
+            return null;
+        }
+
+        var includeSourceSupplement = LooksLikeSourceSupplementQuestion(question);
+        var guideAnswer = TryBuildProductGuideDocumentAnswer(question, chunks);
+        if (guideAnswer is not null)
+        {
+            return guideAnswer;
+        }
+
+        var related = chunks
+            .Where(c => string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
+            .GroupBy(c => c.SectionPath, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.OrderByDescending(c => c.FinalScore).First())
+            .Where(c => includeSourceSupplement || !IsSourceSupplementSection(c))
+            .OrderByDescending(c => ScoreProductGuideSection(question, c, includeSourceSupplement))
+            .ThenByDescending(c => c.FinalScore)
+            .Take(3)
+            .ToArray();
+        if (related.Length == 0)
+        {
+            related = chunks
+                .Where(c => string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
+                .GroupBy(c => c.SectionPath, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderByDescending(c => c.FinalScore).First())
+                .OrderByDescending(c => ScoreProductGuideSection(question, c, includeSourceSupplement: true))
+                .ThenByDescending(c => c.FinalScore)
+                .Take(3)
+                .ToArray();
+            if (related.Length == 0)
+            {
+                return null;
+            }
+        }
+
+        var best = related[0];
+        var directProcedure = TryBuildProductProcedureAnswer(question, best, related);
+        if (directProcedure is not null)
+        {
+            return directProcedure;
+        }
+
+        var sb = new StringBuilder();
+        sb.AppendLine($"{best.GroupName} 제품 매뉴얼 기준으로 보면:");
+        foreach (var chunk in related)
+        {
+            var summary = BuildProductSectionSummary(chunk.Content);
+            if (string.IsNullOrWhiteSpace(summary))
+            {
+                continue;
+            }
+
+            sb.AppendLine($"- {FormatProductSectionPath(chunk.SectionPath)}: {summary}");
+        }
+
+        var imageRefs = related
+            .SelectMany(c => ExtractMarkdownImages(c.Content))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(3)
+            .ToArray();
+        if (imageRefs.Length > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("관련 화면:");
+            foreach (var image in imageRefs)
+            {
+                sb.AppendLine($"- {image}");
+            }
+        }
+
+        var details = new StringBuilder();
+        details.AppendLine($"source: {best.Source}");
+        details.AppendLine();
+        details.AppendLine("[근거]");
+        foreach (var c in related.Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
+        {
+            details.AppendLine($"- {c}");
+        }
+
+        details.AppendLine();
+        details.AppendLine("[원문]");
+        foreach (var c in related)
+        {
+            details.AppendLine($"## {c.Source} / {c.SectionPath}");
+            details.AppendLine(c.Content.Trim());
+            details.AppendLine();
+        }
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static string? TryBuildProductGuideDocumentAnswer(string question, IReadOnlyList<RetrievedChunk> chunks)
+    {
+        var guide = chunks
+            .Where(c => string.Equals(c.SourceType, "product_guide", StringComparison.OrdinalIgnoreCase))
+            .OrderByDescending(c => ScoreProductGuideDocument(question, c))
+            .FirstOrDefault();
+        if (guide is null)
+        {
+            return null;
+        }
+
+        var shortAnswer = ExtractMarkdownSection(guide.Content, "Short Answer");
+        var steps = ExtractMarkdownSection(guide.Content, "Steps");
+        var notes = ExtractMarkdownSection(guide.Content, "Notes");
+        var exampleAnswer = ExtractMarkdownSection(guide.Content, "Example Answer");
+        if (string.IsNullOrWhiteSpace(shortAnswer) && string.IsNullOrWhiteSpace(steps) && string.IsNullOrWhiteSpace(exampleAnswer))
+        {
+            return null;
+        }
+
+        var sb = new StringBuilder();
+        if (!string.IsNullOrWhiteSpace(shortAnswer))
+        {
+            sb.AppendLine(shortAnswer.Trim());
+        }
+
+        if (!string.IsNullOrWhiteSpace(steps))
+        {
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+
+            sb.AppendLine("절차:");
+            foreach (var line in NormalizeGuideListLines(steps).Take(8))
+            {
+                sb.AppendLine(line);
+            }
+        }
+        else if (!string.IsNullOrWhiteSpace(exampleAnswer))
+        {
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+
+            sb.AppendLine(exampleAnswer.Trim());
+        }
+
+        var noteLines = NormalizeGuideListLines(notes)
+            .Where(line => !line.Contains(".cs", StringComparison.OrdinalIgnoreCase))
+            .Take(4)
+            .ToArray();
+        if (noteLines.Length > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("참고:");
+            foreach (var line in noteLines)
+            {
+                sb.AppendLine(line);
+            }
+        }
+
+        var related = chunks
+            .Where(c => string.Equals(c.Source, guide.Source, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
+            .Take(4)
+            .ToArray();
+
+        var details = new StringBuilder();
+        details.AppendLine($"source: {guide.Source}");
+        details.AppendLine();
+        details.AppendLine("[근거]");
+        details.AppendLine($"- {guide.Source} / {guide.SectionPath}");
+        foreach (var c in related.Where(c => !string.Equals(c.Source, guide.Source, StringComparison.OrdinalIgnoreCase)).Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
+        {
+            details.AppendLine($"- {c}");
+        }
+
+        details.AppendLine();
+        details.AppendLine("[원문]");
+        details.AppendLine($"## {guide.Source} / {guide.SectionPath}");
+        details.AppendLine(guide.Content.Trim());
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static string? TryBuildProductProcedureAnswer(string question, RetrievedChunk best, IReadOnlyList<RetrievedChunk> related)
+    {
+        if (!LooksLikeProjectCreationQuestion(question, best))
+        {
+            return null;
+        }
+
+        var source = related.FirstOrDefault(c => c.Content.Contains("File > New > New Project", StringComparison.OrdinalIgnoreCase)) ?? best;
+        var evidence = new[] { source };
+        var sb = new StringBuilder();
+        sb.AppendLine($"{source.GroupName}에서 프로젝트를 생성하는 기본 절차는 다음과 같습니다.");
+        sb.AppendLine();
+        sb.AppendLine("1. 시작 페이지의 `New Project`를 선택하거나, 메인 메뉴에서 `File > New > New Project`를 선택합니다.");
+        sb.AppendLine("2. 프로젝트 이름과 저장 경로를 지정합니다.");
+        sb.AppendLine("3. 프로젝트가 생성되면 Project Tree에 기본 `Task1`이 만들어집니다.");
+        sb.AppendLine("4. 작업을 나누어 구성하려면 Project Tree에서 프로젝트를 우클릭한 뒤 `Add Task`로 태스크를 추가합니다.");
+        sb.AppendLine("5. 필요한 경우 각 Task를 우클릭해 `Rename`으로 이름을 바꾸고, 시작 지점으로 사용할 Task를 `Set Start Task`로 지정합니다.");
+        sb.AppendLine();
+        sb.AppendLine("프로젝트 생성 자체만 보면 1-2번이 핵심이고, 3번 이후는 생성된 프로젝트를 실제 자동화 작업으로 구성하는 단계입니다.");
+
+        var imageRefs = evidence
+            .SelectMany(c => ExtractMarkdownImages(c.Content))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .Take(2)
+            .ToArray();
+        if (imageRefs.Length > 0)
+        {
+            sb.AppendLine();
+            sb.AppendLine("관련 화면:");
+            foreach (var image in imageRefs)
+            {
+                sb.AppendLine($"- {image}");
+            }
+        }
+
+        var details = new StringBuilder();
+        details.AppendLine($"source: {source.Source}");
+        details.AppendLine();
+        details.AppendLine("[근거]");
+        foreach (var c in evidence.Select(c => $"{c.Source} / {c.SectionPath}").Distinct())
+        {
+            details.AppendLine($"- {c}");
+        }
+
+        details.AppendLine();
+        details.AppendLine("[원문]");
+        foreach (var c in evidence)
+        {
+            details.AppendLine($"## {c.Source} / {c.SectionPath}");
+            details.AppendLine(c.Content.Trim());
+            details.AppendLine();
+        }
+
+        return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static double ScoreProductGuideDocument(string question, RetrievedChunk chunk)
+    {
+        var queryTokens = Tokenize(question)
+            .Select(NormalizeGuideToken)
+            .Where(t => t.Length > 1)
+            .Where(t => !IsGuideStopToken(t))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        if (queryTokens.Length == 0)
+        {
+            return chunk.FinalScore;
+        }
+
+        var haystack = $"{chunk.Title} {chunk.SectionPath} {ExtractMarkdownSection(chunk.Content, "User Intent")} {ExtractMarkdownSection(chunk.Content, "Related Keywords")}";
+        haystack = NormalizeGuideToken(haystack);
+        var hits = queryTokens.Count(token => haystack.Contains(token, StringComparison.OrdinalIgnoreCase));
+        var coverage = (double)hits / queryTokens.Length;
+        var titleHits = queryTokens.Count(token => chunk.Title.Contains(token, StringComparison.OrdinalIgnoreCase));
+        return coverage * 3.0 + titleHits * 0.5 + ScoreGuideTopicConcept(question, chunk) + chunk.FinalScore * 0.03;
+    }
+
+    private static double ScoreGuideTopicConcept(string question, RetrievedChunk chunk)
+    {
+        var q = question.ToLowerInvariant();
+        var topic = $"{chunk.Source} {chunk.Title} {ExtractGuideMetadataValue(chunk.Content, "Topic")}".ToLowerInvariant();
+        var concepts = new (string[] QueryTerms, string[] TopicTerms)[]
+        {
+            (["디버그", "디버깅", "debug"], ["debug"]),
+            (["중단점", "breakpoint", "break point"], ["breakpoint"]),
+            (["라이브러리", "library"], ["library"]),
+            (["프로젝트", "project"], ["project"]),
+            (["태스크", "task"], ["task"]),
+            (["변수", "variable"], ["variable"]),
+            (["이미지", "image", "캡처", "capture"], ["image"]),
+            (["셀렉터", "selector"], ["selector"]),
+            (["패키지", "package", "내보내"], ["package", "export"]),
+            (["속성", "property", "properties"], ["properties"]),
+            (["리소스", "resource"], ["resource"])
+        };
+
+        var score = 0.0;
+        foreach (var (queryTerms, topicTerms) in concepts)
+        {
+            if (queryTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase)) &&
+                topicTerms.Any(term => topic.Contains(term, StringComparison.OrdinalIgnoreCase)))
+            {
+                score += 1.4;
+            }
+        }
+
+        return score;
+    }
+
+    private static string NormalizeGuideToken(string value)
+    {
+        var normalized = value.ToLowerInvariant();
+        var endings = new[] { "시켜주는", "시키는", "하려고", "되는", "하는", "한다", "하기", "하려", "된", "할" };
+        foreach (var ending in endings)
+        {
+            normalized = Regex.Replace(normalized, $"{Regex.Escape(ending)}(?=\\s|$)", "", RegexOptions.CultureInvariant);
+        }
+
+        var particles = new[] { "으로부터", "로부터", "에서는", "에서", "에게", "으로", "로", "의", "을", "를", "은", "는", "이", "가", "에" };
+        foreach (var particle in particles)
+        {
+            normalized = Regex.Replace(normalized, $"{Regex.Escape(particle)}(?=\\s|$)", "", RegexOptions.CultureInvariant);
+        }
+
+        return normalized.Trim();
+    }
+
+    private static bool IsGuideStopToken(string token)
+    {
+        return token is "방법" or "사용법" or "알려줘" or "어떻게" or "제품" or "매뉴얼" or "사용자" or "ba" or "studio";
+    }
+
+    private static string ExtractMarkdownSection(string content, string heading)
+    {
+        var match = Regex.Match(
+            content,
+            $@"^##\s+{Regex.Escape(heading)}\s*$\r?\n(?<content>.*?)(?=^##\s+|\z)",
+            RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+        return match.Success ? match.Groups["content"].Value.Trim() : string.Empty;
+    }
+
+    private static IEnumerable<string> NormalizeGuideListLines(string content)
+    {
+        foreach (var raw in content.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+        {
+            var line = raw.Trim();
+            if (line.Length == 0)
+            {
+                continue;
+            }
+
+            if (Regex.IsMatch(line, @"^\d+\.\s+"))
+            {
+                yield return line;
+                continue;
+            }
+
+            var bullet = Regex.Replace(line, @"^[-*]\s+", "- ");
+            yield return bullet.StartsWith("- ", StringComparison.Ordinal) ? bullet : $"- {bullet}";
+        }
+    }
+
+    private static string BuildProductSectionSummary(string content)
+    {
+        var lines = content
+            .Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Where(line => !line.StartsWith("Product:", StringComparison.OrdinalIgnoreCase))
+            .Where(line => !line.StartsWith("Version:", StringComparison.OrdinalIgnoreCase))
+            .Where(line => !line.StartsWith("Section:", StringComparison.OrdinalIgnoreCase))
+            .Where(line => !line.StartsWith("![", StringComparison.Ordinal))
+            .Where(line => !line.StartsWith("|", StringComparison.Ordinal))
+            .Where(line => !line.Contains(".cs", StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+        var text = string.Join(" ", lines).Trim();
+        if (text.Length <= 260)
+        {
+            return text;
+        }
+
+        var boundary = text.LastIndexOfAny(['.', '?', '!'], Math.Min(text.Length - 1, 260));
+        return text[..(boundary > 80 ? boundary + 1 : 260)].Trim();
+    }
+
+    private static double ScoreProductGuideSection(string question, RetrievedChunk chunk, bool includeSourceSupplement)
+    {
+        var queryTokens = Tokenize(question)
+            .Where(t => t.Length > 1)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray();
+        if (queryTokens.Length == 0)
+        {
+            return chunk.FinalScore;
+        }
+
+        var haystack = $"{chunk.SectionPath} {chunk.Content}";
+        var hits = queryTokens.Count(token => haystack.Contains(token, StringComparison.OrdinalIgnoreCase));
+        var score = (double)hits / queryTokens.Length + chunk.FinalScore * 0.05;
+
+        if (IsSourceSupplementSection(chunk))
+        {
+            score += includeSourceSupplement ? 0.15 : -0.4;
+        }
+
+        var section = chunk.SectionPath;
+        if (LooksLikeProjectCreationQuestion(question, chunk))
+        {
+            if (section.Contains("Project 구현하기", StringComparison.OrdinalIgnoreCase))
+            {
+                score += 0.45;
+            }
+
+            if (chunk.Content.Contains("File > New > New Project", StringComparison.OrdinalIgnoreCase) ||
+                chunk.Content.Contains("New Project", StringComparison.OrdinalIgnoreCase))
+            {
+                score += 0.35;
+            }
+        }
+
+        if (section.Contains("목차", StringComparison.OrdinalIgnoreCase))
+        {
+            score -= 0.35;
+        }
+
+        return score;
+    }
+
+    private static bool LooksLikeProjectCreationQuestion(string question, RetrievedChunk chunk)
+    {
+        var q = question.ToLowerInvariant();
+        var asksProject = q.Contains("프로젝트", StringComparison.OrdinalIgnoreCase) ||
+                          q.Contains("project", StringComparison.OrdinalIgnoreCase);
+        var asksCreation = q.Contains("생성", StringComparison.OrdinalIgnoreCase) ||
+                           q.Contains("만들", StringComparison.OrdinalIgnoreCase) ||
+                           q.Contains("create", StringComparison.OrdinalIgnoreCase) ||
+                           q.Contains("new project", StringComparison.OrdinalIgnoreCase);
+        return asksProject && asksCreation;
+    }
+
+    private static bool LooksLikeSourceSupplementQuestion(string question)
+    {
+        var q = question.ToLowerInvariant();
+        var sourceDetailTerms = new[]
+        {
+            "파일", "폴더", "경로", "저장", "로드", "불러", "설정값", "config", "json",
+            "생성되", "만들어지", "위치", "구조", "다중 인스턴스", "parallel", "queue"
+        };
+        return sourceDetailTerms.Any(term => q.Contains(term, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static bool IsSourceSupplementSection(RetrievedChunk chunk)
+    {
+        return chunk.SectionPath.Contains("Source Code Supplement", StringComparison.OrdinalIgnoreCase) ||
+               chunk.SectionPath.Contains("Source-Confirmed", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string FormatProductSectionPath(string sectionPath)
+    {
+        return sectionPath
+            .Replace("Source Code Supplement > ", "", StringComparison.OrdinalIgnoreCase)
+            .Replace("Source-Confirmed ", "", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static IEnumerable<string> ExtractMarkdownImages(string content)
+    {
+        foreach (Match match in Regex.Matches(content, @"!\[(?<alt>[^\]]*)\]\((?<path>[^)]+)\)"))
+        {
+            var alt = match.Groups["alt"].Value.Trim();
+            var path = match.Groups["path"].Value.Trim();
+            yield return string.IsNullOrWhiteSpace(alt) ? path : $"{alt} ({path})";
+        }
+    }
+
     private static string? TryBuildDirectAnswer(string question, DomainIntent intent, IReadOnlyList<RetrievedChunk> chunks)
     {
+        if (intent.Intent == UserIntent.ProductGuide)
+        {
+            return null;
+        }
+
         var best = SelectBestAnswerChunk(chunks);
+        var recommendationSupported =
+            intent.Intent == UserIntent.ActivityRecommendation &&
+            (intent.PreferredSourceHint is not null && chunks.Any(c => string.Equals(c.Source, intent.PreferredSourceHint, StringComparison.OrdinalIgnoreCase)) ||
+             intent.ActionConceptHints is { Count: > 0 } && string.Equals(best.GroupName, intent.PreferredGroup, StringComparison.OrdinalIgnoreCase) ||
+             intent.RequiredGroup is not null && string.Equals(best.GroupName, intent.RequiredGroup, StringComparison.OrdinalIgnoreCase));
         var direct = intent.Intent is UserIntent.ActivityLookup or UserIntent.HowTo ||
+                     recommendationSupported ||
                      question.Contains("액티비티", StringComparison.OrdinalIgnoreCase) ||
                      question.Contains("속성", StringComparison.OrdinalIgnoreCase) ||
                      question.Contains("기본값", StringComparison.OrdinalIgnoreCase) ||

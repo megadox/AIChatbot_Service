@@ -38,12 +38,13 @@ public sealed class SqliteVectorStore : IVectorStore
 
         await using var connection = new SqliteConnection($"Data Source={_dbPath};Mode=ReadOnly");
         await connection.OpenAsync(cancellationToken);
+        var hasSourceType = await ColumnExistsAsync(connection, "kb_chunks", "source_type", cancellationToken);
         var aliasMatches = await FindAliasMatchesAsync(connection, request.Query, cancellationToken);
 
         await using var command = connection.CreateCommand();
-        command.CommandText = """
+        command.CommandText = $"""
             SELECT c.id, c.source, c.group_name, c.activity_name, c.title, c.section_path, c.chunk_type,
-                   c.content, e.vector_blob
+                   c.content, e.vector_blob, {(hasSourceType ? "c.source_type" : "'activity_manual'")} AS source_type
             FROM kb_chunks c
             JOIN kb_embeddings e ON e.chunk_id = c.id
             """;
@@ -58,21 +59,40 @@ public sealed class SqliteVectorStore : IVectorStore
             var title = reader.GetString(4);
             var section = reader.GetString(5);
             var chunkType = reader.GetString(6);
+            var sourceType = reader.GetString(9);
+
+            if (request.SourceTypes is { Count: > 0 } &&
+                !request.SourceTypes.Any(t => string.Equals(t, sourceType, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            if (request.RequiredGroup is not null &&
+                !string.Equals(group, request.RequiredGroup, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
 
             var keyword = ScoreKeyword(tokens, source, group, activity, title, section, content);
             var vector = ReadVector((byte[])reader["vector_blob"]);
             var vectorScore = Dot(request.QueryEmbedding, vector);
             var domainBoost = request.PreferredGroup is not null && string.Equals(group, request.PreferredGroup, StringComparison.OrdinalIgnoreCase) ? 0.35 : 0;
+            var domainPenalty = request.PreferredGroup is not null && !string.Equals(group, request.PreferredGroup, StringComparison.OrdinalIgnoreCase) ? -0.45 : 0;
             var activityBoost = request.ActivityNameHint is not null && string.Equals(activity, request.ActivityNameHint, StringComparison.OrdinalIgnoreCase) ? 0.08 : 0;
             var sourceBoost = request.PreferredSource is not null && string.Equals(source, request.PreferredSource, StringComparison.OrdinalIgnoreCase) ? 0.55 : 0;
+            var targetSourceBoost = request.TargetSourceHint is not null && string.Equals(source, request.TargetSourceHint, StringComparison.OrdinalIgnoreCase) ? 1.15 : 0;
             var exactSummaryBoost = IsExactSummaryMatch(request.Query, chunkType, content) ? 0.45 : 0;
             var activityNameBoost = !string.IsNullOrWhiteSpace(activity) && ContainsActivityName(request.Query, activity) ? 0.18 : 0;
             var aliasBoost = aliasMatches.TryGetValue(source, out var aliasScore)
                 ? 0.45 + aliasScore * 1.1
                 : 0;
             var summaryBoost = string.Equals(chunkType, "summary", StringComparison.OrdinalIgnoreCase) ? 0.12 : 0;
+            var isProductGuide = string.Equals(sourceType, "product_guide", StringComparison.OrdinalIgnoreCase);
+            var productGuideBoost = isProductGuide ? 0.45 : 0;
+            var productGuideKeywordBoost = isProductGuide ? keyword * 1.4 : 0;
             var actionBoost = ScoreActionConcept(request.Query, source, activity, title, content);
-            var final = vectorScore * 0.55 + keyword * 0.25 + domainBoost + activityBoost + sourceBoost + exactSummaryBoost + activityNameBoost + aliasBoost + summaryBoost + actionBoost;
+            var actionHintBoost = ScoreActionHint(request.ActionConceptHints, source, activity, title, content);
+            var final = vectorScore * 0.55 + keyword * 0.25 + domainBoost + domainPenalty + activityBoost + sourceBoost + targetSourceBoost + exactSummaryBoost + activityNameBoost + aliasBoost + summaryBoost + productGuideBoost + productGuideKeywordBoost + actionBoost + actionHintBoost;
 
             candidates.Add(new Candidate(
                 new RetrievedChunk(
@@ -86,7 +106,8 @@ public sealed class SqliteVectorStore : IVectorStore
                     content,
                     vectorScore,
                     keyword,
-                    final),
+                    final,
+                    sourceType),
                 vector));
         }
 
@@ -108,9 +129,11 @@ public sealed class SqliteVectorStore : IVectorStore
         var chunks = new List<RetrievedChunk>();
         await using var connection = new SqliteConnection($"Data Source={_dbPath};Mode=ReadOnly");
         await connection.OpenAsync(cancellationToken);
+        var hasSourceType = await ColumnExistsAsync(connection, "kb_chunks", "source_type", cancellationToken);
         await using var command = connection.CreateCommand();
-        command.CommandText = """
-            SELECT id, source, group_name, activity_name, title, section_path, chunk_type, content
+        command.CommandText = $"""
+            SELECT id, source, group_name, activity_name, title, section_path, chunk_type, content,
+                   {(hasSourceType ? "source_type" : "'activity_manual'")} AS source_type
             FROM kb_chunks
             WHERE source = $source
             """;
@@ -130,7 +153,8 @@ public sealed class SqliteVectorStore : IVectorStore
                 reader.GetString(7),
                 VectorScore: 0,
                 KeywordScore: 0,
-                FinalScore: 0));
+                FinalScore: 0,
+                SourceType: reader.GetString(8)));
         }
 
         return chunks
@@ -143,6 +167,7 @@ public sealed class SqliteVectorStore : IVectorStore
     {
         var rankedPool = candidates
             .OrderByDescending(c => c.Chunk.FinalScore)
+            .ThenByDescending(c => c.Chunk.SourceType == "product_guide" ? 1 : 0)
             .ThenByDescending(c => c.Chunk.ChunkType == "summary" ? 1 : 0)
             .ThenBy(c => c.Chunk.Source, StringComparer.OrdinalIgnoreCase)
             .Take(80)
@@ -151,6 +176,7 @@ public sealed class SqliteVectorStore : IVectorStore
             .GroupBy(c => c.Chunk.Source, StringComparer.OrdinalIgnoreCase)
             .Select(g => g
                 .OrderByDescending(c => c.Chunk.FinalScore)
+                .ThenByDescending(c => c.Chunk.SourceType == "product_guide" ? 1 : 0)
                 .ThenByDescending(c => c.Chunk.ChunkType == "summary" ? 1 : 0)
                 .First())
             .ToList();
@@ -171,6 +197,7 @@ public sealed class SqliteVectorStore : IVectorStore
                         var duplicatePenalty = selected.Max(s => Dot(c.Vector, s.Vector));
                         return 0.7 * c.Chunk.FinalScore - 0.3 * duplicatePenalty;
                     })
+                    .ThenByDescending(c => c.Chunk.SourceType == "product_guide" ? 1 : 0)
                     .ThenByDescending(c => c.Chunk.ChunkType == "summary" ? 1 : 0)
                     .ThenBy(c => c.Chunk.Source, StringComparer.OrdinalIgnoreCase)
                     .First();
@@ -185,6 +212,7 @@ public sealed class SqliteVectorStore : IVectorStore
 
     private static int ChunkTypeOrder(string chunkType) => chunkType switch
     {
+        "product_guide" => 0,
         "summary" => 0,
         "metadata" => 1,
         "properties" => 2,
@@ -301,6 +329,22 @@ public sealed class SqliteVectorStore : IVectorStore
         return result is not null;
     }
 
+    private static async Task<bool> ColumnExistsAsync(SqliteConnection connection, string tableName, string columnName, CancellationToken cancellationToken)
+    {
+        await using var command = connection.CreateCommand();
+        command.CommandText = $"PRAGMA table_info({tableName})";
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            if (string.Equals(reader.GetString(1), columnName, StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static double ScoreKeyword(string[] tokens, params string?[] fields)
     {
         if (tokens.Length == 0)
@@ -352,6 +396,10 @@ public sealed class SqliteVectorStore : IVectorStore
             "최소화" or "minimize" => ["최소화", "minimize"],
             "최대화" or "maximize" => ["최대화", "maximize"],
             "삭제" or "delete" or "remove" or "clear" => ["삭제", "delete", "remove", "clear"],
+            "오픈" or "open" or "열기" or "열" => ["오픈", "open", "열기", "열"],
+            "이동" or "접속" or "navigate" => ["이동", "접속", "navigate", "url"],
+            "새로고침" or "reload" or "refresh" => ["새로고침", "reload", "refresh"],
+            "최대값" or "max" or "maximum" => ["최대값", "max", "maximum"],
             "동시" or "병렬" or "스레드" or "멀티스레드" or "thread" or "multithread" or "parallel" => ["동시", "병렬", "스레드", "멀티스레드", "thread", "multithread", "parallel"],
             _ => []
         };
@@ -404,6 +452,33 @@ public sealed class SqliteVectorStore : IVectorStore
         return 0;
     }
 
+    private static double ScoreActionHint(IReadOnlyList<string>? hints, params string?[] fields)
+    {
+        if (hints is null || hints.Count == 0)
+        {
+            return 0;
+        }
+
+        var hintTokens = hints
+            .SelectMany(Tokenize)
+            .SelectMany(ExpandSearchToken)
+            .Where(t => !IsSearchStopToken(t))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        if (hintTokens.Count == 0)
+        {
+            return 0;
+        }
+
+        var fieldTokens = fields
+            .Where(f => !string.IsNullOrWhiteSpace(f))
+            .SelectMany(f => Tokenize(f!))
+            .SelectMany(ExpandSearchToken)
+            .Where(t => !IsSearchStopToken(t))
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var hits = hintTokens.Count(fieldTokens.Contains);
+        return hits == 0 ? 0 : Math.Min(0.55, hits * 0.09);
+    }
+
     private static readonly ActionConcept[] ActionConcepts =
     [
         new(["최소화", "minimize"]),
@@ -412,6 +487,10 @@ public sealed class SqliteVectorStore : IVectorStore
         new(["숨김", "숨기", "hide"]),
         new(["실행", "execute", "run"]),
         new(["삭제", "delete", "remove", "clear"]),
+        new(["오픈", "open", "열기", "열"]),
+        new(["이동", "접속", "navigate", "url"]),
+        new(["새로고침", "reload", "refresh"]),
+        new(["최대값", "max", "maximum"]),
         new(["동시", "병렬", "스레드", "멀티스레드", "thread", "multithread", "parallel"]),
         new(["클릭", "click"]),
         new(["더블클릭", "doubleclick"])

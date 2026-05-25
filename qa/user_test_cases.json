@@ -178,5 +178,83 @@
         "domain": "COMMON",
         "question": "로그 메시지를 특정 파일에 저장하는 액티비티는?",
         "expectedSource": "COMMON/LogWrite.md"
+    },
+    {
+        "id": "scenario-case-001",
+        "domain": "WEB",
+        "question": "naver.com에서 daum.net으로 이동하고 싶다. 이때 사용하는 것은?",
+        "expectedSource": "WEB/Navigate.md"
+    },
+    {
+        "id": "scenario-case-002",
+        "domain": "WEB",
+        "question": "현재 웹 페이지를 다시 불러오고 싶다",
+        "expectedSource": "WEB/Refresh.md"
+    },
+    {
+        "id": "scenario-case-003",
+        "domain": "WEB",
+        "question": "naver.com을 오픈하는데 사용하는 것은?",
+        "expectedSource": "WEB/OpenBrowser.md"
+    },
+    {
+        "id": "scenario-case-004",
+        "domain": "WEB",
+        "question": "브라우저를 오픈하는 것은?",
+        "expectedSource": "WEB/OpenBrowser.md"
+    },
+    {
+        "id": "scenario-case-005",
+        "domain": "BuiltIn",
+        "question": "멀티 실행은",
+        "expectedSource": "BuiltIn/MultiThread.md"
+    },
+    {
+        "id": "scenario-case-006",
+        "domain": "EXCEL",
+        "question": "엑셀의 A2의 값을 가져오는 액티비티는?",
+        "expectedSource": "EXCEL/GetCellValue.md"
+    },
+    {
+        "id": "product-guide-case-001",
+        "domain": "BA-Studio",
+        "question": "BA-Studio에서 새 프로젝트는 어떻게 만들어?",
+        "expectedSource": "docs/product-manuals/normalized/ba-studio/2.6.0.md"
+    },
+    {
+        "id": "product-guide-case-002",
+        "domain": "BA-Assist",
+        "question": "BA-Assist에서 스케줄은 어떻게 활성화해?",
+        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
+    },
+    {
+        "id": "product-guide-case-003",
+        "domain": "BA-Assist",
+        "question": "BA-Assist와 BA-Server 차이는?",
+        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md"
+    },
+    {
+        "id": "source-guide-case-001",
+        "domain": "BA-Studio",
+        "question": "BA-Studio에서 새 프로젝트를 만들면 어떤 폴더가 생성돼?",
+        "expectedSource": "docs/product-manuals/normalized/ba-studio/2.6.0.md"
+    },
+    {
+        "id": "source-guide-case-002",
+        "domain": "BA-Studio",
+        "question": "BA-Studio에서 액티비티 라이브러리는 어떤 파일에서 로드돼?",
+        "expectedSource": "docs/product-manuals/normalized/ba-studio/2.6.0.md"
+    },
+    {
+        "id": "source-guide-case-003",
+        "domain": "BA-Assist",
+        "question": "BA-Assist 스케줄 다중 인스턴스 옵션은 뭐가 있어?",
+        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
+    },
+    {
+        "id": "source-guide-case-004",
+        "domain": "BA-Assist",
+        "question": "BA-Assist 패키지 변수는 어떤 파일에 저장돼?",
+        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
     }
 ]

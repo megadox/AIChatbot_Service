@@ -20,6 +20,8 @@ if (File.Exists(outPath))
 var embedding = new HashEmbeddingService();
 var chunks = Directory.EnumerateFiles(docsDir, "*.md", SearchOption.AllDirectories)
     .SelectMany(path => ParseMarkdown(path, docsDir))
+    .Concat(ParseProductGuides(root))
+    .Concat(ParseProductManuals(root))
     .Concat(ParseCorrections(Path.Combine(root, "qa", "answer_corrections.jsonl")))
     .ToArray();
 var aliases = LoadAliases(Path.Combine(root, "qa", "activity_aliases.json")).ToArray();
@@ -90,25 +92,140 @@ static IEnumerable<KbChunk> ParseMarkdown(string path, string docsRoot)
     var summary = ExtractSection(text, "Summary");
     if (!string.IsNullOrWhiteSpace(summary))
     {
-        yield return Create(relative, group, activity, title, "Summary", "summary", summary);
+        yield return Create(relative, group, activity, title, "Summary", "summary", summary, "activity_manual");
     }
 
     var metadata = ExtractSection(text, "Metadata");
     if (!string.IsNullOrWhiteSpace(metadata))
     {
-        yield return Create(relative, group, activity, title, "Metadata", "metadata", metadata);
+        yield return Create(relative, group, activity, title, "Metadata", "metadata", metadata, "activity_manual");
     }
 
     var properties = ExtractSection(text, "Properties");
     if (!string.IsNullOrWhiteSpace(properties))
     {
-        yield return Create(relative, group, activity, title, "Properties", "properties", properties);
+        yield return Create(relative, group, activity, title, "Properties", "properties", properties, "activity_manual");
     }
 
     var notes = ExtractPropertyNotes(text);
     foreach (var (name, content) in notes)
     {
-        yield return Create(relative, group, activity, title, $"Property Notes/{name}", "property_note", content);
+        yield return Create(relative, group, activity, title, $"Property Notes/{name}", "property_note", content, "activity_manual");
+    }
+}
+
+static IEnumerable<KbChunk> ParseProductManuals(string root)
+{
+    var productDocsRoot = Path.Combine(root, "docs", "product-manuals", "normalized");
+    if (!Directory.Exists(productDocsRoot))
+    {
+        yield break;
+    }
+
+    foreach (var path in Directory.EnumerateFiles(productDocsRoot, "*.md", SearchOption.AllDirectories))
+    {
+        foreach (var chunk in ParseProductMarkdown(path, root))
+        {
+            yield return chunk;
+        }
+    }
+}
+
+static IEnumerable<KbChunk> ParseProductGuides(string root)
+{
+    var productGuidesRoot = Path.Combine(root, "docs", "product-manuals", "guides");
+    if (!Directory.Exists(productGuidesRoot))
+    {
+        yield break;
+    }
+
+    foreach (var path in Directory.EnumerateFiles(productGuidesRoot, "*.md", SearchOption.AllDirectories))
+    {
+        var source = Path.GetRelativePath(root, path).Replace('\\', '/');
+        var text = File.ReadAllText(path, Encoding.UTF8);
+        var title = Regex.Match(text, @"^#\s+(.+)$", RegexOptions.Multiline).Groups[1].Value.Trim();
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            title = Path.GetFileNameWithoutExtension(path);
+        }
+
+        var sourceParts = source.Split('/');
+        var product = ExtractMetadataValue(text, "Product") ?? (sourceParts.Length >= 4 ? sourceParts[^3] : "ProductGuide");
+        var version = ExtractMetadataValue(text, "Version") ?? (sourceParts.Length >= 2 ? sourceParts[^2] : "");
+        var topic = ExtractMetadataValue(text, "Topic") ?? Path.GetFileNameWithoutExtension(path);
+        var group = NormalizeProductGroup(product);
+        var content = StripTopMetadata(text);
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            content = text.Trim();
+        }
+
+        var guideContent = $"""
+        Product: {product}
+        Version: {version}
+        Topic: {topic}
+        Source: {source}
+
+        {content}
+        """;
+
+        yield return Create(source, group, null, title, title, "product_guide", guideContent, "product_guide");
+    }
+}
+
+static IEnumerable<KbChunk> ParseProductMarkdown(string path, string root)
+{
+    var source = Path.GetRelativePath(root, path).Replace('\\', '/');
+    var text = File.ReadAllText(path, Encoding.UTF8);
+    var title = Regex.Match(text, @"^#\s+(.+)$", RegexOptions.Multiline).Groups[1].Value.Trim();
+    if (string.IsNullOrWhiteSpace(title))
+    {
+        title = Path.GetFileNameWithoutExtension(path);
+    }
+
+    var sourceParts = source.Split('/');
+    var product = ExtractMetadataValue(text, "Product") ?? (sourceParts.Length >= 2 ? sourceParts[^2] : null) ?? "ProductManual";
+    var version = ExtractMetadataValue(text, "Version") ?? Path.GetFileNameWithoutExtension(path);
+    var group = NormalizeProductGroup(product);
+    var headings = Regex.Matches(text, @"^(?<marks>#{2,6})\s+(?<title>.+?)\s*$", RegexOptions.Multiline).Cast<Match>().ToArray();
+    if (headings.Length == 0)
+    {
+        var content = StripTopMetadata(text);
+        if (!string.IsNullOrWhiteSpace(content))
+        {
+            yield return Create(source, group, null, title, $"{product} {version}", "product_section", content, "product_manual");
+        }
+
+        yield break;
+    }
+
+    var stack = new List<string>();
+    for (var i = 0; i < headings.Length; i++)
+    {
+        var heading = headings[i];
+        var level = heading.Groups["marks"].Value.Length;
+        var headingText = heading.Groups["title"].Value.Trim();
+        while (stack.Count >= level - 1)
+        {
+            stack.RemoveAt(stack.Count - 1);
+        }
+
+        stack.Add(headingText);
+        var start = heading.Index + heading.Length;
+        var end = i + 1 < headings.Length ? headings[i + 1].Index : text.Length;
+        var content = text[start..end].Trim();
+        if (IsUsefulProductSection(content))
+        {
+            var sectionPath = string.Join(" > ", stack);
+            var sectionContent = $"""
+            Product: {product}
+            Version: {version}
+            Section: {sectionPath}
+
+            {content}
+            """;
+            yield return Create(source, group, null, title, sectionPath, "product_section", sectionContent, "product_manual");
+        }
     }
 }
 
@@ -185,7 +302,8 @@ static IEnumerable<KbChunk> ParseCorrections(string path)
             BuildCorrectionTitle(correction.Question, expectedSource),
             $"Answer Corrections/{correction.Id ?? index.ToString()}",
             "answer_correction",
-            content);
+            content,
+            "qa_correction");
     }
 }
 
@@ -243,7 +361,7 @@ static string BuildCorrectionTitle(string question, string expectedSource)
         : $"Answer Correction: {question} ({expectedSource})";
 }
 
-static KbChunk Create(string source, string group, string activity, string title, string section, string type, string content)
+static KbChunk Create(string source, string group, string? activity, string title, string section, string type, string content, string sourceType)
 {
     var idSeed = $"{source}|{section}|{content}";
     var hash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(idSeed))).ToLowerInvariant();
@@ -256,7 +374,35 @@ static KbChunk Create(string source, string group, string activity, string title
         section,
         type,
         Normalize(content),
-        hash);
+        hash,
+        sourceType);
+}
+
+static string? ExtractMetadataValue(string text, string name)
+{
+    var match = Regex.Match(text, $@"^(?:-\s*)?{Regex.Escape(name)}:\s*(?<value>.+?)\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+    return match.Success ? match.Groups["value"].Value.Trim() : null;
+}
+
+static string NormalizeProductGroup(string product)
+{
+    return product.Replace(" ", "-", StringComparison.Ordinal).Trim();
+}
+
+static string StripTopMetadata(string text)
+{
+    return Regex.Replace(text, @"^#\s+.+?\r?\n(?:\r?\n|-\s+.+?\r?\n)*", "", RegexOptions.Singleline).Trim();
+}
+
+static bool IsUsefulProductSection(string content)
+{
+    if (string.IsNullOrWhiteSpace(content))
+    {
+        return false;
+    }
+
+    var withoutImages = Regex.Replace(content, @"!\[[^\]]*\]\([^)]+\)", "", RegexOptions.Multiline).Trim();
+    return withoutImages.Length >= 20 || content.Contains("![", StringComparison.Ordinal);
 }
 
 static string ExtractSection(string text, string heading)
@@ -306,6 +452,7 @@ static async Task CreateSchemaAsync(SqliteConnection connection)
           source TEXT NOT NULL,
           group_name TEXT NOT NULL,
           activity_name TEXT NULL,
+          source_type TEXT NOT NULL DEFAULT 'activity_manual',
           title TEXT NOT NULL,
           section_path TEXT NOT NULL,
           chunk_type TEXT NOT NULL,
@@ -336,12 +483,13 @@ static async Task CreateSchemaAsync(SqliteConnection connection)
         );
 
         CREATE INDEX idx_kb_chunks_source ON kb_chunks(source);
+        CREATE INDEX idx_kb_chunks_source_type ON kb_chunks(source_type);
         CREATE INDEX idx_kb_chunks_group ON kb_chunks(group_name);
         CREATE INDEX idx_kb_chunks_activity ON kb_chunks(activity_name);
         CREATE INDEX idx_activity_aliases_normalized ON activity_aliases(normalized_alias);
 
         INSERT INTO kb_meta(key, value) VALUES
-          ('schema_version', '1'),
+          ('schema_version', '2'),
           ('kb_version', strftime('%Y%m%d%H%M%S', 'now')),
           ('created_at_utc', datetime('now')),
           ('embedding_model_id', 'hash-embedding-v1'),
@@ -373,10 +521,10 @@ static async Task InsertChunkAsync(SqliteConnection connection, KbChunk chunk, b
     var command = connection.CreateCommand();
     command.CommandText = """
         INSERT INTO kb_chunks(
-          id, source, group_name, activity_name, title, section_path, chunk_type,
+          id, source, group_name, activity_name, source_type, title, section_path, chunk_type,
           content, content_hash, kb_version, embedding_model_id, updated_at_utc)
         VALUES (
-          $id, $source, $group, $activity, $title, $section, $type,
+          $id, $source, $group, $activity, $sourceType, $title, $section, $type,
           $content, $hash, 'dev', 'hash-embedding-v1', datetime('now'));
 
         INSERT INTO kb_embeddings(chunk_id, dim, vector_blob)
@@ -385,7 +533,8 @@ static async Task InsertChunkAsync(SqliteConnection connection, KbChunk chunk, b
     command.Parameters.AddWithValue("$id", chunk.Id);
     command.Parameters.AddWithValue("$source", chunk.Source);
     command.Parameters.AddWithValue("$group", chunk.GroupName);
-    command.Parameters.AddWithValue("$activity", chunk.ActivityName);
+    command.Parameters.AddWithValue("$activity", string.IsNullOrWhiteSpace(chunk.ActivityName) ? DBNull.Value : chunk.ActivityName);
+    command.Parameters.AddWithValue("$sourceType", chunk.SourceType);
     command.Parameters.AddWithValue("$title", chunk.Title);
     command.Parameters.AddWithValue("$section", chunk.SectionPath);
     command.Parameters.AddWithValue("$type", chunk.ChunkType);
@@ -402,12 +551,13 @@ internal sealed record KbChunk(
     string Id,
     string Source,
     string GroupName,
-    string ActivityName,
+    string? ActivityName,
     string Title,
     string SectionPath,
     string ChunkType,
     string Content,
-    string ContentHash);
+    string ContentHash,
+    string SourceType);
 
 /// <summary>
 /// Represents one persisted answer correction consumed by the KB builder.

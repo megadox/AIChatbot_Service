@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html lang="kr">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" id="description"  content="BATEM Online Manual" /> 
+        <meta name="keyword" id="keyword"  content="" />
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="BATEM 매뉴얼">
+        <meta property="og:description" content="BATEM Online Manual">
+        <meta property="og:image" content="../b_manual/images/sns_logo.jpg">
+        <meta property="og:url" content="">
+		<title>BATEM Online Manual</title>
+		<link href="../b_manual/css/default.css" rel="stylesheet"/>
+		
+		<!-- jquery -->
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+		<!-- SweerAlert -->
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+		<!-- alert 띄우기 -->
+		<script>
+			var alert = function(msg, type) {
+				swal({
+					title : '',
+					text : msg,
+					type : type,
+					timer : 1500,
+					customClass : 'sweet-size',
+					showConfirmButton : false
+				});
+			}
+		
+			var confirm = function(msg, title, resvNum) {
+				swal({
+					title : title,
+					text : msg,
+					type : "warning",
+					showCancelButton : true,
+					confirmButtonClass : "btn-danger",
+					confirmButtonText : "예",
+					cancelButtonText : "아니오",
+					closeOnConfirm : false,
+					closeOnCancel : true
+				}, function(isConfirm) {
+					if (isConfirm) {
+						swal('', '예약이 승인되었습니다.', "success");
+					}else{
+						swal('', '예약이 거부되었습니다.', "failed");
+					}
+		
+				});
+			}
+		
+			function Alert() {
+				alert('gg', 'success');
+			}
+			function Confirm() {
+				confirm('', '승인할까요?');
+			}
+		</script>
+
+		<!-- include -->
+		<script type="text/javascript">   
+			$(document).ready( function() {
+
+			$("#header").load("../b_manual/include/header.html");
+			$("#footer").load("../b_manual/include/footer.html"); 
+			$("#search").load("../b_manual/include/search.html"); 
+
+			});
+		</script>
+
+		<!-- 웹 nav -->
+		<script src="../b_manual/js/TweenMax.js"></script>
+		<script src="../b_manual/js/menu.js"></script>
+		
+		<!-- favicon 적용 -->
+		<link rel="shortcut icon" href="../b_manual/images/favicon.ico">
+		
+		<!-- Material Icon CDN -->
+		<link href="https://fonts.googleapis.com/
+		icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined"
+		rel="stylesheet">
+	
+		<!-- Animate css -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container_w pt1 ptxs0">
+			<!-- lnb start -->
+			<section id="lnb" class="dixsn dismn">
+				<h1>Appendix (BA Assist)</h1>
+				<ul>
+					<li>
+						<a href="#a" style="border-bottom:none;">Appendix A. FAQs</a>
+					</li>
+				</ul>
+			</section>
+			<!-- lnb end -->
+			
+			<!--------------- 매뉴얼 내용 start -------------->
+			<section class="content-wrap">
+				<div class="content-title por ptxs3">
+					<br>
+					<p class="diib fctgray fs1 pt0_5">
+						<span class="material-icons-outlined vam">screen_search_desktop</span> Version: 2.5.X
+						<span class="diib pw0_5 fcgray">|</span>
+						<span class="material-icons-outlined vam">history</span> Date: 2024.03.29
+					</p>
+					<!-- PDF 다운로드 버튼 -->
+<!--					<a class="m_btn_pdfdown diib fr w15" href="../b_manual/file/assist_appendix_2.5.0.pdf" target="_blank">-->
+<!--						<img class="w20" src="../b_manual/images/btn_pdfdown.jpg" alt="PDF다운로드">-->
+<!--					</a>-->
+					<!-- PDF 다운로드 버튼 -->
+					<h2 class="pt1">
+						<img class="title_ci" src="../b_manual/images/ci_assist.png" alt="BA Assist">BA Assist
+					</h2>
+				</div>
+				<div class="content">
+					<!-- 표지 -->
+					<section class="m-content-bg m-content-bg-assist row">
+						<div class="row">
+							<p>비에이템</p>
+							<h1>Appendix</h1>
+							<span>BA Assist 2.5.X</span>
+						</div>
+					</section>
+					<!-- 표지 -->
+					
+					<!-- 목차 -->
+					<section class="m-list-bg row" style="background-position:left top !important;">
+						<div class="row mt1 division_wrap">
+							<h2 class="diib fl fs2 mb2">목차</h2>
+							<div class="diib fr w50 sm100 xs100">
+								<dl class="row m-list">
+									<dt><a href="#a">Appendix A. FAQs</a></dt>
+									<dd></dd>
+								</dl>
+							</div>
+						</div>
+					</section>
+					<!-- 목차 -->
+					
+					<!-- Appendix A. FAQs -->
+					<section class="mt2">
+						<p class="sub-title"><a name='a'>Appendix A. FAQs</a></p>
+						<div class="row mb2 division_wrap">
+							<dl class="row mb2">
+								<dt>
+									<b>Q1. </b>BATEM V2.0의 BA-Assist는 태스크 파일을 실행하기 위하여 BA-Worker를 설치해야 하나요?
+								</dt>
+								<hr class="mh0_5">
+								<dd>
+									아닙니다. BA-Assist는 독자적인 플레이어를 통하여 태스크 파일을 실행하기 때문에 BA-Worker를 설치할 필요가 없습니다.
+								</dd>
+							</dl>
+							<dl class="row mb2">
+								<dt>
+									<b>Q2. </b>BATEM V2.0의 BA-Assist 와 BA-Server의 차이점이 무엇인가요? 
+								</dt>
+								<hr class="mh0_5">
+								<dd>
+									BA-Assist는 스케줄 기반의 태스크를 BA-Assist가 설치된 PC에서만 동작시킬 수 있지만,
+									BA-Server는 BA-Worker가 설치된 다수의 Bot PC에 대하여 스케줄을 설정하여 여러 태스크를 분산시켜 수행하게 할 수 있습니다.
+								</dd>
+							</dl>
+							<dl class="row mb2">
+								<dt>
+									<b>Q3. </b>BA-Assist에서 생성된 로그메시지를 지우려면 어떻게 해야 하나요?
+								</dt>
+								<hr class="mh0_5">
+								<dd>
+									데이터 관리 폴더인 C:\ProgramData\BA-Assist 아래에서 logs.db파일을 찾아 삭제하면 됩니다.
+									삭제된 logs.db는 BA-Assist동작시 다시 자동 생성됩니다. 
+								</dd>
+							</dl>
+							<dl class="row">
+								<dt>
+									<b>Q4. </b>Queue 기능과 Sequential 태스크와 함께 사용할 수 있나요?
+								</dt>
+								<hr class="mh0_5">
+								<dd>
+									Sequential 태스크는 연속으로 지정한 태스크를 실행하는 Queue를 대체하기 위한 기능입니다.
+									따라서 Queue 기능과 함께 사용할 수 없습니다.
+									Queue 기능이 사용되는 동안은 Sequential 태스크는 예정시간이 되어도 실행되지 않습니다.
+								</dd>
+							</dl>
+						</div>
+					</section>
+					<!-- Appendix A. FAQs end -->
+		
+				</div>
+			</section>
+			<!--------------- 매뉴얼 내용 end --------------->
+		</div>
+		
+		<div id="search"></div>
+		<div id="footer"></div>

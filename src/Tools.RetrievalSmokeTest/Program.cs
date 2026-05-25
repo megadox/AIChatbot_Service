@@ -14,7 +14,8 @@ var allActivities = HasArg(args, "--all-activities");
 var docsPath = GetArg(args, "--docs") ?? Path.Combine(root, "docs", "generated", "commands");
 var outputPath = GetArg(args, "--output");
 var preferredSource = GetArg(args, "--source");
-var questionArgs = args.Where((arg, index) => arg != "--source" && (index == 0 || args[index - 1] != "--source")).ToArray();
+var questionType = ParseQuestionType(GetArg(args, "--question-type"));
+var questionArgs = GetQuestionArgs(args).ToArray();
 var question = questionArgs.Length > 0 ? string.Join(' ', questionArgs) : "웹 Click 액티비티 사용법 알려줘";
 var dbPath = Path.Combine(root, "ChatBot", "ba_manual_vector.db");
 
@@ -41,16 +42,33 @@ if (allActivities)
 }
 
 var intent = intentResolver.Resolve(question);
-var vector = embeddings.Embed(question);
+var searchQuery = intent.RewrittenQuery ?? question;
+var vector = embeddings.Embed(searchQuery);
 
 var results = await store.SearchAsync(
-    new SearchRequest(question, vector, TopK: 8, MinScore: 0.0, intent.PreferredGroup, intent.ActivityNameHint, preferredSource),
+    new SearchRequest(
+        searchQuery,
+        vector,
+        TopK: 8,
+        MinScore: 0.0,
+        intent.PreferredGroup,
+        intent.ActivityNameHint,
+        preferredSource,
+        question,
+        intent.RequiredGroup,
+        intent.PreferredSourceHint,
+        intent.ActionConceptHints,
+        ResolveSourceTypes(intent)),
     CancellationToken.None);
 
 Console.WriteLine($"Question: {question}");
+Console.WriteLine($"SearchQuery: {searchQuery}");
 Console.WriteLine($"PreferredGroup: {intent.PreferredGroup ?? "-"}");
+Console.WriteLine($"RequiredGroup: {intent.RequiredGroup ?? "-"}");
 Console.WriteLine($"ActivityHint: {intent.ActivityNameHint ?? "-"}");
+Console.WriteLine($"PreferredSourceHint: {intent.PreferredSourceHint ?? "-"}");
 Console.WriteLine($"PreferredSource: {preferredSource ?? "-"}");
+Console.WriteLine($"QuestionType: {questionType}");
 Console.WriteLine();
 
 foreach (var item in results)
@@ -60,10 +78,22 @@ foreach (var item in results)
     Console.WriteLine();
 }
 
+var orchestrator = new ChatOrchestrator(embeddings, store, new PromptBuilder(), new NoopLlmService(), intentResolver: intentResolver);
+var answer = await AskAsync(orchestrator, new UserTestCase("single", "-", question, preferredSource ?? ""), questionType);
+Console.WriteLine("Answer:");
+Console.WriteLine(answer);
+
 static async Task<UserTestCase[]> LoadCasesAsync(string casesPath)
 {
     var json = await File.ReadAllTextAsync(casesPath);
     return JsonSerializer.Deserialize<UserTestCase[]>(json, JsonOptions()) ?? [];
+}
+
+static IReadOnlyList<string> ResolveSourceTypes(DomainIntent intent)
+{
+    return intent.Intent == UserIntent.ProductGuide
+        ? ["product_guide", "product_manual"]
+        : ["activity_manual", "qa_correction"];
 }
 
 static async Task RunCasesAsync(
@@ -81,9 +111,21 @@ static async Task RunCasesAsync(
     foreach (var testCase in cases)
     {
         var intent = intentResolver.Resolve(testCase.Question);
-        var vector = embeddings.Embed(testCase.Question);
+        var searchQuery = intent.RewrittenQuery ?? testCase.Question;
+        var vector = embeddings.Embed(searchQuery);
         var chunks = await store.SearchAsync(
-            new SearchRequest(testCase.Question, vector, TopK: 8, MinScore: 0.0, intent.PreferredGroup, intent.ActivityNameHint),
+            new SearchRequest(
+                searchQuery,
+                vector,
+                TopK: 8,
+                MinScore: 0.0,
+                intent.PreferredGroup,
+                intent.ActivityNameHint,
+                OriginalQuery: testCase.Question,
+                RequiredGroup: intent.RequiredGroup,
+                TargetSourceHint: intent.PreferredSourceHint,
+                ActionConceptHints: intent.ActionConceptHints,
+                SourceTypes: ResolveSourceTypes(intent)),
             CancellationToken.None);
 
         var ranked = chunks
@@ -168,11 +210,11 @@ static IEnumerable<UserTestCase> LoadActivityCases(string docsRoot)
     }
 }
 
-static async Task<string> AskAsync(IChatOrchestrator orchestrator, UserTestCase testCase)
+static async Task<string> AskAsync(IChatOrchestrator orchestrator, UserTestCase testCase, ChatQuestionType questionType = ChatQuestionType.Auto)
 {
     var tokens = new List<string>();
     await foreach (var evt in orchestrator.AskAsync(
-        new ChatRequest(testCase.Question, ConversationId: $"smoke-{testCase.Id}", TopK: 8, MinScore: 0.0),
+        new ChatRequest(testCase.Question, ConversationId: $"smoke-{testCase.Id}", TopK: 8, MinScore: 0.0, QuestionType: questionType),
         CancellationToken.None))
     {
         if (evt.Kind == ChatStreamEventKind.Token)
@@ -182,6 +224,47 @@ static async Task<string> AskAsync(IChatOrchestrator orchestrator, UserTestCase 
     }
 
     return string.Concat(tokens);
+}
+
+static IEnumerable<string> GetQuestionArgs(string[] args)
+{
+    var optionsWithValue = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+    {
+        "--cases",
+        "--docs",
+        "--output",
+        "--source",
+        "--question-type"
+    };
+
+    for (var i = 0; i < args.Length; i++)
+    {
+        var arg = args[i];
+        if (optionsWithValue.Contains(arg))
+        {
+            i++;
+            continue;
+        }
+
+        if (arg.StartsWith("--", StringComparison.Ordinal))
+        {
+            continue;
+        }
+
+        yield return arg;
+    }
+}
+
+static ChatQuestionType ParseQuestionType(string? value)
+{
+    if (string.IsNullOrWhiteSpace(value))
+    {
+        return ChatQuestionType.Auto;
+    }
+
+    return Enum.TryParse<ChatQuestionType>(value, ignoreCase: true, out var questionType)
+        ? questionType
+        : ChatQuestionType.Auto;
 }
 
 static string FindRepoRoot()

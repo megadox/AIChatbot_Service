@@ -95,7 +95,13 @@
             </DockPanel>
         </Border>
 
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Padding="20" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="ChatScrollViewer"
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      Padding="20"
+                      VerticalScrollBarVisibility="Auto"
+                      Loaded="ChatScrollViewer_OnLoaded"
+                      SizeChanged="ChatScrollViewer_OnSizeChanged">
             <ItemsControl ItemsSource="{Binding SelectedSession.Messages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -163,11 +169,19 @@
                             Grid.ColumnSpan="4"
                             Orientation="Horizontal"
                             Margin="0,0,0,8">
+                    <TextBlock Text="질문 유형"
+                               VerticalAlignment="Center"
+                               Foreground="#374151"
+                               Margin="0,0,8,0" />
+                    <ComboBox ItemsSource="{Binding QuestionTypes}"
+                              SelectedValue="{Binding SelectedSession.QuestionType, Mode=TwoWay}"
+                              SelectedValuePath="Value"
+                              DisplayMemberPath="Label"
+                              Width="160"
+                              Height="28"
+                              Margin="0,0,18,0" />
                     <CheckBox Content="문맥 유지"
                               IsChecked="{Binding SelectedSession.IsContextRetained}"
-                              Margin="0,0,18,0" />
-                    <CheckBox Content="일반 질문"
-                              IsChecked="{Binding SelectedSession.IsGeneralQuestionEnabled}"
                               Margin="0,0,18,0" />
                     <CheckBox Content="웹 검색"
                               IsChecked="{Binding SelectedSession.IsWebSearchEnabled}" />

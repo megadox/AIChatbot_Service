@@ -1,0 +1,17 @@
+[
+  {
+    "product": "BA-Studio",
+    "version": "2.6.0",
+    "url": "https://docs.batem.com/b_manual/b_studio_2.6.0.html"
+  },
+  {
+    "product": "BA-Assist",
+    "version": "2.5.0",
+    "url": "https://docs.batem.com/b_manual/b_assist_2.5.0.html"
+  },
+  {
+    "product": "BA-Assist",
+    "version": "2.5.0-appendix",
+    "url": "https://docs.batem.com/b_manual/b_assist_appendix_2.5.0.html"
+  }
+]

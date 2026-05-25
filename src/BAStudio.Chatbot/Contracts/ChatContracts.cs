@@ -9,7 +9,20 @@ public sealed record ChatRequest(
     int TopK = 6,
     double MinScore = 0.0,
     bool AllowGeneralQuestion = false,
-    bool AllowWebSearch = false);
+    bool AllowWebSearch = false,
+    ChatQuestionType QuestionType = ChatQuestionType.Auto);
+
+/// <summary>
+/// Allows the UI to explicitly route a question to the intended knowledge domain.
+/// </summary>
+public enum ChatQuestionType
+{
+    Auto,
+    ActivityTask,
+    BAStudioGuide,
+    BAAssistGuide,
+    General
+}
 
 /// <summary>
 /// Identifies the type of streaming event returned by the chat orchestrator.
@@ -62,7 +75,8 @@ public sealed record RetrievedChunk(
     string Content,
     double VectorScore,
     double KeywordScore,
-    double FinalScore);
+    double FinalScore,
+    string SourceType = "activity_manual");
 
 /// <summary>
 /// Describes a vector-store search request and optional domain/source preferences.
@@ -74,7 +88,12 @@ public sealed record SearchRequest(
     double MinScore,
     string? PreferredGroup,
     string? ActivityNameHint,
-    string? PreferredSource = null);
+    string? PreferredSource = null,
+    string? OriginalQuery = null,
+    string? RequiredGroup = null,
+    string? TargetSourceHint = null,
+    IReadOnlyList<string>? ActionConceptHints = null,
+    IReadOnlyList<string>? SourceTypes = null);
 
 /// <summary>
 /// Stores the rule-based interpretation of a user's question.
@@ -83,7 +102,11 @@ public sealed record DomainIntent(
     string? PreferredGroup,
     string? ActivityNameHint,
     UserIntent Intent,
-    IReadOnlyList<string> Signals);
+    IReadOnlyList<string> Signals,
+    string? RewrittenQuery = null,
+    string? RequiredGroup = null,
+    string? PreferredSourceHint = null,
+    IReadOnlyList<string>? ActionConceptHints = null);
 
 /// <summary>
 /// Contains summarized web search output and connectivity state.
@@ -112,5 +135,6 @@ public enum UserIntent
     ActivityRecommendation,
     Troubleshooting,
     HowTo,
+    ProductGuide,
     OutOfScope
 }

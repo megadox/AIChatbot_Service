@@ -3,5 +3,6 @@
   <Project Path="src/BAStudio.Chatbot.Infra/BAStudio.Chatbot.Infra.csproj" />
   <Project Path="src/BAStudio.Wpf/BAStudio.Wpf.csproj" />
   <Project Path="src/Tools.KbBuilder/Tools.KbBuilder.csproj" />
+  <Project Path="src/Tools.ProductManualCollector/Tools.ProductManualCollector.csproj" />
   <Project Path="src/Tools.RetrievalSmokeTest/Tools.RetrievalSmokeTest.csproj" />
 </Solution>

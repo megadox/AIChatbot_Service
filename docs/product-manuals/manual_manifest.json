@@ -1,0 +1,1044 @@
+﻿[
+  {
+    "Product": "BA-Studio",
+    "Version": "2.6.0",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_studio_2.6.0.html",
+    "RawHtmlPath": "docs/product-manuals/raw/ba-studio/2.6.0.html",
+    "NormalizedMarkdownPath": "docs/product-manuals/normalized/ba-studio/2.6.0.md",
+    "Images": [
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img01.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img01-90a3f030cea52611.png",
+        "AltText": "studio_img01",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img00.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img00-d1ec579c25aa1dc3.png",
+        "AltText": "BA Studio의 역할",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img15.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img15-fe754d52757b1bd1.png",
+        "AltText": "studio_img15",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img16.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img16-3305bf225ce2cb9f.png",
+        "AltText": "studio_img16",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img02.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img02-a6eaa149753125fb.png",
+        "AltText": "260_studio_img02",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img1-3be78c76936bb1da.png",
+        "AltText": "260_studio_img1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/230/230_studio_img07.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/230_studio_img07-36110c7828d49cb0.png",
+        "AltText": "230_studio_img07",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img2-2e63f35b22a3c6d8.png",
+        "AltText": "250_studio_img2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/230/230_studio_img09.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/230_studio_img09-101717d2ed3fb6dd.png",
+        "AltText": "230_studio_img09",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/230/230_studio_img15.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/230_studio_img15-cabdadc0d1090d79.png",
+        "AltText": "230_studio_img15",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/230/230_studio_img16.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/230_studio_img16-91a0064629e80f47.png",
+        "AltText": "230_studio_img16",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img14.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img14-c1c96ee233b4e219.png",
+        "AltText": "260_studio_img14",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img14_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img14_1-984d11adb9645545.png",
+        "AltText": "260_studio_img14_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img3-674c2e57015f8c46.png",
+        "AltText": "260_studio_img3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img4.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img4-3cdb746f776ab8dc.png",
+        "AltText": "260_studio_img4",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img5.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img5-ceebc1b927cb4324.png",
+        "AltText": "250_studio_img5",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img6.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img6-29a21d58dfa6ce2d.png",
+        "AltText": "250_studio_img6",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_user_interface_img_02.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_user_interface_img_02-5283160869e0c638.png",
+        "AltText": "260_studio_user_interface_img_02",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img12.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img12-308d05f5cf506681.png",
+        "AltText": "260_studio_img12",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img7.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img7-afc4aa991355a007.png",
+        "AltText": "260_studio_img7",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img44.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img44-cc0b225d2eb3ec01.png",
+        "AltText": "studio_img44",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img45.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img45-26e7df810e938b8c.png",
+        "AltText": "studio_img45",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img44_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img44_1-03f34cbf30d4764b.png",
+        "AltText": "studio_img44_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img45_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img45_1-7c3d84eec3df20f5.png",
+        "AltText": "studio_img45_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img44_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img44_2-d55c8aef0195bd54.png",
+        "AltText": "studio_img44_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img44_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img44_3-e8a52235bb742155.png",
+        "AltText": "studio_img44_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img45_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img45_3-9ccdbbe7a7e989e0.png",
+        "AltText": "studio_img45_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img19.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img19-cee727c03d6e4470.png",
+        "AltText": "260_studio_img19",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img20.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img20-71b9456c6056fb27.png",
+        "AltText": "250_studio_img20",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_user_interface_img_04.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_user_interface_img_04-be630bce1155dd97.png",
+        "AltText": "260_studio_user_interface_img_04",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img21.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img21-69b5f8e99696fd0a.png",
+        "AltText": "250_studio_img21",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img21_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img21_1-dd5fc3e851b18dc6.png",
+        "AltText": "260_studio_img21_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img21_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img21_2-03893884424350c3.png",
+        "AltText": "260_studio_img21_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img21_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img21_3-1eb7226a41093892.png",
+        "AltText": "260_studio_img21_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img74.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img74-4df143d9fd9a0366.png",
+        "AltText": "studio_img74",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img23_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img23_1-e185243522f58c04.png",
+        "AltText": "260_studio_img23_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img23_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img23_2-17205caf305aae51.png",
+        "AltText": "260_studio_img23_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img23.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img23-21c734226f050d8d.png",
+        "AltText": "250_studio_img23",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img23_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img23_3-c9212ea4348de5aa.png",
+        "AltText": "260_studio_img23_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img76.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img76-59abc98c094b5d68.png",
+        "AltText": "studio_img76",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img78.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img78-9c155a64c8500dfa.png",
+        "AltText": "studio_img78",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img24.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img24-974399ef9efd16e3.png",
+        "AltText": "260_studio_img24",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img25.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img25-0e23403c067221f1.png",
+        "AltText": "260_studio_img25",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img26.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img26-f8aee34d26d2c800.png",
+        "AltText": "260_studio_img26",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img21.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img21-2afbfdb4b85499ab.png",
+        "AltText": "260_studio_img21",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img81.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img81-5e79999c45fc0c90.png",
+        "AltText": "studio_img81",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img84.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img84-9b7096e783a55dba.png",
+        "AltText": "studio_img84",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img85.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img85-4cc1d1fa4e3f48d1.png",
+        "AltText": "studio_img85",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img86.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img86-6402feb6bf742a19.png",
+        "AltText": "studio_img86",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img86_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img86_3-1a9018301edbf062.png",
+        "AltText": "studio_img86_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img86_4.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img86_4-e0a8991482b128ff.png",
+        "AltText": "studio_img86_4",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img86_5.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img86_5-925f40fa47ad46ff.png",
+        "AltText": "studio_img86_5",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img87_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img87_2-104ac79f696c2252.png",
+        "AltText": "studio_img87_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img87_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img87_3-328671f8497e3684.png",
+        "AltText": "studio_img87_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img88_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img88_2-11601676ab9dfeb8.png",
+        "AltText": "studio_img88_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img88_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img88_3-226da7f16ea794ee.png",
+        "AltText": "studio_img88_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img90_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img90_1-e679b974ae519322.png",
+        "AltText": "260_studio_img90_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img90_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img90_2-5d22fd55c47c4a65.png",
+        "AltText": "260_studio_img90_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img91_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img91_1-02b5d1284c8d42ab.png",
+        "AltText": "260_studio_img91_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img92_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img92_1-014a65be52a3f541.png",
+        "AltText": "260_studio_img92_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img95_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img95_1-20a7ad8d26568368.png",
+        "AltText": "260_studio_img95_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img100_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img100_1-519fbb56d5c51f99.png",
+        "AltText": "260_studio_img100_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img101_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img101_1-f87cf3b35464f687.png",
+        "AltText": "260_studio_img101_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img102_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img102_1-37eee4fb6b645a31.png",
+        "AltText": "260_studio_img102_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_102_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_102_1-5f37c460f0aa1754.png",
+        "AltText": "260_studio_img_WF_102_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_102_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_102_2-6bde1562b254de34.png",
+        "AltText": "260_studio_img_WF_102_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_103_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_103_1-62d2827a73a35951.png",
+        "AltText": "260_studio_img_WF_103_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_103_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_103_2-b9077ecf83ecc970.png",
+        "AltText": "260_studio_img_WF_103_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img115.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img115-e79d0076339dcd0c.png",
+        "AltText": "260_studio_img115",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img116.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img116-69e23c5499de072a.png",
+        "AltText": "studio_img116",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_104_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_104_1-992d0cf13ed44280.png",
+        "AltText": "260_studio_img_WF_104_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_104_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_104_2-5f36e0a658bcfd97.png",
+        "AltText": "260_studio_img_WF_104_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_105_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_105_1-bc8613bc45b68408.png",
+        "AltText": "260_studio_img_WF_105_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_105_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_105_2-668fa316a2de1852.png",
+        "AltText": "260_studio_img_WF_105_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img_WF_106_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img_WF_106_1-e4cccd76bb403a93.png",
+        "AltText": "studio_img_WF_106_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img_WF_106_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img_WF_106_2-b041af17a020fd8a.png",
+        "AltText": "studio_img_WF_106_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img_WF_106_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img_WF_106_3-ae0b19660eac2422.png",
+        "AltText": "studio_img_WF_106_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img_WF_106_4.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img_WF_106_4-90ac957c42bd0f4f.png",
+        "AltText": "studio_img_WF_106_4",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_106_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_106_1-5cd4def628d7d101.png",
+        "AltText": "260_studio_img_WF_106_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_106_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_106_2-1522d99efb011542.png",
+        "AltText": "260_studio_img_WF_106_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_107_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_107_1-347b9a21dfbbefc5.png",
+        "AltText": "260_studio_img_WF_107_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_107_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_107_2-768ac26e47f487f7.png",
+        "AltText": "260_studio_img_WF_107_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_107_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_107_3-8bbc950df0b1903d.png",
+        "AltText": "260_studio_img_WF_107_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_107_4.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_107_4-87086f221b9dc936.png",
+        "AltText": "260_studio_img_WF_107_4",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_1-87302d6662b0eb43.png",
+        "AltText": "260_studio_img_MT_100_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_2-dc4c352f64c358a7.png",
+        "AltText": "260_studio_img_MT_100_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_3-e873baa937c0012f.png",
+        "AltText": "260_studio_img_MT_100_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_12.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_12-830c673e9e3e67ab.png",
+        "AltText": "260_studio_img_MT_100_12",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_13.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_13-d74465198e0f64b5.png",
+        "AltText": "260_studio_img_MT_100_13",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_14.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_14-11afcc6946d9c48f.png",
+        "AltText": "260_studio_img_MT_100_14",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_MT_100_15.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_MT_100_15-3a5259b4cd7f4eda.png",
+        "AltText": "260_studio_img_MT_100_15",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_109_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_109_1-b4ee5035db8fd6ab.png",
+        "AltText": "260_studio_img_WF_109_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_109_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_109_2-fd4c5524c8dbd42f.png",
+        "AltText": "260_studio_img_WF_109_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_109_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_109_3-8cb63c833f9aa544.png",
+        "AltText": "260_studio_img_WF_109_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_109_6.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_109_6-4de544246d1b992d.png",
+        "AltText": "260_studio_img_WF_109_6",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_110_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_110_1-f7f9e5b88dbaee3e.png",
+        "AltText": "260_studio_img_WF_110_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_WF_110_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_WF_110_2-273221d5e997ed95.png",
+        "AltText": "260_studio_img_WF_110_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/studio_img79.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img79-ab1ad03d95c464f9.png",
+        "AltText": "studio_img79",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/studio_img135.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/studio_img135-0509f3e5f4cf391e.png",
+        "AltText": "studio_img135",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_PM_107_1.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_PM_107_1-fb3f6b92a2ab0070.png",
+        "AltText": "260_studio_img_PM_107_1",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_PM_107_2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_PM_107_2-c33b5ac6d4dcdf9a.png",
+        "AltText": "260_studio_img_PM_107_2",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/260/260_studio_img_PM_107_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/260_studio_img_PM_107_3-e566933e9e01bc6b.png",
+        "AltText": "260_studio_img_PM_107_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img11.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img11-f9a83462d8142697.png",
+        "AltText": "250_studio_img11",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_studio/250/250_studio_img12.png",
+        "LocalPath": "docs/product-manuals/assets/ba-studio/2.6.0/250_studio_img12-f0a4bcc91fb04662.png",
+        "AltText": "250_studio_img12",
+        "Downloaded": true
+      }
+    ],
+    "SectionPaths": [
+      "사용자 매뉴얼 (BA Studio 2.6.X)",
+      "사용자 매뉴얼 (BA Studio 2.6.X) > BA Studio",
+      "사용자 매뉴얼",
+      "사용자 매뉴얼 > 목차",
+      "사용자 매뉴얼 > 목차 > 1-1. RPA 정의",
+      "사용자 매뉴얼 > 목차 > 1-2. BA Studio의 역할",
+      "사용자 매뉴얼 > 목차 > 1-2. BA Studio의 역할 > 1) BA Studio의 역할",
+      "사용자 매뉴얼 > 목차 > 1-2. BA Studio의 역할 > 2) BA Server의 역할",
+      "사용자 매뉴얼 > 목차 > 1-2. BA Studio의 역할 > 3) BA Worker의 역할",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Studio의 특징",
+      "사용자 매뉴얼 > 목차 > 1-4. BA Studio 설치방법(환경설정)",
+      "사용자 매뉴얼 > 목차 > 1-4. BA Studio 설치방법(환경설정) > BA Studio 삭제방법",
+      "사용자 매뉴얼 > 목차 > 1-5. BATEM V2.0 시스템 권장사항",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 1) File",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 2) Edit",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 2) Edit > [검색 방법]",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 2) Edit > [검색 결과 확인]",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 3) Project",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 4) Library",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 5) View",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 6) Tools",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 7) Debug",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 7-1) Debug",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 7-2) Validation",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 8) Options",
+      "사용자 매뉴얼 > 목차 > 2-1. 메인 메뉴 > 9) Help",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 1) 태스크 실행의 예외 사항",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 2) 다이어그램(액티비티) 자동 연결 방식",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 기능 설명",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 1. 새로운 액티비티 추가",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 2. 기존 액티비티 이동",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 3. 액티비티 삭제",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 4. 액티비티 붙여넣기",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 주의사항",
+      "사용자 매뉴얼 > 목차 > 2-3. Project 창",
+      "사용자 매뉴얼 > 목차 > 2-3. Project 창 > 1) Project에서의 팝업메뉴",
+      "사용자 매뉴얼 > 목차 > 2-3. Project 창 > 2) Task에서의 팝업메뉴",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창 > Activities",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창 > ② Activities 검색창",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창 > ④ Activities 툴팁",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창 > ⑤ Activities 사용자화",
+      "사용자 매뉴얼 > 목차 > 2-4. 툴박스 창 > ⑥ Custom Activities",
+      "사용자 매뉴얼 > 목차 > 2-5. Properties / Library / Images / Resource",
+      "사용자 매뉴얼 > 목차 > 2-5. Properties / Library / Images / Resource > ① Properties창",
+      "사용자 매뉴얼 > 목차 > 2-5. Properties / Library / Images / Resource > ② Library 창",
+      "사용자 매뉴얼 > 목차 > 2-5. Properties / Library / Images / Resource > ③ Images 등록/해제 창",
+      "사용자 매뉴얼 > 목차 > 2-5. Properties / Library / Images / Resource > ④ Resource관리창",
+      "사용자 매뉴얼 > 목차 > 2-6. 개발자도구",
+      "사용자 매뉴얼 > 목차 > 2-6. 개발자도구 > 2-6-1. Logs창",
+      "사용자 매뉴얼 > 목차 > 2-6. 개발자도구 > 2-6-2. Variables창",
+      "사용자 매뉴얼 > 목차 > 2-6. 개발자도구 > 2-6-3. Debug 창",
+      "사용자 매뉴얼 > 목차 > 2-6. 개발자도구 > 2-6-4. 오류목록 창",
+      "사용자 매뉴얼 > 목차 > 2-7. 태스크 에디터(Task Editor)",
+      "사용자 매뉴얼 > 목차 > 2-7. 태스크 에디터(Task Editor) > ① Flow Editor",
+      "사용자 매뉴얼 > 목차 > 2-7. 태스크 에디터(Task Editor) > ② Code Editor",
+      "사용자 매뉴얼 > 목차 > 2-8. 설정 (Settings)",
+      "사용자 매뉴얼 > 목차 > 2-8. 설정 (Settings) > 1) Operation",
+      "사용자 매뉴얼 > 목차 > 2-8. 설정 (Settings) > 2) General",
+      "사용자 매뉴얼 > 목차 > 2-8. 설정 (Settings) > 3) Add On",
+      "사용자 매뉴얼 > 목차 > 2-9. 프로퍼티 설정 창 (Properties)",
+      "사용자 매뉴얼 > 목차 > 3-1. 용어의 정의",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-1. 태스크 구현의 주요방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-1. 태스크 구현의 주요방법 > ① Image 인식기반 구현방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-1. 태스크 구현의 주요방법 > ② Object 인식기반의 구현방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-1. 태스크 구현의 주요방법 > ③ 위치기반의 구현방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Image 인식기반으로 태스크 작성하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Object/Browser 인식기반으로 태스크 작성하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 브라우저 확장 프로그램 설치 방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Object/Windows 인식 기반으로 태스크 작성하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-2. 변수의 사용",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-2. 변수의 사용 > ▶ Variables 창 기본 사용",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-2. 변수의 사용 > ▶ 지역변수의 선언과 사용법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-2. 변수의 사용 > ▶ 전역변수의 선언과 사용법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-2. 변수의 사용 > ▶ Input / Output 변수의 선언과 사용법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-3. 태스크 흐름제어",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Decision (판단문, If~Else~분기문)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ ForEach (반복문, ForEach Loop)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ DoWhile (반복문)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ While (반복문)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Break 와 Continue 액티비티",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ SwitchCase (조건 분기문)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ TryExcept (예외처리)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ Multi Thread (다중 처리, Multi Threading)",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-4. Predefined Process 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-5. 스크립트 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > 3-2-6. 리소스 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ▶ 리소스 등록/해제 방법",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ① Image Type 리소스의 등록/해제",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기 > ① Image Type 리소스의 등록/해제 > Text Type 리소스 등록",
+      "사용자 매뉴얼 > 목차 > 3-3. Project 구현하기",
+      "사용자 매뉴얼 > 목차 > 3-3. Project 구현하기 > 3-3-1. Project 구현하기",
+      "사용자 매뉴얼 > 목차 > 3-3. Project 구현하기 > 3-3-2. Project Manager 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 1) 중단점 설정",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 2) 여기서 부터 실행",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 3) 계속 실행",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 4) 단계별 실행",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 5) 핫 다시 로드",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 6) Debug Console",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 7) Debug Frames",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 8) Debug Variables",
+      "사용자 매뉴얼 > 목차 > 3-4. Debugging 사용하기 > 9) Debug BreakPoints",
+      "사용자 매뉴얼 > 목차 > 3-5. 라이브러리 작성하기",
+      "사용자 매뉴얼 > 목차 > 3-5. 라이브러리 작성하기 > 1) 라이브러리 작성 시작",
+      "사용자 매뉴얼 > 목차 > 3-5. 라이브러리 작성하기 > 2) 라이브러리 Task 구성",
+      "사용자 매뉴얼 > 목차 > 3-5. 라이브러리 작성하기 > 3) 라이브러리 업로드",
+      "사용자 매뉴얼 > 목차 > 3-6. 프로젝트에서 라이브러리 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-6. 프로젝트에서 라이브러리 사용하기 > 1) 라이브러리 다운로드",
+      "사용자 매뉴얼 > 목차 > 3-6. 프로젝트에서 라이브러리 사용하기 > 2) 라이브러리 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 1) 셀렉터 편집기 인터페이스",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 2) 셀렉터 편집기 실행 방법",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 3) 셀렉터 편집기 기능 - 셀렉터/테이블 셀렉터 추가",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 4) 셀렉터 편집기 기능 - 유효성 검사",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 5) 셀렉터 편집기 기능 - UI 요소선택기 편집",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 6) 셀렉터 편집기 기능 - 테이블 미리보기",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 7) 셀렉터 편집기 기능 - 재설정",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 8) 셀렉터 편집기 기능 - 삭제",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 9) 셀렉터 편집기 기능 - 셀렉터 선택",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 10) 셀렉터 편집기 기능 - 저장",
+      "사용자 매뉴얼 > 목차 > 4-1. Activities&Properties 의 분류",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities > 4-2-1. WIN32 Group Activities",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities > 4-2-3. EXCEL Group Activities",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities > 4-2-4. COMMON Group Activities",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities > 4-2-5. FILE Group Activities",
+      "사용자 매뉴얼 > 목차 > 4-2. Group별 Activities > 4-2-6. EMAIL Group Activities",
+      "Source Supplement > Source Code Supplement",
+      "Source Supplement > Source-Confirmed Project and Library Creation",
+      "Source Supplement > Source-Confirmed Activity Library Loading",
+      "Source Supplement > Source-Confirmed Project Bundle Structure",
+      "Source Supplement > Source-Confirmed Run and Debug Behavior",
+      "Source Supplement > Source-Confirmed Selector and Resource Notes",
+      "Source Supplement > Source References"
+    ],
+    "CollectedAtUtc": "2026-05-24T14:37:27.4702409+00:00"
+  },
+  {
+    "Product": "BA-Assist",
+    "Version": "2.5.0",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_assist_2.5.0.html",
+    "RawHtmlPath": "docs/product-manuals/raw/ba-assist/2.5.0.html",
+    "NormalizedMarkdownPath": "docs/product-manuals/normalized/ba-assist/2.5.0.md",
+    "Images": [
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img00.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img00-84b1987194cadace.png",
+        "AltText": "BA Assist와 인터페이스",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img00-2.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img00-2-3894bfb83867f89b.png",
+        "AltText": "패키지 파일 생성 과정",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img7.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img7-3a37811e3c2fbe7a.png",
+        "AltText": "250_assist_img7",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img8.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img8-e0d54a40c1dc3ff4.png",
+        "AltText": "250_assist_img8",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img15.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img15-6fd702f80305e963.png",
+        "AltText": "250_assist_img15",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img16.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img16-6c5e2a5f73fdd7b5.png",
+        "AltText": "250_assist_img16",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img17.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img17-3a311418f41f3b4c.png",
+        "AltText": "250_assist_img17",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/230/assist_img27.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img27-02e1ef586ed1cb51.png",
+        "AltText": "assist_img27",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_3.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_3-1fb312e8d70b7b89.png",
+        "AltText": "assist_img46_3",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_4.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_4-d0606eeb3c789456.png",
+        "AltText": "assist_img46_4",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_5.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_5-29d9625e158049e4.png",
+        "AltText": "assist_img46_5",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img18.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img18-44a768b25b8b9dc8.png",
+        "AltText": "250_assist_img18",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img20.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img20-8b4bac0a41ae8d99.png",
+        "AltText": "250_assist_img20",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img21.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img21-0a40a1b2d7fdc850.png",
+        "AltText": "250_assist_img21",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/230/assist_img35.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img35-a1522e602a8a98e9.png",
+        "AltText": "assist_img35",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_6.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_6-9ab3ce37331633bf.png",
+        "AltText": "assist_img46_6",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img22.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img22-bb693854328f0be3.png",
+        "AltText": "250_assist_img22",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img24.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img24-76110d2bc074fe95.png",
+        "AltText": "250_assist_img24",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_7.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_7-d080abc098d64dd7.png",
+        "AltText": "assist_img46_7",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_8.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_8-27c05a1b08234c94.png",
+        "AltText": "assist_img46_8",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_9.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_9-2fc713de1e88686d.png",
+        "AltText": "assist_img46_9",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_10.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_10-8849b9b250058df9.png",
+        "AltText": "assist_img46_10",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/b_img08.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/b_img08-ce8a8358d85d0c36.png",
+        "AltText": "b_img08",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/b_img06.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/b_img06-2bc337ed709d31d0.png",
+        "AltText": "b_img06",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/230/assist_img37.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img37-8c67603354dfd842.png",
+        "AltText": "assist_img37",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/230/assist_img38.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img38-4b052d45f69312da.png",
+        "AltText": "assist_img38",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/b_img06.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/b_img06-2bc337ed709d31d0.png",
+        "AltText": "b_img06",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/b_img07.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/b_img07-35187a3d5c00c3d7.png",
+        "AltText": "b_img07",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/230/assist_img39.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img39-5ebca9e7beb9886c.png",
+        "AltText": "assist_img39",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/assist_img46_10.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/assist_img46_10-8849b9b250058df9.png",
+        "AltText": "assist_img46_10",
+        "Downloaded": true
+      },
+      {
+        "Url": "https://docs.batem.com/b_manual/images/m_assist/250/250_assist_img27.png",
+        "LocalPath": "docs/product-manuals/assets/ba-assist/2.5.0/250_assist_img27-2ef7d775f3af0107.png",
+        "AltText": "250_assist_img27",
+        "Downloaded": true
+      }
+    ],
+    "SectionPaths": [
+      "사용자 매뉴얼 (BA Assist 2.5.X)",
+      "사용자 매뉴얼 (BA Assist 2.5.X) > BA Assist",
+      "사용자 매뉴얼",
+      "사용자 매뉴얼 > 목차",
+      "사용자 매뉴얼 > 목차 > 1-1. BA Assist와 인터페이스",
+      "사용자 매뉴얼 > 목차 > 1-2. BA Assist 파일 형식",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-1. 스케줄러 기능",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-2. 패키지파일 등록/생성 가능",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-3. 상태 보기",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-4. 기타 부가 기능",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-5. 대쉬보드",
+      "사용자 매뉴얼 > 목차 > 1-3. BA Assist의 기능 > 1-3-6. Calendar",
+      "사용자 매뉴얼 > 목차 > 1-4. BATEM V2.0 시스템 권장사항",
+      "사용자 매뉴얼 > 목차 > 2-1. BA Assist 설치방법",
+      "사용자 매뉴얼 > 목차 > 3-1. 태스크(=fpk 또는 fpx 파일) 로딩하기",
+      "사용자 매뉴얼 > 목차 > 3-1. 태스크(=fpk 또는 fpx 파일) 로딩하기 > 3-1-1. fpx 파일 변환 후, 로딩하기",
+      "사용자 매뉴얼 > 목차 > 3-1. 태스크(=fpk 또는 fpx 파일) 로딩하기 > 3-1-2. fpx 파일 변환 후, 로딩하기",
+      "사용자 매뉴얼 > 목차 > 3-1. 태스크(=fpk 또는 fpx 파일) 로딩하기 > 3-1-3. 태스크 업데이트하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기 > 3-2-1. Schedule 창 열기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기 > 3-2-2. Trigger 시간 설정하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기 > 3-2-3. 스케줄 옵션 설정하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기 > 3-2-4. PC 셧다운 여부 설정하기",
+      "사용자 매뉴얼 > 목차 > 3-2. 스케줄 설정하기 > 3-2-5. 스케줄 활성화하기",
+      "사용자 매뉴얼 > 목차 > 4-1. Schedule List",
+      "사용자 매뉴얼 > 목차 > 4-2. Log",
+      "사용자 매뉴얼 > 목차 > 4-3. Stop",
+      "사용자 매뉴얼 > 목차 > 4-4. Setting",
+      "사용자 매뉴얼 > 목차 > 4-4. Setting > 4-4-1. Assist 옵션 설정 기능",
+      "사용자 매뉴얼 > 목차 > 4-4. Setting > 4-4-2. Assist 큐 설정 기능",
+      "사용자 매뉴얼 > 목차 > 4-5. Packing",
+      "사용자 매뉴얼 > 목차 > 4-6. Sequential",
+      "사용자 매뉴얼 > 목차 > 4-7. Refresh",
+      "사용자 매뉴얼 > 목차 > 4-8. Close",
+      "사용자 매뉴얼 > 목차 > 4-9. Exit",
+      "사용자 매뉴얼 > 목차 > 4-10. Help",
+      "사용자 매뉴얼 > 목차 > 5-1. Task List",
+      "사용자 매뉴얼 > 목차 > 5-2. Logs",
+      "사용자 매뉴얼 > 목차 > 5-3. Task Schedule",
+      "사용자 매뉴얼 > 목차 > 5-4. Setting",
+      "사용자 매뉴얼 > 목차 > 5-5. Exit",
+      "사용자 매뉴얼 > 목차 > 6-1. 스킨 설정 기능",
+      "사용자 매뉴얼 > 목차 > 6-2. View Panel 기능",
+      "사용자 매뉴얼 > 목차 > 6-3. 리본메뉴 최소화(Ctrl+F1)",
+      "사용자 매뉴얼 > 목차 > 6-4. Help 메뉴",
+      "Source Supplement > Source Code Supplement",
+      "Source Supplement > Source-Confirmed Package Loading",
+      "Source Supplement > Source-Confirmed Task Update",
+      "Source Supplement > Source-Confirmed Scheduler Behavior",
+      "Source Supplement > Source-Confirmed Trigger and Multi-Instance Options",
+      "Source Supplement > Source-Confirmed Settings and Repository Behavior",
+      "Source Supplement > Source-Confirmed Package Status and Schedule Display",
+      "Source Supplement > Source-Confirmed Task Variables",
+      "Source Supplement > Source References"
+    ],
+    "CollectedAtUtc": "2026-05-24T14:37:27.5725487+00:00"
+  },
+  {
+    "Product": "BA-Assist",
+    "Version": "2.5.0-appendix",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_assist_appendix_2.5.0.html",
+    "RawHtmlPath": "docs/product-manuals/raw/ba-assist/2.5.0-appendix.html",
+    "NormalizedMarkdownPath": "docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md",
+    "Images": [],
+    "SectionPaths": [
+      "Appendix (BA Assist)",
+      "Appendix (BA Assist) > BA Assist",
+      "Appendix",
+      "Appendix > 목차"
+    ],
+    "CollectedAtUtc": "2026-05-24T14:37:27.639102+00:00"
+  }
+]

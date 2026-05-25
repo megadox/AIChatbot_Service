@@ -20,7 +20,8 @@ public sealed record ChatSessionRecord(
     bool IsContextRetained,
     IReadOnlyList<ChatMessageRecord> Messages,
     bool IsGeneralQuestionEnabled = false,
-    bool IsWebSearchEnabled = false);
+    bool IsWebSearchEnabled = false,
+    string QuestionType = "ActivityTask");
 
 /// <summary>
 /// Stores one persisted chat message.

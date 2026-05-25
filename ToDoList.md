@@ -74,7 +74,17 @@
     - `BuiltIn/ForEach.md`
     - `BuiltIn/While.md`
 
-## Improve Scenario-based Activity Recommendation
+## Improve Scenario-based Activity Recommendation - 구현됨
+
+- Implemented current scope.
+  - Scenario intent classification now handles "이때 사용하는 것은?", "하고 싶다", "하려면?" style questions.
+  - URL/domain, Excel range, file path, and UI automation signals are extracted for retrieval routing.
+  - Scenario questions are rewritten into manual-friendly search terms before vector retrieval.
+  - Common action concepts now boost explicit sources such as `WEB/Navigate.md`, `WEB/Refresh.md`, `WEB/Click.md`, and `EXCEL/MaxInRange.md`.
+  - Added `qa/activity_scenarios.json` so all generated activities can provide scenario terms, negative terms, rewrite terms, and entity hints outside code.
+  - `DomainIntentResolver` now loads the scenario map and scores candidates generically instead of relying only on hardcoded activity rules.
+  - Strong entity signals can constrain conflicting candidate groups while softer terms remain preference-only to avoid regressions.
+  - Regression cases were added to `qa/user_test_cases.json`.
 
 - Add stronger intent classification for scenario questions.
   - Examples: "이때 사용하는 것은?", "어떤 액티비티를 써야 하나?", "하고 싶다", "하려면?"
@@ -118,65 +128,146 @@
   - Question: "현재 웹 페이지를 다시 불러오고 싶다"
   - Expected source: `WEB/Refresh.md`
 
-## Add Solution Usage and Guide Chat Support
+### Add Workflow Planning for Multi-step Scenarios
 
-- Add a separate intent for solution/product guide questions.
-  - Examples: "이 프로그램은 어떻게 실행해?", "KB는 어떻게 빌드해?", "대화 세션은 어디에 저장돼?", "답변 수정은 어떻게 반영돼?"
-  - Expected meaning: answer about the AI Chatbot solution itself, not BA-Studio activity manuals.
+- Add a new user intent for workflow or activity plan requests.
+  - Proposed intent: `ActivityPlan`
+  - Examples:
+    - "네이버에 로그인 할때 사용하는 액티비티는?"
+    - "사이트에 로그인하려면?"
+    - "엑셀 파일을 열고 특정 범위를 복사하려면?"
+    - "메일을 작성해서 첨부파일과 함께 보내려면?"
+  - Expected meaning: decompose the user's goal into ordered automation steps and recommend one activity per step, not a single top activity.
 
-- Separate guide knowledge from activity manual knowledge.
-  - Activity manual KB: `docs/generated/commands/**/*.md`
-  - Solution guide KB candidates:
-    - `README.md`
-    - `guide_doc/**/*.md`
-    - `ToDoList.md`
-    - generated operation guide files
-  - Keep source type metadata: `activity_manual`, `solution_guide`, `qa_correction`.
+- Add workflow template data outside code.
+  - Proposed file: `qa/activity_workflows.json`
+  - Example workflow: `web-login`
+    - Trigger terms: "로그인", "사이트 로그인", "웹 로그인"
+    - Required/preferred group: `WEB`
+    - Steps:
+      - Open target website -> `WEB/OpenBrowser.md`
+      - Enter user id -> `WEB/SetValue.md`
+      - Enter password -> `WEB/SetValue.md`
+      - Click login button -> `WEB/Click.md`
 
-- Add a solution guide document set.
-  - App overview and purpose
-  - How to run the WPF chatbot
-  - How to build or rebuild the manual vector DB
-  - How to configure model path and KB path
-  - How chat sessions are saved and loaded
-  - How answer corrections are stored and reflected
-  - How to run retrieval smoke tests
+- Extract workflow entities from user questions.
+  - Site names and domains:
+    - "네이버", `naver.com` -> target URL or site hint.
+    - "다음", `daum.net` -> target URL or site hint.
+  - Operation terms:
+    - "로그인" -> `web-login`
+    - "검색" -> later `web-search`
+    - "다운로드" -> later `web-download`
+  - Keep unknown values as placeholders in the answer.
+    - Example: selector for id field, password field, login button.
 
-- Extend KB builder or add a second guide KB builder path.
-  - Option A: store guide docs in the same SQLite DB with a new source type.
-  - Option B: maintain a separate `solution_guide_vector.db`.
-  - Prefer Option A first if source type filtering is added.
+- Add a workflow retrieval path in `ChatOrchestrator`.
+  - If intent is `ActivityPlan`, do not return only the highest ranked activity.
+  - Resolve the matching workflow template first.
+  - For each step:
+    - Use `preferredSource` when the workflow step defines one.
+    - Retrieve all source chunks via `GetChunksBySourceAsync`.
+    - Keep all step sources in the final grounding set.
+
+- Add a workflow answer builder.
+  - Answer should state that the task requires multiple activities.
+  - Use ordered steps.
+  - For web login, expected answer shape:
+    - `WEB/OpenBrowser` for opening `naver.com`.
+    - `WEB/SetValue` for entering the ID.
+    - `WEB/SetValue` for entering the password.
+    - `WEB/Click` for clicking the login button.
+  - Include important property guidance:
+    - URL
+    - selector
+    - value/text
+  - Include a `[근거]` section listing all source documents.
+
+- Extend regression tests to support multiple expected sources.
+  - Current `UserTestCase.ExpectedSource` supports only one source.
+  - Add `ExpectedSources` array while keeping `ExpectedSource` backward compatible.
+  - A workflow test passes only when all expected sources appear in retrieval or answer grounding.
+
+- Add workflow regression cases.
+  - Question: "네이버에 로그인 할때 사용하는 액티비티는?"
+  - Expected sources:
+    - `WEB/OpenBrowser.md`
+    - `WEB/SetValue.md`
+    - `WEB/Click.md`
+
+- Add workflow process logs.
+  - Example logs:
+    - `의도 분석: ActivityPlan`
+    - `워크플로우 감지: web-login`
+    - `단계 1 근거: WEB/OpenBrowser.md`
+    - `단계 2 근거: WEB/SetValue.md`
+    - `단계 3 근거: WEB/SetValue.md`
+    - `단계 4 근거: WEB/Click.md`
+
+## Add BA-Studio / BA-Assist Product Manual Chat Support
+
+- Implement manual collection and refinement pipeline. - 구현됨
+  - Added `Tools.ProductManualCollector`.
+  - Source list is maintained in `qa/product_manual_sources.json`.
+  - Default sources:
+    - BA-Studio 2.6.0: `https://docs.batem.com/b_manual/b_studio_2.6.0.html`
+    - BA-Assist 2.5.0: `https://docs.batem.com/b_manual/b_assist_2.5.0.html`
+    - BA-Assist 2.5.0 appendix: `https://docs.batem.com/b_manual/b_assist_appendix_2.5.0.html`
+  - Generated outputs:
+    - Raw HTML: `docs/product-manuals/raw/`
+    - Downloaded images: `docs/product-manuals/assets/`
+    - Normalized Markdown: `docs/product-manuals/normalized/`
+    - Manifest: `docs/product-manuals/manual_manifest.json`
+    - Audit report: `docs/product-manuals/reports/manual_audit.json`
+
+- Review current manual audit.
+  - BA-Studio 2.6.0: 131 headings, 179 image references, 1 missing image.
+  - BA-Assist 2.5.0: 46 headings, 59 image references, 0 missing images.
+  - BA-Assist appendix: 4 headings, text-oriented FAQ content.
+  - Empty top-level headings are expected for title/TOC sections, but nested empty sections should be reviewed.
+
+- Add manual image notes for important screenshots.
+  - Proposed file: `qa/product_manual_image_notes.json`
+  - Use for screenshots where the visible UI text is not enough in the HTML.
+  - Add captions for menus, dialogs, scheduler screens, settings screens, and task editor screenshots.
+
+- Extend KB builder for product manuals.
+  - 구현됨
+  - Ingest `docs/product-manuals/normalized/**/*.md`.
+  - Add or infer source type metadata:
+    - `activity_manual`
+    - `product_manual`
+    - `qa_correction`
+  - Store product, version, source URL, section path, and image references.
+
+- Add a separate intent for product guide questions.
+  - 구현됨
+  - Proposed intent: `ProductGuide`
+  - Examples:
+    - "BA-Studio에서 프로젝트는 어떻게 만들어?"
+    - "BA-Assist에서 스케줄은 어떻게 등록해?"
+    - "BA-Assist 로그는 어디서 봐?"
+    - "BA-Studio 셀렉터 편집기는 어떻게 사용해?"
+  - Expected meaning: answer about BA-Studio / BA-Assist product usage, not only individual activity properties.
 
 - Extend retrieval routing.
-  - If intent is `SolutionGuide`, search only solution guide sources.
-  - If intent is `ActivityLookup` or `ActivityRecommendation`, search activity manual sources.
-  - If intent is ambiguous, search both and rerank by intent confidence.
+  - 구현됨
+  - If intent is `ProductGuide`, search only product manual chunks.
+  - If intent is `ActivityLookup` or `ActivityRecommendation`, search activity manual chunks.
+  - If the question combines product usage and activity recommendation, search both and keep the answer sections separated.
 
-- Add a guide answer builder.
-  - Use procedural step format for "how to" questions.
-  - Use short explanation plus paths for "where is stored" questions.
-  - Include exact local file paths or commands when available.
-  - Avoid mixing activity properties into solution guide answers.
+- Add product guide answer builder.
+  - 구현됨
+  - Use ordered steps for "how to" questions.
+  - Mention product and version in the grounding.
+  - Include related screenshot captions when available.
+  - Avoid returning a single activity when the user is asking how to use the BA-Studio or BA-Assist UI.
 
-- Add process logs for guide questions.
-  - Example logs:
-    - `의도 분석: SolutionGuide`
-    - `가이드 문서 검색: README.md, guide_doc/...`
-    - `솔루션 사용법 답변 생성`
-
-- Add guide regression cases.
-  - Question: "KB는 어떻게 다시 빌드해?"
-  - Expected source: `README.md` or guide doc with KB build command.
-  - Question: "대화 세션은 어디에 저장돼?"
-  - Expected source: guide doc describing `ChatBot/conversations/`.
-  - Question: "답변 수정은 어디에 저장돼?"
-  - Expected source: guide doc or `qa/answer_corrections.jsonl` explanation.
-
-- Add user-facing help entry later.
-  - Provide a small "도움말" button or command.
-  - Show examples grouped by:
-    - Activity lookup
-    - Scenario recommendation
-    - Comparison
-    - Follow-up questions
-    - Solution usage
+- Add regression cases.
+  - 구현됨
+  - Question: "BA-Studio에서 새 프로젝트는 어떻게 만들어?"
+  - Expected source: `docs/product-manuals/normalized/ba-studio/2.6.0.md`
+  - Question: "BA-Assist에서 스케줄은 어떻게 활성화해?"
+  - Expected source: `docs/product-manuals/normalized/ba-assist/2.5.0.md`
+  - Question: "BA-Assist와 BA-Server 차이는?"
+  - Expected source: `docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md`

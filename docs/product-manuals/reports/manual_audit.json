@@ -1,0 +1,44 @@
+﻿[
+  {
+    "Product": "BA-Studio",
+    "Version": "2.6.0",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_studio_2.6.0.html",
+    "HeadingCount": 138,
+    "ImageCount": 104,
+    "MissingImageCount": 0,
+    "EmptySectionPaths": [
+      "사용자 매뉴얼",
+      "사용자 매뉴얼 > 목차 > 2-2. 툴바 > 기능 설명",
+      "사용자 매뉴얼 > 목차 > 3-2. 태스크 구현하기",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 1) 셀렉터 편집기 인터페이스",
+      "사용자 매뉴얼 > 목차 > 3-7. 셀렉터 편집기 사용하기 > 2) 셀렉터 편집기 실행 방법"
+    ],
+    "Warnings": []
+  },
+  {
+    "Product": "BA-Assist",
+    "Version": "2.5.0",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_assist_2.5.0.html",
+    "HeadingCount": 55,
+    "ImageCount": 31,
+    "MissingImageCount": 0,
+    "EmptySectionPaths": [
+      "사용자 매뉴얼"
+    ],
+    "Warnings": []
+  },
+  {
+    "Product": "BA-Assist",
+    "Version": "2.5.0-appendix",
+    "SourceUrl": "https://docs.batem.com/b_manual/b_assist_appendix_2.5.0.html",
+    "HeadingCount": 4,
+    "ImageCount": 0,
+    "MissingImageCount": 0,
+    "EmptySectionPaths": [
+      "Appendix"
+    ],
+    "Warnings": [
+      "No images were found in the manual."
+    ]
+  }
+]

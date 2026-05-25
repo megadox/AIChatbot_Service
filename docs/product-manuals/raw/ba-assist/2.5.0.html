@@ -1,0 +1,1576 @@
+﻿<!doctype html>
+<html lang="kr">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="description" id="description"  content="BATEM Online Manual" /> 
+        <meta name="keyword" id="keyword"  content="" />
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="BATEM 매뉴얼">
+        <meta property="og:description" content="BATEM Online Manual">
+        <meta property="og:image" content="../b_manual/images/sns_logo.jpg">
+        <meta property="og:url" content="">
+		<title>BATEM Online Manual</title>
+		<link href="../b_manual/css/default.css" rel="stylesheet"/>
+		
+		<!-- jquery -->
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		
+		<!-- include -->
+		<script type="text/javascript">   
+			$(document).ready( function() {
+
+			$("#header").load("../b_manual/include/header.html");
+			$("#footer").load("../b_manual/include/footer.html"); 
+			$("#search").load("../b_manual/include/search.html"); 
+
+			});
+		</script>
+
+		<!-- 웹 nav -->
+		<script src="../b_manual/js/TweenMax.js"></script>
+		<script src="../b_manual/js/menu.js"></script>
+		
+		<!-- favicon 적용 -->
+		<link rel="shortcut icon" href="../b_manual/images/favicon.ico">
+		
+		<!-- Material Icon CDN -->
+		<link href="https://fonts.googleapis.com/
+		icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined"
+		rel="stylesheet">
+	
+		<!-- Animate css -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container_w pt1 ptxs0">
+			<!-- lnb start -->
+			<section id="lnb" class="dixsn dismn">
+				<h1>사용자 매뉴얼 (BA Assist 2.5.X)</h1>
+				<ul>
+					<li>
+						<a href="#01">01. BA Assist란</a>
+						<ul>
+							<li>
+								<a href="#01_1">1-1. BA Assist와 인터페이스</a>
+							</li>
+							<li>
+								<a href="#01_2">1-2. BA Assist의 파일형식</a>
+							</li>
+							<li>
+								<a href="#01_3">1-3. BA Assist의 기능</a>
+								<ul>
+									<li><a href="#01_3_1">1-3-1. 스케줄러 기능</a></li>
+									<li><a href="#01_3_2">1-3-2. 패키지파일 등록/생성 기능</a></li>
+									<li><a href="#01_3_3">1-3-3. 상태 보기</a></li>
+									<li><a href="#01_3_4">1-3-4. 기타 부가 기능</a></li>
+									<li><a href="#01_3_5">1-3-5. 대쉬보드</a></li>
+									<li><a href="#01_3_6">1-3-6. Calendar</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#01_4">1-4. BATEM V2.0 시스템 권장사항</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#02">02. 환경 설정</a>
+						<ul>
+							<li>
+								<a href="#02_1">2-1. BA Assist 설치방법</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#03">03. 스케줄러</a>
+						<ul>
+							<li>
+								<a href="#03_1">3-1. 태스크(=fpk 또는 fpx파일) 로딩하기</a>
+								<ul>
+									<li><a href="#03_1_1">3-1-1. fpx 파일 변환 후, 로딩하기</a></li>
+									<li><a href="#03_1_2">3-1-2. fpk 파일 변환 후, 로딩하기</a></li>
+									<li><a href="#03_1_3">3-1-3. 태스크 업데이트하기</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#03_2">3-2. 스케줄 설정하기</a>
+								<ul>
+									<li><a href="#03_2_1">3-2-1. Schedule 창 열기</a></li>
+									<li><a href="#03_2_2">3-2-2. Trigger 시간 설정하기</a></li>
+									<li><a href="#03_2_3">3-2-3. 스케줄 옵션 설정하기</a></li>
+									<li><a href="#03_2_4">3-2-4. PC 셧다운 여부 설정하기</a></li>
+									<li><a href="#03_2_5">3-2-5. 스케줄 활성화하기</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+<!--					<li>-->
+<!--						<a href="#04" style="border-bottom:none;">04. 단축키 설정 기능</a>-->
+<!--					</li>-->
+					<li>
+						<a href="#04">04. 메인 메뉴</a>
+						<ul>
+							<li><a href="#04_1">4-1. Schedule List</a></li>
+							<li><a href="#04_2">4-2. Log</a></li>
+							<li><a href="#04_3">4-3. Stop</a></li>
+							<li>
+								<a href="#04_4">4-4. Setting</a>
+								<ul>
+									<li><a href="#04_4_1">4-4-1. BA Assist 옵션 설정 기능</a></li>
+									<li><a href="#04_4_2">4-4-2. BA Assist 큐 설정 기능</a></li>
+								</ul>
+							</li>
+							<li><a href="#04_5">4-5. Packing</a></li>
+							<li><a href="#04_6">4-6. Sequential</a></li>
+							<li><a href="#04_7">4-7. Refresh</a></li>
+							<li><a href="#04_8">4-8. Close</a></li>
+							<li><a href="#04_9">4-9. Exit</a></li>
+							<li><a href="#04_10">4-10. Help</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#05">05. 시스템 트레이 메뉴</a>
+						<ul>
+							<li><a href="#05_1">5-1. Task List</a></li>
+							<li><a href="#05_2">5-2. Logs</a></li>
+							<li><a href="#05_3">5-3. Task Schedule</a></li>
+							<li><a href="#05_4">5-4. Setting</a></li>
+							<li><a href="#05_5">5-5. Exit</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#06">06. 기타 편의기능</a>
+						<ul>
+							<li><a href="#06_1">6-1. 스킨 설정 기능</a></li>
+							<li><a href="#06_2">6-2. View Panel 기능</a></li>
+							<li><a href="#06_3">6-3. 리본메뉴 최소화(Ctrl+F1)</a></li>
+							<li><a href="#06_4">6-4. Help 메뉴</a></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<!-- lnb end -->
+			
+			<!--------------- 매뉴얼 내용 start --------------->
+			<section class="content-wrap">
+				<div class="content-title por ptxs3">
+					<p class="diib fctgray fs1 pt2">
+						<span class="material-icons-outlined vam">screen_search_desktop</span> Version: 2.5.X
+						<span class="diib pw0_5 fcgray">|</span>
+						<span class="material-icons-outlined vam">history</span> Date: 2024.03.29
+					</p>
+					<!-- PDF 다운로드 버튼 -->
+<!--					<a class="m_btn_pdfdown diib fr w15" href="../b_manual/file/assist_2.5.0.pdf" target="_blank">-->
+<!--						<img class="w20" src="../b_manual/images/btn_pdfdown.jpg" alt="PDF다운로드">-->
+<!--					</a>-->
+					<!-- PDF 다운로드 버튼 -->
+					<h2 class="pt1">
+						<img class="title_ci" src="../b_manual/images/ci_assist.png" alt="BA Assist">BA Assist
+					</h2>
+				</div>
+				<div class="content">
+					<!-- 표지 -->
+					<section class="m-content-bg m-content-bg-assist row">
+						<div class="row">
+							<p>비에이템</p>
+							<h1>사용자 매뉴얼</h1>
+							<span>BA Assist 2.5.X</span>
+						</div>
+					</section>
+					<!-- 표지 -->
+					
+					<!-- 목차 -->
+					<section class="m-list-bg row">
+						<div class="row mt1 division_wrap">
+							<h2 class="diib fl fs2 mb2">목차</h2>
+							<div class="diib fr w50 sm100 xs100">
+								<dl class="row m-list">
+									<dt><a href="#01">01. BA Assist란</a></dt>
+									<dd><a href="#01_1">1-1. BA Assist와 인터페이스</a></dd>
+									<dd><a href="#01_2">1-2. BA Assist의 파일 형식</a></dd>
+									<dd>
+										<a href="#01_3">1-3. BA Assist의 기능</a>
+										<ul>
+											<li><a href="#01_3_1">1-3-1. 스케줄러 기능</a></li>
+											<li><a href="#01_3_2">1-3-2. 패키지파일 등록/생성 기능</a></li>
+											<li><a href="#01_3_3">1-3-3. 상태 보기</a></li>
+											<li><a href="#01_3_4">1-3-4. 기타 부가 기능</a></li>
+											<li><a href="#01_3_5">1-3-5. 대쉬보드</a></li>
+											<li><a href="#01_3_6">1-3-6. Calendar</a></li>
+										</ul>
+									</dd>
+									<dd><a href="#01_4">1-4. BATEM V2.0 시스템 권장사항</a></dd>
+								</dl>
+								<dl class="row m-list">
+									<dt><a href="#02">02. 환경 설정</a></dt>
+									<dd><a href="#02_1">2-1. BA Assist 설치방법</a></dd>
+								</dl>
+								<dl class="row m-list">
+									<dt><a href="#03">03. 스케줄러</a></dt>
+									<dd>
+										<a href="#03_1">3-1. 태스크(=fpk 또는 fpx파일) 로딩하기</a>
+										<ul>
+											<li><a href="#03_1_1">3-1-1. fpx 파일 변환 후 로딩하기</a></li>
+											<li><a href="#03_1_2">3-1-2. fpk 파일 변환 후 로딩하기</a></li>
+											<li><a href="#03_1_3">3-1-3. 태스크 업데이트하기</a></li>
+										</ul>
+									</dd>
+									<dd>
+										<a href="#03_2">3-2. 스케줄 설정하기</a>
+										<ul>
+											<li><a href="#03_2_1">3-2-1. Schedule 창 열기</a></li>
+											<li><a href="#03_2_2">3-2-2. Trigger 시간 설정하기</a></li>
+											<li><a href="#03_2_3">3-2-3. 스케줄 옵션 설정하기</a></li>
+											<li><a href="#03_2_4">3-2-4. PC 셧다운 여부 설정하기</a></li>
+											<li><a href="#03_2_5">3-2-5. 스케줄 활성화하기</a></li>
+										</ul>
+									</dd>
+								</dl>
+<!--								<dl class="row m-list">-->
+<!--									<dt><a href="#04">04. 단축키 설정 기능</a></dt>-->
+<!--									<dd></dd>-->
+<!--								</dl>-->
+								<dl class="row m-list">
+									<dt><a href="#04">04. 메인 메뉴</a></dt>
+									<dd><a href="#04_1">4-1. Schedule List</a></dd>
+									<dd><a href="#04_2">4-2. Log</a></dd>
+									<dd><a href="#04_3">4-3. Stop</a></dd>
+									<dd>
+										<a href="#04_4">4-4. Setting</a>
+										<ul>
+											<li><a href="#04_4_1">4-4-1. BA Assist 옵션 설정 기능</a></li>
+											<li><a href="#04_4_2">4-4-2. BA Assist 큐 설정 기능</a></li>
+										</ul>
+									</dd>
+									<dd><a href="#04_5">4-5. Packing</a></dd>
+									<dd><a href="#04_6">4-6. Sequential</a></dd>
+									<dd><a href="#04_7">4-7. Refresh</a></dd>
+									<dd><a href="#04_8">4-8. Close</a></dd>
+									<dd><a href="#04_9">4-9. Exit</a></dd>
+									<dd><a href="#04_10">4-10. Help</a></dd>
+								</dl>
+								<dl class="row m-list">
+									<dt><a href="#05">05. 시스템 트레이 메뉴</a></dt>
+									<dd><a href="#05_1">5-1. Task List</a></dd>
+									<dd><a href="#05_2">5-2. Logs</a></dd>
+									<dd><a href="#05_3">5-3. Task Schedule</a></dd>
+									<dd><a href="#05_4">5-4. Setting</a></dd>
+									<dd><a href="#05_5">5-5. Exit</a></dd>
+								</dl>
+								<dl class="row m-list">
+									<dt><a href="#06">06. 기타 편의기능</a></dt>
+									<dd><a href="#06_1">6-1. 스킨 설정 기능</a></dd>
+									<dd><a href="#06_2">6-2. View Panel 기능</a></dd>
+									<dd><a href="#06_3">6-3. 리본메뉴 최소화(Ctrl+F1)</a></dd>
+									<dd><a href="#06_4">6-4. Help 메뉴</a></dd>
+								</dl>
+							</div>
+						</div>
+					</section>
+					<!-- 목차 -->
+					
+					<!-- 01. BA Assist란 -->
+					<section class="mt2">
+						<p class="sub-title"><a name='01'>01. BA Assist란</a></p>
+						<p class="pb1">
+							BA Assist는 BATEM의 RDA(Robotic Desktop Automation) 제품을 지칭한다. BA Studio(개발 도구)에서 작성한 업무 자동화 태스크를 스케줄러를 통하여 사용자가 정의한 조건에 따라 실행하는 서비스를 수행한다. 
+							BA Assist는 지정된 시간에 자동화 태스크들을 실행하고 다양한 간격으로 실행을 반복 할 수 있다. 
+							BA Assist는 여러 사용자, 여러 부서의 응용 프로그램에 해당하는 넓은 범위에 걸쳐서 작동하는 BA Server 시스템과 달리 오직 하나의 PC(Personal Computer)에서만 작동하며 해당 사용자가 작업하는 응용 프로그램들과의 상호 작용만 담당한다. 
+						</p>
+						<div class="row mb2 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='01_1'>1-1. BA Assist와 인터페이스</a></h3>
+							<p>BA Assist는 단일 사용자를 위한 업무 자동화를 제공하여 반복적인 수동 작업의 일들을 대신할 수 있다.</p>
+							<div class="row tac ph2">
+								<img src="../b_manual/images/m_assist/assist_img00.png" alt="BA Assist와 인터페이스">
+							</div>
+							<p>
+								BA Studio에 의해서 작성된 후 BA Assist의 스케줄링에 포함되는 자동화 태스크의 수행 목록은 작업자의 할 일 목록 또는
+								체크 리스트의 항목에 해당된다고 할 수 있으며, BA Assist에 의해 실행되는 순차적인 일의 처리과정은 자동으로 항목을 수행하고
+								체크리스트 위에서 완료되었음을 체크해 나가는 것으로 비유 할 수 있다.
+							</p>
+						</div>
+						<div class="mb2 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='01_2'>1-2. BA Assist 파일 형식</a></h3>
+							<p class="pb0_5">
+								BA Studio(개발 도구)에서 만들어진 업무 자동화 태스크는 태스크 파일(fp)과 프로젝트 파일(fpp) 두 가지 파일 형식으로 저장된다. 
+							</p>
+							<div class="table_container">
+								<table class="table_scroll table-style1 bd">
+									<tr>
+										<td class="w20 bgnavy fcw fwb bdr">파일형식</td>
+										<td class="bgnavy fcw fwb tac">설명</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray fwb">① fp파일(*.fp)</td>
+										<td>BA Studio에서 업무 자동화를 위한 태스크를 생성하여 구현한 실행파일로서, 파일 확장자는 fp이다.</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray fwb">② fpp파일(*.fpp)</td>
+										<td>BA Studio에서 업무 자동화를 위한 프로젝트를 생성하여 구현한 실행파일로서, 파일 확장자는 fpp이다.</td>
+									</tr>
+								</table>
+							</div>
+							<p class="ph1">
+								위 업무 자동화 파일들을 BA Assist(RDA 제품)에서 구동하게 하려면 fpk(fp파일+리소스) 또는 fpx(fpp파일+리소스)의
+								확장자를 가진 패키지 파일로 변환되어야 한다. 
+							</p>
+							<div class="table_container">
+								<table class="table_scroll table-style1 bd">
+									<tr>
+										<td class="w20 bgnavy fcw fwb bdr">파일형식</td>
+										<td class="bgnavy fcw fwb tac">설명</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray fwb">① fpk 파일(*.fpk)</td>
+										<td>
+											BA Studio에서 만들어진 업무자동화 태스크인 fp파일과 리소스를 묶어 패키지로 만든 파일이다.<br>
+											**BA Assist를 통해 fpk파일을 생성한다.
+										</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray fwb">② fpx 파일(*.fpx)</td>
+										<td>
+											BA Studio의 Project 만들기로 생성된 Project 폴더를 패키지로 변환한 파일이다.
+											Project 폴더는 Project실행 파일인 fpp파일과 리소스 폴더들을 포함하고 있다.
+											**BA Studio를 통해 fpx파일을 생성한다.
+										</td>
+									</tr>
+								</table>
+							</div>
+							<p class="ph1">
+								실행파일과 리소스를 함께 관리하기 위해 <b>패키지 파일을 생성하는 두 가지 경로</b>를 아래의 그림을 통해 나타내었다.
+							</p>
+							<img src="../b_manual/images/m_assist/assist_img00-2.png" alt="패키지 파일 생성 과정">
+						</div>
+						<div class="row mb2 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='01_3'>1-3. BA Assist의 기능</a></h3>
+							<p>
+								BA Assist는 한 개 이상의 자동화 태스크 (fpk 또는 fpx파일)들을 정해진 시간에 수행되도록 하는 스케줄러의 일을 하는 것이 주된 임무이다.<br><br>
+								또한, 태스크 로딩기능으로 서버로부터 자동화 태스크를 다운 받아 로딩하는 기능, fp파일들을 패키지 파일인 fpk로 만드는 기능,
+								BA Studio의 Export 기능에 의해서 하나의 project가 변환된 fpx파일을 읽어 들여 로딩하는 기능 등을 지원하고 있고, 상태메뉴 보기 기능으로
+								스케줄에 등록된 태스크들만 추출하여 만든 스케줄 리스트를 검색하는 기능과 로그창을 통해 수행이력 및 로그메시지를 검색하는 기능 등을 제공하고 있다.
+								그 밖에 Short Cut기능을 통해 단축키를 이용하여 특정 태스크를 즉시 수행할 수 있는 기능과 편의기능으로 스킨 설정 기능 등을 제공하고 있다.
+							</p>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_1'>1-3-1. 스케줄러 기능</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										1) 스케줄러는 스케줄에 등록한 시간까지 대기 한 다음 이벤트를 발생시켜 저장된 태스크를 수행하게 한다.
+									</li>
+									<li class="pt0_5">
+										2) 지정된 시간에 자동화된 일의 프로세스를 실행하고 다양한 간격으로 실행을 반복 할 수 있다. 일을 한 번 실행하거나
+										시간 간격을 두고 매분, 매시간, 매일, 매주, 매월 또는 매년 반복하게 하도록 구성할 수 있다.
+									</li>
+								</ul>
+							</div>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_2'>1-3-2. 패키지파일 등록/생성 가능</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										1) BA Studio의 export기능을 통해 Project폴더를 패키지 파일인 fpx로 변환한 후 BA Assist에 등록하여 실행할 수 있는 기능
+									</li>
+									<li class="pt0_5">
+										2) BA Studio에서 만들어진 자동화 태스크인 fp파일과 리소스를 묶어 BA Assist를 통해 패키지 파일인 fpk파일을 생성하고 수행하는 기능
+									</li>
+									<li class="pt0_5">
+										3) BA Server에 등록되어 있는 패키지 파일인 fpk 또는 fpx파일을 다운받아 BA Assist에서 수행시키는 기능 등을 제공하고 있다.
+									</li>
+								</ul>
+							</div>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_3'>1-3-3. 상태 보기</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										메인 메뉴 아래 「Schedule」과 「Log」 의 서브 메뉴를 통해 스케줄러에 등록된 일들과 실행의 로그 상태 등을 볼 수 있는 기능을
+										제공하고 있다. 또한  「Setting」메뉴의 「Dashboard Set」 기능을 통하여 특정 서버와의 DB 동기화를 수행할 수 있으며 특정 서버에
+										접속하여 Dashboard 보기를 통하여 태스크의 스케줄링과 수행 상태를 모니터링 할 수 있다.
+									</li>
+								</ul>
+							</div>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_4'>1-3-4. 기타 부가 기능</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										1) 세팅 메뉴를 통해 멀티프로세싱 및 Queue 사용 여부를 설정할 수 있는 기능
+									</li>
+									<li class="pt0_5">
+										2) 시스템 트레이 메뉴를 통해 BA Assist의 메인 메뉴로 이동하거나 특정 부가 메뉴로 이동하는 기능
+									</li>
+									<li class="pt0_5">
+										3) 사용자 인터페이스인 테마를 여러 가지 형태로 변경할 수 있는 기능 등을 제공하고 있다.
+									</li>
+									<li class="pt0_5">
+										4) Sequential 태스크 수행을 위한 Sequential 태스크 설정 기능
+									</li>
+								</ul>
+							</div>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_5'>1-3-5. 대쉬보드</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										1) 선택한 작업의 실행 통계를 확인할 수 있는 기능
+									</li>
+									<li class="pt0_5">
+										2) 성공률 및 최근 작업 수행 시간을 확인할 수 있다.
+									</li>
+								</ul>
+							</div>
+							<div class="row mh1 division_wrap">
+								<h4><a name='01_3_6'>1-3-6. Calendar</a></h4>
+								<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+									<li>
+										예정 스케줄과 이미 수행된 스케줄을 달력화면에서 확인할 수 있는 기능
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mb2 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='01_4'>1-4. BATEM V2.0 시스템 권장사항</a></h3>
+							<div class="table_container">
+								<table class="table_scroll table-style1 bd tal">
+									<tr class="bgnavy fcw fwb">
+										<td colspan="3" class="tac">소프트웨어</td>
+									</tr>
+									<tr>
+										<td rowspan="5" class="bdr bggray fwb tac">운영체제</td>
+										<td class="fwb bdr">BA Assist용 PC</td>
+										<td rowspan="4">Microsoft Windows 10 Pro – 64bit</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Studio용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA-Worker용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr w20">BA Server접속 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Server</td>
+										<td>Ubuntu 18.04 – 64bit</td>
+									</tr>
+									<tr>
+										<td rowspan="5" class="bdr bggray fwb tac">특이사항<br>(제품구동요구사항)</td>
+										<td class="bdr">BA Studio용 PC</td>
+										<td rowspan="3" class="bdr">
+											- 프레임워크: .Net Framework 4.8 이상<br>
+											- 오피스 프로그램: MS Excel 2007 이상, MS Word 2007 이상, MS Outlook 2007 이상<br>
+											- 웹 브라우저: Microsoft Internet Explorer 최신 버전, Google Chrome 최신버전 (Driver2.3이상)
+										</td>
+									</tr>
+									<tr>
+										<td class="fwb bdr">BA Assists용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA-Worker용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Server 접속 PC</td>
+										<td class="bdr">
+											- 프레임워크: .Net Framework 4.5 이상<br>
+											- 웹 브라우저: Google Chrome 최신 버전
+										</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Server</td>
+										<td>
+											- DBMS : MySQL 5.7<br>
+											- JAVA: Oracle JDK 1.8 이상<br>
+											- Web Server : Apache 2.4<br>
+											- WAS : Tomcat 8.5
+										</td>
+									</tr>
+									<tr class="bgnavy fcw fwb">
+										<td colspan="3" class="tac">하드웨어</td>
+									</tr>
+									<tr>
+										<td rowspan="5" class="bdr bggray fwb tac">하드웨어 사양</td>
+										<td class="bdr">BA Studio용 PC</td>
+										<td rowspan="4">CPU: Intel i5 Dual Core 2.0GHz, MEM: 8GB, HDD: 256GB</td>
+									</tr>
+									<tr>
+										<td class="fwb bdr">BA Assist용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA-Worker용 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Server접속 PC</td>
+									</tr>
+									<tr>
+										<td class="bdr">BA Server접속 PC</td>
+										<td>CPU: 2 CPUs, MEM: 4GB, SSD: 80GB</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray tac fwb">네트워크 환경</td>
+										<td colspan="2" class="tac">TCP/IP 환경</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray fwb tac">기타 환경</td>
+										<td colspan="2" class="tac">N/A</td>
+									</tr>
+									<tr class="bgnavy fcw fwb">
+										<td colspan="3" class="tac">기타사항</td>
+									</tr>
+									<tr>
+										<td colspan="3" class="tac">데이터 암복호화: One-way Bcrypt</td>
+									</tr>
+								</table>	
+							</div>
+						</div>
+					</section>
+					<!-- 01. BA Assist란 end -->		
+					
+					<!-- 02. 환경설정 (BA Assist 설치방법) -->
+					<section class="mt2">
+						<p class="sub-title"><a name='02'>02. 환경 설정</a></p>
+						<hr class="hr-style1">
+						<h3><a name='02_1'>2-1. BA Assist 설치방법</a></h3>
+						<p>
+							BATEM에서 제공하는 Web Site에서 BA Assist 설치파일을 다운로드 받아서 설치할 수 있다.<br class="dismn dixsn">
+							아래의 Step별 설치과정을 따라서 BA Assist를 설치하도록 한다.
+						</p>
+						<div>
+							<dl class="row mh1">
+								<dt class="fwb ffsd tdu">Step1.</dt>
+								<dd>
+									<a href="https://download.batem.com" target="_blank">https://download.batem.com</a>에 접속하여 나타난 아래의
+									BA Assist 다운로드 창에서 왼쪽 DOWNLOAD 버튼을 눌러 설치 파일인 BAssistSetup.exe을 다운 받는다.
+									<img class="mt0_5" src="../b_manual/images/m_assist/230/assist_img00.png">
+								</dd>
+							</dl>
+							<hr class="mh1">
+							<dl class="mh1">
+								<dt class="fwb ffsd tdu">Step2.</dt>
+								<dd>
+									<p>아래의 과정에 따라 설치한다.</p>
+									<div class="table_container">
+										<table class="table_scroll table-style1 bd mt0_5">
+											<tr>
+												<td class="bggray fwb bdr w30 tac">① 추가 정보 클릭</td>
+												<td class="bggray fwb bdr w30 tac">② 실행 클릭</td>
+												<td class="bggray fwb w30 tac">③ 설치 시작</td>
+											</tr>
+											<tr>
+												<td class="bdr"><img src="../b_manual/images/m_assist/assist_img02.png" alt=""></td>
+												<td class="bdr"><img src="../b_manual/images/m_assist/assist_img03.png" alt=""></td>
+												<td class=""><img src="../b_manual/images/m_assist/230/assist_img01.png" alt=""></td>
+											</tr>
+											<tr>
+												<td class="bdr">추가 정보를 클릭한다.</td>
+												<td class="bdr">실행 버튼을 클릭한다.</td>
+												<td>다음 버튼을 클릭한다.</td>
+											</tr>
+											<tr>
+												<td class="bggray fwb bdr tac">④ 설치 폴더 선택</td>
+												<td class="bggray fwb bdr tac">⑤ 설치 진행</td>
+												<td class="bggray fwb tac">⑥ 설치 완료</td>
+											</tr>
+											<tr>
+												<td class="bdr"><img src="../b_manual/images/m_assist/230/assist_img02.png" alt=""></td>
+												<td class="bdr"><img src="../b_manual/images/m_assist/230/assist_img03.png" alt=""></td>
+												<td><img src="../b_manual/images/m_assist/230/assist_img04.png" alt=""></td>
+											</tr>
+											<tr>
+												<td class="bdr">설치 폴더를 선택한다.</td>
+												<td class="bdr">설치를 진행한다.</td>
+												<td>마침을 클릭하여 Assist 설치를 마무리한다.</td>
+											</tr>
+										</table>
+									</div>
+								</dd>
+							</dl>
+							<hr class="mh1">
+							<dl class="mh1">
+								<dt class="fwb ffsd tdu">Step3.</dt>
+								<dd>
+									<p>아래의 과정에 따라 라이선스 절차를 확인 후 등록한다.<span class="fcred"> *정책에 따라 변경 가능하다.</span></p>
+									<div class="table_container">
+										<table class="table_scroll table-style1 bd mt0_5">
+											<tr>
+												<td class="bggray fwb bdr w30 tac">① Register License 클릭</td>
+												<td class="bggray fwb bdr w30 tac">② License Information 복사</td>
+												<td class="bggray fwb w30 tac">③ License 담당자에게 메일발송</td>
+											</tr>
+											<tr>
+												<td class="bdr"><img src="../b_manual/images/m_assist/230/assist_img05.png" alt=""></td>
+												<td class="bdr"><img src="../b_manual/images/m_assist/230/assist_img06.png" alt=""></td>
+												<td class=""><img src="../b_manual/images/m_assist/assist_img10.png" alt=""></td>
+											</tr>
+											<tr>
+												<td class="bdr">
+													설치가 끝난 후 라이선스 등록화면이
+													나오면 Register License 버튼을 누른다.
+												</td>
+												<td class="bdr">
+													License > Create License Info. 탭으로 들어간 후 License Information 아래에 있는 내용을 복사한다.
+												</td>
+												<td>
+													라이선스 담당자(license@batem.com)에게
+													복사한 내용과 직급을 입력 후메일을 발송하여 import할 라이선스 파일을 요청한다.
+												</td>
+											</tr>
+											<tr>
+												<td class="bggray fwb bdr tac">④ Import License File 클릭</td>
+												<td class="bggray fwb bdr tac">⑤ License File 열기</td>
+												<td class="bggray fwb tac">⑥ 라이선스 등록 완료</td>
+											</tr>
+											<tr>
+												<td class="bdr"><img src="../b_manual/images/m_assist/230/assist_img07.png" alt=""></td>
+												<td class="bdr"><img src="../b_manual/images/m_assist/assist_img12.png" alt=""></td>
+												<td><img src="../b_manual/images/m_assist/230/assist_img08.png" alt=""></td>
+											</tr>
+											<tr>
+												<td class="bdr">
+													담당자에게 요청한 파일이 오면
+													파일을 다운로드 후 
+													Import License File 버튼을 클릭한다.
+												</td>
+												<td class="bdr">
+													라이선스 담당자에게 받은 License File의
+													경로를 확인 후 열기를 누른다.
+												</td>
+												<td>
+													Register License 버튼을 클릭하여
+													라이선스 등록을 마무리한다.
+												</td>
+											</tr>
+										</table>
+									</div>
+								</dd>
+							</dl>
+						</div>															
+					</section>
+					<!-- 02.환경 설정 end -->
+					
+					<!-- 03. 스케줄러 -->
+					<section class="mt2">
+						<p class="sub-title"><a name='03'>03. 스케줄러</a></p>
+						<p>
+							BA Assist의 주요 기능은 스케줄러이다. 스케줄러는 사용자가 정의한 조건에 따라 BA Studio에서 작성한 자동화 태스크를 실행하는 서비스로,
+							BA Assist는 지정된 시간에 자동화 태스크를 실행하고 다양한 간격으로 실행을 반복 할 수 있다.
+						</p>
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='03_1'>3-1. 태스크(=fpk 또는 fpx 파일) 로딩하기</a></h3>
+							<p class="mt0_5">아래의 세가지 형태의 자동화 태스크들을 BA Assist에 로딩하여 수행할 수 있다.</p>
+							<ul class="row mt0_5 bd mb0_5 p1 bdtnavy bggray fs0_9">
+								<li>
+									1) BA Studio의 export기능을 통해 Project폴더를 패키지 파일인 fpx로 변환한 후 BA Assist에 로딩하기
+								</li>
+								<li class="pt0_5">
+									2) BA Studio에서 만들어진 태스크인 fp파일과 태스크와 관련된 리소스파일을 소스로 하여 패키지 파일인 fpk파일을 생성한 후 BA Assist에 로딩하기
+								</li>
+								<li class="pt0_5">
+									3) BA Server에 등록되어 있는 패키지 파일인 fpk 또는 fpx파일을 다운받아 BA Assist에 로딩하기
+								</li>
+							</ul>
+							<p class="mt0_5">☞ fpx와 fpk파일 형식에 관해서는 <a>BA Assist 실행 태스크 파일의 형식</a>을 참조한다.</p>
+							<div class="row mh1 division_wrap">
+								<div class="row ph2">
+									<h4><a name='03_1_1'>3-1-1. fpx 파일 변환 후, 로딩하기</a></h4>
+									<p class="pt0_5">
+										<a href="#01_2" class="tdu">BA Assist 파일 형식</a>에서 다루었던 것처럼, BA Studio(개발 도구)에서 작성된 fpp파일(프로젝트 파일)을 BA Assist에서 구동하려면
+										fpp파일과 리소스를 패키징하여, fpx파일(패키지 파일)로 변환하는 과정이 필요하다. 본 작업을 수행해보자.
+									</p>
+									<p class="pt0_5">
+										<b>Step1</b>을 통해 BA Studio에서 fpp파일을 리소스와 패키징하여 fpx파일로 변환하는 과정을 다룬다.  
+									</p>
+									<p class="pt0_5">
+										<b>Step2</b>을 통해 fpx파일을 BA Assist에 로딩하는 과정을 나타내기로 한다.
+									</p>
+								</div>
+								<div class="row">
+									<p class="ex-title">Step1. fpx 파일로의 변환</p>
+									<div class="row ex-con mt1">
+										<dl class="mb1">
+											<dt>Step1-1.</dt>
+											<dd>
+												Sample Tasks 폴더> 현금예산작성하기 폴더> 『현금예산작성하기.fpp』 파일을 열고 상단의 Project 탭에서 Export Project를 선택한다.
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img1.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-2.</dt>
+											<dd>
+												Sample Tasks 폴더로 저장 경로를 설정하고, 파일 형식(.fpx)을 확인 한 후, 파일 이름에 『현금예산작성하기_패키지』를 입력한다. 
+												<img class="ph1" src="../b_manual/images/m_assist/assist_img15.png">
+												<p>
+													☞ 주의: 이 때, fpx파일의 저장 위치를 지정할 때 fpp 파일이 위치한 폴더는 허용되지 않는다. 따라서 프로젝트 폴더(예, 현금예산작성하기) 외부에 있는 저장 폴더(예, Sample Tasks)를 지정하여 변환된 fpx파일이 저장되도록 해야 한다.
+												</p>
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-3.</dt>
+											<dd>
+												<span class="pt0_5 pr0_5"><img class="diib" src="../b_manual/images/m_assist/b_img01.png"></span>버튼을 누른다.
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-4.</dt>
+											<dd>
+												해당 폴더에 패키지 파일인 fpx 파일이 생성되었음을 확인할 수 있다.
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="row mt2">
+									<p class="ex-title">Step2. 변환된 fpx 파일 로딩</p>
+									<div class="row ex-con mt1">
+										<dl class="mb1">
+											<dt>Step2-1.</dt>
+											<dd>
+												BA Assist의 스케줄 에디터 화면에서 왼쪽 상단의 Add Task를 선택한다. 
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img2.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2-2.</dt>
+											<dd>
+												Step1에서 만들어 놓았던 『현금예산작성하기_패키지.fpx』파일을 선택 후,<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img02.png"></span>버튼을 누른다. 
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img13.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2-3.</dt>
+											<dd>
+												아래의 화면처럼 선택된 fpx파일이 BA Assist에 로딩되었음을 확인할 수 있다.
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img3.png">
+											</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+							<div class="row mh1 division_wrap">
+								<div class="row ph2">
+									<h4><a name='03_1_2'>3-1-2. fpx 파일 변환 후, 로딩하기</a></h4>
+									<p class="pt0_5">
+										앞서 다루었던 것처럼, BA Studio(개발 도구)에서 작성된 fp파일(태스크 파일)을 BA Assist에서 구동하려면 fp파일과 리소스를
+										패키징하여, fpk파일(패키지 파일)로 변환하는 과정이 필요하다. 본 작업을 수행해보자.
+									</p>
+									<p class="pt0_5">
+										<b>Step1</b>을 통해 BA Assist에서 fp파일과 리소스를 패키징하여, fpk파일로 변환하는 과정을 다룬다.  
+									</p>
+									<p class="pt0_5">
+										<b>Step2</b>을 통해 fpk파일을 BA Assist에 로딩하는 과정을 나타내기로 한다.
+									</p>
+								</div>
+								<div class="row">
+									<p class="ex-title">Step1. fpk 파일로의 변환</p>
+									<div class="row ex-con mt1">
+										<dl class="mb1">
+											<dt>Step1-1.</dt>
+											<dd>
+												Option 탭의<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img03.png"></span>누른 후 나타난 아래의 화면에서 〓를 선택한다. 
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img4.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-2.</dt>
+											<dd>
+												fpk로 변환할 대상 폴더를 선택한다. Sample Tasks 폴더의 『상품몰검색』 폴더를 가져온다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img14.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-3.</dt>
+											<dd>
+												아래의 그림을 참고하여, 선택한 폴더에서 Main Task에 해당하는 fp파일에 체크 박스를 클릭한 후, Package Name과 Description 을 입력한다.
+												<ul class="row bd p1 bdtnavy bgw mh1">
+													<li>- Main Task : 상품몰검색\쇼핑몰상품정보가져오기.fp</li>
+													<li>- Package Name: 『상품정보크롤링</li>
+													<li>- Description: 『상품정보를 인기순 검색 후 특정 상품정보필드만 선택하여 엑셀에 저장한다.』</li>
+												</ul>
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-4.</dt>
+											<dd>
+												입력 과정이 완료되면<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img04.png"></span>버튼을 누른다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img12.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-5.</dt>
+											<dd>
+												Sample Tasks 폴더로 저장 경로를 선택한 후, 파일 이름(N)에 『상품정보크롤링』을 입력하고<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img01.png"></span>버튼을 누른다. 
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img17.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step1-6.</dt>
+											<dd>
+												해당 폴더에서 패키지 파일인 fpk 파일이 생성되었음을 확인할 수 있다.
+												<p class="pt0_5">
+													☞ 참고로, 아래의 그림처럼 〓버튼을 눌러 이미 만들어진 fpk 파일을 불러와서 패키지 정보를 수정할 수도 있다.
+													즉, 〓버튼 동작 이후의 시퀀스는 패키지를 업데이트하는 기능으로 작동하는 것으로 간주할 수 있다.
+												</p>
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img16.png">
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="row">
+									<p class="ex-title">Step2. fpk파일을 로딩</p>
+									<div class="row ex-con mt1">
+										<dl class="mb1">
+											<dt>Step2-1.</dt>
+											<dd>
+												BA Assist의 스케줄 에디터 화면에서 왼쪽 상단에 Add Task를 클릭한다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img09.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2-2.</dt>
+											<dd>
+												파일 검색창에서 Step 1에서 만들어 놓은 fpk파일을 선택한 후<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img02.png"></span>버튼을 누른다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img18.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2-3.</dt>
+											<dd>
+												아래의 그림처럼 fpk 파일이 BA Assist에 로딩된 화면이 나타난다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img19.png">
+											</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+							<div class="row mh1 division_wrap"> 
+								<div class="row ph2">
+									<h4><a name='03_1_3'>3-1-3. 태스크 업데이트하기</a></h4>
+									<p class="pt0_5">
+										BA Assist에 이미 로딩된 태스크를 업데이트하는 과정은 다음과 같다.
+									</p>
+								</div>
+								<div class="row">
+									<div class="row ex-con">
+										<dl class="mb1">
+											<dt>Step1.</dt>
+											<dd>
+												BA Assist의 스케줄 에디터 화면에서 왼쪽 상단에 Add Task를 클릭한다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img20.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2.</dt>
+											<dd>
+												3-1-1. fpx 파일 변환 후, 로딩하기의 Step2에서와 마찬가지로 파일 검색창에서 업데이트하고자 하는
+												fpk파일을 선택한 후<span class="pw0_5"><img class="diib" src="../b_manual/images/m_assist/b_img02.png"></span>버튼을 누른다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img21.png">
+											</dd>
+										</dl>
+										<dl class="mb1">
+											<dt>Step3.</dt>
+											<dd>
+												팝업 창에 YES 버튼을 클릭한다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img22.png">
+											</dd>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='03_2'>3-2. 스케줄 설정하기</a></h3>
+							<p class="mt0_5">봇이 수행할 태스크를 로딩하였으니, 스케줄을 설정해보자. 이 때, 3-1의 ①번과 ②번에서 만들어 놓은 예시를 활용할 것이다.</p>
+							<div class="row mh1 division_wrap"> 
+								<div class="row ph2">
+									<h4><a name='03_2_1'>3-2-1. Schedule 창 열기</a></h4>
+								</div>
+								<div class="row">
+									<div class="row ex-con">
+										<dl class="mb1">
+											<dt>Step1.</dt>
+											<dd>
+												스케줄을 설정하고자 하는 태스크를 선택 > Schedule 버튼 (①번 버튼) 또는 + 버튼 (②번 버튼)을 클릭한다. 
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img5.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl class="mb1">
+											<dt>Step2.</dt>
+											<dd>
+												Step1의 과정을 수행하면, 스케줄 설정 화면(Schedule 창)이 나타난다.  
+												<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img6.png">
+											</dd>
+										</dl>
+										<p>
+											※ 다음에서는 본 Schedule 창에서 Trigger 시간(시작 시간), 스케줄 옵션, PC 셧다운 여부를 설정하고, 스케줄을 활성화시키는 작업을 수행할 것이다. 
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="row mh1 division_wrap"> 
+								<div class="row ph2">
+									<h4><a name='03_2_2'>3-2-2. Trigger 시간 설정하기</a></h4>
+									<p class="pt0_5">Trigger 기능은 실행하고자 하는 태스크가 시작될 시간과 날짜를 의미한다.</p>
+									<ul class="row bd bdtnavy bggray p1 mt1">
+										<li class="pb0_5">
+											→ 날짜의 경우, 직접 키보드의 숫자키를 입력하거나 이동키 위, 아래 버튼을 이용하여 시간을 조정할 수 있다. 또한, 달력 아이콘을 클릭하여 표시된 선택 메뉴에서 날짜를 고를 수도 있다.
+										</li>
+										<li>
+											→ 시간의 경우, 직접 키보드의 숫자키를 입력하거나 이동키 위, 아래 버튼을 이용하여 시간을 조정할 수 있다.
+										</li>
+									</ul>
+									<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img7.png">
+								</div>
+							</div>
+							<div class="row mh1 division_wrap"> 
+								<div class="ph2">
+									<h4><a name='03_2_3'>3-2-3. 스케줄 옵션 설정하기</a></h4>
+									<p class="pt0_5">
+										스케줄 옵션 기능은 다양한 시간 간격으로 자동화 태스크의 실행을 반복 할 수 있게 하는 기능이다.<br>
+										Times창, Option창에 해당한다.
+									</p>
+									<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img8.png">
+									<p class="sub-title2">반복 주기 설정</p>
+									<p>
+										위 화면 Times 창을 통해 One Time(한 번만), Daily(매일마다), Weekly(매주마다), Monthly(매월마다) 중에서
+										하나를 택하여 반복주기를 설정할 수 있다. 각각의 메뉴는 아래의 하위메뉴를 통하여 세부 설정기능을 제공하고 있고, 특히,
+										Mothly 설정에는 day(일) 설정과 day of the week(주단위) 설정 기능이 더 들어 있다.
+									</p>
+									<div class="table_container">
+										<table class="table_scroll table-style1 bd mh1">
+											<tr>
+												<td class="bggray fwb tac bdr">One Time</td>
+												<td class="bggray fwb tac">Daily</td>
+											</tr>
+											<tr>
+												<td class="bdr tal vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img9.png">
+													<dl>
+														<dt>[동작설명]</dt>
+														<dd>● Trigger에 설정된 날짜와 시간부터</dd>
+														<dd>● Period에 설정된 시간 동안</dd>
+														<dd>● Job Repeat Interval에 설정된 시간마다 태스크를 수행한다.</dd>
+													</dl>
+													<p class="pt0_5">
+														따라서, Trigger에 설정된 시간부터 Period에 설정된 시간 경과 후에는
+														더 이상 태스크를 반복 수행하지 않는다. 
+													</p>
+												</td>
+												<td class="vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img10.png">
+													<dl>
+														<dt>[동작설명]</dt>
+														<dd>● Trigger에 설정된 날짜와 시간부터</dd>
+														<dd>● Recur every에 설정된 일 간격으로</dd> 
+														<dd>● Period에 설정된 시간 동안</dd>
+														<dd>● Job Repeat Interval에 설정된 시간마다 태스크를 수행한다.</dd> 
+													</dl>
+													<p class="pt0_5">
+														따라서, Trigger에 설정된 시간부터 Period에 설정된 시간 동안 수행한 횟수만큼 매일 태스크를 반복 수행한다.  
+													</p>
+												</td>
+											</tr>
+											<tr>
+												<td class="bggray fwb tac bdr w50">Weekly</td>
+												<td class="bggray fwb tac w50">Monthly(I)</td>
+											</tr>
+											<tr>
+												<td class="bdr tal vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img11.png">
+													<dl>
+														<dt>[동작설명]</dt>
+														<dd>● Trigger에 설정된 날짜와 시간부터</dd>
+														<dd>● Recur every에 설정된 주 간격으로</dd>
+														<dd>● every day of the week에 설정된 요일마다 (복수선택 가능)</dd>
+														<dd>● Period에 설정된 시간 동안</dd>
+														<dd>● Job Repeat Interval에 설정된 시간마다 태스크를 수행한다.</dd>
+													</dl>
+													<p class="pt0_5">
+														따라서, Trigger에 설정된 시간에 처음 수행한 태스크는 설정된 주 단위로 반복 수행을 한다.
+														이 때 Recur every에 설정할 수 있는 최대값은 52 (단위: 주)이다.
+													</p>
+												</td>
+												<td class="vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img12.png">
+													<dl>
+														<dt>[동작설명 - day 모드가 선택된 경우]</dt>
+														<dd>● Trigger에 설정된 날짜와 시간부터</dd>
+														<dd>● Month에 설정된 월마다 (복수선택 가능)</dd>
+														<dd>● day에 설정된 날짜마다 (복수선택 가능)</dd>
+														<dd>● Period에 설정된 시간 동안</dd>
+														<dd>● Job Repeat Interval에 설정된 시간마다 태스크를 수행한다.</dd>
+													</dl>
+													<p class="pt0_5">
+														따라서, Trigger에 설정된 시간에 처음 수행한 태스크는 설정된 월 마다 반복 수행을 한다.
+													</p>
+												</td>
+											</tr>
+											<tr>
+												<td class="bggray fwb tac bdr w50">Monthly(II)</td>
+												<td class="bggray fwb tac w50">스케줄 겹침 처리 방법</td>
+											</tr>
+											<tr>
+												<td class="bdr tal vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img13.png">
+													<dl>
+														<dt>[동작설명 – day of the week 모드가 선택된 경우]</dt>
+														<dd>● Trigger에 설정된 날짜와 시간부터</dd>
+														<dd>● Month에 설정된 월마다 (복수선택 가능)</dd>
+														<dd>● day of the week에 설정된 주 M (복수선택 가능) 요일 N (복수선택 가능) 에 대하여 M번째 주 N요일에</dd>
+														<dd>● Period에 설정된 시간 동안</dd>
+														<dd>● Job Repeat Interval에 설정된 시간마다 태스크를 수행한다.</dd>
+													</dl>
+													<p class="pt0_5">
+														따라서, Trigger에 설정된 시간에 처음 수행한 태스크는 설정된 월 마다 반복 수행을 한다.
+													</p>
+												</td>
+												<td class="vat">	
+													<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img14.png">
+													<p class="pb0_5">이미 동작 중인 작업이 있을 경우 처리 방법을 설정한다.</p>
+													<dl>
+														<dt>[동작설명 - day 모드가 선택된 경우]</dt>
+														<dd>● IgnoreNew: 새로 진행되는 작업을 무시한다.</dd>
+														<dd>● Parallel: 병행(병렬)으로 작업을 진행한다.</dd>
+														<dd>● Queue: 큐에 쌓는다.</dd>
+														<dd>● StopExisting: 기존 작업을 정지한다.</dd>
+													</dl>
+													<ul class="row mh1">
+														<li class="pb0_5">※Paralled 은 동시에 작업이 진행됨으로 오류가 발생할 확률이 높다. 권장하지 않는다.</li>
+														<li>※Queue 사용 시 Setting에서 Queue사용을 체크해야한다.</li>
+													</ul>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="row mh1 division_wrap"> 
+								<div class="row ph2">
+									<h4><a name='03_2_4'>3-2-4. PC 셧다운 여부 설정하기</a></h4>
+									<p class="pt0_5">
+										해당 자동화 태스크가 종료된 후 PC를 셧다운 하고자 할 때, Shutdown PC after execution 체크 박스에 클릭한다.
+									</p>
+									<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img15.png">
+									<p>
+										☞ Option 아래 Job Repeat Interval 과 Period가 설정되어 태스크가 반복적으로 수행되는 경우의
+										PC 셧다운동작은 Trigger에 설정된 시간 또는 Job Repeat Interval 설정에 의한 반복 수행 중
+										첫 번째 스케줄 이벤트 수행 후 이루어진다. 
+									</p>
+								</div>
+							</div>
+							<div class="row mh1 division_wrap"> 
+								<div class="row ph2">
+									<h4><a name='03_2_5'>3-2-5. 스케줄 활성화하기</a></h4>
+									<p class="pt0_5">
+										아래의 화면에서 Enabled 체크 박스를 클릭하면, 예약된 스케줄을 활성화할 수 있다.
+										체크 박스가 선택 해제되어 있다면, 예약된 스케줄은 작동되지 않는다.
+									</p>
+									<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img16.png">
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- 03. 스케줄러 end -->
+					
+					<!-- 04. 단축키 설정 기능 -->
+<!--					<section class="row mt2">-->
+<!--						<p class="sub-title"><a name='04'>04. 단축키 설정 기능</a></p>-->
+<!--						<div class="row mh1 division_wrap">-->
+<!--							<p class="pt0_5">단축키 설정 기능(Short Cut)은 설정된 단축키를 누르면, 스케줄러에 등록된 일을 실행하게 하는 기능이다.</p>-->
+<!--							<p class="pt0_5">-->
+<!--								<b>※ 해당 기능은 2.3.0 버전 이상 버전에서는 삭제되었음을 알려드립니다.</b>-->
+<!--							</p>-->
+<!--						</div>-->
+<!--					</section>-->
+					<!-- 04. 단축키 설정 기능 end -->
+					
+					<!-- 05. 메인 메뉴 -->
+					<section class="row mt2">
+						<p class="sub-title"><a name='04'>04. 메인 메뉴</a></p>
+						<p class="pt0_5">
+							사용자의 사용 편의성을 증진시키기 위해, BA Assist 상단에는 주요 기능에 대한 상태 보기 메뉴가 위치하고 있다.
+							본 메뉴는 스케줄러의 등록 상태, 단축키의 등록 상태, 로그 요약 등의 기능을 제공하고 있다.
+						</p>
+						<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img17.png">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_1'>4-1. Schedule List</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/230/assist_img27.png"></span>기능을 살펴보자. 
+								Schedule List 버튼을 누르면, Task Schedules 창이 나타난다. Task 창에서 스케줄이 설정된 리스트 만을 추출하여 보여주는 기능을 제공한다.
+							</p>
+							<table class="table-style1 bd mt1">
+								<tr>
+									<td class="bggray fwb tac bdr">메뉴</td>
+									<td class="bggray fwb tac">표시 화면</td>
+								</tr>
+								<tr>
+									<td class="vam bdr"><img class="diib" src="../b_manual/images/m_assist/230/assist_img27.png"></td>
+									<td class="vam"><img class="diib" src="../b_manual/images/m_assist/230/assist_img28.png"></td>
+								</tr>
+							</table>
+							<p>Export, Import 버튼을 사용하여 스케줄을 파일로 내보내기/불러오기가 가능하다.</p>
+							<p class="ph1">※스케줄 설정 방법에 관해서는 위에서 설명된 <a class="tdu">스케줄 설정하기</a>를 참조한다.</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_2'>4-2. Log</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_3.png"></span>기능을 살펴보자. Log 아이콘을 누르면 아래와 같이 태스크의 수행 이력을 보여주는 화면이 나타난다. 수행 시간, 성공 여부를 확인 가능하며, 실패 시에는 로그 메시지가 함께 제공된다.
+							</p>
+							<table class="table-style1 bd mt1">
+								<tr>
+									<td class="bggray fwb tac bdr">메뉴</td>
+									<td class="bggray fwb tac">표시 화면</td>
+								</tr>
+								<tr>
+									<td class="vam bdr"><img class="diib" src="../b_manual/images/m_assist/assist_img46_3.png"></td>
+									<td class="vam"><img class="diib" src="../b_manual/images/m_assist/230/assist_img29.png"></td>
+								</tr>
+							</table>
+							<p class="ph1">
+								※이 때, Task 필드에 태스크 이름의 일부 또는 전체를 입력하고 검색 버튼을 누르면 검색어가 포함된 일부 태스크만의 이력을 추출하여 보여주는 기능도 포함되어 있다.  
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_3'>4-3. Stop</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_4.png"></span>기능은 수동으로 동작한 Task의 작동을 정지시킨다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_4'>4-4. Setting</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_5.png"></span>기능은 로그 옵션 설정 기능, 태스크 저장 폴더를 변경하는 기능, 키보드와 마우스 제어 기능,
+								대시보드 설정 기능, 큐 설정 기능 등을 제공한다.
+							</p>
+							<hr class="mh1">
+							<div class="row">
+								<div class="row ph1">
+									<h4><a name='04_4_1'>4-4-1. Assist 옵션 설정 기능</a></h4>
+								</div>
+								<img class="diib" src="../b_manual/images/m_assist/250/250_assist_img18.png">
+								<p>[Setting Assist Configuration 탭 참조]</p>
+								<div class="row mt2">
+									<p class="ffsd fwb">1) 화면 보호기 방지 기능</p>
+									<p class="ph0_5">
+										BA-Assist를 켜놓을 경우(숨김 포함) 화면 보호기로 진입을 방지할 수 있다. (체크 시: 화면 보호기 끄기)
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">2) 대쉬보드 사용 기능</p>
+									<p class="ph0_5">
+										「Setting」 메뉴에서 ① 「Use Dashboard」를 체크하고 ②「Dashboard Set」버튼을 클릭하여 서버 연결정보를 입력한 후 Dashboard DB 연결 확인과 DB 동기화를 수행할 수 있다.
+									</p>
+									<div class="row ex-con">
+										<dl class="mb1">
+											<dt>Step1.</dt>
+											<dd>
+												「Use Dashboard」를 체크한다.<br>
+												<img class="ph2" src="../b_manual/images/m_assist/250/250_assist_img19.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl>
+											<dt>Step2.</dt>
+											<dd>
+												Dashboard Set 버튼을 클릭하여 Dashboard 접속을 위한 정보를 입력 후 「Dashboard Information」의 *BASE Url, *Sub Path를 입력하고 Remote Task 사용 여부를 체크한다.
+												<img class="ph1" src="../b_manual/images/m_assist/230/assist_img32.png">
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl>
+											<dt>Step3.</dt>
+											<dd>
+												Connection Test을 클릭하여 연결 시험을 진행한다. 연결이 실패하면 Step2의 정보를 정확히 입력하였는지 확인한 후 재실행한다.
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl>
+											<dt>Step4.</dt>
+											<dd>
+												「RDA Information」의 *Nick Name 필드에 닉네임을 입력한다.
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl>
+											<dt>Step5.</dt>
+											<dd>
+												「RDA Information」의 Create RDA ID 버튼을 클릭하면 RDA ID가 자동 생성되어 *RDA ID 필드 안에 입력된다.
+											</dd>
+										</dl>
+										<hr class="mh1">
+										<dl>
+											<dt>Step6.</dt>
+											<dd>
+												설정을 완료하기 위하여 Save 버튼을 클릭한다.
+												<p class="pt0_5">
+													☞ 설정이 완료되고 BA Assist에 추가된 스케줄 기반의 태스크를 Dashboard를 통하여 모니터링하기 위해서 DB Sync. 버튼을 클릭한다. 
+													DB Sync. 버튼의 클릭은 BA Assist와 Dashboard의 동기화를 수행하게 한다.
+												</p>
+												<p class="pt0_5">
+													※대시보드의 화면은 서버 페이지 접속을 통해 이루어지며 접속 페이지 정보 업데이트는 고객사/운영사가 관리한다. 
+												</p>
+											</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">3) 키보드와 마우스 제어 기능</p>
+									<p class="ph0_5">
+										태스크를 수행하는 동안에 키보드와 마우스의 동작에 의한 오동작을 방지하는 기능이다.
+									</p>
+									<img class="ph1" src="../b_manual/images/m_assist/250/250_assist_img20.png">
+									<p>
+										체크 박스를 클릭할 경우, 태스크가 수행되는 동안 사용자의 키보드 입력과 마우스 입력을 방지할 수 있고 Esc 버튼을 두 번 눌러 방지 모드를 해제할 수 있다. 
+										체크 박스가 Uncheck 상태이면 사용자의 키보드 또는 마우스 입력에 의해 태스크 실행 중 오동작이 발생할 가능성이 있다.
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">4) 스크린 녹화 기능</p>
+									<p class="ph0_5">
+										작업 수행시 주 스크린 화면이 동영상으로 녹화할 수 있다. (체크 시: 스크린 녹화 기능 끄기)
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">5) 스크린 캡쳐 기능</p>
+									<p class="ph0_5">
+										오류 발생시 스크린 캡쳐 기능을 켜고 끌 수 있다. (체크 시: 스크린 캡쳐 기능 끄기)
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">6) 멀티 태스크 설정 기능</p>
+									<p class="ph0_5">
+										멀티 태스크 설정을 통해 동시에 여러 개의 태스크를 실행할 수 있다. <br>(멀티 태스크를 사용하는 경우 마우스, 키보드 또는 이미지 등 같은 객체를 사용할 경우 주의가 필요하다.)
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">7) 로그 레벨 설정 기능</p>
+									<p class="ph0_5">
+										Full, Normal, Simple, OneLine, None의 로그 레벨 설정을 설정하는 기능이다. 
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">8) 저장 폴더 변경 기능</p>
+									<p class="ph0_5">
+										태스크 저장 폴더를 설정하는 기능이다.(현재 비활성화)
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">9) 세팅 백업 기능</p>
+									<p class="ph0_5">
+										현재 설정을 파일로 백업하는 기능이다.
+									</p>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">10) 세팅 롤백 기능</p>
+									<p class="ph0_5">
+										백업된 설정 파일을 불러오는 기능이다.
+									</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="row ph1">
+									<h4><a name='04_4_2'>4-4-2. Assist 큐 설정 기능</a></h4>
+								</div>
+								<img class="diib" src="../b_manual/images/m_assist/250/250_assist_img21.png">
+								<p>☞ Queue 기능은 Sequential 태스크와 함께 사용할 수 없습니다. Sequential 태스크는 Queue에 쌓이지 않습니다.</p>
+								<p>[Setting Queue Configuration 탭 참조]</p>
+								<div class="row mt2">
+									<p class="ffsd fwb">1) Use Queue (Automatic)</p>
+									<p class="ph0_5">
+										Task Watcher라는 툴을 이용하여 자동으로 Queue에 쌓인 Task를 실행하는 방식
+									</p>
+									<ul class="row bd bggray bdtnavy p1">
+										<li class="pb0_5">1) Watch Interval : 이미 동작중인 Task가 종료되는 것을 체크하는 기간 설정</li>
+										<li>
+											2) Watcher run time : Task Watcher가 동작하는 시간을 설정
+											<ul class="row">
+												<li class="pb0_5">
+													▶ Always : 항상 Task Watcher가 동작한다.
+													<ul class="row pl1">
+														<li>- 이전 Task가 끝나면 다음 큐 Task를 시작할 시간을 설정해야한다.</li>
+														<li>- Set start program : 프로그램을 시작하면 자동으로 Task Watcher가 동작한다.</li>
+													</ul>
+												</li>
+												<li>▶ Set time: Task Watcher가 설정한 시작 시간 ~ 끝 시간만큼 동작한다.</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								<div class="row mt2">
+									<p class="ffsd fwb">2) Use Queue (Manual)</p>
+									<p class="ph0_5">
+										Queue Task List의 있는 Task를 수동으로 실행하는 방식
+									</p>
+									<img class="diib" src="../b_manual/images/m_assist/230/assist_img35.png">
+									<dl class="pt1">
+										<dt>Queue Task List : 큐에 쌓여있는 Task의 목록을 확인할 수 있는 창.</dt>
+										<dd class="pt0_5">1)Run Task: 설정한 시간 뒤에 선택한 Task를 실행한다.</dd>
+										<dd class="pt0_5">2)Search : 특정 Task를 검색한다.</dd>
+										<dd class="pt0_5">3)Delete executed tasks: 실행된 Task를 리스트에서 제거한다.</dd>
+										<dd class="pt0_5">4)Delete : 선택된 Task를 Queue에서 제거한다.</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_5'>4-5. Packing</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_6.png"></span>기능은 서버에 등록된 패키지 리스트와 Local Repository의 폴더/파일 리스트를 갱신한다. 상세한 설명은 3-1-2. fpk 파일 변환 후, 로딩하기를 참조한다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_6'>4-6. Sequential</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/250/250_assist_img22.png"></span>기능은 연속 태스크 실행을 설정하는 창을 오픈한다.
+							</p>
+							<p>
+								<img class="diib" src="../b_manual/images/m_assist/250/250_assist_img24.png">
+							</p>
+							<p>
+								Sequential 태스크는 여러 개의 태스크를 순차적으로 실행하는 기능이다.
+								태스크를 추가하고 삭제할 수 있으며, 순서를 변경할 수 있다.
+								태스크를 추가하려면 Add Sequential 버튼을 클릭하고, 삭제하려면 X 버튼을 클릭한다.
+							</p>
+							<br><p>Sequential Task 설정 방법</p>
+							<table class="table-style1 bd mh1">
+							<tr>
+								<td class="bdr">
+									<img class="diib ph1" src="../b_manual/images/m_assist/250/250_assist_img26.png">
+								</td>
+								<td class="bdr">
+									<img class="diib ph1" src="../b_manual/images/m_assist/250/250_assist_img23.png">
+								</td>
+								<td class="tac">
+									<img class="diib ph1" src="../b_manual/images/m_assist/250/250_assist_img25.png">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<p>Add Sequential 버튼을 클릭한다.</p>
+								</td>
+								<td>
+									<p>Sequential Task의 이름과 설명을 작성한다.</p>
+								</td>
+								<td>
+									<p>순차적 실행을 원하는 태스크를 순서대로 Drag & Drop 한다.</p>
+								</td>
+							</tr>
+						</table>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_7'>4-7. Refresh</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_7.png"></span>기능은 서버에 등록된 패키지 리스트와 Local Repository의 폴더/파일 리스트를 갱신한다. 
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_8'>4-8. Close</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_8.png"></span>기능은 BA Assist 창을 최소화한다.(BA Assist는 백그라운드 계속한다.)
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_9'>4-9. Exit</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_9.png"></span>기능은 BA Assist를 완전히 종료한다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='04_10'>4-10. Help</a></h3>
+							<p class="pt0_5">
+								Main 탭의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_10.png"></span>기능은 6-4. Help 메뉴를 참조한다.
+							</p>
+						</div>
+					</section>
+					<!-- 05. 메인메뉴 end -->
+					
+					<!-- 06. 시스템 트레이 메뉴 -->
+					<section class="row mt2">
+						<p class="sub-title"><a name='05'>05. 시스템 트레이 메뉴</a></p>
+						<p>
+							윈도우 화면 우측하단의 시스템 트레이에서 BA Assist가 구동되고 있는 것을 확인할 수 있다.
+							메뉴 아이콘에 커서를 대고 마우스 오른쪽을 누르면 BA Assist의 메인 화면으로 이동하거나 특정한 부가기능으로 이동하는 기능,
+							백그라운드 모드로 동작하던 BA Assist를 종료하는 기능 등을 이용할 수 있다. BA Assist에서 제공하는 트레이 메뉴 리스트는
+							아래와 같다.
+						</p>
+						<table class="table-style1 bd mh1">
+							<tr>
+								<td class="bdr">
+									<img class="diib ph1" src="../b_manual/images/m_assist/230/assist_img36.png">
+								</td>
+								<td class="bdr">
+									▶▶
+								</td>
+								<td class="tac">
+									<img class="diib ph1" src="../b_manual/images/m_assist/assist_img57.png">
+								</td>
+							</tr>
+						</table>
+						<p>각 메뉴 항목 선택 시 수행되는 기능을 정리하면 아래와 같다.</p>
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='05_1'>5-1. Task List</a></h3>
+							<p class="pt0_5">
+								태스크의 리스트가 나타나는 BA Assist의 메인 화면으로 이동한다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='05_2'>5-2. Logs</a></h3>
+							<p class="pt0_5">
+								태스크의 수행시간, 성공여부, 로그 메시지 등의 수행이력을 보여주는 로그 화면창이 나타난다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='05_3'>5-3. Task Schedule</a></h3>
+							<p class="pt0_5">
+								상태 보기 메뉴에서 Schedule아이콘을 누르면 나타나는 기능으로, 태스크 리스트에서
+								<span><img class="diib w3" src="../b_manual/images/m_assist/b_img08.png"></span>아이콘으로 표시되어 있는 스케줄이 설정된 태스크들을 추출하여 보여주는 화면이 나타난다. 
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='05_4'>5-4. Setting</a></h3>
+							<p class="pt0_5">
+								서버 접속정보를 설정하고 접속 시험을 수행하는 기능, 태스크의 저장 폴더를 변경하는 기능, 키보드와 마우스를 제어하는 기능,
+								대시보드 사용 기능 등을 제공하는 BA Assist Setting 창이 나타난다.
+								상세 설명은 <a class="tdu" href="#04_4">4-4. Setting</a>을 참조한다.
+							</p>
+						</div>
+						<hr class="mh1">
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='05_5'>5-5. Exit</a></h3>
+							<p class="pt0_5">
+								BA Assist를 종료하는 기능을 수행한다. 
+								BA Assist 우측 상단의(Close)<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/b_img06.png"></span>버튼을 누르면 Foreground의 BA Assist는 닫히지만 BA Assist는 여전히 Background모드로 동작하고 있다. 이는 스케줄 이벤트가 발생할 경우 처리해야 하기 때문이다.
+								따라서 BA Assist를 완전히 종료하고자 할 때는 바로 이 시스템 트레이 메뉴에 있는 BA Assist의 Exit를 클릭하여 종료한다.
+							</p>
+						</div>
+					</section>
+					<!-- 06. 시스템 트레이 메뉴 end -->
+					
+					<!-- 07. 기타 편의기능 -->
+					<section class="mt2">
+						<p class="sub-title"><a name='06'>06. 기타 편의기능</a></p>
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='06_1'>6-1. 스킨 설정 기능</a></h3>
+							<p class="pt0_5">
+								아래의 화면처럼 View 메뉴에서 아래 방향키를 누르면 다양한 스킨 선택 메뉴 리스트가 나타나고 그 중 하나를 선택하여
+								GUI 화면의 스킨을 변경할 수 있다.
+							</p>
+							<img class="diib ph1" src="../b_manual/images/m_assist/230/assist_img37.png">
+						</div>
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='06_2'>6-2. View Panel 기능</a></h3>
+							<p class="pt0_5">
+								Tasks, Logs, Dashboard, Schedule 패널은 사용자의 의도에 의해서 화면 보기 구성에서 사라지고 나타나게 할 수 있다. 
+								아래의 그림은 메인 메뉴에서 View를 클릭하면 나타나는 화면이다. 여기서 우측 Panel 탭에 보이는 Tasks, Logs, Dashboard, Schedule 패널은 마우스 클릭 시 활성화 할 수 있다. 
+							</p>
+							<img class="diib ph1" src="../b_manual/images/m_assist/230/assist_img38.png">
+							<p>
+								화면 왼쪽에 위치한 Task, Logs 패널, 우측에 위치한 Dashboard, Schedule 패널은 각각<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/b_img06.png"></span>
+								을 눌러 닫게 할 수 있고 닫힌 패널 항목은 View Panel 메뉴의 항목을 클릭하여 다시 활성화하여 보이게 할 수 있다. 
+							</p>
+						</div>
+						<div class="row mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='06_3'>6-3. 리본메뉴 최소화(Ctrl+F1)</a></h3>
+							<p class="pt0_5">
+								BA Assist화면에서 하단의 컨텐츠 영역 확대를 위하여 상단의 메인 메뉴에 해당하는 리본 메뉴의 상하 크기를 줄일 수 있는 (리본메뉴 최소화) 수단을 제공하고 있다.
+								리본메뉴의 최소화 설정은 컨텐츠 영역 우측 상단의<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/b_img07.png"></span>아이콘을 클릭하여 수행할 수 있으며,
+							</p>
+							<img class="diib ph1" src="../b_manual/images/m_assist/230/assist_img39.png">
+							<p>
+								리본메뉴 최소화는 Ctrl+F1을 통해 최소화된 리본메뉴를 해제하여 리본메뉴를 최대화 할 수 있다.<br><br>
+								☞ 아이콘 클릭 없이 단축키를 통하여 Ctrl+F1을 누름으로 리본메뉴 최소화 설정과 해제를 번갈아 가며 수행할 수 있다. 
+							</p>
+						</div>
+						<div class="mh1 division_wrap">
+							<hr class="hr-style1">
+							<h3><a name='06_4'>6-4. Help 메뉴</a></h3>
+							<p class="pt0_5">
+								BA Assist화면 상단 메인 메뉴에서<span class="pw0_5"><img class="diib w5" src="../b_manual/images/m_assist/assist_img46_10.png"></span>를 클릭하면 아래처럼 5가지의 Help메뉴가 표시된다.
+							</p>
+							<img class="diib ph1" src="../b_manual/images/m_assist/250/250_assist_img27.png">
+							<p>
+								각 메뉴에서 제공되는 기능은 다음과 같다.
+							</p>
+							<div class="table_container">
+								<table class="table_scroll table-style1 bd mt1">
+									<tr class="bgnavy fcw fwb">
+										<td class="bdr tac">Help Menu</td>
+										<td class="tac">설명</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray">About</td>
+										<td>BA Assist의 Release Version을 표시한다.</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray">License</td>
+										<td>License파일의 등록과 관리 기능을 제공한다.</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray">Manual</td>
+										<td>BA Assist 사용자 매뉴얼을 열람할 수 있다.</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray">Request License</td>
+										<td>BA Assist 라이선스를 요청하는 페이지를 연다.</td>
+									</tr>
+									<tr>
+										<td class="bdr bggray">DB Schema update</td>
+										<td>BA Assist 데이터 베이스 스키마를 최신화한다.</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</section>
+					<!-- 07. 기타 편의기능 end -->
+				</div>
+			</section>
+			<!--------------- 매뉴얼 내용 end --------------->
+		</div>
+		
+		<div id="search"></div>
+		<div id="footer"></div>

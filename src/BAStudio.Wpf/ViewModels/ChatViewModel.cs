@@ -67,6 +67,13 @@ public sealed class ChatViewModel : INotifyPropertyChanged
     }
 
     public ObservableCollection<ChatSessionViewModel> Sessions { get; } = new();
+    public IReadOnlyList<QuestionTypeOption> QuestionTypes { get; } =
+    [
+        new(ChatQuestionType.ActivityTask, "액티비티/Task"),
+        new(ChatQuestionType.BAStudioGuide, "BA-Studio 사용법"),
+        new(ChatQuestionType.BAAssistGuide, "BA-Assist 사용법"),
+        new(ChatQuestionType.General, "일반 질문")
+    ];
 
     public ChatSessionViewModel? SelectedSession
     {
@@ -211,8 +218,8 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         session.AddMessage(new ChatMessageViewModel("User", question, isUser: true));
         session.ClearProcessLogs();
         AddProcessLog(session, $"질문 입력: {question}");
+        AddProcessLog(session, $"질문 유형: {FormatQuestionType(session.QuestionType)}");
         AddProcessLog(session, session.IsContextRetained ? "문맥 유지: 켜짐" : "문맥 유지: 꺼짐");
-        AddProcessLog(session, session.IsGeneralQuestionEnabled ? "일반 질문: 켜짐" : "일반 질문: 꺼짐");
         AddProcessLog(session, session.IsWebSearchEnabled ? "웹 검색: 켜짐" : "웹 검색: 꺼짐");
         var assistant = new ChatMessageViewModel("Assistant", "", isUser: false);
         session.AddMessage(assistant);
@@ -225,7 +232,8 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         {
             var buffer = new StringBuilder();
             var lastFlush = Environment.TickCount64;
-            await foreach (var evt in _orchestrator.AskAsync(new ChatRequest(question, ConversationId: conversationId, TopK: _options.TopK, MinScore: _options.MinScore, AllowGeneralQuestion: session.IsGeneralQuestionEnabled, AllowWebSearch: session.IsWebSearchEnabled), _cts.Token))
+            var allowGeneralQuestion = session.IsGeneralQuestionEnabled || session.QuestionType == ChatQuestionType.General;
+            await foreach (var evt in _orchestrator.AskAsync(new ChatRequest(question, ConversationId: conversationId, TopK: _options.TopK, MinScore: _options.MinScore, AllowGeneralQuestion: allowGeneralQuestion, AllowWebSearch: session.IsWebSearchEnabled, QuestionType: session.QuestionType), _cts.Token))
             {
                 if (evt.Kind == ChatStreamEventKind.Status)
                 {
@@ -438,13 +446,25 @@ public sealed class ChatViewModel : INotifyPropertyChanged
             OnPropertyChanged(nameof(CanSend));
             SendCommand.RaiseCanExecuteChanged();
         }
-        else if (e.PropertyName is nameof(ChatSessionViewModel.IsContextRetained) or nameof(ChatSessionViewModel.IsGeneralQuestionEnabled) or nameof(ChatSessionViewModel.IsWebSearchEnabled))
+        else if (e.PropertyName is nameof(ChatSessionViewModel.IsContextRetained) or nameof(ChatSessionViewModel.IsGeneralQuestionEnabled) or nameof(ChatSessionViewModel.IsWebSearchEnabled) or nameof(ChatSessionViewModel.QuestionType))
         {
             if (sender is ChatSessionViewModel session)
             {
                 _ = SaveSessionAsync(session);
             }
         }
+    }
+
+    private static string FormatQuestionType(ChatQuestionType questionType)
+    {
+        return questionType switch
+        {
+            ChatQuestionType.ActivityTask => "액티비티/Task",
+            ChatQuestionType.BAStudioGuide => "BA-Studio 사용법",
+            ChatQuestionType.BAAssistGuide => "BA-Assist 사용법",
+            ChatQuestionType.General => "일반 질문",
+            _ => questionType.ToString()
+        };
     }
 
     private void RaiseCommandStates()
@@ -461,3 +481,5 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
+
+public sealed record QuestionTypeOption(ChatQuestionType Value, string Label);
