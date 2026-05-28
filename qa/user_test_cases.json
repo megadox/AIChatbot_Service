@@ -96,6 +96,30 @@
         "expectedSource": "WIN32/ControlExists.md"
     },
     {
+        "id": "regression-control-exists-001",
+        "domain": "ActivityTask",
+        "question": "controlExists 를 설명해줘.",
+        "expectedSource": "WIN32/ControlExists.md"
+    },
+    {
+        "id": "regression-control-exists-002",
+        "domain": "ActivityTask",
+        "question": "WIN32/ControlExists",
+        "expectedSource": "WIN32/ControlExists.md"
+    },
+    {
+        "id": "regression-control-exists-003",
+        "domain": "ActivityTask",
+        "question": "WIN32/ControlExists를 설명해줘.",
+        "expectedSource": "WIN32/ControlExists.md"
+    },
+    {
+        "id": "regression-control-exists-004",
+        "domain": "ActivityTask",
+        "question": "ANDROID/ControlExists를 설명해줘.",
+        "expectedSource": "ANDROID/ControlExists.md"
+    },
+    {
         "id": "user-case-017",
         "domain": "EXCEL",
         "question": "현재 엑셀 시트를 가져오는 액티비티는?",
@@ -225,13 +249,13 @@
         "id": "product-guide-case-002",
         "domain": "BA-Assist",
         "question": "BA-Assist에서 스케줄은 어떻게 활성화해?",
-        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/schedule-enable-shutdown.md"
     },
     {
         "id": "product-guide-case-003",
         "domain": "BA-Assist",
         "question": "BA-Assist와 BA-Server 차이는?",
-        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md"
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/server-worker-difference.md"
     },
     {
         "id": "source-guide-case-001",
@@ -249,12 +273,90 @@
         "id": "source-guide-case-003",
         "domain": "BA-Assist",
         "question": "BA-Assist 스케줄 다중 인스턴스 옵션은 뭐가 있어?",
-        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/schedule-options.md"
     },
     {
         "id": "source-guide-case-004",
         "domain": "BA-Assist",
         "question": "BA-Assist 패키지 변수는 어떤 파일에 저장돼?",
-        "expectedSource": "docs/product-manuals/normalized/ba-assist/2.5.0.md"
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/task-variables.md"
+    },
+    {
+        "id": "ba-assist-guide-case-001",
+        "domain": "BA-Assist",
+        "question": "BA-Assist는 어떤 프로그램이야?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/overview-and-file-types.md"
+    },
+    {
+        "id": "ba-assist-guide-case-002",
+        "domain": "BA-Assist",
+        "question": "BA-Assist 설치 방법을 알려줘.",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/install-and-license.md"
+    },
+    {
+        "id": "ba-assist-guide-case-003",
+        "domain": "BA-Assist",
+        "question": "BA-Assist에서 fpk 파일을 만드는 방법은?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/task-package-add-fpk.md"
+    },
+    {
+        "id": "ba-assist-guide-case-004",
+        "domain": "BA-Assist",
+        "question": "BA-Assist에서 태스크를 업데이트하려면?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/task-update.md"
+    },
+    {
+        "id": "ba-assist-guide-case-005",
+        "domain": "BA-Assist",
+        "question": "BA-Assist에서 스케줄을 등록하려면?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/schedule-create.md"
+    },
+    {
+        "id": "ba-assist-guide-case-006",
+        "domain": "BA-Assist",
+        "question": "BA-Assist 로그는 어디서 확인해?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/schedule-list-log-stop.md"
+    },
+    {
+        "id": "ba-assist-guide-case-007",
+        "domain": "BA-Assist",
+        "question": "BA-Assist Dashboard 설정 방법을 알려줘.",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/settings-dashboard.md"
+    },
+    {
+        "id": "ba-assist-guide-case-008",
+        "domain": "BA-Assist",
+        "question": "BA-Assist Queue 기능은 뭐야?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/settings-queue.md"
+    },
+    {
+        "id": "ba-assist-guide-case-009",
+        "domain": "BA-Assist",
+        "question": "태스크 실행 중 키보드와 마우스를 막으려면?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/settings-options-repository.md"
+    },
+    {
+        "id": "ba-assist-guide-case-010",
+        "domain": "BA-Assist",
+        "question": "BA-Assist Refresh는 어떤 기능이야?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/refresh-close-exit-tray-help.md"
+    },
+    {
+        "id": "ba-assist-guide-case-011",
+        "domain": "BA-Assist",
+        "question": "BA-Assist 로그 메시지를 지우려면?",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/log-delete.md"
+    },
+    {
+        "id": "ba-assist-guide-case-012",
+        "domain": "BA-Assist",
+        "question": "Sequential Task 에 대해 설명해줘",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/sequential-task.md"
+    },
+    {
+        "id": "ba-assist-guide-case-013",
+        "domain": "BA-Assist",
+        "question": "프로젝트를 추가하는 방법을 알려줘",
+        "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/project-package-add.md"
     }
 ]

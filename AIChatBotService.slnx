@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="src/BAStudio.Chatbot/BAStudio.Chatbot.csproj" />
+  <Project Path="src/BAStudio.Chatbot.Api/BAStudio.Chatbot.Api.csproj" />
   <Project Path="src/BAStudio.Chatbot.Infra/BAStudio.Chatbot.Infra.csproj" />
   <Project Path="src/BAStudio.Wpf/BAStudio.Wpf.csproj" />
   <Project Path="src/Tools.KbBuilder/Tools.KbBuilder.csproj" />

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ba-assist-sequential",
+    "domain": "BA-Assist",
+    "questionType": "BAAssistGuide",
+    "question": "Sequential Task 에 대해 설명해줘",
+    "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/sequential-task.md"
+  },
+  {
+    "id": "ba-assist-project-add",
+    "domain": "BA-Assist",
+    "questionType": "BAAssistGuide",
+    "question": "프로젝트를 추가하는 방법을 알려줘",
+    "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/project-package-add.md"
+  },
+  {
+    "id": "ba-assist-input-block",
+    "domain": "BA-Assist",
+    "questionType": "BAAssistGuide",
+    "question": "태스크 실행 중 키보드와 마우스를 막으려면?",
+    "expectedSource": "docs/product-manuals/guides/ba-assist/2.5.0/settings-options-repository.md"
+  }
+]

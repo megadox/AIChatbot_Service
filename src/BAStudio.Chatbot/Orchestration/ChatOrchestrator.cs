@@ -78,8 +78,18 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         }
 
         yield return ChatStreamEvent.Status("질문 의도를 분석하는 중...");
-        var intent = _intentResolver.Resolve(request.Question);
-        intent = ApplyQuestionTypeOverride(request.Question, request.QuestionType, intent);
+        var resolvedIntent = _intentResolver.Resolve(request.Question);
+        var mismatchAnswer = TryBuildQuestionTypeMismatchAnswer(request.Question, request.QuestionType, resolvedIntent);
+        if (mismatchAnswer is not null)
+        {
+            yield return ChatStreamEvent.Status("질문 유형과 질문 내용이 일치하지 않음");
+            yield return ChatStreamEvent.Token(mismatchAnswer);
+            yield return ChatStreamEvent.Completed();
+            yield break;
+        }
+
+        var intent = ApplyQuestionTypeOverride(request.Question, request.QuestionType, resolvedIntent);
+
         yield return ChatStreamEvent.Status(
             $"의도 분석: type={request.QuestionType}, intent={intent.Intent}, group={intent.PreferredGroup ?? "-"}, activity={intent.ActivityNameHint ?? "-"}");
         var conversationId = string.IsNullOrWhiteSpace(request.ConversationId) ? "default" : request.ConversationId;
@@ -350,20 +360,88 @@ public sealed class ChatOrchestrator : IChatOrchestrator
     {
         return questionType switch
         {
-            ChatQuestionType.ActivityTask when intent.Intent == UserIntent.ProductGuide => new DomainIntent(
-                PreferredGroup: null,
-                ActivityNameHint: null,
-                Intent: UserIntent.ActivityLookup,
-                Signals: [],
-                RewrittenQuery: question,
-                RequiredGroup: null,
-                PreferredSourceHint: null,
-                ActionConceptHints: []),
             ChatQuestionType.BAStudioGuide => BuildProductGuideIntent(question, "BA-Studio", null),
             ChatQuestionType.BAAssistGuide => BuildProductGuideIntent(question, "BA-Assist", ResolveBAAssistGuideSource(question)),
             ChatQuestionType.General => new DomainIntent(null, null, UserIntent.OutOfScope, [], question),
             ChatQuestionType.Auto => intent,
             _ => intent
+        };
+    }
+
+    private static string? TryBuildQuestionTypeMismatchAnswer(string question, ChatQuestionType questionType, DomainIntent resolvedIntent)
+    {
+        return questionType switch
+        {
+            ChatQuestionType.ActivityTask when resolvedIntent.Intent == UserIntent.ProductGuide =>
+                BuildQuestionTypeMismatchMessage(
+                    "액티비티/Task",
+                    "선택한 질문 유형에서는 해당하는 답변이 없습니다. 이 질문은 제품 사용법 질문으로 보입니다. `BA-Studio 사용법` 또는 `BA-Assist 사용법`으로 질문 유형을 바꿔서 다시 질문해주세요."),
+
+            ChatQuestionType.BAStudioGuide when LooksLikeBAAssistQuestion(question) =>
+                BuildQuestionTypeMismatchMessage(
+                    "BA-Studio 사용법",
+                    "선택한 질문 유형에서는 해당하는 답변이 없습니다. 이 질문은 BA-Assist 사용법 질문으로 보입니다. `BA-Assist 사용법`으로 질문 유형을 바꿔서 다시 질문해주세요."),
+
+            ChatQuestionType.BAAssistGuide when LooksLikeBAStudioQuestion(question) =>
+                BuildQuestionTypeMismatchMessage(
+                    "BA-Assist 사용법",
+                    "선택한 질문 유형에서는 해당하는 답변이 없습니다. 이 질문은 BA-Studio 사용법 질문으로 보입니다. `BA-Studio 사용법`으로 질문 유형을 바꿔서 다시 질문해주세요."),
+
+            ChatQuestionType.BAStudioGuide or ChatQuestionType.BAAssistGuide
+                when resolvedIntent.Intent != UserIntent.ProductGuide && LooksLikeActivityQuestion(resolvedIntent) =>
+                BuildQuestionTypeMismatchMessage(
+                    FormatQuestionType(questionType),
+                    "선택한 질문 유형에서는 해당하는 답변이 없습니다. 이 질문은 액티비티/Task 질문으로 보입니다. `액티비티/Task`로 질문 유형을 바꿔서 다시 질문해주세요."),
+
+            _ => null
+        };
+    }
+
+    private static string BuildQuestionTypeMismatchMessage(string selectedQuestionType, string guidance)
+    {
+        return $"""
+        질문 유형이 맞지 않습니다.
+
+        - 현재 질문 유형: {selectedQuestionType}
+        - 처리 결과: {guidance}
+        """;
+    }
+
+    private static bool LooksLikeActivityQuestion(DomainIntent intent)
+    {
+        return !string.IsNullOrWhiteSpace(intent.PreferredGroup) ||
+               !string.IsNullOrWhiteSpace(intent.ActivityNameHint) ||
+               !string.IsNullOrWhiteSpace(intent.PreferredSourceHint) &&
+               !intent.PreferredSourceHint.StartsWith("docs/product-manuals/", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool LooksLikeBAStudioQuestion(string question)
+    {
+        return question.Contains("BA-Studio", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Studio", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("스튜디오", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool LooksLikeBAAssistQuestion(string question)
+    {
+        return question.Contains("BA-Assist", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Assist", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("어시스트", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA-Server", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Server", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA-Worker", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Worker", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string FormatQuestionType(ChatQuestionType questionType)
+    {
+        return questionType switch
+        {
+            ChatQuestionType.ActivityTask => "액티비티/Task",
+            ChatQuestionType.BAStudioGuide => "BA-Studio 사용법",
+            ChatQuestionType.BAAssistGuide => "BA-Assist 사용법",
+            ChatQuestionType.General => "일반 질문",
+            _ => "자동"
         };
     }
 
@@ -382,6 +460,24 @@ public sealed class ChatOrchestrator : IChatOrchestrator
 
     private static string ResolveBAAssistGuideSource(string question)
     {
+        if (question.Contains("키보드", StringComparison.OrdinalIgnoreCase) &&
+            question.Contains("마우스", StringComparison.OrdinalIgnoreCase) &&
+            (question.Contains("막", StringComparison.OrdinalIgnoreCase) ||
+             question.Contains("차단", StringComparison.OrdinalIgnoreCase) ||
+             question.Contains("방지", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/settings-options-repository.md";
+        }
+
+        if (question.Contains("프로젝트", StringComparison.OrdinalIgnoreCase) &&
+            (question.Contains("추가", StringComparison.OrdinalIgnoreCase) ||
+             question.Contains("등록", StringComparison.OrdinalIgnoreCase) ||
+             question.Contains("로딩", StringComparison.OrdinalIgnoreCase) ||
+             question.Contains("로드", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/project-package-add.md";
+        }
+
         return question.Contains("BA-Server", StringComparison.OrdinalIgnoreCase) ||
                question.Contains("BA Server", StringComparison.OrdinalIgnoreCase) ||
                question.Contains("BA-Worker", StringComparison.OrdinalIgnoreCase) ||
@@ -759,6 +855,8 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         }
 
         var sameActivityGroups = chunks
+            .Where(c => string.Equals(c.SourceType, "activity_manual", StringComparison.OrdinalIgnoreCase))
+            .Where(c => c.ChunkType != "answer_correction")
             .Where(c => string.Equals(c.ActivityName, activityName, StringComparison.OrdinalIgnoreCase))
             .GroupBy(c => c.Source)
             .Select(g => g.First())
@@ -1098,8 +1196,20 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             return null;
         }
 
+        var targetProduct = ResolveProductSignal(intent);
+        if (targetProduct is not null)
+        {
+            chunks = chunks
+                .Where(c => IsChunkForProduct(c, targetProduct))
+                .ToArray();
+            if (chunks.Count == 0)
+            {
+                return null;
+            }
+        }
+
         var includeSourceSupplement = LooksLikeSourceSupplementQuestion(question);
-        var guideAnswer = TryBuildProductGuideDocumentAnswer(question, chunks);
+        var guideAnswer = TryBuildProductGuideDocumentAnswer(question, chunks, intent.PreferredSourceHint);
         if (guideAnswer is not null)
         {
             return guideAnswer;
@@ -1186,11 +1296,39 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
     }
 
-    private static string? TryBuildProductGuideDocumentAnswer(string question, IReadOnlyList<RetrievedChunk> chunks)
+    private static string? ResolveProductSignal(DomainIntent intent)
+    {
+        if (intent.Signals.Any(signal => string.Equals(signal, "BA-Assist", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "BA-Assist";
+        }
+
+        if (intent.Signals.Any(signal => string.Equals(signal, "BA-Studio", StringComparison.OrdinalIgnoreCase)))
+        {
+            return "BA-Studio";
+        }
+
+        return null;
+    }
+
+    private static bool IsChunkForProduct(RetrievedChunk chunk, string product)
+    {
+        var productSlug = product.ToLowerInvariant().Replace("-", "", StringComparison.Ordinal);
+        var sourceSlug = chunk.Source.ToLowerInvariant().Replace("-", "", StringComparison.Ordinal);
+        var groupSlug = chunk.GroupName.ToLowerInvariant().Replace("-", "", StringComparison.Ordinal);
+        return groupSlug.Contains(productSlug, StringComparison.OrdinalIgnoreCase) ||
+               sourceSlug.Contains(productSlug, StringComparison.OrdinalIgnoreCase) ||
+               chunk.Content.Contains($"Product: {product}", StringComparison.OrdinalIgnoreCase) ||
+               chunk.Content.Contains($"- Product: {product}", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string? TryBuildProductGuideDocumentAnswer(string question, IReadOnlyList<RetrievedChunk> chunks, string? preferredSourceHint)
     {
         var guide = chunks
             .Where(c => string.Equals(c.SourceType, "product_guide", StringComparison.OrdinalIgnoreCase))
-            .OrderByDescending(c => ScoreProductGuideDocument(question, c))
+            .Where(c => IsProductGuideCompatibleWithQuestion(question, c))
+            .OrderByDescending(c => string.Equals(c.Source, preferredSourceHint, StringComparison.OrdinalIgnoreCase) ? 1 : 0)
+            .ThenByDescending(c => ScoreProductGuideDocument(question, c))
             .FirstOrDefault();
         if (guide is null)
         {
@@ -1249,10 +1387,29 @@ public sealed class ChatOrchestrator : IChatOrchestrator
             }
         }
 
-        var related = chunks
-            .Where(c => string.Equals(c.Source, guide.Source, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
-            .Take(4)
+        var includeSourceSupplement = LooksLikeSourceSupplementQuestion(question);
+        var relatedManualCandidates = chunks
+            .Where(c => string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
+            .Where(c => includeSourceSupplement || !IsSourceSupplementSection(c))
+            .Where(c => IsRelatedManualSectionForGuide(guide, c))
+            .GroupBy(c => c.SectionPath, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.OrderByDescending(c => c.FinalScore).First())
+            .OrderByDescending(c => ScoreProductGuideSection(question, c, includeSourceSupplement))
+            .ThenByDescending(c => c.FinalScore)
+            .Take(3)
+            .ToArray();
+        var relatedManualChunks = relatedManualCandidates.Length > 0
+            ? relatedManualCandidates
+            : chunks
+                .Where(c => string.Equals(c.SourceType, "product_manual", StringComparison.OrdinalIgnoreCase))
+                .Where(c => includeSourceSupplement || !IsSourceSupplementSection(c))
+                .GroupBy(c => c.SectionPath, StringComparer.OrdinalIgnoreCase)
+                .Select(g => g.OrderByDescending(c => c.FinalScore).First())
+                .OrderByDescending(c => ScoreProductGuideSection(question, c, includeSourceSupplement))
+                .ThenByDescending(c => c.FinalScore)
+                .Take(3);
+        var related = new[] { guide }
+            .Concat(relatedManualChunks)
             .ToArray();
 
         var details = new StringBuilder();
@@ -1271,6 +1428,106 @@ public sealed class ChatOrchestrator : IChatOrchestrator
         details.AppendLine(guide.Content.Trim());
 
         return sb.ToString().TrimEnd() + DetailsMarker + details.ToString().TrimEnd();
+    }
+
+    private static bool IsProductGuideCompatibleWithQuestion(string question, RetrievedChunk guide)
+    {
+        var q = question.ToLowerInvariant();
+        if (guide.Source.Contains("project-package-add", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("프로젝트", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("project", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("fpx", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("fpp", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("패키지", StringComparison.OrdinalIgnoreCase);
+        }
+
+        if (guide.Source.Contains("task-package-add-fpk", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("fpk", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("fp", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("패키지", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("add task", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("태스크", StringComparison.OrdinalIgnoreCase) &&
+                   (q.Contains("추가", StringComparison.OrdinalIgnoreCase) ||
+                    q.Contains("등록", StringComparison.OrdinalIgnoreCase) ||
+                    q.Contains("로딩", StringComparison.OrdinalIgnoreCase) ||
+                    q.Contains("로드", StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (guide.Source.Contains("overview-and-file-types", StringComparison.OrdinalIgnoreCase))
+        {
+            var asksPackageProcedure =
+                (q.Contains("fpk", StringComparison.OrdinalIgnoreCase) || q.Contains("fpx", StringComparison.OrdinalIgnoreCase)) &&
+                (q.Contains("만드", StringComparison.OrdinalIgnoreCase) ||
+                 q.Contains("생성", StringComparison.OrdinalIgnoreCase) ||
+                 q.Contains("추가", StringComparison.OrdinalIgnoreCase) ||
+                 q.Contains("등록", StringComparison.OrdinalIgnoreCase) ||
+                 q.Contains("로딩", StringComparison.OrdinalIgnoreCase) ||
+                 q.Contains("로드", StringComparison.OrdinalIgnoreCase));
+            if (asksPackageProcedure)
+            {
+                return false;
+            }
+        }
+
+        if (guide.Source.Contains("task-update", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("업데이트", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("교체", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("수정", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("기존", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("갱신", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("바꾸", StringComparison.OrdinalIgnoreCase);
+        }
+
+        if (guide.Source.Contains("schedule-enable-shutdown", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("enabled", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("활성", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("종료", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("shutdown", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("스케줄", StringComparison.OrdinalIgnoreCase);
+        }
+
+        if (guide.Source.Contains("sequential-task", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("sequential", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("순차", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("연속", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("queue", StringComparison.OrdinalIgnoreCase);
+        }
+
+        if (guide.Source.Contains("log-delete", StringComparison.OrdinalIgnoreCase))
+        {
+            return q.Contains("삭제", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("지우", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("초기화", StringComparison.OrdinalIgnoreCase) ||
+                   q.Contains("logs.db", StringComparison.OrdinalIgnoreCase);
+        }
+
+        return true;
+    }
+
+    private static bool IsRelatedManualSectionForGuide(RetrievedChunk guide, RetrievedChunk manual)
+    {
+        var guideText = $"{guide.Source} {guide.Title} {guide.Content}";
+        var manualText = $"{manual.SectionPath} {manual.Content}";
+        if (guideText.Contains("project-package-add", StringComparison.OrdinalIgnoreCase))
+        {
+            if (string.Equals(manual.SectionPath, "사용자 매뉴얼 > 목차", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(manual.SectionPath, "사용자 매뉴얼 (BA Assist 2.5.X)", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            return manualText.Contains("fpx", StringComparison.OrdinalIgnoreCase) ||
+                   manualText.Contains("Add Task", StringComparison.OrdinalIgnoreCase) ||
+                   manualText.Contains("태스크", StringComparison.OrdinalIgnoreCase) &&
+                   manualText.Contains("로딩", StringComparison.OrdinalIgnoreCase);
+        }
+
+        return true;
     }
 
     private static string? TryBuildProductProcedureAnswer(string question, RetrievedChunk best, IReadOnlyList<RetrievedChunk> related)

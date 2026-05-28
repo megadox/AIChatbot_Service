@@ -1,0 +1,34 @@
+[
+  {
+    "id": "routing-activity-selected-product-question",
+    "domain": "QuestionTypeRouting",
+    "questionType": "ActivityTask",
+    "question": "프로젝트를 추가하는 방법을 알려줘",
+    "expectedSource": "",
+    "expectedAnswerContains": "질문 유형이 맞지 않습니다"
+  },
+  {
+    "id": "routing-activity-selected-sequential-question",
+    "domain": "QuestionTypeRouting",
+    "questionType": "ActivityTask",
+    "question": "Sequential Task 에 대해 설명해줘",
+    "expectedSource": "",
+    "expectedAnswerContains": "BA-Studio 사용법` 또는 `BA-Assist 사용법"
+  },
+  {
+    "id": "routing-ba-assist-selected-activity-question",
+    "domain": "QuestionTypeRouting",
+    "questionType": "BAAssistGuide",
+    "question": "WIN32/ControlExists를 설명해줘.",
+    "expectedSource": "",
+    "expectedAnswerContains": "액티비티/Task"
+  },
+  {
+    "id": "routing-ba-studio-selected-ba-assist-question",
+    "domain": "QuestionTypeRouting",
+    "questionType": "BAStudioGuide",
+    "question": "BA-Assist Queue 기능은 뭐야?",
+    "expectedSource": "",
+    "expectedAnswerContains": "BA-Assist 사용법"
+  }
+]

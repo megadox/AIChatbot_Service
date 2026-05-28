@@ -110,6 +110,7 @@ static async Task RunCasesAsync(
 
     foreach (var testCase in cases)
     {
+        var caseQuestionType = ParseQuestionType(testCase.QuestionType);
         var intent = intentResolver.Resolve(testCase.Question);
         var searchQuery = intent.RewrittenQuery ?? testCase.Question;
         var vector = embeddings.Embed(searchQuery);
@@ -142,8 +143,14 @@ static async Task RunCasesAsync(
 
         var expectedRank = ranked.FirstOrDefault(r => string.Equals(r.Source, testCase.ExpectedSource, StringComparison.OrdinalIgnoreCase))?.Rank;
         var topSource = ranked.FirstOrDefault()?.Source;
-        var answer = await AskAsync(orchestrator, testCase);
-        var answerContainsExpectedSource = answer.Contains(testCase.ExpectedSource, StringComparison.OrdinalIgnoreCase);
+        var answer = await AskAsync(orchestrator, testCase, caseQuestionType);
+        var hasSourceExpectation = !string.IsNullOrWhiteSpace(testCase.ExpectedSource);
+        var answerContainsExpectedSource = !hasSourceExpectation || answer.Contains(testCase.ExpectedSource, StringComparison.OrdinalIgnoreCase);
+        var answerContainsExpectedText = string.IsNullOrWhiteSpace(testCase.ExpectedAnswerContains) ||
+                                         answer.Contains(testCase.ExpectedAnswerContains, StringComparison.OrdinalIgnoreCase);
+        var expectedSourceFound = !hasSourceExpectation || expectedRank is not null;
+        var retrievalTop1Passed = !hasSourceExpectation || expectedRank == 1;
+        var passed = answerContainsExpectedSource && answerContainsExpectedText;
 
         results.Add(new UserTestCaseResult(
             testCase.Id,
@@ -152,9 +159,9 @@ static async Task RunCasesAsync(
             testCase.ExpectedSource,
             topSource,
             expectedRank,
-            answerContainsExpectedSource,
-            expectedRank == 1,
-            expectedRank is not null,
+            passed,
+            retrievalTop1Passed,
+            expectedSourceFound,
             answerContainsExpectedSource,
             intent.PreferredGroup,
             intent.ActivityNameHint,
@@ -337,7 +344,9 @@ public sealed record UserTestCase(
     string Id,
     string Domain,
     string Question,
-    string ExpectedSource);
+    string ExpectedSource,
+    string? QuestionType = null,
+    string? ExpectedAnswerContains = null);
 
 /// <summary>
 /// Stores aggregate smoke-test results and per-case outcomes.

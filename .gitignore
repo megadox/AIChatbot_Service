@@ -8,6 +8,8 @@ artifacts/
 
 # Runtime chat session data
 ChatBot/conversations/
+ChatBot/settings.json
+qa/feature_test_results/
 
 # Local LLM model files
 model/*.gguf

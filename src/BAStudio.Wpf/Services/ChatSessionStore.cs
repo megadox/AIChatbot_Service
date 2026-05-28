@@ -114,6 +114,15 @@ public sealed class ChatSessionStore
             cancellationToken);
     }
 
+    /// <summary>
+    /// Returns the absolute JSON file path for a session.
+    /// </summary>
+    public string GetSessionFilePath(string sessionId)
+    {
+        Directory.CreateDirectory(_directory);
+        return GetSessionPath(sessionId);
+    }
+
     private async Task<ChatSessionIndexRecord[]> LoadIndexAsync(CancellationToken cancellationToken)
     {
         if (!File.Exists(_indexPath))

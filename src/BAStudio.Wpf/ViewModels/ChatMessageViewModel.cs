@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
 
 namespace BAStudio.Wpf.ViewModels;
@@ -31,6 +32,7 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
         _text = text;
         Background = isUser ? new SolidColorBrush(Color.FromRgb(239, 246, 255)) : Brushes.White;
         BorderBrush = isUser ? new SolidColorBrush(Color.FromRgb(191, 219, 254)) : new SolidColorBrush(Color.FromRgb(229, 231, 235));
+        CopyCommand = new RelayCommand(CopyText, () => HasText);
     }
 
     public string Role { get; }
@@ -49,6 +51,8 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
 
             _text = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(HasText));
+            CopyCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -69,14 +73,25 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     }
 
     public bool HasDetails => !string.IsNullOrWhiteSpace(DetailsText);
+    public bool HasText => !string.IsNullOrWhiteSpace(Text);
+    public string CopyToolTip => IsUser ? "질문 복사" : "답변 복사";
 
     public Brush Background { get; }
     public Brush BorderBrush { get; }
+    public RelayCommand CopyCommand { get; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void CopyText()
+    {
+        if (!string.IsNullOrWhiteSpace(Text))
+        {
+            Clipboard.SetText(Text);
+        }
     }
 }

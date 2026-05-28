@@ -1,0 +1,6 @@
+bin/
+obj/
+.git/
+.vs/
+*.user
+AI_ChatBot_Service.code-workspace

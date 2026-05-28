@@ -1,0 +1,17 @@
+services:
+  chatbot-api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: ba-chatbot-api:latest
+    container_name: ba-chatbot-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Chatbot__KbPath: /app/ChatBot/ba_manual_vector.db
+      Chatbot__ModelPath: ""
+      Chatbot__TopK: "6"
+      Chatbot__MinScore: "0"
+      CHATBOT_API_TOKENS: ${CHATBOT_API_TOKENS}

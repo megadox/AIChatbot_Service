@@ -50,6 +50,12 @@ public sealed class DomainIntentResolver
         string? preferredGroup = null;
         string? requiredGroup = null;
 
+        var explicitSourceIntent = TryResolveExplicitActivitySource(normalized);
+        if (explicitSourceIntent is not null)
+        {
+            return explicitSourceIntent;
+        }
+
         foreach (var (group, words) in GroupSignals)
         {
             if (words.Any(w => MatchesSignal(normalized, w)))
@@ -65,6 +71,7 @@ public sealed class DomainIntentResolver
         if (!string.IsNullOrWhiteSpace(explicitGroup))
         {
             preferredGroup = explicitGroup;
+            requiredGroup = explicitGroup;
             signals.Add(explicitGroup);
         }
 
@@ -73,6 +80,11 @@ public sealed class DomainIntentResolver
         {
             signals.Add("ProductManual");
             var productSourceHint = ResolveProductGuideSourceHint(normalized);
+            if (IsBAAssistGuideQuestion(normalized, productSourceHint))
+            {
+                signals.Add("BA-Assist");
+            }
+
             return new DomainIntent(
                 null,
                 null,
@@ -104,6 +116,32 @@ public sealed class DomainIntentResolver
             requiredGroup,
             actionConcept?.Source,
             actionConcept?.RewriteTerms ?? []);
+    }
+
+    private static DomainIntent? TryResolveExplicitActivitySource(string question)
+    {
+        var groupPattern = string.Join('|', KnownGroups.Select(Regex.Escape));
+        var match = Regex.Match(
+            question,
+            $@"(?<![A-Za-z0-9_])(?<group>{groupPattern})[\\/](?<activity>[A-Za-z][A-Za-z0-9_]*)(?:\.md)?",
+            RegexOptions.IgnoreCase);
+        if (!match.Success)
+        {
+            return null;
+        }
+
+        var group = KnownGroups.First(g => string.Equals(g, match.Groups["group"].Value, StringComparison.OrdinalIgnoreCase));
+        var activity = match.Groups["activity"].Value;
+        var source = $"{group}/{activity}.md";
+        return new DomainIntent(
+            PreferredGroup: group,
+            ActivityNameHint: activity,
+            Intent: UserIntent.ActivityLookup,
+            Signals: [group],
+            RewrittenQuery: $"{question} {group} {activity} {source}",
+            RequiredGroup: group,
+            PreferredSourceHint: source,
+            ActionConceptHints: [source, group, activity]);
     }
 
     private static void ApplyEntitySignals(string question, List<string> signals, ref string? preferredGroup, ref string? requiredGroup)
@@ -499,11 +537,17 @@ public sealed class DomainIntentResolver
         {
             "프로젝트", "태스크", "스케줄", "스케줄러", "메뉴", "툴바", "설치", "화면", "인터페이스",
             "실행", "등록", "생성", "설정", "로그", "패키지", "셀렉터 편집기", "디버깅", "라이브러리",
-            "어떻게", "방법", "사용법", "차이"
+            "어떻게", "방법", "사용법", "차이", "기능", "refresh", "새로고침"
         };
 
         if (productTerms.Any(term => question.Contains(term, StringComparison.OrdinalIgnoreCase)) &&
             guideTerms.Any(term => question.Contains(term, StringComparison.OrdinalIgnoreCase)))
+        {
+            return true;
+        }
+
+        if (LooksLikeBAAssistProjectAddQuestion(question) ||
+            LooksLikeBAAssistInputBlockQuestion(question))
         {
             return true;
         }
@@ -528,11 +572,40 @@ public sealed class DomainIntentResolver
             parts.AddRange(["BA-Assist", "BA Assist"]);
         }
 
+        if (LooksLikeBAAssistProjectAddQuestion(question) ||
+            LooksLikeBAAssistInputBlockQuestion(question))
+        {
+            parts.AddRange(["BA-Assist", "BA Assist"]);
+        }
+
         return string.Join(' ', parts.Distinct(StringComparer.OrdinalIgnoreCase));
     }
 
     private static string? ResolveProductGuideSourceHint(string question)
     {
+        if (LooksLikeBAAssistProjectAddQuestion(question))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/project-package-add.md";
+        }
+
+        if (LooksLikeBAAssistInputBlockQuestion(question))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/settings-options-repository.md";
+        }
+
+        if (question.Contains("BA-Assist", StringComparison.OrdinalIgnoreCase) &&
+            MatchesAny(question, ["Refresh", "새로고침", "Close", "Exit", "Tray", "Help"]))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/refresh-close-exit-tray-help.md";
+        }
+
+        if (question.Contains("BA-Assist", StringComparison.OrdinalIgnoreCase) &&
+            question.Contains("로그", StringComparison.OrdinalIgnoreCase) &&
+            MatchesAny(question, ["확인", "어디", "조회", "보기"]))
+        {
+            return "docs/product-manuals/guides/ba-assist/2.5.0/schedule-list-log-stop.md";
+        }
+
         if (MatchesAny(question, ["BA-Server", "BA Server", "BA-Worker", "BA Worker", "logs.db", "Queue", "Sequential"]))
         {
             return "docs/product-manuals/normalized/ba-assist/2.5.0-appendix.md";
@@ -553,6 +626,29 @@ public sealed class DomainIntentResolver
         }
 
         return null;
+    }
+
+    private static bool IsBAAssistGuideQuestion(string question, string? sourceHint)
+    {
+        return question.Contains("BA-Assist", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("BA Assist", StringComparison.OrdinalIgnoreCase) ||
+               question.Contains("어시스트", StringComparison.OrdinalIgnoreCase) ||
+               LooksLikeBAAssistProjectAddQuestion(question) ||
+               LooksLikeBAAssistInputBlockQuestion(question) ||
+               sourceHint?.Contains("ba-assist", StringComparison.OrdinalIgnoreCase) == true;
+    }
+
+    private static bool LooksLikeBAAssistProjectAddQuestion(string question)
+    {
+        return question.Contains("프로젝트", StringComparison.OrdinalIgnoreCase) &&
+               MatchesAny(question, ["추가", "등록", "로딩", "로드"]);
+    }
+
+    private static bool LooksLikeBAAssistInputBlockQuestion(string question)
+    {
+        return question.Contains("키보드", StringComparison.OrdinalIgnoreCase) &&
+               question.Contains("마우스", StringComparison.OrdinalIgnoreCase) &&
+               MatchesAny(question, ["막", "차단", "방지"]);
     }
 
     private static string? ExtractActivityHint(string question, string? preferredGroup)

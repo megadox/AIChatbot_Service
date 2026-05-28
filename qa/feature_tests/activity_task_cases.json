@@ -1,0 +1,30 @@
+[
+  {
+    "id": "activity-control-exists-name",
+    "domain": "ActivityTask",
+    "questionType": "ActivityTask",
+    "question": "controlExists 를 설명해줘.",
+    "expectedSource": "WIN32/ControlExists.md"
+  },
+  {
+    "id": "activity-control-exists-explicit-win32",
+    "domain": "ActivityTask",
+    "questionType": "ActivityTask",
+    "question": "WIN32/ControlExists를 설명해줘.",
+    "expectedSource": "WIN32/ControlExists.md"
+  },
+  {
+    "id": "activity-control-exists-explicit-android",
+    "domain": "ActivityTask",
+    "questionType": "ActivityTask",
+    "question": "ANDROID/ControlExists를 설명해줘.",
+    "expectedSource": "ANDROID/ControlExists.md"
+  },
+  {
+    "id": "activity-clipboard",
+    "domain": "ActivityTask",
+    "questionType": "ActivityTask",
+    "question": "Clipboard에 값을 쓰는 액티비티 설명해줘",
+    "expectedSource": "COMMON/SetClipboard.md"
+  }
+]

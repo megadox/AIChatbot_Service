@@ -1,6 +1,10 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -19,7 +23,7 @@ namespace BAStudio.Wpf.ViewModels;
 /// <summary>
 /// Main WPF view model that manages chat sessions, commands, streaming answers, and answer corrections.
 /// </summary>
-public sealed class ChatViewModel : INotifyPropertyChanged
+public sealed class ChatViewModel : INotifyPropertyChanged, IDisposable
 {
     private const string DetailsMarker = "\n<<<DETAILS>>>\n";
     private const string NewSessionTitle = "새 대화";
@@ -31,6 +35,7 @@ public sealed class ChatViewModel : INotifyPropertyChanged
     private CancellationTokenSource? _cts;
     private ChatSessionViewModel? _selectedSession;
     private string _statusText = "준비됨";
+    private string _appVersionText;
     private bool _isBusy;
 
     private ChatViewModel(
@@ -38,18 +43,21 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         ChatbotOptions options,
         AnswerCorrectionStore correctionStore,
         ChatSessionStore sessionStore,
+        string appVersionText,
         IReadOnlyList<ChatSessionRecord> savedSessions)
     {
         _orchestrator = orchestrator;
         _options = options;
         _correctionStore = correctionStore;
         _sessionStore = sessionStore;
+        _appVersionText = appVersionText;
 
         SendCommand = new RelayCommand(SendAsync, () => CanSend);
         CorrectAnswerCommand = new RelayCommand(CorrectAnswerAsync, () => CanCorrectAnswer);
         CancelCommand = new RelayCommand(Cancel, () => IsBusy);
         NewSessionCommand = new RelayCommand(NewSessionAsync, () => !IsBusy);
         DeleteSessionCommand = new RelayCommand(DeleteSelectedSessionAsync, () => !IsBusy && SelectedSession is not null);
+        OpenSelectedSessionFileCommand = new RelayCommand(OpenSelectedSessionFile, () => SelectedSession is not null);
 
         foreach (var session in savedSessions.Select(ChatSessionViewModel.FromRecord))
         {
@@ -138,12 +146,30 @@ public sealed class ChatViewModel : INotifyPropertyChanged
 
     public bool CanSend => !IsBusy && SelectedSession is not null && !string.IsNullOrWhiteSpace(SelectedSession.InputText);
     public bool CanCorrectAnswer => !IsBusy && GetLastQuestionAndAnswer(SelectedSession) is not null;
+    public string AnswerModeText => string.Equals(_options.Mode, "Remote", StringComparison.OrdinalIgnoreCase)
+        ? "온라인 답변 모드"
+        : "로컬 답변 모드";
+    public string AppVersionText
+    {
+        get => _appVersionText;
+        private set
+        {
+            if (_appVersionText == value)
+            {
+                return;
+            }
+
+            _appVersionText = value;
+            OnPropertyChanged();
+        }
+    }
 
     public RelayCommand SendCommand { get; }
     public RelayCommand CorrectAnswerCommand { get; }
     public RelayCommand CancelCommand { get; }
     public RelayCommand NewSessionCommand { get; }
     public RelayCommand DeleteSessionCommand { get; }
+    public RelayCommand OpenSelectedSessionFileCommand { get; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -152,16 +178,86 @@ public sealed class ChatViewModel : INotifyPropertyChanged
     /// </summary>
     public static ChatViewModel Create(ChatbotOptions options, string repoRoot)
     {
-        var embeddings = new HashEmbeddingService();
-        var store = new SqliteVectorStore(options.KbPath);
-        var promptBuilder = new PromptBuilder();
-        ILlmService llm = File.Exists(options.ModelPath)
-            ? new LlamaSharpPhi4LlmService(options)
-            : new GroundedLlmService();
-        var orchestrator = new ChatOrchestrator(embeddings, store, promptBuilder, llm, new NaverWebSearchService(), new DomainIntentResolver());
+        IChatOrchestrator orchestrator;
+        if (string.Equals(options.Mode, "Remote", StringComparison.OrdinalIgnoreCase))
+        {
+            orchestrator = new RemoteChatOrchestratorClient(options.ApiBaseUrl, options.ApiToken);
+        }
+        else
+        {
+            var embeddings = new HashEmbeddingService();
+            var store = new SqliteVectorStore(options.KbPath);
+            var promptBuilder = new PromptBuilder();
+            ILlmService llm = File.Exists(options.ModelPath)
+                ? new LlamaSharpPhi4LlmService(options)
+                : new GroundedLlmService();
+            orchestrator = new ChatOrchestrator(embeddings, store, promptBuilder, llm, new NaverWebSearchService(), new DomainIntentResolver());
+        }
+
         var sessionStore = new ChatSessionStore(repoRoot);
         var savedSessions = sessionStore.LoadAll();
-        return new ChatViewModel(orchestrator, options, new AnswerCorrectionStore(repoRoot), sessionStore, savedSessions);
+        var appVersionText = string.Equals(options.Mode, "Remote", StringComparison.OrdinalIgnoreCase)
+            ? "서버 버전 확인 중"
+            : LoadLocalAppVersionText(repoRoot);
+        var viewModel = new ChatViewModel(orchestrator, options, new AnswerCorrectionStore(repoRoot), sessionStore, appVersionText, savedSessions);
+        if (string.Equals(options.Mode, "Remote", StringComparison.OrdinalIgnoreCase))
+        {
+            _ = viewModel.LoadRemoteAppVersionAsync(options.ApiBaseUrl);
+        }
+
+        return viewModel;
+    }
+
+    private static string LoadLocalAppVersionText(string repoRoot)
+    {
+        var candidates = new[]
+        {
+            Path.Combine(repoRoot, "VERSION"),
+            Path.Combine(AppContext.BaseDirectory, "VERSION")
+        };
+
+        foreach (var path in candidates)
+        {
+            if (!File.Exists(path))
+            {
+                continue;
+            }
+
+            var version = File.ReadAllText(path).Trim();
+            if (!string.IsNullOrWhiteSpace(version))
+            {
+                return $"v{version}";
+            }
+        }
+
+        var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+        return string.IsNullOrWhiteSpace(assemblyVersion) ? "vdev" : $"v{assemblyVersion}";
+    }
+
+    private async Task LoadRemoteAppVersionAsync(string apiBaseUrl)
+    {
+        if (string.IsNullOrWhiteSpace(apiBaseUrl))
+        {
+            AppVersionText = "서버 버전 미설정";
+            return;
+        }
+
+        try
+        {
+            using var client = new HttpClient
+            {
+                BaseAddress = new Uri(apiBaseUrl.TrimEnd('/') + "/"),
+                Timeout = TimeSpan.FromSeconds(5)
+            };
+            var health = await client.GetFromJsonAsync<ChatbotHealthResponse>("health");
+            AppVersionText = string.IsNullOrWhiteSpace(health?.Version)
+                ? "서버 버전 미제공"
+                : $"서버 v{health.Version}";
+        }
+        catch
+        {
+            AppVersionText = "서버 버전 확인 실패";
+        }
     }
 
     private async Task NewSessionAsync()
@@ -194,6 +290,36 @@ public sealed class ChatViewModel : INotifyPropertyChanged
 
         SelectedSession = Sessions[Math.Clamp(index, 0, Sessions.Count - 1)];
         StatusText = "대화 삭제됨";
+    }
+
+    private void OpenSelectedSessionFile()
+    {
+        var session = SelectedSession;
+        if (session is null)
+        {
+            return;
+        }
+
+        var path = _sessionStore.GetSessionFilePath(session.Id);
+        if (File.Exists(path))
+        {
+            Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{path}\"")
+            {
+                UseShellExecute = true
+            });
+            StatusText = $"대화 파일 위치 열기: {path}";
+            return;
+        }
+
+        var directory = Path.GetDirectoryName(path);
+        if (!string.IsNullOrWhiteSpace(directory) && Directory.Exists(directory))
+        {
+            Process.Start(new ProcessStartInfo(directory)
+            {
+                UseShellExecute = true
+            });
+            StatusText = $"대화 폴더 열기: {directory}";
+        }
     }
 
     private async Task SendAsync()
@@ -373,7 +499,9 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         var session = new ChatSessionViewModel(Guid.NewGuid().ToString("N"), NewSessionTitle, now, now);
         session.AddMessage(new ChatMessageViewModel(
             "Assistant",
-            File.Exists(_options.KbPath)
+            string.Equals(_options.Mode, "Remote", StringComparison.OrdinalIgnoreCase)
+                ? "온라인 BA-Studio 답변 서비스에 연결하도록 설정되었습니다. 액티비티 사용법이나 제품 사용법을 질문해보세요."
+                : File.Exists(_options.KbPath)
                 ? "BA-Studio 매뉴얼 KB가 준비되었습니다. 액티비티 사용법이나 속성을 질문해보세요."
                 : $"KB 파일이 없습니다. 먼저 Tools.KbBuilder로 생성하세요.\n{_options.KbPath}",
             isUser: false));
@@ -474,12 +602,29 @@ public sealed class ChatViewModel : INotifyPropertyChanged
         CancelCommand.RaiseCanExecuteChanged();
         NewSessionCommand.RaiseCanExecuteChanged();
         DeleteSessionCommand.RaiseCanExecuteChanged();
+        OpenSelectedSessionFileCommand.RaiseCanExecuteChanged();
     }
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    public void Dispose()
+    {
+        if (_orchestrator is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+    }
 }
 
 public sealed record QuestionTypeOption(ChatQuestionType Value, string Label);
+
+internal sealed record ChatbotHealthResponse(
+    string Status,
+    string? Version,
+    string? BuildDate,
+    string? GitSha,
+    string? Kb,
+    string? KbPath);
