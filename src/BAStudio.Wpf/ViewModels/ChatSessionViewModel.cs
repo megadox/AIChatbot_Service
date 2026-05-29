@@ -64,6 +64,8 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
 
             _inputText = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(HasInputText));
+            OnPropertyChanged(nameof(HasNoInputText));
         }
     }
 
@@ -153,6 +155,9 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
     }
 
     public string DisplayUpdatedAt => UpdatedAt.ToString("MM-dd HH:mm");
+    public string MessageCountText => Messages.Count == 0 ? "메시지 없음" : $"메시지 {Messages.Count}개";
+    public bool HasInputText => !string.IsNullOrWhiteSpace(InputText);
+    public bool HasNoInputText => string.IsNullOrWhiteSpace(InputText);
 
     /// <summary>
     /// Adds a message to the session and updates its modified timestamp.
@@ -161,6 +166,7 @@ public sealed class ChatSessionViewModel : INotifyPropertyChanged
     {
         Messages.Add(message);
         Touch();
+        OnPropertyChanged(nameof(MessageCountText));
     }
 
     /// <summary>

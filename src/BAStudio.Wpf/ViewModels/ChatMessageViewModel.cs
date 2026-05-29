@@ -38,6 +38,10 @@ public sealed class ChatMessageViewModel : INotifyPropertyChanged
     public string Role { get; }
     public bool IsUser { get; }
     public DateTimeOffset CreatedAt { get; }
+    public string DisplayRole => IsUser ? "나" : "BA Chatbot";
+    public string DisplayCreatedAt => CreatedAt.ToString("HH:mm");
+    public HorizontalAlignment BubbleAlignment => IsUser ? HorizontalAlignment.Right : HorizontalAlignment.Left;
+    public double BubbleMaxWidth => IsUser ? 560 : 680;
 
     public string Text
     {
